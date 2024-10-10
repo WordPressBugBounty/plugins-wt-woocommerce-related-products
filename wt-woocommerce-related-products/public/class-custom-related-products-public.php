@@ -537,54 +537,37 @@ class Custom_Related_Products_Public {
             <?php
         }else{
             ?>
-                   <script>
+                <script>
                     jQuery(document).ready(function($) {
                         jQuery(".wt-related-products").removeClass('products');
-                    });
-                                                                                       
+                    });                                                             
                 </script>
+                <style>
+                    .wt-related-products-cart {
+                        clear: both;
+                        margin: 0;
+                        padding: 0;
+                    }
+                </style>
+                
             <?php
             
             if(is_cart()){
                ?>
-              <script>
+                <script>
                     jQuery(document).ready(function($) {
-                        jQuery(".wt-related-products-cart").find('.first').removeClass('first');
-                        jQuery(".wt-related-products-cart").find('.last').removeClass('last');
-                          jQuery(".wt-related-products-cart>ul[class*='columns']").removeClass (function (index, css) {
-                        return (css.match (/(^|\s)columns\S+/g) || []).join(' ');
-                     });
-                        jQuery(".wt-related-products-cart>ul").addClass('columns-3');
-                         var max = 0;
-                         var w =0;
-                        jQuery('.wt-related-products-cart ul li').each(function() {
-                            var h = jQuery(this).height(); 
-                            w = jQuery(this).width(); 
-                            max = h > max ? h : max;
-                            var arr = [];
-                            arr.push(jQuery(this).height());
-                        });
-                       //sleepFor(500);
-                       jQuery('.wt-related-products-cart ul li').each(function() {
-                            if(max>0){
-                                jQuery(this).css("height", max+10);
-                                jQuery(this).css("width", w-5);
-                            }
-                        });
-                        
+                        //sleepFor(500);
+
                         function sleepFor(sleepDuration){
                             var now = new Date().getTime();
                             while(new Date().getTime() < now + sleepDuration){ /* Do nothing */ }
                         }
-
-                    });
-                                                                                       
+                    });                                                             
                 </script>
             <?php
             }
         }
          
-        
     }
 
     /**

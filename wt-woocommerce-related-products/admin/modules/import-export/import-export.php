@@ -164,22 +164,24 @@ class Custom_Related_Product_Import_Export {
     public function process_webtoffee_import($meta) {
 
         $wt_crp_meta_keys = $this->get_crp_meta_keys();  
-        foreach ($meta['meta_data'] as $key => $meta_data) {
-            if (in_array($meta_data['key'],$wt_crp_meta_keys)){
-                    $custom_meta = explode( ",", $meta_data['value'] );
-                    if( $meta_data['key'] == '_crp_related_product_attr' ) {
-                        $custom_meta = $this->process_related_attr_for_import($custom_meta);
-                    }
-                    if( $meta_data['key'] == '_crp_excluded_cats' || $meta_data['key'] == '_crp_related_product_cats' || $meta_data['key'] == '_crp_related_product_tags' ) {
-                     $custom_meta = $this->process_term_id_for_import($custom_meta, $meta_data['key']);
-                    }
-                    if( $meta_data['key'] == '_crp_related_skus' ) {
-                        $custom_meta = $this->get_product_id_from_sku($custom_meta);
-                        $meta[ 'meta_data' ][$key]['key']		 = '_crp_related_ids';
-                    }
-                    $meta[ 'meta_data' ][ $key ][ 'value' ] = $custom_meta;
+        if (isset($meta['meta_data']) && is_array($meta['meta_data'])) {
+            foreach ($meta['meta_data'] as $key => $meta_data) {
+                if (in_array($meta_data['key'],$wt_crp_meta_keys)){
+                        $custom_meta = explode( ",", $meta_data['value'] );
+                        if( $meta_data['key'] == '_crp_related_product_attr' ) {
+                            $custom_meta = $this->process_related_attr_for_import($custom_meta);
+                        }
+                        if( $meta_data['key'] == '_crp_excluded_cats' || $meta_data['key'] == '_crp_related_product_cats' || $meta_data['key'] == '_crp_related_product_tags' ) {
+                        $custom_meta = $this->process_term_id_for_import($custom_meta, $meta_data['key']);
+                        }
+                        if( $meta_data['key'] == '_crp_related_skus' ) {
+                            $custom_meta = $this->get_product_id_from_sku($custom_meta);
+                            $meta[ 'meta_data' ][$key]['key']		 = '_crp_related_ids';
+                        }
+                        $meta[ 'meta_data' ][ $key ][ 'value' ] = $custom_meta;
 
-            } 
+                } 
+            }
         }
          return $meta;
     }

@@ -1116,6 +1116,16 @@ class Custom_Related_Products_Admin {
                     jQuery('.wt-gloablly-relate').hide();
                 }
                 
+                var sub_cat_check = jQuery('.crp-related-by #custom_related_products_category');               
+                sub_cat_check.on('click', function() {
+                    var is_checked = sub_cat_check.is(":checked");
+                    if(is_checked) {
+                        jQuery(".crp-sub-cat").show();   
+                    } else {
+                        jQuery(".crp-sub-cat").hide();
+                    }
+                });
+                
                 jQuery("#custom_related_products_slider_type").on('change', function() {
                     var opt = jQuery("#custom_related_products_slider_type :selected").val();
                     if(opt == 'bx'){
@@ -1123,19 +1133,7 @@ class Custom_Related_Products_Admin {
                     }else if(opt == 'swiper'){
                         jQuery('#crp-slider-type').html('Swiper - is the free and most modern mobile touch slider with hardware accelerated transitions and amazing native behavior.<a href="https://github.com/nolimits4web/swiper" target="_blank"> Know more. </a>');
                     }
-             });
-                jQuery(".crp_related_by_search").on('change', function() {
-                    show_hide_subcategory_msg();
-                });
-                function show_hide_subcategory_msg() {
-                    var selected_related_by = jQuery(".crp_related_by_search").val();
-                    if( Array.isArray(selected_related_by) && jQuery.inArray('category', selected_related_by) > -1 ) {
-                        jQuery(".crp-sub-cat").show();
-                    }else {
-                        jQuery(".crp-sub-cat").hide();
-                    }
-                }
-                show_hide_subcategory_msg();       
+                });  
             });
         </script>
 

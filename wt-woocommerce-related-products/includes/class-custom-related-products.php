@@ -21,23 +21,23 @@ class Custom_Related_Products {
 	protected $VERSION;
 	protected $plugin_base_name;
 
-	const VERSION = '1.5.7';
+	const VERSION = '1.5.8';
 
 	public function __construct() {
 
 		$this->plugin_name		 = 'wt-woocommerce-related-products';
 		$this->plugin_base_name	 = WT_CRP_BASE_NAME;
 
-		$this->VERSION = '1.5.7';
+		$this->VERSION = '1.5.8';
 
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
 		add_shortcode( 'wt-related-products', array( $this, 'render_wt_related_products' ) );
-                add_action( 'woocommerce_after_cart', array( $this, 'render_related_products_in_cart' ) );
-                
-	}
+        add_action( 'woocommerce_after_cart', array( $this, 'render_related_products_in_cart' ) );
+		
+    }
 
 	/**
 	 * Load the required dependencies for this plugin.
@@ -383,6 +383,9 @@ class Custom_Related_Products {
 	 */
 
 	public function render_related_products_in_cart( ) {
+		// Set the column count for related products displayed after the cart
+		wc_set_loop_prop( 'columns', 3 );
+
         $slider_state = get_option( 'custom_related_products_cart_working_mode','cart_mode' );
 		if('cart_mode' == $slider_state){
              include CRP_PLUGIN_DIR_PATH.'woocommerce/cart/wt-cart.php'; 

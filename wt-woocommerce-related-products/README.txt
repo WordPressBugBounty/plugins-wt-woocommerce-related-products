@@ -1,12 +1,12 @@
 === Related Products - Product Recommendations for WooCommerce ===
 Contributors: webtoffee
-Version: 1.5.7
+Version: 1.5.8
 Donate link: https://www.webtoffee.com/plugins/
 Tags: related products, product recommendations, woocommerce related products, woocommerce product recommendations, woocommerce recommendations
 Requires at least: 3.0.1
 Tested up to: 6.6
 Requires PHP: 5.6
-Stable tag: 1.5.7
+Stable tag: 1.5.8
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -37,7 +37,7 @@ You can also make use of the related product's functionality in your WooCommerce
 * Import related products using the default WooCommerce importer<a rel="nofollow" href="https://www.webtoffee.com/how-to-import-related-products-using-woocommerce-importer/"> Learn more </a>
 
 
-&#9989; Tested OK with WooCommerce 9.1.4
+&#9989; Tested OK with WooCommerce 9.3.3
 
 == Related Products for WooCommerce - Installation and Setup ==
 
@@ -139,6 +139,11 @@ The plugin is seamlessly compatible with WP all import. <a rel="nofollow" href="
 5. Related Products - Setup Page.
 
 == Changelog ==
+
+= 1.5.8 10-10-2024 =
+* [Compatibility] - Tested OK with WordPress 6.6.2
+* [Compatibility] - Tested OK with WooCommerce 9.3.3
+* [Fix] - An issue with the grid view of related products on the cart page
 
 = 1.5.7 08-08-2024 =
 * [Compatibility] - Tested OK with WordPress 6.6.1
@@ -389,6 +394,6 @@ and Exclude Categories for related products.
 
 == Upgrade Notice ==
 
-= 1.5.7 =
-* [Compatibility] - Tested OK with WordPress 6.6.1
-* [Compatibility] - Tested OK with WooCommerce 9.1.4
+= 1.5.8 =
+* [Compatibility] - Tested OK with WordPress 6.6.2
+* [Compatibility] - Tested OK with WooCommerce 9.3.3
