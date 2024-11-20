@@ -15,12 +15,12 @@
 
 <div class="wrap wt-crp-container">
     <?php settings_errors(); ?>
-    <div class="crp-main-container" style="width: 68%;display: inline-block;">
+    <div class="crp-main-container">
         <p style="font-size: 16px;">
             <b><?php _e('Settings', 'wt-woocommerce-related-products'); ?></b>
         </p>
         <p style="border-top: 1px dashed rgb(204, 204, 204); padding-top: 5px;"></p>
-        <div>
+        <div class="wt-crp-form-container">
             <form action="options.php" method="post">
                 <?php
                 settings_fields($this->plugin_name);
@@ -30,7 +30,7 @@
             </form>
         </div>
     </div>
-    <div style="width: 27%;float: <?php echo is_rtl() ? 'left;' : 'right;' ?> margin-right: 10px;">
+    <div class="crp-right-container" style="float: <?php echo is_rtl() ? 'left;' : 'right;' ?>">
         <div style="background: #fff; height:auto; padding: 15px; box-shadow: 0px 0px 2px #ccc;">
             <h2 style="text-align: center;margin-top: 10px;"><?php _e('Watch setup video', 'wt-woocommerce-related-products'); ?></h2>
             <iframe src="//www.youtube.com/embed/KOMx3g-ZMQs" allowfullscreen="allowfullscreen" frameborder="0" align="middle" style="width:100%;margin-bottom: 1em;margin-top: 4px;"></iframe>
@@ -48,8 +48,17 @@
                 </div>
             </div>
         </div>
-
+        
         <div class="wt_rp_plugin_promo">
+            <?php 
+			if ( class_exists( 'Wtcrp_Bfcm_Twenty_Twenty_Four' ) && method_exists( 'Wtcrp_Bfcm_Twenty_Twenty_Four', 'is_bfcm_season' ) && Wtcrp_Bfcm_Twenty_Twenty_Four::is_bfcm_season() ) {
+		    ?>
+                <div class="wtcrp_bfcm_offer">
+                    <span style="margin: 0px 13px;"><img src="<?php echo esc_url( CRP_PLUGIN_URL . 'admin/img/wtcrp-bfcm-doc-settings-coupon.svg' ); ?>" style="width: 280px;"></span>
+                </div>
+			<?php
+			}
+			?>
             <div class="wt_rp_plugin_promo_content">
                 <div class="wt_rp_plugin_promo_title_wrapper">
                     <img src="<?php echo esc_url($wt_rp_admin_gopro_img_path . '/' . 'product-recommendation-plugin.svg');?>">
@@ -79,6 +88,15 @@
         </div>
 
         <div class="wt_rp_plugin_promo wt_rp_margin_click_style_fbt" >
+            <?php 
+			if ( class_exists( 'Wtcrp_Bfcm_Twenty_Twenty_Four' ) && method_exists( 'Wtcrp_Bfcm_Twenty_Twenty_Four', 'is_bfcm_season' ) && Wtcrp_Bfcm_Twenty_Twenty_Four::is_bfcm_season() ) {
+		    ?>
+                <div class="wtcrp_bfcm_offer">
+                    <span style="margin: 0px 13px;"><img src="<?php echo esc_url( CRP_PLUGIN_URL . 'admin/img/wtcrp-bfcm-doc-settings-coupon.svg' ); ?>" style="width: 280px;"></span>
+                </div>
+			<?php
+			}
+			?>
             <div class="wt_rp_plugin_promo_content">
                 <div class="wt_rp_plugin_promo_title_wrapper">
                     <img src="<?php echo esc_url($wt_rp_admin_gopro_img_path . '/' . 'frequently-bought-together-plugin.svg');?>">
@@ -161,8 +179,14 @@
         width : 290px;
     }
     .crp-main-container {
+        width: 68%;
+        display: inline-block;
         background-color: white;
         padding: 10px 10px 10px 20px;
+    }
+    .crp-right-container {
+        width: 27%;
+        margin-right: 10px;
     }
 
     .crp-paragraph {
@@ -371,6 +395,46 @@
     .wt_rp_pro_feature_content .ticked-list li .dashicons{ background:#fff; color:#6ABE45; border-radius:20px; margin-right:5px; margin-left:-25px; }
 
     .crp-number .description , .crp-banner-width .description { margin-left: 110px; margin-top: -31px; }
+    
+   @media (min-width: 1200px) and (max-width: 1440px) {
+    .woocommerce table.form-table input[type=text] {
+        width: 330px !important;
+    }
+    .woocommerce table.form-table .select2-container {
+        min-width: 330px !important;
+    }
+    .woocommerce table.form-table select {
+        width: 330px;
+    }
+    .wt_rp_exclusive_gopro {
+        height: fit-content;
+    }
+    .wt_rp_exclusive_gopro .wt_rp_copy_content {
+        align-items: center;
+    }
+    .wt_rp_pro_features_btn {
+        padding-left: 15px;
+        padding-right: 12px;
+   }
+    @media (max-width: 1200px) {
+        .crp-main-container, 
+        .crp-right-container {
+            width: 100%;
+            padding: 10px;
+        }
+        .crp-right-container {
+            margin-top: 10px;
+            float: none !important;
+        }
+        .wrap.wt-crp-container {
+            margin-right: 15px;
+        }
+        .wt-crp-form-container {
+            padding: 0px 10px;
+        }
+    }
+    
+
 </style>
 
 <script>
