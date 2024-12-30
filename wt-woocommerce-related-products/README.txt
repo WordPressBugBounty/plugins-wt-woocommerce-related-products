@@ -1,12 +1,12 @@
 === Related Products - Create Upsells, Cross-sells, and Product Recommendations for WooCommerce ===
 Contributors: webtoffee
-Version: 1.5.9
+Version: 1.6.0
 Donate link: https://www.webtoffee.com/product/woocommerce-product-recommendations/
 Tags: related products, product recommendations, woocommerce related products, woocommerce product recommendations, woocommerce recommendations
 Requires at least: 3.0.1
 Tested up to: 6.7
 Requires PHP: 5.6
-Stable tag: 1.5.9
+Stable tag: 1.6.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -37,7 +37,7 @@ You can also make use of the related product's functionality in your WooCommerce
 * Import related products using the default WooCommerce importer<a rel="nofollow" href="https://www.webtoffee.com/how-to-import-related-products-using-woocommerce-importer/"> Learn more </a>
 
 
-&#9989; Tested OK with WooCommerce 9.4.1
+&#9989; Tested OK with WooCommerce 9.5.1
 
 == Related Products for WooCommerce - Installation and Setup ==
 
@@ -166,6 +166,12 @@ You can display cross-sell product recommendations by adding cross-sells to indi
 5. Related Products - Setup Page.
 
 == Changelog ==
+
+= 1.6.0 30-12-2024 =
+* [Compatibility] - Tested OK with WordPress 6.7.1
+* [Compatibility] - Tested OK with WooCommerce 9.5.1
+* [Enhancement] - Custom related products selection to include product variations
+* [Enhancement] - Plugin settings page options alignment
 
 = 1.5.9 20-11-2024 =
 * [Compatibility] - Tested OK with WordPress 6.7
@@ -425,6 +431,9 @@ and Exclude Categories for related products.
 
 == Upgrade Notice ==
 
-= 1.5.9 =
-* [Compatibility] - Tested OK with WordPress 6.7
-* [Compatibility] - Tested OK with WooCommerce 9.4.1
+= 1.6.0 =
+* [Compatibility] - Tested OK with WordPress 6.7.1
+* [Compatibility] - Tested OK with WooCommerce 9.5.1
+* [Enhancement] - Custom related products selection to include product variations
+* [Enhancement] - Plugin settings page options alignment
+

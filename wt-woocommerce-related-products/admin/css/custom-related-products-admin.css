@@ -198,3 +198,40 @@
 
 #custom_related_products_crp_number { width:100px; }
 #custom_related_products_crp_banner_width { width:100px; }
+
+.wt-crp-advanced-settings-toggle,
+.wt-crp-widget-settings-toggle {
+  cursor: pointer;
+}
+.wt-crp-arrow {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  display: inline-block;
+  margin-right: 5px;
+}
+.crp-main-container .dashicons-arrow-down {
+  transform: rotate(0);
+}
+.wt-crp-advanced-settings-toggle.active,
+.wt-crp-widget-settings-toggle.active {
+  color: #333;
+}
+.wt-crp-advanced-settings-toggle.crp-toggle-disallow,
+.wt-crp-widget-settings-toggle.crp-toggle-disallow {
+  color: #9c9c9c;
+}
+.crp-tr-field.crp-child {
+  width: 300px;
+  position: relative;
+  left: 3%;
+}
+.wt-crp-container .form-table .crp-tr-field.crp-child th label{
+  width: 90%;
+}
+.wt-crp-container .form-table .crp-tr-field.crp-child td {
+  position: relative;
+  right: 3%
+}
+.crp-linked-products-banner {
+  display: none;
+}

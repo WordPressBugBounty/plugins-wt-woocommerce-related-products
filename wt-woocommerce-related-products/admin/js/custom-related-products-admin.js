@@ -34,5 +34,24 @@
                 $(".wt_rp_copied").hide();
             }, 500);
         });
+
+        //jQuery for toggle of sections in related products plugin settings 
+        var crpAdvancedSettingsTable = jQuery( '.wt-crp-advanced-settings-toggle' ).nextAll( 'table.form-table:first' );
+        crpAdvancedSettingsTable.hide();
+        jQuery( '.wt-crp-advanced-settings-toggle , .wt-crp-widget-settings-toggle' ).on( 'click', function() {
+            var crpArrow = $( this ).find( '.wt-crp-arrow' ); 
+            var crpTable = $( this ).nextAll( 'table.form-table:first' );
+    
+            crpTable.toggle();
+    
+            if ( crpTable.is( ':visible' ) ) {
+                crpArrow.removeClass( 'dashicons-arrow-right' ).addClass( 'dashicons-arrow-down' );
+                $(this).addClass('active');
+            } else {
+                crpArrow.removeClass( 'dashicons-arrow-down' ).addClass( 'dashicons-arrow-right' );
+                $(this).removeClass('active');
+            }
+        });
+
     });
 })(jQuery);

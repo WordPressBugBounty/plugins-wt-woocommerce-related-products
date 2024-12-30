@@ -21,14 +21,14 @@ class Custom_Related_Products {
 	protected $VERSION;
 	protected $plugin_base_name;
 
-	const VERSION = '1.5.9';
+	const VERSION = '1.6.0';
 
 	public function __construct() {
 
 		$this->plugin_name		 = 'wt-woocommerce-related-products';
 		$this->plugin_base_name	 = WT_CRP_BASE_NAME;
 
-		$this->VERSION = '1.5.9';
+		$this->VERSION = '1.6.0';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -92,12 +92,6 @@ class Custom_Related_Products {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-custom-related-products-public.php';
 		
-		/**
-		 * The class responsible for displaying and handling the Black Friday and 
-		 * Cyber Monday CTA banners for 2024.
-		 */
-        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wtcrp-bfcm-twenty-twenty-four.php';
-
 		$this->loader = new Custom_Related_Products_Loader();
 	}
 

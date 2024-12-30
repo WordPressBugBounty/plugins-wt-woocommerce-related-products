@@ -279,14 +279,33 @@ if ( $related_products || !empty($global_related_by) ) :
 				}
 			}
 
-			//gets excluded categories
+			//gets excluded categories and tags
 			$excluded_categories_ids = apply_filters( 'wt_crp_excluded_category_ids',get_post_meta($post->ID, '_crp_excluded_cats', true) );
+			$excluded_tag_ids = apply_filters( 'wt_crp_excluded_tag_ids',array());
 
 			if (!empty($excluded_categories_ids) && !empty($related)) {
 				$all_ids = crp_get_all_product_ids_from_cat_ids( $excluded_categories_ids );
 
 				if (!empty($all_ids)) {
 					$related = array_diff($related, $all_ids);
+				}
+			}
+
+			if (!empty($excluded_tag_ids) && !empty($related)) {
+				$all_excluded_ids = crp_get_all_product_ids_from_tag_ids($excluded_tag_ids);
+			
+				if (!empty($all_excluded_ids)) {
+					$related = array_filter($related, function($product_id) use ($excluded_tag_ids) {
+						$product_tags = wp_get_post_terms($product_id, 'product_tag', array('fields' => 'ids'));
+			
+						if (empty($product_tags)) {
+							return true; 
+						}
+			
+						$has_allowed_tag = array_diff($product_tags, $excluded_tag_ids);
+			
+						return !empty($has_allowed_tag);
+					});
 				}
 			}
 
@@ -372,7 +391,7 @@ if ( $related_products || !empty($global_related_by) ) :
 
 				// Setup your custom query
 				$args = array(
-					'post_type' => 'product', 
+					'post_type' => array('product', 'product_variation'), 
 					'posts_per_page' => $number_of_products, 
 					'orderby' => $orderby, 
 					'order' => $order, 
