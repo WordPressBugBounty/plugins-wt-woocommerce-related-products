@@ -21,7 +21,7 @@ class Custom_Related_Products_Admin {
 	 * admin module list, Module folder and main file must be same as that of module name
 	 * Please check the `admin_modules` method for more details
 	 */
-	private $modules = array(
+	private $modules                = array(
 		'import-export',
 	);
 	public static $existing_modules = array();
@@ -172,12 +172,12 @@ class Custom_Related_Products_Admin {
 						data-selected="
 						<?php
 							$json_ids = array();
-							foreach ( $product_ids as $product_id ) {
-								$product = wc_get_product( $product_id );
+						foreach ( $product_ids as $product_id ) {
+							$product = wc_get_product( $product_id );
 
-								if ( is_object( $product ) && is_callable( array( $product, 'get_formatted_name' ) ) ) {
-								$json_ids[ $product_id ] = wp_kses_post( wp_strip_all_tags( $product->get_formatted_name() ) );								}
-							}
+							if ( is_object( $product ) && is_callable( array( $product, 'get_formatted_name' ) ) ) {
+								$json_ids[ $product_id ] = wp_kses_post( wp_strip_all_tags( $product->get_formatted_name() ) );                             }
+						}
 							echo esc_attr( json_encode( $json_ids ) );
 						?>
 					" value="<?php echo esc_attr( implode( ',', array_keys( $json_ids ) ) ); ?>" />
@@ -198,7 +198,7 @@ class Custom_Related_Products_Admin {
 									$product = wc_get_product( $product_id );
 
 									if ( is_object( $product ) ) {
-										echo '<option value="' . esc_attr( $product_id ) . '" selected="selected">' . esc_html( wp_strip_all_tags($product->get_formatted_name()) ) . '</option>';
+										echo '<option value="' . esc_attr( $product_id ) . '" selected="selected">' . esc_html( wp_strip_all_tags( $product->get_formatted_name() ) ) . '</option>';
 									}
 								}
 								?>
@@ -673,11 +673,17 @@ class Custom_Related_Products_Admin {
 				'class'     => 'crp-tr-field mode-default-disallow',
 			),
 		);
-		add_settings_section(
+
+		add_settings_field(
 			$this->option_name . '_info_bottom',
 			'',
 			array( $this, $this->option_name . '_info_bottom_cb' ),
-			$this->plugin_name
+			$this->plugin_name,
+			$this->option_name . '_advanced_settings',
+			array(
+				'label_for' => $this->option_name . '_info_bottom',
+				'class'     => 'crp-tr-field crp-info-bottom-banner mode-default-disallow',
+			),
 		);
 
 		register_setting(
@@ -728,18 +734,18 @@ class Custom_Related_Products_Admin {
 			$this->plugin_name,
 			$this->option_name . '_crp_number'
 		);
-				register_setting(
-					$this->plugin_name,
-					$this->option_name . '_crp_banner_width'
-				);
-				register_setting(
-					$this->plugin_name,
-					$this->option_name . '_crp_custom_slider_arrow'
-				);
-				register_setting(
-					$this->plugin_name,
-					$this->option_name . '_crp_banner_product_width'
-				);
+		register_setting(
+			$this->plugin_name,
+			$this->option_name . '_crp_banner_width'
+		);
+		register_setting(
+			$this->plugin_name,
+			$this->option_name . '_crp_custom_slider_arrow'
+		);
+		register_setting(
+			$this->plugin_name,
+			$this->option_name . '_crp_banner_product_width'
+		);
 		register_setting(
 			$this->plugin_name,
 			$this->option_name . '_exclude_os'
@@ -922,7 +928,7 @@ class Custom_Related_Products_Admin {
 				<input type="checkbox" name="<?php echo esc_attr( $this->option_name . '_crp_related_by[]' ); ?>" id="<?php echo esc_attr( $this->option_name . '_tag' ); ?>" value="<?php echo esc_attr( 'tag' ); ?>" <?php ( is_array( $crp_related_by ) && in_array( 'tag', $crp_related_by ) ? print esc_attr( 'checked' ) : '' ); ?>>
 				<?php _e( 'Same tag', 'wt-woocommerce-related-products' ); ?>
 			</label>
-			<p class="description crp-paragraph crp-sub-cat"><?php printf( __( 'Use this %1$s code snippet %2$s to relate products by sub-category.', 'wt-woocommerce-related-products' ), '<a href="https://www.webtoffee.com/related-products-woocommerce-user-guide/#sub_category" target="_blank">', '</a>' ); ?></p>
+			<!-- <p class="description crp-paragraph crp-sub-cat"><?php // printf( __( 'Use this %1$s code snippet %2$s to relate products by sub-category.', 'wt-woocommerce-related-products' ), '<a href="https://www.webtoffee.com/related-products-woocommerce-user-guide/#sub_category" target="_blank">', '</a>' ); ?></p> -->
 
 		</fieldset>
 		<?php
@@ -932,7 +938,7 @@ class Custom_Related_Products_Admin {
 		?>
 		<tr class="crp-tr-field">
 			<td colspan="2" style="padding: 0px;">
-				<div class="crp-banner crp-info-box">
+				<div class="crp-banner wt-crp-info-box">
 				<?php _e( "To override the 'Display related products from' selection or to set related products individually for each product:", 'wt-woocommerce-related-products' ); ?>
 				<ol>
 					<li><?php _e( 'Navigate to Products', 'wt-woocommerce-related-products' ); ?> > <?php _e( 'Edit Product', 'wt-woocommerce-related-products' ); ?> > <?php _e( 'Linked Products', 'wt-woocommerce-related-products' ); ?></li>
@@ -1042,6 +1048,12 @@ class Custom_Related_Products_Admin {
 					echo 'selected="selected"';}
 				?>
 					><?php _e( 'Avg rating', 'wt-woocommerce-related-products' ); ?></option>
+				<option value="relevance" 
+				<?php
+				if ( $crp_order_by == 'relevance' ) {
+					echo 'selected="selected"';}
+				?>
+					><?php _e( 'Relevance', 'wt-woocommerce-related-products' ); ?></option>
 			</select>
 		</fieldset>         
 		<?php
@@ -1085,6 +1097,7 @@ class Custom_Related_Products_Admin {
 		<fieldset class="crp-exclude-os">
 			<label>
 				<input type="checkbox" name="<?php echo esc_attr( $this->option_name . '_exclude_os' ); ?>" id="<?php echo esc_attr( $this->option_name . '_exclude_os' ); ?>" value="exclude_os" <?php checked( $exclude_os, 'exclude_os' ); ?>>
+				<?php esc_html_e( 'Prevent out of stock products from being displayed in the widget', 'wt-woocommerce-related-products' ); ?>
 			</label>
 		</fieldset>         
 		<?php
@@ -1099,6 +1112,7 @@ class Custom_Related_Products_Admin {
 		<fieldset class="crp-exclude-backorder">
 			<label>
 				<input type="checkbox" name="<?php echo esc_attr( $this->option_name . '_rp_exclude_backorder' ); ?>" id="<?php echo esc_attr( $this->option_name . '_rp_exclude_backorder' ); ?>" value="rp_exclude_backorder" <?php checked( $rp_exclude_backorder, 'rp_exclude_backorder' ); ?>>
+				<?php esc_html_e( 'Prevent backorder products from being displayed in the widget', 'wt-woocommerce-related-products' ); ?>
 			</label>
 		</fieldset>      
 		<?php
@@ -1111,6 +1125,7 @@ class Custom_Related_Products_Admin {
 		<fieldset class="crp-slider">
 			<label>
 				<input type="checkbox" name="<?php echo esc_attr( $this->option_name . '_slider' ); ?>" id="<?php echo esc_attr( $this->option_name . '_slider' ); ?>" value="enable" <?php checked( $slider, 'enable' ); ?>>
+				<?php esc_html_e( 'Showcase products in a slidable widget', 'wt-woocommerce-related-products' ); ?>
 			</label>
 		</fieldset>         
 		<?php
@@ -1138,7 +1153,7 @@ class Custom_Related_Products_Admin {
 			<p class="description"><?php _e( 'Try switching the slider type if any conflicts with the site theme.', 'wt-woocommerce-related-products' ); ?></p>
 		</fieldset>  
 		
-			<div class="crp-banner crp-info-box">
+			<div class="crp-banner wt-crp-info-box">
 			<?php if ( $slider == 'bx' ) { ?>
 					<p id="crp-slider-type"><?php printf( __( 'bxSlider is a fully-loaded, responsive jQuery content slider.%1$s Know more. %2$s', 'wt-woocommerce-related-products' ), '<a href="https://github.com/stevenwanderski/bxslider-4" target="_blank">', '</a>' ); ?></p>
 				<?php } elseif ( $slider == 'swiper' ) { ?> 
@@ -1196,9 +1211,24 @@ class Custom_Related_Products_Admin {
 	}
 	public function custom_related_products_info_bottom_cb() {
 		?>
-		<div class="crp-alert crp-seconday-alert crp-info">
-			<?php printf( __( 'Note: Alternatively, utilize the shortcode %1$s[wt-related-products product_id=XX]%2$s to showcase related products on custom posts/pages of your site. (Ensure to replace the %3$sXX%4$s placeholder in the shortcode with the product ID of the product you are basing the recommendation on, and related product recommendations for the selected product will be displayed on the chosen post/page.)', 'wt-woocommerce-related-products' ), '<b>', '</b>', '<b>', '</b>' ); ?>
-		</div>
+		<tr class="crp-tr-field">
+			<td colspan="2" style="padding: 0px;">
+				<div class="crp-alert crp-seconday-alert wt-crp-info">
+					<?php
+					echo wp_kses_post(
+						sprintf(
+							__( 'Use the shortcode %1$s[wt-related-products product_id=XX]%2$s to show related products on custom posts/pages.<br>Replace the %3$sXX%4$s placeholder with the product ID of the product you are basing the recommendation on.', 'wt-woocommerce-related-products' ),
+							'<code>',
+							'</code>',
+							'<code>',
+							'</code>'
+						)
+					);
+					?>
+
+				</div>
+			</td>
+		</tr>
 		<?php
 	}
 	public function custom_related_products_advanced_settings_cb() {
@@ -1298,21 +1328,21 @@ class Custom_Related_Products_Admin {
 					}
 				}
 				function add_disable_mode_restrictions() {
-					jQuery('.crp-tr-field th label,.crp-tr-field fieldset, .crp-banner').addClass("crp-disallow").prop('disabled', true);
+					jQuery('.crp-tr-field th label,.crp-tr-field fieldset, .crp-banner, .wt-crp-info').addClass("crp-disallow").prop('disabled', true);
 					jQuery('.crp_related_by_search').prop('disabled', true);
 					jQuery('.wt-crp-advanced-settings-toggle, .wt-crp-widget-settings-toggle').addClass("crp-toggle-disallow");
 				}
 				function remove_disable_mode_restrictions() {
-					jQuery('.crp-tr-field .crp-disallow, .crp-banner').removeClass("crp-disallow").prop('disabled', false);
+					jQuery('.crp-tr-field .crp-disallow, .crp-banner, .wt-crp-info').removeClass("crp-disallow").prop('disabled', false);
 					jQuery('.wt-crp-advanced-settings-toggle, .wt-crp-widget-settings-toggle').removeClass("crp-toggle-disallow");
 				}
 				function add_default_mode_restrictions() {
-					jQuery('.mode-default-disallow th label,.mode-default-disallow fieldset, .crp-banner').addClass("crp-disallow").prop('disabled', true);
+					jQuery('.mode-default-disallow th label,.mode-default-disallow fieldset, .crp-banner, .wt-crp-info').addClass("crp-disallow").prop('disabled', true);
 					jQuery('.crp_related_by_search').prop('disabled', true);
 					jQuery('.wt-crp-advanced-settings-toggle').addClass("crp-toggle-disallow");
 				}
 				function remove_default_mode_restrictions() {
-					jQuery('.mode-default-disallow .crp-disallow, .crp-banner').removeClass("crp-disallow").prop('disabled', false);
+					jQuery('.mode-default-disallow .crp-disallow, .crp-banner, .wt-crp-info').removeClass("crp-disallow").prop('disabled', false);
 					jQuery('.crp_related_by_search').prop('disabled', false);
 				}
 				
@@ -1389,6 +1419,23 @@ class Custom_Related_Products_Admin {
 						jQuery('#crp-slider-type').html('Swiper - is the free and most modern mobile touch slider with hardware accelerated transitions and amazing native behavior.<a href="https://github.com/nolimits4web/swiper" target="_blank"> Know more. </a>');
 					}
 				});  
+				const $sortByDropdown = jQuery('#custom_related_products_crp_order_by');
+				const $sortOrderRow = jQuery('#custom_related_products_crp_order').closest('tr');
+
+				// Function to toggle visibility of the "Sort order" field
+				function toggleSortOrderVisibility() {
+					if ($sortByDropdown.val() === 'relevance') {
+						$sortOrderRow.hide(); // Hide the sort order field
+					} else {
+						$sortOrderRow.show(); // Show the sort order field
+					}
+				}
+
+				// Initial check on page load
+				toggleSortOrderVisibility();
+
+				// Event listener for changes in the "Sort by" dropdown
+				$sortByDropdown.on('change', toggleSortOrderVisibility);
 			});
 		</script>
 
@@ -1477,8 +1524,8 @@ class Custom_Related_Products_Admin {
 		<fieldset class="include-cart">
 			<label>
 				<input type="checkbox" name="<?php echo esc_attr( $this->option_name . '_cart_working_mode' ); ?>" id="<?php echo esc_attr( $this->option_name . '_cart_working_mode' ); ?>" value="cart_mode" <?php checked( $include_cart, 'cart_mode' ); ?>>
+				<?php esc_html_e( 'Display ‘Related products’ widget on the cart page', 'wt-woocommerce-related-products' ); ?>
 			</label>
-			<!--<p class="description"><?php _e( 'Enable to exclude out of stock products from displaying in related products.', 'wt-woocommerce-related-products' ); ?></p>-->
 		</fieldset>         
 		<?php
 	}
@@ -1507,12 +1554,13 @@ class Custom_Related_Products_Admin {
 
 		$crp_custom_slider_arrow = get_option( $this->option_name . '_crp_custom_slider_arrow' );
 		?>
-		<fieldset class="crp-custom-slider-arrow">
-			<label>
-				<input type="checkbox" name="<?php echo esc_attr( $this->option_name . '_crp_custom_slider_arrow' ); ?>" id="<?php echo esc_attr( $this->option_name . '_crp_custom_slider_arrow' ); ?>" value="slider_arrow"  <?php checked( $crp_custom_slider_arrow, 'slider_arrow' ); ?>>
+				<fieldset class="crp-custom-slider-arrow" style="display: flex; align-items: center; gap: 5px;">
+			<input type="checkbox" name="<?php echo esc_attr( $this->option_name . '_crp_custom_slider_arrow' ); ?>" id="<?php echo esc_attr( $this->option_name . '_crp_custom_slider_arrow' ); ?>" value="slider_arrow" <?php checked( $crp_custom_slider_arrow, 'slider_arrow' ); ?>>
+			<label for="<?php echo esc_attr( $this->option_name . '_crp_custom_slider_arrow' ); ?>">
+				<?php esc_html_e( 'Use this option if you encounter issues in displaying the default arrow icons on the slider', 'wt-woocommerce-related-products' ); ?>
 			</label>
-			<p class="description"><?php _e( 'Consider using this option if you encounter difficulties in displaying the default left and right arrow dashboard icons on the slider.', 'wt-woocommerce-related-products' ); ?></p>
-		</fieldset>         
+		</fieldset>
+  
 		<?php
 	}
 

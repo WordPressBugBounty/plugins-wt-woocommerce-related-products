@@ -50,14 +50,14 @@ class Custom_Related_Products_Public {
      * @since    1.0.0
      */
     public function enqueue_styles() {
-		$slider_state	 = get_option( 'custom_related_products_slider','enable' );
-		if('enable' == $slider_state){
-                     wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/custom-related-products-public.css', array(), $this->version, 'all');
-                     wp_enqueue_style('carousel-css', plugin_dir_url(__FILE__) . 'css/owl.carousel.min.css', array(), $this->version, 'all');
-                     wp_enqueue_style('carousel-theme-css', plugin_dir_url(__FILE__) . 'css/owl.theme.default.min.css', array(), $this->version, 'all');
-                    //wp_enqueue_style('bxslider-css', plugin_dir_url(__FILE__) . 'css/jquery.bxslider.min.css', array(), $this->version, 'all');
-                    //wp_enqueue_style('swiper-css', plugin_dir_url(__FILE__) . 'css/swiper.min.css', array(), $this->version, 'all');
-		}
+        wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/custom-related-products-public.css', array(), $this->version, 'all');
+        $slider_state = get_option('custom_related_products_slider', 'enable');
+        if ('enable' == $slider_state) {
+            wp_enqueue_style('carousel-css', plugin_dir_url(__FILE__) . 'css/owl.carousel.min.css', array(), $this->version, 'all');
+            wp_enqueue_style('carousel-theme-css', plugin_dir_url(__FILE__) . 'css/owl.theme.default.min.css', array(), $this->version, 'all');
+            //wp_enqueue_style('bxslider-css', plugin_dir_url(__FILE__) . 'css/jquery.bxslider.min.css', array(), $this->version, 'all');
+            //wp_enqueue_style('swiper-css', plugin_dir_url(__FILE__) . 'css/swiper.min.css', array(), $this->version, 'all');
+        }
     }
 
     /**
@@ -66,12 +66,11 @@ class Custom_Related_Products_Public {
      * @since    1.0.0
      */
     public function enqueue_scripts() {
-
-        //wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/custom-related-products-public.js', array('jquery'), $this->version, false);
+        wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/custom-related-products-public.js', array('jquery'), $this->version, false);
 		$slider_state	 = get_option( 'custom_related_products_slider','enable' );
 		if('enable' == $slider_state){
-                    wp_enqueue_script('wt-owl-js', plugin_dir_url(__FILE__) . 'js/wt_owl_carousel.js', array('jquery'), $this->version, false);	
-                }
+            wp_enqueue_script('wt-owl-js', plugin_dir_url(__FILE__) . 'js/wt_owl_carousel.js', array('jquery'), $this->version, false);	
+        }
     }
 
     public function crp_filter_related_products($args) {
@@ -320,8 +319,7 @@ class Custom_Related_Products_Public {
                                     }
                                 })
                             }
-
-                        <?php  } else { ?>
+                        <?php } else { ?>
                             if ("function" === typeof wt_related_products.owlCarousel) {
                                 wt_related_products.owlCarousel({
                                     loop: false,
@@ -331,7 +329,7 @@ class Custom_Related_Products_Public {
                                         "<i class='dashicons dashicons-arrow-left-alt2 wt-left'></i>",
                                         "<i class='dashicons dashicons-arrow-right-alt2 wt-right'></i>"
                                     ],
-                                    //   autoplay: true,
+                                    //autoplay: true,
                                     autoplayHoverPause: true,
                                     responsive: {
                                         0: {
@@ -415,11 +413,11 @@ class Custom_Related_Products_Public {
                 </script>
                 <style>
                     .wt-related-products{
-                                    max-width: <?php echo $slide_width . ' !important'; ?>;
-                                }
-                                .wt-related-products .owl-carousel .owl-nav .owl-next:before ,.wt-related-products .owl-carousel .owl-nav .owl-prev:before {
-                                    content: unset;
-                                }
+                        max-width: <?php echo $slide_width . ' !important'; ?>;
+                    }
+                    .wt-related-products .owl-carousel .owl-nav .owl-next:before ,.wt-related-products .owl-carousel .owl-nav .owl-prev:before {
+                        content: unset;
+                    }
                                 <?php if($slider_state_temp !== 'disable' && $working_mode !== 'default'){ ?>
                                 
                                         .wt-related-products div.wt-crp-content-wrapper span.wt_price, .wt_cart_button {
@@ -508,7 +506,7 @@ class Custom_Related_Products_Public {
                                             text-decoration: none;
                                         }
 
-                                        .wt-related-products ul.products li.product, .wt-related-products ul.products {
+                                        .woocommerce-page .wt-related-products ul.products li.product, .wt-related-products ul.products li.product, .wt-related-products ul.products {
                                             margin: initial !important;
                                             width: initial !important;
                                             float: initial !important;
@@ -527,15 +525,15 @@ class Custom_Related_Products_Public {
                                             display: none !important;
                                         }
                                         .wt-related-products .owl-nav .dashicons {
-                                            width: 30px;
-                                            height: 30px;
+                                            width: 40px;
+                                            height: 40px;
                                         }
 
                                 <?php } ?>
                                 
                 </style>
             <?php
-        }else{
+        } else {
             ?>
                 <script>
                     jQuery(document).ready(function($) {
@@ -544,9 +542,9 @@ class Custom_Related_Products_Public {
                 </script>
                 <style>
                     .wt-related-products-cart {
-                        clear: both;
-                        margin: 0;
-                        padding: 0;
+                        clear: both !important;
+                        margin: 0 !important;
+                        padding: 0 !important;
                     }
                 </style>
                 
@@ -570,15 +568,57 @@ class Custom_Related_Products_Public {
          
     }
 
+
     /**
-     * Remove Related Products blocks when block theme is enabled
+     * Remove Related Products blocks only where our plugin's widget exists
      * 
      * @since 1.5.1
      */
-    public function block_theme_single_product_page( $block_content, $block ) {
-        if ('woocommerce/related-products' === $block['blockName']) {
-            $block_content = '';
+    public function block_theme_single_product_page($block_content, $block) {
+        // Check if this is a related products block
+        $is_related_block = (
+            'woocommerce/related-products' === $block['blockName'] || 
+            ('woocommerce/product-collection' === $block['blockName'] && 
+            isset($block['attrs']['collection']) && 
+            $block['attrs']['collection'] === 'woocommerce/product-collection/related')
+        );
+
+        if (!$is_related_block) {
+            return $block_content;
         }
+
+        // Get current working mode
+        $current_working_mode = Custom_Related_Products::get_current_working_mode();
+        
+        // Check various conditions where our widget might appear
+        $should_remove_block = false;
+
+        // 1. Check for product page
+        if (is_product() && $current_working_mode !== 'disable') {
+            $should_remove_block = true;
+        }
+
+        // 2. Check for cart page
+        if (is_cart()) {
+            $cart_mode = get_option('custom_related_products_cart_working_mode', 'cart_mode');
+            if ($cart_mode === 'cart_mode' && $current_working_mode !== 'disable') {
+                $should_remove_block = true;
+            }
+        }
+
+        // 3. Check for shortcode presence on current page
+        if (!$should_remove_block) {
+            global $post;
+            if ($post && has_shortcode($post->post_content, 'wt-related-products')) {
+                $should_remove_block = true;
+            }
+        }
+
+        // Remove block if our widget is present
+        if ($should_remove_block) {
+            return '';
+        }
+
         return $block_content;
     }
 }

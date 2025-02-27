@@ -5,9 +5,9 @@
         <?php settings_errors(); ?>
         <?php do_action('wt_crp_before_settings_block'); ?>
         <h2 class="nav-tab-wrapper woo-nav-tab-wrapper">
-            <a href="<?php echo admin_url( 'admin.php?page=wt-woocommerce-related-products' ) ?>" class="nav-tab <?php echo ( $tab == 'related-product' ) ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Settings', 'wt-woocommerce-related-products' ); ?></a>
+            <a href="<?php echo esc_url(admin_url( 'admin.php?page=wt-woocommerce-related-products' )) ?>" class="nav-tab <?php echo ( $tab == 'related-product' ) ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Settings', 'wt-woocommerce-related-products' ); ?></a>
 
-            <a href="<?php echo admin_url( 'admin.php?page=wt-woocommerce-related-products&tab=other-solutions' ); ?>" class="nav-tab <?php echo ( 'other-solutions' == $tab ) ? 'nav-tab-active' : ''; ?>" style="background: #32A001; color: #FFFFFF;"><?php esc_html_e( 'You May Also Need', 'wt-woocommerce-related-products' ); ?></a>
+            <a href="<?php echo esc_url(admin_url( 'admin.php?page=wt-woocommerce-related-products&tab=other-solutions' )); ?>" class="nav-tab <?php echo ( 'other-solutions' == $tab ) ? 'nav-tab-active' : ''; ?>" style=""><?php esc_html_e( 'You May Also Need', 'wt-woocommerce-related-products' ); ?></a>
 
         </h2>
         <?php

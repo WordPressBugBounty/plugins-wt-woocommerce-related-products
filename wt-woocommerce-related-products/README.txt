@@ -1,12 +1,12 @@
 === Related Products - Create Upsells, Cross-sells, and Product Recommendations for WooCommerce ===
 Contributors: webtoffee
-Version: 1.6.0
+Version: 1.7.0
 Donate link: https://www.webtoffee.com/product/woocommerce-product-recommendations/
 Tags: related products, product recommendations, woocommerce related products, woocommerce product recommendations, woocommerce recommendations
 Requires at least: 3.0.1
 Tested up to: 6.7
 Requires PHP: 5.6
-Stable tag: 1.6.0
+Stable tag: 1.7.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -14,9 +14,9 @@ Display custom related products, upsells, and cross-sells in WooCommerce by disa
 
 == Description ==
 
-Related Products for WooCommerce plugin shows custom-related products in WooCommerce. You can show related products by category, tags, or choose products to show as related products on the product details page of a specific product. 
+Related Products for WooCommerce plugin shows custom related products in WooCommerce. You can show WooCommerce related products by category, tags, or choose products to show as related products on the product details page of a specific product. 
 
-Showing related products recommendation brings customers' attention to other products in your store that they might be interested in. This persuades them to try those products, thus resulting in an increase in the average order value.
+Showing WooCommerce related products recommendation brings customers' attention to other products in your store that they might be interested in. This persuades them to try those products, thus resulting in an increase in the average order value.
 
 You can also make use of the related product's functionality in your WooCommerce store to suggest upsells, cross-sells and similar products to your customers and boost your sales.
 
@@ -24,7 +24,7 @@ You can also make use of the related product's functionality in your WooCommerce
 
 * **Disable default WooCommerce related products** functionality
 * Choose **custom related products**
-* Option to **set up related products for the entire store** (by category, tags)
+* Option to **set up WooCommerce related products for the entire store** (by category, tags)
 * **Set up related products for individual products** (by category, attributes, tags, or products)
 * **Exclude selected categories** from showing as related products
 * **Exclude out of stock products** from showing as related products
@@ -34,10 +34,11 @@ You can also make use of the related product's functionality in your WooCommerce
 * Use WooCommerce **related products shortcode ([wt-related-products product_id="xx"])** to display related products for any posts/pages on your site
 * **Show the same set of related products for their translated versions** as well when using **WPML** 
 * **Remove theme's default related products in WooCommerce**
+* Woocommerce related products widget is **compatible with Block-based themes**
 * Import related products using the default WooCommerce importer<a rel="nofollow" href="https://www.webtoffee.com/how-to-import-related-products-using-woocommerce-importer/"> Learn more </a>
 
 
-&#9989; Tested OK with WooCommerce 9.5.1
+&#9989; Tested OK with WooCommerce 9.6.2
 
 == Related Products for WooCommerce - Installation and Setup ==
 
@@ -59,7 +60,7 @@ It is also seen that when customers keep getting recommendations while purchasin
 
 ==  Different Ways to Show Related Product Recommendations on your WooCommerce store ==
 
-WooCommerce Related Products feature is one of the important sales tools available for store owners. "Related products" can be employed on your website in different forms. When built-in features in WooCommerce enable you to showcase related products like upsells and cross-sells, with the help of third-party plugins you can equip your store to automatically recommend related products depending upon the activities of customers on your WooCommerce store. The two main methods to easily display similar product suggestions are:
+WooCommerce Related Products feature is one of the important sales tools available for store owners. "Related products" can be employed on your website in different forms. When built-in features in WooCommerce enable you to showcase related products like upsells and cross-sells, third-party plugins enhance this capability. They can automatically recommend related products and create custom related product suggestions based on the activities of customers on your WooCommerce store. The three main methods to easily display similar product suggestions are:
 
 ===Upsells===
 
@@ -68,6 +69,10 @@ These products are shown on the product page as an alternative to the product cu
 ===Cross-sells=== 
 
 On contrary to up-sells, cross-sells are displayed on the cart page under the title "you may be interested in".  These products would complement the products currently in the cart. On seeing this customers would feel an urge to buy the complementary products along with the products in their cart thereby selling more products for the store. Notifying customers about phone cases while purchasing a phone would be a perfect example of cross-selling.
+
+===Custom Related Products=== 
+
+Set up and manage custom related products to display on your product pages. Use flexible options like categories, tags, attributes, or specific products to fine-tune the WooCommerce related products shown to your shoppers.
 
 == Advanced WooCommerce Product Recommendations - Premium Version ==
 
@@ -86,7 +91,7 @@ On contrary to up-sells, cross-sells are displayed on the cart page under the ti
 
 === Built-in Recommendation Widgets Available on Advanced WooCommerce Product Recommendations ===
 
-* **Related Products:** Improve WooCommerce sales with relevant complementary product recommendations.
+* **Related Products:** Improve sales with relevant WooCommerce related product recommendations.
 * **Bestsellers:** Showcase your popular products to earn more sales.
 * **Top rated:** Easily display the highest rated products of your store.
 * **Frequently Bought Together:** Upsell and cross sell with relevant product bundles.
@@ -166,6 +171,14 @@ You can display cross-sell product recommendations by adding cross-sells to indi
 5. Related Products - Setup Page.
 
 == Changelog ==
+
+= 1.7.0 27-2-2024 =
+* [Compatibility] - Tested OK with WooCommerce 9.6.2
+* [Add] - Relevance sort option to prioritise related products
+* [Improvement] - Plugin settings page content
+* [Enhancement] - Block theme compatibility 
+* [Enhancement] - Improve compatibility with WordPress themes
+
 
 = 1.6.0 30-12-2024 =
 * [Compatibility] - Tested OK with WordPress 6.7.1
@@ -431,9 +444,9 @@ and Exclude Categories for related products.
 
 == Upgrade Notice ==
 
-= 1.6.0 =
-* [Compatibility] - Tested OK with WordPress 6.7.1
-* [Compatibility] - Tested OK with WooCommerce 9.5.1
-* [Enhancement] - Custom related products selection to include product variations
-* [Enhancement] - Plugin settings page options alignment
-
+= 1.7.0 =
+* [Compatibility] - Tested OK with WooCommerce 9.6.2
+* [Add] - Relevance sort option to prioritise related products
+* [Improvement] - Plugin settings page content
+* [Enhancement] - Block theme compatibility 
+* [Enhancement] - Improve compatibility with WordPress themes

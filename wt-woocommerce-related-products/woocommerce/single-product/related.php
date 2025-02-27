@@ -142,6 +142,13 @@ if ( ! function_exists( 'crp_get_all_product_ids_from_attr_ids' ) ) {
 }
 
 $global_related_by = (array) apply_filters( 'wt_crp_global_related_by', get_option('custom_related_products_crp_related_by', array('category')) );
+$number_of_products = get_option('custom_related_products_crp_number', 3);
+$slider_state = get_option('custom_related_products_slider','enable');
+if ('enable' !== $slider_state) {
+	$number_of_products = class_exists('Custom_Related_Products') ? Custom_Related_Products::wt_get_device_type() : '3';
+}
+$number_of_products = apply_filters('wt_related_products_number', $number_of_products);
+
 if ( $related_products || !empty($global_related_by) ) :
 
 ?>
@@ -182,9 +189,6 @@ if ( $related_products || !empty($global_related_by) ) :
 
 			$related = apply_filters( 'wt_crp_related_product_ids', array_filter(array_map('absint', (array) get_post_meta($post->ID, '_crp_related_ids', true))));
 
-			
-
-
 			//gets selected related categories
 			$related_categories_ids = apply_filters( 'wt_crp_related_category_ids',array_filter(array_map('absint', (array) get_post_meta($post->ID, '_crp_related_product_cats', true))));
 				
@@ -193,7 +197,7 @@ if ( $related_products || !empty($global_related_by) ) :
 			
 			//gets selected related attributes
 			$related_attr_ids = apply_filters( 'wt_crp_related_attribute_ids', get_post_meta($post->ID, '_crp_related_product_attr', true) );
-		
+
 			if(!empty($related) || !empty($related_categories_ids) || !empty($related_tags_ids) || !empty($related_attr_ids)) {
 
 				if (!empty($related_categories_ids)) {
@@ -226,55 +230,208 @@ if ( $related_products || !empty($global_related_by) ) :
 						$related = $all_ids;
 					}
 				}
-			} else if(!empty($global_related_by)) {
-				
-				if( in_array( 'category', $global_related_by ) ) {
-					$product_cat_ids = array();
-					$prod_terms = wp_get_post_terms($post->ID, 'product_cat', array("orderby" => "parent"));//get_the_terms( $post->ID, 'product_cat' );
-					if ( ! empty( $prod_terms ) && ! is_wp_error( $prod_terms ) ) {
-						$subcategory_only = apply_filters('wt_crp_subcategory_only', false);
-						$category_count = count($prod_terms);
-                        $term_ids = array_column($prod_terms, 'term_id');
+			} elseif (!empty($global_related_by)) {
 
-						foreach ($prod_terms as $prod_term) {
-							if( $subcategory_only && $category_count > 1 ) {
-                                $has_term_id = false;
-                                $children = function_exists('get_categories') ? get_categories( array ('taxonomy' => 'product_cat', 'child_of' => $prod_term->term_id )) : array();
-                                foreach ($children as $term) {
-                                    if( in_array($term->term_id, $term_ids) ) {
-                                        $has_term_id = true;
-                                        break;
-                                    }
-                                }
-                                
-                                if ( count($children) == 0 || !$has_term_id ) {
-									// if no children, then it may be the deepest sub category.
-									$product_cat_ids[] = $prod_term->term_id;
-								}
-							}else {
-								// gets product cat id
-								$product_cat_ids[] = $prod_term->term_id;
-							}	
-						}
-						if(!empty($product_cat_ids)) {
-							$related = crp_get_all_product_ids_from_cat_ids( $product_cat_ids );
+				$related = array();
+				$all_related_products = array();
+
+				// Ensure both tags and categories are selected
+				if (in_array('tag', $global_related_by) && in_array('category', $global_related_by)) {
+					$product_tag_ids = array();
+					$deepest_child_cat_id = null;
+					$parent_category_ids = array();
+
+					// Get current product's tags
+					$tag_terms = get_the_terms($post->ID, 'product_tag');
+					if (!empty($tag_terms) && !is_wp_error($tag_terms)) {
+						foreach ($tag_terms as $term) {
+							$product_tag_ids[] = $term->term_id;
 						}
 					}
-					
-				}
 
-				if( in_array( 'tag', $global_related_by ) ) {
-					$product_tag_ids = $related_ids = array();
-					$prod_terms = get_the_terms( $post->ID, 'product_tag' );
-					if ( ! empty( $prod_terms ) && ! is_wp_error( $prod_terms ) ) {
-						foreach ($prod_terms as $prod_term) {
-							// gets product tag id
-							$product_tag_ids[] = $prod_term->term_id;
+					// Get current product's categories and parent category
+					$cat_terms = wp_get_post_terms($post->ID, 'product_cat', array('fields' => 'all'));
+					if (!empty($cat_terms) && !is_wp_error($cat_terms)) {
+						$deepest_child_cat_id = array_reduce($cat_terms, function ($carry, $term) {
+							if (!$carry || $term->parent > $carry->parent) {
+								return $term;
+							}
+							return $carry;
+						});
+						$deepest_child_cat_id = $deepest_child_cat_id->term_id;
+
+						// Collect parent categories
+						foreach ($cat_terms as $term) {
+							if ($term->parent > 0) {
+								$parent_category_ids[] = $term->parent;
+							}
 						}
-						if(!empty($product_tag_ids)) {
-							$related_ids = crp_get_all_product_ids_from_tag_ids( $product_tag_ids );
-							$related = ( !empty($related) && is_array($related) ) ? array_merge($related, $related_ids) : $related_ids;
+					}
+
+					// First Priority: Products matching both deepest child category and tags
+					if (!empty($product_tag_ids) && $deepest_child_cat_id) {
+						$args = array(
+							'post_type' => 'product',
+							'posts_per_page' => -1,
+							'post__not_in' => array($post->ID),
+							'tax_query' => array(
+								'relation' => 'AND',
+								array(
+									'taxonomy' => 'product_tag',
+									'field' => 'id',
+									'terms' => $product_tag_ids,
+								),
+								array(
+									'taxonomy' => 'product_cat',
+									'field' => 'id',
+									'terms' => $deepest_child_cat_id,
+								)
+							)
+						);
+						$both_matches = get_posts($args);
+						$related = array_merge($related, wp_list_pluck($both_matches, 'ID'));
+					}
+
+					// Second Priority: Products from the deepest child category only
+					if ($deepest_child_cat_id && count($related) < $number_of_products) {
+						$args = array(
+							'post_type' => 'product',
+							'posts_per_page' => -1,
+							'post__not_in' => array_merge(array($post->ID), $related),
+							'tax_query' => array(
+								array(
+									'taxonomy' => 'product_cat',
+									'field' => 'id',
+									'terms' => $deepest_child_cat_id,
+								)
+							)
+						);
+						$cat_matches = get_posts($args);
+						$related = array_merge($related, wp_list_pluck($cat_matches, 'ID'));
+					}
+
+					// Third Priority: Products with matching tags, sorted by the number of common tags
+					if (!empty($product_tag_ids) && count($related) < $number_of_products) {
+						$args = array(
+							'post_type' => 'product',
+							'posts_per_page' => -1,
+							'post__not_in' => array_merge(array($post->ID), $related),
+							'tax_query' => array(
+								array(
+									'taxonomy' => 'product_tag',
+									'field' => 'id',
+									'terms' => $product_tag_ids,
+								)
+							)
+						);
+						$tag_matches = get_posts($args);
+
+						// Score products by number of matching tags
+						$scored_products = array();
+						foreach ($tag_matches as $product) {
+							$product_tags = wp_get_post_terms($product->ID, 'product_tag', array('fields' => 'ids'));
+							$matching_tags = array_intersect($product_tag_ids, $product_tags);
+							$scored_products[] = array(
+								'id' => $product->ID,
+								'score' => count($matching_tags),
+							);
 						}
+
+						// Sort by number of matching tags
+						usort($scored_products, function ($a, $b) {
+							return $b['score'] - $a['score'];
+						});
+
+						$tag_sorted_ids = wp_list_pluck($scored_products, 'id');
+						$related = array_merge($related, $tag_sorted_ids);
+					}
+
+					// Fourth Priority: Fill remaining slots with products from parent category
+					if (!empty($parent_category_ids) && count($related) < $number_of_products) {
+						$args = array(
+							'post_type' => 'product',
+							'posts_per_page' => $number_of_products - count($related),
+							'post__not_in' => array_merge(array($post->ID), $related),
+							'tax_query' => array(
+								array(
+									'taxonomy' => 'product_cat',
+									'field' => 'id',
+									'terms' => $parent_category_ids,
+								)
+							)
+						);
+						$parent_matches = get_posts($args);
+						$related = array_merge($related, wp_list_pluck($parent_matches, 'ID'));
+					}
+
+					// Ensure unique and limit to required number of products
+					$related = array_slice(array_unique($related), 0, $number_of_products);
+				}
+			
+				// When only category is selected
+				elseif (count($global_related_by) === 1 && in_array('category', $global_related_by)) {
+					$sub_category_ids = array();
+					$parent_category_ids = array();
+					$prod_terms = wp_get_post_terms($post->ID, 'product_cat', array("orderby" => "parent"));
+
+					if (!empty($prod_terms) && !is_wp_error($prod_terms)) {
+						foreach ($prod_terms as $term) {
+							// Get subcategories
+							$children = get_categories(array(
+								'taxonomy' => 'product_cat',
+								'child_of' => $term->term_id
+							));
+							foreach ($children as $child) {
+								$sub_category_ids[] = $child->term_id;
+							}
+							$parent_category_ids[] = $term->term_id;
+						}
+						
+						// First get products from subcategories
+						if (!empty($sub_category_ids)) {
+							$sub_cat_products = crp_get_all_product_ids_from_cat_ids($sub_category_ids);
+							$all_related_products = array_merge($all_related_products, $sub_cat_products);
+						}
+						
+						// Then get products from parent categories to fill remaining slots
+						if (count($all_related_products) < $number_of_products) {
+							$parent_cat_products = crp_get_all_product_ids_from_cat_ids($parent_category_ids);
+							$all_related_products = array_merge($all_related_products, $parent_cat_products);
+						}
+						
+						$related = array_slice(array_unique($all_related_products), 0, $number_of_products);
+					}
+				}
+				// When only tag is selected
+				elseif (count($global_related_by) === 1 && in_array('tag', $global_related_by)) {
+					$product_tag_ids = array();
+					$prod_terms = get_the_terms($post->ID, 'product_tag');
+					
+					if (!empty($prod_terms) && !is_wp_error($prod_terms)) {
+						foreach ($prod_terms as $term) {
+							$product_tag_ids[] = $term->term_id;
+						}
+						
+						// Get all products with matching tags
+						$tag_products = crp_get_all_product_ids_from_tag_ids($product_tag_ids);
+						
+						// Score products by number of matching tags
+						$scored_products = array();
+						foreach ($tag_products as $product_id) {
+							$product_tags = wp_get_post_terms($product_id, 'product_tag', array('fields' => 'ids'));
+							$matching_tags = array_intersect($product_tag_ids, $product_tags);
+							$scored_products[] = array(
+								'id' => $product_id,
+								'score' => count($matching_tags)
+							);
+						}
+						
+						// Sort by number of matching tags
+						usort($scored_products, function($a, $b) {
+							return $b['score'] - $a['score'];
+						});
+						
+						$related = array_slice(wp_list_pluck($scored_products, 'id'), 0, $number_of_products);
 					}
 				}
 			}
@@ -291,24 +448,34 @@ if ( $related_products || !empty($global_related_by) ) :
 				}
 			}
 
+			//Product tags of current viewing product page
+			$product_tags = wp_get_post_terms($post->ID, 'product_tag', array('fields' => 'ids'));
+			
 			if (!empty($excluded_tag_ids) && !empty($related)) {
-				$all_excluded_ids = crp_get_all_product_ids_from_tag_ids($excluded_tag_ids);
-			
-				if (!empty($all_excluded_ids)) {
-					$related = array_filter($related, function($product_id) use ($excluded_tag_ids) {
-						$product_tags = wp_get_post_terms($product_id, 'product_tag', array('fields' => 'ids'));
-			
-						if (empty($product_tags)) {
-							return true; 
-						}
-			
-						$has_allowed_tag = array_diff($product_tags, $excluded_tag_ids);
-			
-						return !empty($has_allowed_tag);
-					});
+				// Prefetch all tags for related products 
+				$related_product_tags_map = array();
+				foreach ($related as $product_id) {
+					$related_product_tags_map[$product_id] = wp_get_post_terms($product_id, 'product_tag', ['fields' => 'ids']) ?: array();
 				}
-			}
 
+				$related = array_filter($related, function ($product_id) use ($excluded_tag_ids, $product_tags, $related_product_tags_map) {
+					$related_product_tags = $related_product_tags_map[$product_id] ?? array();
+
+					if (empty($related_product_tags)) {
+						return false;
+					}
+
+					// Tags that are shared with the current product
+					$shared_tags = array_intersect($related_product_tags, $product_tags);
+
+					// Non-excluded tags that are shared with the current product
+					$shared_non_excluded_tags = array_intersect($shared_tags, array_diff($product_tags, $excluded_tag_ids));
+
+					// Include the product if it has at least one shared, non-excluded tag
+					return !empty($shared_non_excluded_tags);
+				});
+			}
+			
 			delete_post_meta($post->ID, 'selected_ids');
 			$related	= is_array($related) ? array_diff($related, array($post->ID, $current_post_id)) : array();
 
@@ -332,13 +499,6 @@ if ( $related_products || !empty($global_related_by) ) :
 
 			if (!empty($related) && (is_array($products_to_exclude_widgets) && !in_array($post->ID,$products_to_exclude_widgets)) ) {
 
-                $number_of_products	 = get_option('custom_related_products_crp_number', 3);
-                $slider_state	 = get_option('custom_related_products_slider','enable');
-                if('enable' !== $slider_state){
-                    $number_of_products = class_exists('Custom_Related_Products') ? Custom_Related_Products::wt_get_device_type() : '3';
-                }
-				$number_of_products	 = apply_filters('wt_related_products_number', $number_of_products);
-                
                 // To exclude out of stock products
 				$exclude_os	 = get_option('custom_related_products_exclude_os');
 				if (!empty($exclude_os)) {
@@ -372,18 +532,24 @@ if ( $related_products || !empty($global_related_by) ) :
 				$related_products	 = array();
 				$copy				 = array();
 				
-				$related_products	 = $related;
-				while (count($related_products)) {
-					// takes a rand array elements by its key
-					$element			 = array_rand($related_products);
-					// assign the array and its value to an another array
-					$copy[$element]	 = $related_products[$element];
-					//delete the element from source array
-					unset($related_products[$element]);
-				}
-
 				$orderby 			 = get_option('custom_related_products_crp_order_by', 'popularity');
 				$orderby			 = apply_filters('wt_related_products_orderby', $orderby);
+				
+				if ($orderby === 'relevance') {
+					// Directly copy related to copy without shuffling
+					$copy = $related;
+				} else {
+					// Shuffle only if orderby is not relevance
+					$related_products = $related;
+					while (count($related_products)) {
+						// Take a random array element by its key
+						$element = array_rand($related_products);
+						// Assign the array and its value to another array
+						$copy[$element] = $related_products[$element];
+						// Delete the element from the source array
+						unset($related_products[$element]);
+					}
+				}
 				$order 				 = get_option('custom_related_products_crp_order', 'DESC');	
 				$order				 = apply_filters('wt_related_products_order', $order);
 
@@ -397,61 +563,68 @@ if ( $related_products || !empty($global_related_by) ) :
 					'order' => $order, 
 					'post__in' => $copy
 				);
+
+				// Remove 'order' if 'orderby' is 'relevance' or 'post__in'
+				if ($orderby === 'relevance') {
+					unset($args['order']); // Remove 'order' key
+					$args['orderby'] = 'post__in'; // Force order by the 'post__in' array
+				}
+				
 				$custom_orderby = class_exists('Custom_Related_Products') ? Custom_Related_Products::get_custom_order_by_values() : array();
 				if( array_key_exists( $orderby, $custom_orderby ) ) {
 					$args['orderby'] =  $custom_orderby[$orderby]['orderby'];
 					$args['meta_key'] = $custom_orderby[$orderby]['meta_key'];
 				}
 
-                                $copy = apply_filters("woocommerce_crp_set_product_visibility", $copy); 
-                                $min_slides = class_exists('Custom_Related_Products') ? Custom_Related_Products::wt_get_device_type() : '3';
-                                $slider_status = 'enable';
+				$copy = apply_filters("woocommerce_crp_set_product_visibility", $copy); 
+				$min_slides = class_exists('Custom_Related_Products') ? Custom_Related_Products::wt_get_device_type() : '3';
+				$slider_status = 'enable';
 
-                                if(count($copy) <= $min_slides){
-                                    update_option('custom_related_products_slider_temp','disable');
-                                    $slider_status = 'disable';
-                                }else{
-                                    update_option('custom_related_products_slider_temp','enabled');
-                                }
-                                $bxslider		 = 'slider';
-                                $slider_state	 = get_option('custom_related_products_slider','enable');
-                                $crp_title		 = get_option('custom_related_products_crp_title', esc_html__('Related Products', 'wt-woocommerce-related-products'));
-                                $crp_heading 	 = apply_filters('wt_related_products_heading', "<h2 class='wt-crp-heading'>" . esc_html( $crp_title ) . " </h2>", $crp_title);
+				if(count($copy) <= $min_slides){
+					update_option('custom_related_products_slider_temp','disable');
+					$slider_status = 'disable';
+				}else{
+					update_option('custom_related_products_slider_temp','enabled');
+				}
+				$bxslider		 = 'slider';
+				$slider_state	 = get_option('custom_related_products_slider','enable');
+				$crp_title		 = get_option('custom_related_products_crp_title', esc_html__('Related Products', 'wt-woocommerce-related-products'));
+				$crp_heading 	 = apply_filters('wt_related_products_heading', "<h2 class='wt-crp-heading'>" . esc_html( $crp_title ) . " </h2>", $crp_title);
 
-                                $few_slider		 = '';
-                                $slider_type = get_option('custom_related_products_slider_type') ? get_option('custom_related_products_slider_type'):'swiper';
-                                 if(in_array('elementor/elementor.php', apply_filters('active_plugins', get_option('active_plugins')))){ 
-                                    $slider_type = 'bx';
-                                }
-                                
-                                if(strstr(wp_get_theme()->get('Name'),'Woodmart') || strstr(wp_get_theme()->get('Name'),'Flatsome')){
-                                    $slider_type = 'bx';
-                                }
-                                
-                                if(strstr(wp_get_theme()->get('Name'),'Divi') || strstr(wp_get_theme()->get('Name'),'Avada') || strstr(wp_get_theme()->get('Name'),'BeOnePage')){
-                                    $slider_type = 'swiper';
-                                }
-                                if( 'disable' === $slider_status ){
-                                    $slider_state = '';
-                                    $bxslider = '';
-                                }
-                                 if ('enable' === $slider_state && $slider_type== 'bx') {
-                                        $bxslider = 'bxslider';
-                                 }
-                                 if (('enable' !== $slider_state && 'swiper' === $slider_type ) || ('enable' !== $slider_state && 'bx' === $slider_type )) {
-                                        $bxslider = '';
-                                 }
-                                if(strstr(wp_get_theme()->get('Name'),'Twenty Twenty-One')){
-                                    $slider_type = 'swiper';
-                                }
+				$few_slider		 = '';
+				$slider_type = get_option('custom_related_products_slider_type') ? get_option('custom_related_products_slider_type'):'swiper';
+					if(in_array('elementor/elementor.php', apply_filters('active_plugins', get_option('active_plugins')))){ 
+					$slider_type = 'bx';
+				}
+				
+				if(strstr(wp_get_theme()->get('Name'),'Woodmart') || strstr(wp_get_theme()->get('Name'),'Flatsome')){
+					$slider_type = 'bx';
+				}
+				
+				if(strstr(wp_get_theme()->get('Name'),'Divi') || strstr(wp_get_theme()->get('Name'),'Avada') || strstr(wp_get_theme()->get('Name'),'BeOnePage')){
+					$slider_type = 'swiper';
+				}
+				if( 'disable' === $slider_status ){
+					$slider_state = '';
+					$bxslider = '';
+				}
+					if ('enable' === $slider_state && $slider_type== 'bx') {
+						$bxslider = 'bxslider';
+					}
+					if (('enable' !== $slider_state && 'swiper' === $slider_type ) || ('enable' !== $slider_state && 'bx' === $slider_type )) {
+						$bxslider = '';
+					}
+				if(strstr(wp_get_theme()->get('Name'),'Twenty Twenty-One')){
+					$slider_type = 'swiper';
+				}
                                 
                                                 
                 // Added empty check to stop showing random related products when post_ids are empty.
                 if(empty($args['post__in']))
                 {
                 	$loop = array();
-                } else 
-                {
+                } else {
+
                 	$loop	 = new WP_Query($args);
 
                     if ( ! WP_DEBUG || ( WP_DEBUG && ! WP_DEBUG_DISPLAY ) ) {
@@ -461,7 +634,7 @@ if ( $related_products || !empty($global_related_by) ) :
 				
 		       	if(!empty($loop) && $loop->have_posts())
 		       	{
-					
+
 					echo $crp_heading;
 
 	                if($bxslider && apply_filters( 'wt_crp_custom_related_product_template', false ))
@@ -470,6 +643,7 @@ if ( $related_products || !empty($global_related_by) ) :
 	                            <div class="carousel-wrap">
 	                                <div class="owl-carousel owl-theme products">
 					                    <?php 
+
 					                        $rel_products = $loop->posts;
 						                    foreach ($rel_products as $products) {
 				                                $bs_id = absint($products->ID);
@@ -521,7 +695,7 @@ if ( $related_products || !empty($global_related_by) ) :
 				<section class="related_products" style="display: none;"></section>
 				<?php
 			}
-		} else if( $working_mode == 'default' && !empty( $related_products ))
+		} elseif( $working_mode == 'default' && !empty( $related_products ))
 		{
 	        $crp_title         = get_option('custom_related_products_crp_title', esc_html__('Related Products', 'wt-woocommerce-related-products'));
 	        $crp_heading 	 = apply_filters('wt_related_products_heading', "<h2 class='wt-crp-heading'>" . esc_html( $crp_title ) . " </h2>", $crp_title);

@@ -21,14 +21,14 @@ class Custom_Related_Products {
 	protected $VERSION;
 	protected $plugin_base_name;
 
-	const VERSION = '1.6.0';
+	const VERSION = '1.7.0';
 
 	public function __construct() {
 
 		$this->plugin_name		 = 'wt-woocommerce-related-products';
 		$this->plugin_base_name	 = WT_CRP_BASE_NAME;
 
-		$this->VERSION = '1.6.0';
+		$this->VERSION = '1.7.0';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -36,6 +36,7 @@ class Custom_Related_Products {
 		$this->define_public_hooks();
 		add_shortcode( 'wt-related-products', array( $this, 'render_wt_related_products' ) );
         add_action( 'woocommerce_after_cart', array( $this, 'render_related_products_in_cart' ) );
+        add_filter( 'render_block', array( $this, 'render_related_products_in_block_cart' ), 10, 2 );
 		
     }
 
@@ -152,7 +153,6 @@ class Custom_Related_Products {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
 
-
 		if ( isset( $wcversion ) && !empty( $wcversion ) ) {
 			if ( $wcversion >= '2.3' && $wcversion < '3.0' ) {
 				$this->loader->add_filter( 'woocommerce_related_products_args', $plugin_public, 'crp_filter_related_products' );
@@ -163,17 +163,16 @@ class Custom_Related_Products {
 				$this->loader->add_filter( 'woocommerce_product_related_posts_relate_by_category', $plugin_public, 'crp_remove_taxonomy', 10, 2 );
 				$this->loader->add_filter( 'woocommerce_product_related_posts_relate_by_tag', $plugin_public, 'crp_remove_taxonomy', 10, 2 );
 				$this->loader->add_filter( 'woocommerce_product_related_posts_query', $plugin_public, 'crp_related_products_query', 20, 2 );
-				
+				$this->loader->add_filter('pre_render_block', $plugin_public, 'block_theme_single_product_page', 10, 2);
+
 				/**
 				 * Block theme compatability
 				 * 
 				 * @since 1.5.1
 				 * 
 				*/
-				if ( function_exists('wp_is_block_theme') && wp_is_block_theme() ) { // Block theme
-		
-					$this->loader->add_filter( 'render_block',$plugin_public, 'block_theme_single_product_page', 10, 2 );
-
+				if ( function_exists('wp_is_block_theme') && wp_is_block_theme() ) { // Block theme		
+					// $this->loader->add_filter('pre_render_block', $plugin_public, 'block_theme_single_product_page', 10, 2);
 					$this->loader->add_action( 'woocommerce_after_single_product_summary',$plugin_public, 'wt_woocommerce_output_related_products', 20 );	
 				}
 
@@ -388,8 +387,44 @@ class Custom_Related_Products {
 
         $slider_state = get_option( 'custom_related_products_cart_working_mode','cart_mode' );
 		if('cart_mode' == $slider_state){
-             include CRP_PLUGIN_DIR_PATH.'woocommerce/cart/wt-cart.php'; 
+            include CRP_PLUGIN_DIR_PATH.'woocommerce/cart/wt-cart.php'; 
         }
     }
 
+    /**
+     * Render related products in block-based cart pages
+     *
+     * @param string $block_content The block content.
+     * @param array  $block The block.
+     * @return string The filtered block content.
+     */
+    public function render_related_products_in_block_cart($block_content, $block) 
+    {
+        // Only proceed if we're on a cart page
+        if (!is_cart()) {
+            return $block_content;
+        }
+
+        // Create our own block container
+        if ('woocommerce/cart' === $block['blockName']) {
+            ob_start();
+
+            // Always add woocommerce class for consistent styling
+            $woocommerce_class = 'woocommerce';
+            ?>
+            <div class="wp-block-wt-related-products <?php echo esc_attr($woocommerce_class); ?>" 
+                 data-block="wt-related-products">
+                <?php $this->render_related_products_in_cart(); ?>
+            </div>
+            <?php
+            $related_products = ob_get_clean();
+            
+            // Add our block after the main cart content
+            return $block_content . $related_products;
+        }
+
+        return $block_content;
+    }
+
 }
+

@@ -232,6 +232,7 @@
   position: relative;
   right: 3%
 }
-.crp-linked-products-banner {
+.crp-linked-products-banner,
+.crp-info-bottom-banner {
   display: none;
 }
