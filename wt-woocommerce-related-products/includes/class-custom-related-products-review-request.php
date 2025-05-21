@@ -50,16 +50,7 @@ class WT_CRP_Review_Request
         add_action($this->deactivation_hook, array($this, 'on_deactivate'));
 
         if ($this->check_condition()) /* checks the banner is active now */ {
-            $this->banner_message = sprintf(__("Hi there! We at %sWebToffee%s would like to thank you for using our plugin. We would really appreciate if you could take a moment to drop a quick review that will inspire us to keep going.", 'wt-woocommerce-related-products'), '<b>', '</b>');
-
-            /* button texts */
-            $this->later_btn_text   = __("Remind me later", 'wt-woocommerce-related-products');
-            $this->never_btn_text   = __("Not interested", 'wt-woocommerce-related-products');
-            $this->review_btn_text  = __("Review now", 'wt-woocommerce-related-products');
-
-            add_action('admin_notices', array($this, 'show_banner')); /* show banner */
-            add_action('admin_print_footer_scripts', array($this, 'add_banner_scripts')); /* add banner scripts */
-            add_action('wp_ajax_' . $this->ajax_action_name, array($this, 'process_user_action')); /* process banner user action */
+            add_action('init',array($this, 'load_button_text_and_display_banner'));
         }
     }
 
@@ -249,6 +240,25 @@ class WT_CRP_Review_Request
         }
 
         return false;
+    }
+
+    /**
+     * Load translations and display notices
+     * 
+     * @return void
+     */
+    public function load_button_text_and_display_banner(){
+        $this->banner_message = sprintf(__("Hi there! We at %sWebToffee%s would like to thank you for using our plugin. We would really appreciate if you could take a moment to drop a quick review that will inspire us to keep going.", 'wt-woocommerce-related-products'), '<b>', '</b>');
+
+        /* button texts */
+        $this->later_btn_text   = __("Remind me later", 'wt-woocommerce-related-products');
+        $this->never_btn_text   = __("Not interested", 'wt-woocommerce-related-products');
+        $this->review_btn_text  = __("Review now", 'wt-woocommerce-related-products');
+
+        add_action('admin_notices', array($this, 'show_banner')); /* show banner */
+        add_action('admin_print_footer_scripts', array($this, 'add_banner_scripts')); /* add banner scripts */
+        add_action('wp_ajax_' . $this->ajax_action_name, array($this, 'process_user_action')); /* process banner user action */
+
     }
 }
 new WT_CRP_Review_Request();

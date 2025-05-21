@@ -21,20 +21,21 @@ class Custom_Related_Products {
 	protected $VERSION;
 	protected $plugin_base_name;
 
-	const VERSION = '1.7.0';
+	const VERSION = '1.7.1';
 
 	public function __construct() {
 
 		$this->plugin_name		 = 'wt-woocommerce-related-products';
 		$this->plugin_base_name	 = WT_CRP_BASE_NAME;
 
-		$this->VERSION = '1.7.0';
+		$this->VERSION = '1.7.1';
 
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
 		add_shortcode( 'wt-related-products', array( $this, 'render_wt_related_products' ) );
+		add_action('plugins_loaded', array($this, 'woocommerce_addition_for_rp_shortcode'));
         add_action( 'woocommerce_after_cart', array( $this, 'render_related_products_in_cart' ) );
         add_filter( 'render_block', array( $this, 'render_related_products_in_block_cart' ), 10, 2 );
 		
@@ -109,7 +110,7 @@ class Custom_Related_Products {
 
 		$plugin_i18n = new Custom_Related_Products_i18n();
 
-		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
+		$this->loader->add_action( 'init', $plugin_i18n, 'load_plugin_textdomain' );
 	}
 
 	/**
@@ -126,9 +127,11 @@ class Custom_Related_Products {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
-		$this->loader->add_action( 'woocommerce_process_product_meta', $plugin_admin, 'crp_save_related_products', 10, 2 );
-		$this->loader->add_action( 'woocommerce_product_options_related', $plugin_admin, 'crp_select_related_products' );
-
+		if(!class_exists('Wt_Woocommerce_Product_Recommendations')){
+			$this->loader->add_action( 'woocommerce_process_product_meta', $plugin_admin, 'crp_save_related_products', 10, 2 );
+			$this->loader->add_action( 'woocommerce_product_options_related', $plugin_admin, 'crp_select_related_products' );
+		}
+		
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_options_page' );
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'register_setting' );
 
@@ -426,5 +429,29 @@ class Custom_Related_Products {
         return $block_content;
     }
 
+	/**
+	 * Call to wrap related products via shortcode
+	 *
+	 * @return void
+	 */
+	public function woocommerce_addition_for_rp_shortcode() {
+		if (class_exists('WooCommerce')) {
+			add_filter('do_shortcode_tag', array($this, 'wrap_related_products_shortcode_output'), 10, 2);
+		}
+	}
+
+	/**
+	 * Add woocommerce class to related products shortcode output
+	 * 
+	 * @param  mixed $output
+	 * @param  mixed $tag
+	 * @return string $output
+	 */
+	public function wrap_related_products_shortcode_output($output, $tag) {
+		if ('wt-related-products' === $tag) {
+			$output = '<div class="woocommerce">' . $output . '</div>';
+		}
+		return $output;
+	}
 }
 

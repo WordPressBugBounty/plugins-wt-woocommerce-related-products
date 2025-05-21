@@ -4,13 +4,14 @@
  * Plugin Name:       Related Products for WooCommerce
  * Plugin URI:        https://wordpress.org/plugins/wt-woocommerce-related-products/
  * Description:       Displays custom related products based on category, tag, attribute or product for your WooCommerce store.
- * Version:           1.7.0
+ * Version:           1.7.1
  * Author:            WebToffee
  * Author URI:        https://www.webtoffee.com/
  * License:           GPLv3
  * License URI:       https://www.gnu.org/licenses/gpl-3.0.html
  * Text Domain:       wt-woocommerce-related-products
  * Domain Path:       /languages
+ * WC tested up to:   9.8
  */
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -40,23 +41,27 @@ if ( ! defined( 'WT_CRP_BASE_NAME' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'WT_RELATED_PRODUCTS_VERSION', '1.7.0' );
+define( 'WT_RELATED_PRODUCTS_VERSION', '1.7.1' );
 
 /**
  *  @since 1.6.0
  *  Changelog in plugins page
  */
-function wt_crp_update_message( $data, $response ) {
-	if ( isset( $data['upgrade_notice'] ) ) {
-		add_action( 'admin_print_footer_scripts', 'wt_crp_plugin_screen_update_notice_js' );
-		$msg = str_replace( array( '<p>', '</p>' ), array( '<div>', '</div>' ), $data['upgrade_notice'] );
-		echo '<style type="text/css">
-        #wt-woocommerce-related-products-update .update-message p:last-child{ display:none;}     
-        #wt-woocommerce-related-products-update ul{ list-style:disc; margin-left:30px;}
-        .wt_crp_update_message{ padding-left:30px;}
-        </style>
-        <div class="update-message wt_crp_update_message">' . wp_kses_post( wpautop( $msg ) ) . '</div>';
+add_action( 'in_plugin_update_message-wt-woocommerce-related-products/custom-related-products.php', 'wt_crp_update_message', 10, 2 );
 
+if ( ! function_exists( 'wt_crp_update_message' ) ) {
+	function wt_crp_update_message( $data, $response ) {
+		if ( isset( $data['upgrade_notice'] ) ) {
+			add_action( 'admin_print_footer_scripts', 'wt_crp_plugin_screen_update_notice_js' );
+			$msg = str_replace( array( '<p>', '</p>' ), array( '<div>', '</div>' ), $data['upgrade_notice'] );
+			echo '<style type="text/css">
+			#wt-woocommerce-related-products-update .update-message p:last-child{ display:none;}     
+			#wt-woocommerce-related-products-update ul{ list-style:disc; margin-left:30px;}
+			.wt_crp_update_message{ padding-left:30px;}
+			</style>
+			<div class="update-message wt_crp_update_message">' . wp_kses_post( wpautop( $msg ) ) . '</div>';
+
+		}
 	}
 }
 
@@ -64,45 +69,51 @@ function wt_crp_update_message( $data, $response ) {
  *  @since 1.6.0
  *  Javascript code for changelog in plugins page
  */
-function wt_crp_plugin_screen_update_notice_js() {
-	global $pagenow;
-	if ( 'plugins.php' !== $pagenow ) {
-		return;
+if ( ! function_exists( 'wt_crp_plugin_screen_update_notice_js' ) ) {
+	function wt_crp_plugin_screen_update_notice_js() {
+		global $pagenow;
+		if ( 'plugins.php' !== $pagenow ) {
+			return;
+		}
+		?>
+		<script>
+			( function( $ ){
+				var update_dv=$('#wt-woocommerce-related-products-update');
+				update_dv.find('.wt_crp_update_message').next('p').remove();
+				update_dv.find('a.update-link:eq(0)').on('click', function(){
+					$('.wt_crp_update_message').remove();
+				});
+			})( jQuery );
+		</script>
+		<?php
 	}
-	?>
-	<script>
-		( function( $ ){
-			var update_dv=$('#wt-woocommerce-related-products-update');
-			update_dv.find('.wt_crp_update_message').next('p').remove();
-			update_dv.find('a.update-link:eq(0)').on('click', function(){
-				$('.wt_crp_update_message').remove();
-			});
-		})( jQuery );
-	</script>
-	<?php
 }
-add_action( 'in_plugin_update_message-wt-woocommerce-related-products/custom-related-products.php', 'wt_crp_update_message', 10, 2 );
 
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-custom-related-products-activator.php
  */
-function activate_custom_related_products() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-custom-related-products-activator.php';
-	Custom_Related_Products_Activator::activate();
+if ( ! function_exists( 'wt_crp_activate_custom_related_products' ) ) {
+	function wt_crp_activate_custom_related_products() {
+		require_once plugin_dir_path( __FILE__ ) . 'includes/class-custom-related-products-activator.php';
+		Custom_Related_Products_Activator::activate();
+	}
 }
 
 /**
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-custom-related-products-deactivator.php
  */
-function deactivate_custom_related_products() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-custom-related-products-deactivator.php';
-	Custom_Related_Products_Deactivator::deactivate();
+
+if ( ! function_exists( 'wt_crp_deactivate_custom_related_products' ) ) {
+	function wt_crp_deactivate_custom_related_products() {
+		require_once plugin_dir_path( __FILE__ ) . 'includes/class-custom-related-products-deactivator.php';
+		Custom_Related_Products_Deactivator::deactivate();
+	}
 }
 
-register_activation_hook( __FILE__, 'activate_custom_related_products' );
-register_deactivation_hook( __FILE__, 'deactivate_custom_related_products' );
+register_activation_hook( __FILE__, 'wt_crp_activate_custom_related_products' );
+register_deactivation_hook( __FILE__, 'wt_crp_deactivate_custom_related_products' );
 
 /**
  * The core plugin class that is used to define internationalization,
@@ -122,8 +133,10 @@ if ( ! in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins',
 		add_action( 'admin_notices', 'wt_rp_disabled_notice' );
 		return;
 }
-function wt_rp_disabled_notice() {
-	echo '<div class="error"><p>' . sprintf( __( '<strong>Related Products</strong> requires WooCommerce to be active. You can download WooCommerce %s.', 'wt-woocommerce-related-products' ), '<a href="https://wordpress.org/plugins/woocommerce">' . __( 'here', 'wt-woocommerce-related-products' ) . '</a>' ) . '</p></div>';
+if( !function_exists('wt_rp_disabled_notice') ) {
+	function wt_rp_disabled_notice() {
+		echo '<div class="error"><p>' . sprintf( __( '<strong>Related Products</strong> requires WooCommerce to be active. You can download WooCommerce %s.', 'wt-woocommerce-related-products' ), '<a href="https://wordpress.org/plugins/woocommerce">' . __( 'here', 'wt-woocommerce-related-products' ) . '</a>' ) . '</p></div>';
+	}
 }
 
 /**
@@ -135,27 +148,13 @@ function wt_rp_disabled_notice() {
  *
  * @since    1.0.0
  */
-function run_custom_related_products() {
+if( !function_exists('run_custom_related_products')){
+	 function run_custom_related_products() {
 
-	$plugin = new Custom_Related_Products();
-	$plugin->run();
+		$plugin = new Custom_Related_Products();
+		$plugin->run();
+	}
+
 }
 
 run_custom_related_products();
-
-// Hook to add wrapper only for the related products shortcode
-function wrap_related_products_shortcode_output($output, $tag) {
-    if ('wt-related-products' === $tag) {
-        $output = '<div class="woocommerce">' . $output . '</div>';
-    }
-    return $output;
-}
-
-// Ensure the function runs after all plugins are loaded and WooCommerce is available
-function wt_related_products_plugin_init() {
-    if (class_exists('WooCommerce')) {
-        add_filter('do_shortcode_tag', 'wrap_related_products_shortcode_output', 10, 2);
-    }
-}
-add_action('plugins_loaded', 'wt_related_products_plugin_init');
-

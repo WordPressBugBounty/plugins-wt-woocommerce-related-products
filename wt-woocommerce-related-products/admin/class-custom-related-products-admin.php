@@ -1390,8 +1390,15 @@ class Custom_Related_Products_Admin {
 					var is_checked = check.is(":checked");
 					if(is_checked) {
 						jQuery('.wt-gloablly-relate').show();   
+						jQuery('#custom_related_products_crp_order_by option[value="relevance"]').show();
 					} else {
 						jQuery('.wt-gloablly-relate').hide();
+						jQuery('#custom_related_products_crp_order_by option[value="relevance"]').hide();
+
+						var select = jQuery('#custom_related_products_crp_order_by');
+						if (select.val() === 'relevance') {
+							select.val('popularity'); // fallback default
+						} 
 					}
 				});
 
@@ -1424,7 +1431,7 @@ class Custom_Related_Products_Admin {
 
 				// Function to toggle visibility of the "Sort order" field
 				function toggleSortOrderVisibility() {
-					if ($sortByDropdown.val() === 'relevance') {
+					if ('relevance' === $sortByDropdown.val() || 'rand' === $sortByDropdown.val()) {
 						$sortOrderRow.hide(); // Hide the sort order field
 					} else {
 						$sortOrderRow.show(); // Show the sort order field

@@ -29,8 +29,8 @@
     margin-left: auto !important;
     margin-right: auto !important;
     box-sizing: border-box !important;
-    padding-left: var(--theme-block-padding, 0) !important;
-    padding-right: var(--theme-block-padding, 0) !important;
+    padding-left: var(--theme-block-padding, 0);
+    padding-right: var(--theme-block-padding, 0);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }

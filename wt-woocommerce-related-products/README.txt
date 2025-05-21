@@ -1,12 +1,12 @@
 === Related Products - Create Upsells, Cross-sells, and Product Recommendations for WooCommerce ===
 Contributors: webtoffee
-Version: 1.7.0
+Version: 1.7.1
 Donate link: https://www.webtoffee.com/product/woocommerce-product-recommendations/
 Tags: related products, product recommendations, woocommerce related products, woocommerce product recommendations, woocommerce recommendations
 Requires at least: 3.0.1
-Tested up to: 6.7
+Tested up to: 6.8
 Requires PHP: 5.6
-Stable tag: 1.7.0
+Stable tag: 1.7.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -172,13 +172,17 @@ You can display cross-sell product recommendations by adding cross-sells to indi
 
 == Changelog ==
 
-= 1.7.0 27-2-2024 =
+= 1.7.1 21-5-2025 =
+* [Fix] - Remove password protected products from displaying in widget
+* [Compatibility] - Tested OK with WooCommerce 9.8.5
+* [Compatibility] - Tested OK with WordPress 6.8.1
+
+= 1.7.0 27-2-2025 =
 * [Compatibility] - Tested OK with WooCommerce 9.6.2
 * [Add] - Relevance sort option to prioritise related products
 * [Improvement] - Plugin settings page content
 * [Enhancement] - Block theme compatibility 
 * [Enhancement] - Improve compatibility with WordPress themes
-
 
 = 1.6.0 30-12-2024 =
 * [Compatibility] - Tested OK with WordPress 6.7.1
@@ -444,9 +448,7 @@ and Exclude Categories for related products.
 
 == Upgrade Notice ==
 
-= 1.7.0 =
-* [Compatibility] - Tested OK with WooCommerce 9.6.2
-* [Add] - Relevance sort option to prioritise related products
-* [Improvement] - Plugin settings page content
-* [Enhancement] - Block theme compatibility 
-* [Enhancement] - Improve compatibility with WordPress themes
+= 1.7.1 =
+* [Fix] - Remove password protected products from displaying in widget
+* [Compatibility] - Tested OK with WooCommerce 9.8.5
+* [Compatibility] - Tested OK with WordPress 6.8.1

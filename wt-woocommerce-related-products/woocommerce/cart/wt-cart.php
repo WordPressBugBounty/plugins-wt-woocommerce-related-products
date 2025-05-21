@@ -155,7 +155,7 @@ if ($related_products || !empty($global_related_by) ) :
 
     $working_mode = class_exists('Custom_Related_Products') ? Custom_Related_Products::get_current_working_mode() : '';
 
-    if ($working_mode === 'custom' ) {
+    if ( 'custom' === $working_mode) {
 
         $crp_post_id_arr= array();$cart_post_id_arr = array();
         if (WC()->cart && ! WC()->cart->is_empty() ) {
@@ -166,7 +166,7 @@ if ($related_products || !empty($global_related_by) ) :
                 $current_post_id = $post->ID;
                 global $sitepress;
                 $use_primary_id_wpml = apply_filters('wt_crp_use_primary_id_wpml', get_option('custom_related_products_use_primary_id_wpml'));
-                if($use_primary_id_wpml == 'enable' && isset($sitepress) && defined('ICL_LANGUAGE_CODE') ) {
+                if( 'enable' === $use_primary_id_wpml && isset($sitepress) && defined('ICL_LANGUAGE_CODE') ) {
                     $default_lang = $sitepress->get_default_language();
                     if($default_lang != ICL_LANGUAGE_CODE && function_exists('icl_object_id') ) {
                         $default_id = icl_object_id($post->ID, "product", false, $default_lang);
@@ -368,39 +368,67 @@ if ($related_products || !empty($global_related_by) ) :
             
                     // When only category is selected
                     else if (count($global_related_by) === 1 && in_array('category', $global_related_by)) {
-                        $sub_category_ids = array();
-                        $parent_category_ids = array();
+                        $product_cat_ids = [];
+                        $sub_category_ids = [];
+                        $parent_category_ids = [];
+                        
                         $prod_terms = wp_get_post_terms($post->ID, 'product_cat', array("orderby" => "parent"));
-
+                    
                         if (!empty($prod_terms) && !is_wp_error($prod_terms)) {
-                            foreach ($prod_terms as $term) {
-                                    // Get subcategories
-                                    $children = get_categories(
-                                        array(
-                                        'taxonomy' => 'product_cat',
-                                        'child_of' => $term->term_id
-                                        )
-                                    );
+                            $category_count = count($prod_terms);
+                            $term_ids = array_column($prod_terms, 'term_id');
+                    
+                            foreach ($prod_terms as $prod_term) {
+                                $has_term_id = false;
+                                
+                                // Get child categories (subcategories)
+                                $children = get_terms([
+                                    'taxonomy'   => 'product_cat',
+                                    'parent'     => $prod_term->term_id,
+                                    'hide_empty' => false
+                                ]);
+                    
                                 foreach ($children as $child) {
-                                    $sub_category_ids[] = $child->term_id;
+                                    if (in_array($child->term_id, $term_ids)) {
+                                        $has_term_id = true;
+                                        break;
+                                    }
                                 }
-                                            $parent_category_ids[] = $term->term_id;
+                    
+                                if ( 0 === count($children) || !$has_term_id) {
+                                    // If no children, it is the deepest subcategory
+                                    $sub_category_ids[] = $prod_term->term_id;
+                                } else {
+                                    // Otherwise, add it to parent categories
+                                    $parent_category_ids[] = $prod_term->term_id;
+                                }
                             }
-                                
-                            // First get products from subcategories
+                    
+                            // Ensure unique category IDs
+                            $sub_category_ids = array_unique($sub_category_ids);
+                            $parent_category_ids = array_unique($parent_category_ids);
+                    
+                            $related_products = [];
+                    
+                            // Fetch products from subcategories first
                             if (!empty($sub_category_ids)) {
-                                    $sub_cat_products = crp_get_all_product_ids_from_cat_ids($sub_category_ids);
-                                    $all_related_products = array_merge($all_related_products, $sub_cat_products);
+                                $sub_cat_products = crp_get_all_product_ids_from_cat_ids($sub_category_ids);
+                                $related_products = array_merge($related_products, $sub_cat_products);
                             }
-                                
-                            // Then get products from parent categories to fill remaining slots
-                            if (count($all_related_products) < $number_of_products) {
+                    
+                            // If not enough products, fetch from parent categories
+                            if (count($related_products) < $number_of_products) {
                                 $parent_cat_products = crp_get_all_product_ids_from_cat_ids($parent_category_ids);
-                                $all_related_products = array_merge($all_related_products, $parent_cat_products);
+                                $related_products = array_merge($related_products, $parent_cat_products);
                             }
-                                
-                            $related = array_slice(array_unique($all_related_products), 0, $number_of_products);
-                        }
+                    
+                            // Ensure unique products & remove the current product
+                            $related_products = array_unique($related_products);
+                            $related_products = array_diff($related_products, [$post->ID]);
+                    
+                            // Limit the number of products
+                            $related = array_slice($related_products, 0, $number_of_products);
+                        }		
                     }
                     // When only tag is selected
                     else if (count($global_related_by) === 1 && in_array('tag', $global_related_by)) {
@@ -446,7 +474,7 @@ if ($related_products || !empty($global_related_by) ) :
         $post_ids = array_diff($crp_post_id_arr, $cart_post_id_arr);
         $related = array_values($post_ids);
 
-        //gets excluded categoriesc
+        //gets excluded categories
         $excluded_categories_ids = apply_filters('wt_crp_excluded_category_ids', get_post_meta($post->ID, '_crp_excluded_cats', true));
         $excluded_tag_ids = apply_filters( 'wt_crp_excluded_tag_ids',array());
 
@@ -486,7 +514,8 @@ if ($related_products || !empty($global_related_by) ) :
             });
         }
 		delete_post_meta($post->ID, 'selected_ids');
-		$related = is_array($related) ? array_diff($related, array($post->ID, $current_post_id)) : array();
+		// Remove the current post ID and all cart product IDs from related products
+		$related = is_array($related) ? array_diff($related, array_merge(array($post->ID), $cart_post_id_arr)) : array();
                     
         if (!empty($related)) {
 
@@ -596,14 +625,14 @@ if ($related_products || !empty($global_related_by) ) :
 			if(strstr(wp_get_theme()->get('Name'), 'Divi') || strstr(wp_get_theme()->get('Name'), 'Avada') || strstr(wp_get_theme()->get('Name'), 'BeOnePage')) {
 				$slider_type = 'swiper';
 			}
-			if($slider_status == 'disable') {
+			if('disable' === $slider_status) {
 				$slider_state = '';
 				$bxslider = '';
 			}
-			if ('enable' == $slider_state && $slider_type== 'bx') {
+			if ('enable' === $slider_state && 'bx' === $slider_type) {
 					$bxslider = 'bxslider';
 			}
-			if (('enable' != $slider_state && $slider_type== 'swiper') || ('enable' != $slider_state && $slider_type== 'bx')) {
+			if (('enable' !== $slider_state && 'swiper' === $slider_type) || ('enable' !== $slider_state && 'bx' === $slider_type)) {
 					$bxslider = '';
 			}
 			if(strstr(wp_get_theme()->get('Name'), 'Twenty Twenty-One')) {
@@ -675,7 +704,7 @@ if ($related_products || !empty($global_related_by) ) :
             <section class="related_products" style="display: none;"></section>
             <?php
         }
-    } else if($working_mode == 'default' && !empty($related_products)) {
+    } else if( 'default' === $working_mode && !empty($related_products)) {
           $crp_title         = get_option('custom_related_products_crp_title', esc_html__('Related Products', 'wt-woocommerce-related-products'));
           $crp_heading      = apply_filters('wt_related_products_heading', "<h2 class='wt-crp-heading'>" . esc_html($crp_title) . " </h2>", $crp_title);
           $bxslider = false;
@@ -712,7 +741,6 @@ if ($related_products || !empty($global_related_by) ) :
 
     </section>
 
-    
     <?php
     echo ob_get_clean();
 endif;
