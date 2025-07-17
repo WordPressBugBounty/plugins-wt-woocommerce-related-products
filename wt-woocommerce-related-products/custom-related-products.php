@@ -4,7 +4,7 @@
  * Plugin Name:       Related Products for WooCommerce
  * Plugin URI:        https://wordpress.org/plugins/wt-woocommerce-related-products/
  * Description:       Displays custom related products based on category, tag, attribute or product for your WooCommerce store.
- * Version:           1.7.2
+ * Version:           1.7.3
  * Author:            WebToffee
  * Author URI:        https://www.webtoffee.com/
  * License:           GPLv3
@@ -40,7 +40,7 @@ if ( ! defined( 'WT_CRP_BASE_NAME' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'WT_RELATED_PRODUCTS_VERSION', '1.7.2' );
+define( 'WT_RELATED_PRODUCTS_VERSION', '1.7.3' );
 
 /**
  *  @since 1.6.0

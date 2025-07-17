@@ -159,7 +159,7 @@ class Custom_Related_Products_Admin {
 			$product_ids = array_filter( array_map( 'absint', (array) get_post_meta( $post->ID, '_crp_related_ids', true ) ) );
 			?>
 
-			<?php if ( $woocommerce->version >= '2.3' && $woocommerce->version < '3.0' ) : ?>
+			<?php if ( version_compare( $woocommerce->version, '2.3', '>=' ) && version_compare( $woocommerce->version, '3.0', '<' ) ) : ?>
 				<p class="form-field"><label for="related_ids"><?php _e( 'Products', 'wt-woocommerce-related-products' ); ?></label>
 					<input type="hidden" 
 						class="wc-product-search" 
@@ -309,7 +309,7 @@ class Custom_Related_Products_Admin {
 		if ( isset( $_POST['crp_related_ids'] ) && current_user_can( 'manage_woocommerce' ) ) {
 			$custom_related_ids = ( isset( $_POST['crp_related_ids'] ) && is_array( $_POST['crp_related_ids'] ) ) ? array_map( 'absint', $_POST['crp_related_ids'] ) : array();
 
-			if ( $woocommerce->version >= '2.3' && $woocommerce->version < '3.0' ) {
+			if ( version_compare( $woocommerce->version, '2.3', '>=' ) && version_compare( $woocommerce->version, '3.0', '<' ) ) {
 				$related = $custom_related_ids;
 			} else {
 				$related = array();
@@ -331,7 +331,7 @@ class Custom_Related_Products_Admin {
 
 			$custom_related_product_cat_id = ( isset( $_POST['crp_related_product_cats'] ) && is_array( $_POST['crp_related_product_cats'] ) ) ? array_map( 'absint', $_POST['crp_related_product_cats'] ) : array();
 
-			if ( $woocommerce->version >= '2.3' && $woocommerce->version < '3.0' ) {
+			if ( version_compare( $woocommerce->version, '2.3', '>=' ) && version_compare( $woocommerce->version, '3.0', '<' ) ) {
 				$related = $custom_related_product_cat_id;
 			} else {
 				$related = array();
@@ -353,7 +353,7 @@ class Custom_Related_Products_Admin {
 
 			$custom_related_product_tag_id = ( isset( $_POST['crp_related_product_tags'] ) && is_array( $_POST['crp_related_product_tags'] ) ) ? array_map( 'absint', $_POST['crp_related_product_tags'] ) : array();
 
-			if ( $woocommerce->version >= '2.3' && $woocommerce->version < '3.0' ) {
+			if ( version_compare( $woocommerce->version, '2.3', '>=' ) && version_compare( $woocommerce->version, '3.0', '<' ) ) {
 				$related = $custom_related_product_tag_id;
 			} else {
 				$related = array();
@@ -387,7 +387,7 @@ class Custom_Related_Products_Admin {
 
 			$custom_related_product_cat_id = ( isset( $_POST['crp_exclude_cats'] ) && is_array( $_POST['crp_exclude_cats'] ) ) ? array_map( 'absint', $_POST['crp_exclude_cats'] ) : array();
 
-			if ( $woocommerce->version >= '2.3' && $woocommerce->version < '3.0' ) {
+			if ( version_compare( $woocommerce->version, '2.3', '>=' ) && version_compare( $woocommerce->version, '3.0', '<' ) ) {
 				$related = $custom_related_product_cat_id;
 			} else {
 				$related = array();

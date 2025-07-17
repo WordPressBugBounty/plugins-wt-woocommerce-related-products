@@ -21,14 +21,14 @@ class Custom_Related_Products {
 	protected $VERSION;
 	protected $plugin_base_name;
 
-	const VERSION = '1.7.2';
+	const VERSION = '1.7.3';
 
 	public function __construct() {
 
 		$this->plugin_name		 = 'wt-woocommerce-related-products';
 		$this->plugin_base_name	 = WT_CRP_BASE_NAME;
 
-		$this->VERSION = '1.7.2';
+		$this->VERSION = '1.7.3';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -82,6 +82,13 @@ class Custom_Related_Products {
 		 * of the plugin.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-custom-related-products-survey-request.php';
+
+		/**
+		 * Includes the CTA banners for smart coupon, Pdf invoice and product import export for woocommerce
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/modules/banner/class-wt-p-iew-cta-banner.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/modules/banner/class-wt-pklist-cta-banner.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/modules/banner/class-wt-smart-coupon-cta-banner.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
@@ -157,9 +164,9 @@ class Custom_Related_Products {
 
 
 		if ( isset( $wcversion ) && !empty( $wcversion ) ) {
-			if ( $wcversion >= '2.3' && $wcversion < '3.0' ) {
+			if ( version_compare( $wcversion, '2.3', '>=' ) && version_compare( $wcversion, '3.0', '<' ) ) {
 				$this->loader->add_filter( 'woocommerce_related_products_args', $plugin_public, 'crp_filter_related_products' );
-			} else if ( $wcversion >= '3.0' ) {
+			} else if ( version_compare( $wcversion, '3.0', '>=' )) {
 				$this->loader->add_filter( 'woocommerce_locate_template', $plugin_public, 'crp_woocommerce_locate_template', 10, 3 );
 
 				$this->loader->add_filter( 'woocommerce_product_related_posts_force_display', $plugin_public, 'crp_display_ids', 10, 2 );

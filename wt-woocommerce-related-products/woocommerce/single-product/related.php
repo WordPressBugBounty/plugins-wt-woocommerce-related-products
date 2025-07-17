@@ -449,6 +449,9 @@ if ( $related_products || !empty($global_related_by) ) :
 						// Score products by number of matching tags
 						$scored_products = array();
 						foreach ($tag_products as $product_id) {
+							if ($product_id === $post->ID) {
+								continue; 
+							}
 							$product_tags = wp_get_post_terms($product_id, 'product_tag', array('fields' => 'ids'));
 							$matching_tags = array_intersect($product_tag_ids, $product_tags);
 							$scored_products[] = array(

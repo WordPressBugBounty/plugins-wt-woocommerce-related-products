@@ -1,16 +1,16 @@
 === Related Products - Create Upsells, Cross-sells, and Product Recommendations for WooCommerce ===
 Contributors: webtoffee
-Version: 1.7.2
+Version: 1.7.3
 Donate link: https://www.webtoffee.com/product/woocommerce-product-recommendations/
 Tags: related products, product recommendations, woocommerce related products, woocommerce product recommendations, woocommerce recommendations
 Requires at least: 3.0.1
 Tested up to: 6.8
 Requires PHP: 5.6
-Stable tag: 1.7.2
+Stable tag: 1.7.3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Display custom related products, upsells, and cross-sells in WooCommerce by disabling default WooCommerce related products.
+This WooCommerce related products plugin, lets you create upsells, and cross-sells with smart WooCommerce product recommendations widget.
 
 == Description ==
 
@@ -38,9 +38,9 @@ You can also make use of the related product's functionality in your WooCommerce
 * Import related products using the default WooCommerce importer<a rel="nofollow" href="https://www.webtoffee.com/how-to-import-related-products-using-woocommerce-importer/"> Learn more </a>
 
 
-&#9989; Tested OK with WooCommerce 9.6.2
+&#9989; Tested OK with WooCommerce 10.0.2
 
-== Related Products for WooCommerce - Installation and Setup ==
+== Related Products for WooCommerce Product Recommendations- Installation and Setup ==
 
 You can learn about the installation and setup of the WooCommerce related products plugin with the help of this [setup guide](https://www.webtoffee.com/related-products-woocommerce-user-guide/).
 
@@ -49,14 +49,16 @@ You can also check out this video to get a quick understanding of the WooCommerc
 
 == Compatible plugins ==
 
-* [Product import export for WooCommerce](https://www.webtoffee.com/product/product-import-export-woocommerce/)
+* [Product import export for WooCommerce](https://www.webtoffee.com/product/product-import-export-woocommerce/?utm_source=free_plugin_readme&utm_medium=related_products&utm_campaign=Product_import_export)
 * [WP all import export for WooCommerce](https://www.wpallimport.com/)
 
 ==  Related Products as a Powerful Marketing Tool ==
 
-Displaying related products has become the best strategy for selling products. This feature has a great influence on making customers purchase from your store. Upselling or cross-selling related products at each stage of a product purchase increases the stores' profit multiple times. eCommerce giant Amazon's success is the best example of the recommending similar products technique. It acts literally like a virtual salesperson who accompanies us showing better recommendations throughout our purchase journey in the store.
+Suggesting related products in a WooCommerce store isn’t just a nice-to-have — it’s one of the most effective sales techniques available today. Whether you’re upselling premium items or cross-selling complementary products, displaying related products at key points in the customer journey can significantly increase your average order value and conversion rates.
 
-It is also seen that when customers keep getting recommendations while purchasing a product it increases their confidence in the product thereby simplifying the decision making process without spending a lot of time on it. Thus online purchasing would be a great option for people who hate shopping or who do not have the time or patience for it.
+Just like Amazon’s powerful recommendation engine, WooCommerce product recommendation plugins can act as virtual sales assistants — guiding shoppers by showing them relevant suggestions based on what they're already interested in. This keeps customers engaged and encourages them to explore more, ultimately leading to higher cart totals.
+
+By showing personalized product recommendations on product pages, cart pages, or even during checkout, you can help reduce decision fatigue and build buyer confidence. Customers are more likely to trust your store when they see thoughtful, relevant suggestions, making online shopping faster, easier, and more enjoyable — especially for those who dislike browsing or are short on time.
 
 ==  Different Ways to Show Related Product Recommendations on your WooCommerce store ==
 
@@ -78,7 +80,7 @@ Set up and manage custom related products to display on your product pages. Use 
 
 [youtube https://youtu.be/_-5SESD3Ez0?si=WQtFEGkFfKf-Cz04] 
 
-<a rel="nofollow" href="https://www.webtoffee.com/product/woocommerce-product-recommendations/">WooCommerce Product Recommendations</a> is an advanced recommendation tool for WooCommerce stores. The plugin offers multiple product recommendation templates such as Related Products, Bestsellers, Top-rated Products, Frequently Bought Together, New Arrivals, Recently Viewed, and more. Apart from these recommendations, you can create custom recommendations, with advanced recommendation rules and conditions.
+<a rel="nofollow" href="https://www.webtoffee.com/product/woocommerce-product-recommendations/?utm_source=free_plugin_readme&utm_medium=related_products&utm_campaign=Product_Recommendations">WooCommerce Product Recommendations</a> is an advanced recommendation tool for WooCommerce stores. The plugin offers multiple product recommendation templates such as Related Products, Bestsellers, Top-rated Products, Frequently Bought Together, New Arrivals, Recently Viewed, and more. Apart from these recommendations, you can create custom recommendations, with advanced recommendation rules and conditions.
 
 = Major features of WooCommerce Product Recommendations (Premium) =
 * **Multiple pre-built recommendation templates:** Related products, recently viewed, bestsellers, top-rated, frequently bought together, new arrivals, and more. 
@@ -98,6 +100,13 @@ Set up and manage custom related products to display on your product pages. Use 
 * **New Arrivals:** Show-off and grab customers attention to your store's latest arrivals. 
 * **Recently Viewed:** Remind customers about the products they have previously viewed.
 * **Trending Now:** Recommend items trending in the past 30 days.
+
+== You May Also Need ==
+GDPR Cookie Consent is our flagship cookie consent plugin, which is a Google-certified CMP built specifically for WordPress websites. With this plugin, you can display a fully customizable cookie banner on your site to help ensure compliance with major privacy laws like the GDPR and CCPA.
+
+Key features include an advanced cookie scanner, automatic script blocking, and detailed consent log reporting. It also lets you deploy an IAB-compliant cookie banner and supports Google Consent Mode v2. 
+
+Get [GDPR Cookie Consent Plugin](https://www.webtoffee.com/product/gdpr-cookie-consent/?utm_source=free_plugin_readme&utm_medium=related_products&utm_campaign=GDPR) Now.
 
 
 == About WebToffee ==
@@ -171,6 +180,11 @@ You can display cross-sell product recommendations by adding cross-sells to indi
 5. Related Products - Setup Page.
 
 == Changelog ==
+
+= 1.7.3 17-7-2025 =
+* [Enhancement]   - Tags recommended products selection
+* [Compatibility] - Tested OK with WooCommerce 10.0.2
+* [Compatibility] - Tested OK with WordPress 6.8.2
 
 = 1.7.2 22-5-2025 =
 * [Improvement] - HPOS compatibility
@@ -451,5 +465,7 @@ and Exclude Categories for related products.
 
 == Upgrade Notice ==
 
-= 1.7.2 =
-* [Improvement] - HPOS compatibility
+= 1.7.3 =
+* [Enhancement]   - Tags recommended products selection
+* [Compatibility] - Tested OK with WooCommerce 10.0.2
+* [Compatibility] - Tested OK with WordPress 6.8.2
