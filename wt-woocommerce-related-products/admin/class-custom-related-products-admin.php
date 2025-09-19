@@ -48,10 +48,9 @@ class Custom_Related_Products_Admin {
 	 * @since    1.0.0
 	 */
 	public function enqueue_scripts() {
+		//phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nonce verification is not required here.
 		if ( isset( $_GET['page'] ) && 'wt-woocommerce-related-products' === $_GET['page'] && current_user_can( 'manage_options' ) ) {
-
 			wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/custom-related-products-admin.js', array( 'jquery' ), $this->version, false );
-
 		}
 	}
 
@@ -66,19 +65,23 @@ class Custom_Related_Products_Admin {
 		$working_mode = Custom_Related_Products::get_current_working_mode();
 		if ( $working_mode != 'custom' ) {
 			?>
-			<p style="background:#fcf8e3; padding:10px;margin-left:10px; margin-right:10px; color:#000;"> <?php printf( __( 'Please select %1$s Working mode %2$s as "Custom related products" to reflect the selected related products on the product page.', 'wt-woocommerce-related-products' ), "<a target='_blank' href=" . esc_url( $settings_url ) . '>', '</a>' ); ?></p>
+			<p style="background:#fcf8e3; padding:10px;margin-left:10px; margin-right:10px; color:#000;"> 
+				<?php
+				// translators: %1$s HTML a tag opening, %2$s HTML a tag closing.
+				wp_kses_post( sprintf( __( 'Please select %1$s Working mode %2$s as "Custom related products" to reflect the selected related products on the product page.', 'wt-woocommerce-related-products' ), "<a target='_blank' href=" . esc_url( $settings_url ) . '>', '</a>' ) );
+				?>
+			</p>
 			<?php
 		}
 		?>
 		<div class="wt_crp_options_group">
-			<div class="wt_crp_options_heading"><b><?php _e( 'Custom related product settings:', 'wt-woocommerce-related-products' ); ?></b> <?php _e( 'Related products for this item will be shown based on the selection made below.', 'wt-woocommerce-related-products' ); ?></div>
+			<div class="wt_crp_options_heading"><b><?php esc_html_e( 'Custom related product settings:', 'wt-woocommerce-related-products' ); ?></b> <?php esc_html_e( 'Related products for this item will be shown based on the selection made below.', 'wt-woocommerce-related-products' ); ?></div>
 			
 			<!-- Categories Start -->
-			<p class="form-field"><label for="related_product_cat"><?php _e( 'Categories', 'wt-woocommerce-related-products' ); ?></label>
+			<p class="form-field"><label for="related_product_cat"><?php esc_html_e( 'Categories', 'wt-woocommerce-related-products' ); ?></label>
 				<select id="crp_related_product_cats" class="wc-category-search" multiple="multiple"  name="crp_related_product_cats[]" data-return_id="id" data-placeholder="<?php esc_attr_e( 'Search for a category...', 'wt-woocommerce-related-products' ); ?>" style="width: 400px;">     
 					<?php
-
-						$category_ids = array_filter( array_map( 'absint', (array) get_post_meta( $post->ID, '_crp_related_product_cats', true ) ) );
+					$category_ids = array_filter( array_map( 'absint', (array) get_post_meta( $post->ID, '_crp_related_product_cats', true ) ) );
 					if ( is_array( $category_ids ) && ! empty( $category_ids ) ) {
 						foreach ( $category_ids as $category_id ) {
 							$category = get_term( $category_id, 'product_cat' );
@@ -93,14 +96,14 @@ class Custom_Related_Products_Admin {
 
 					?>
 				</select>
-				<?php echo wc_help_tip( __( 'Products from chosen categories will be displayed as related products on the product page.', 'wt-woocommerce-related-products' ) ); ?>
+				<?php echo wp_kses_post( wc_help_tip( __( 'Products from chosen categories will be displayed as related products on the product page.', 'wt-woocommerce-related-products' ) ) ); ?>
 			</p>
 
 			<!-- Categories End -->
 
 			<!-- Added ajax search in tag selection -->
 			<!-- Tags Start -->
-			<p class="form-field"><label for="related_product_tag"><?php _e( 'Tags', 'wt-woocommerce-related-products' ); ?></label>
+			<p class="form-field"><label for="related_product_tag"><?php esc_html_e( 'Tags', 'wt-woocommerce-related-products' ); ?></label>
 				<select id="crp_related_product_tags" name="crp_related_product_tags[]"  class="wc-taxonomy-term-search" data-taxonomy="product_tag" data-return_id="id" multiple="multiple" data-placeholder="<?php esc_attr_e( 'Select for a tag...', 'wt-woocommerce-related-products' ); ?>" style="width: 400px;">
 					<?php
 					$tag_ids = array_filter( array_map( 'absint', (array) get_post_meta( $post->ID, '_crp_related_product_tags', true ) ) );
@@ -117,7 +120,7 @@ class Custom_Related_Products_Admin {
 					}
 					?>
 				</select>
-				<?php echo wc_help_tip( __( 'Products from chosen tags will be displayed as related products on the product page.', 'wt-woocommerce-related-products' ) ); ?>                                
+				<?php echo wp_kses_post( wc_help_tip( __( 'Products from chosen tags will be displayed as related products on the product page.', 'wt-woocommerce-related-products' ) ) ); ?>                                
 			</p>
 			
 			<!-- Tags End -->
@@ -128,7 +131,7 @@ class Custom_Related_Products_Admin {
 
 			?>
 			<p class="form-field">
-				<label for="related_product_attr"><?php _e( 'Attributes', 'wt-woocommerce-related-products' ); ?></label>
+				<label for="related_product_attr"><?php esc_html_e( 'Attributes', 'wt-woocommerce-related-products' ); ?></label>
 				<select id="crp_related_product_attr"
 					name="crp_related_product_attr[]" 
 					class="crp_related_product_attr_search"
@@ -150,7 +153,7 @@ class Custom_Related_Products_Admin {
 					}
 					?>
 				</select>         
-				<?php echo wc_help_tip( __( 'Products from chosen attributes will be displayed as related products on the product page.', 'wt-woocommerce-related-products' ) ); ?>                
+				<?php echo wp_kses_post( wc_help_tip( __( 'Products from chosen attributes will be displayed as related products on the product page.', 'wt-woocommerce-related-products' ) ) ); ?>                
 			</p>
 			<!-- Attr End -->
 
@@ -160,13 +163,13 @@ class Custom_Related_Products_Admin {
 			?>
 
 			<?php if ( version_compare( $woocommerce->version, '2.3', '>=' ) && version_compare( $woocommerce->version, '3.0', '<' ) ) : ?>
-				<p class="form-field"><label for="related_ids"><?php _e( 'Products', 'wt-woocommerce-related-products' ); ?></label>
+				<p class="form-field"><label for="related_ids"><?php esc_html_e( 'Products', 'wt-woocommerce-related-products' ); ?></label>
 					<input type="hidden" 
 						class="wc-product-search" 
 						style="width: 50%;" 
 						id="crp_related_ids" 
 						name="crp_related_ids" 
-						data-placeholder="<?php esc_attr_e( 'Search for a product&hellip;', 'woocommerce' ); ?>" 
+						data-placeholder="<?php esc_attr_e( 'Search for a product&hellip;', 'wt-woocommerce-related-products' ); ?>" 
 						data-action="woocommerce_json_search_products_and_variations" 
 						data-multiple="true" 
 						data-selected="
@@ -178,13 +181,13 @@ class Custom_Related_Products_Admin {
 							if ( is_object( $product ) && is_callable( array( $product, 'get_formatted_name' ) ) ) {
 								$json_ids[ $product_id ] = wp_kses_post( wp_strip_all_tags( $product->get_formatted_name() ) );                             }
 						}
-							echo esc_attr( json_encode( $json_ids ) );
+							echo esc_attr( wp_json_encode( $json_ids ) );
 						?>
 					" value="<?php echo esc_attr( implode( ',', array_keys( $json_ids ) ) ); ?>" />
-					<?php echo wc_help_tip( __( 'Choose products to be displayed as related products on the product page.', 'wt-woocommerce-related-products' ) ); ?>
+					<?php echo wp_kses_post( wc_help_tip( __( 'Choose products to be displayed as related products on the product page.', 'wt-woocommerce-related-products' ) ) ); ?>
 				</p>
 			<?php else : ?>
-				<p class="form-field"><label for="related_ids"><?php _e( 'Products', 'wt-woocommerce-related-products' ); ?></label>
+				<p class="form-field"><label for="related_ids"><?php esc_html_e( 'Products', 'wt-woocommerce-related-products' ); ?></label>
 					<select id="crp_related_ids" 
 							class="wc-product-search" 
 							name="crp_related_ids[]" 
@@ -203,14 +206,14 @@ class Custom_Related_Products_Admin {
 								}
 								?>
 					</select>
-					<?php echo wc_help_tip( __( 'Choose products to be displayed as related products on the product page.', 'wt-woocommerce-related-products' ) ); ?>                    
+					<?php echo wp_kses_post( wc_help_tip( __( 'Choose products to be displayed as related products on the product page.', 'wt-woocommerce-related-products' ) ) ); ?>                    
 				</p>
 			<?php endif; ?>
 
 			<!-- Related Products End -->
 
 			<!-- Exclude Category Start -->
-			<p class="form-field"><label for="exclude_cat"><?php _e( 'Exclude categories', 'wt-woocommerce-related-products' ); ?></label>
+			<p class="form-field"><label for="exclude_cat"><?php esc_html_e( 'Exclude categories', 'wt-woocommerce-related-products' ); ?></label>
 				<select id="crp_exclude_cats" class="wc-category-search" multiple="multiple"  name="crp_exclude_cats[]" data-return_id="id" data-placeholder="<?php esc_attr_e( 'Search for a category...', 'wt-woocommerce-related-products' ); ?>" style="width: 400px;">     
 				<?php
 
@@ -229,7 +232,7 @@ class Custom_Related_Products_Admin {
 
 				?>
 				</select>
-				<?php echo wc_help_tip( __( 'Products from chosen categories will be excluded from related products on the product page.', 'wt-woocommerce-related-products' ) ); ?>
+				<?php echo wp_kses_post( wc_help_tip( __( 'Products from chosen categories will be excluded from related products on the product page.', 'wt-woocommerce-related-products' ) ) ); ?>
 			</p>
 			<!-- Exclude Category End -->
 
@@ -247,10 +250,10 @@ class Custom_Related_Products_Admin {
 		<script type="text/javascript">
 			jQuery(document).ready(function() {
 				jQuery('.crp_related_product_attr_search').select2({
-						placeholder: "<?php _e( 'Search for an attribute...', 'wt-woocommerce-related-products' ); ?>",
+						placeholder: "<?php esc_html_e( 'Search for an attribute...', 'wt-woocommerce-related-products' ); ?>",
 						minimumInputLength: 2,
 						multiple: true,
-						noResults: "<?php _e( 'No results found', 'wt-woocommerce-related-products' ); ?>",
+						noResults: "<?php esc_html_e( 'No results found', 'wt-woocommerce-related-products' ); ?>",
 						ajax: {
 							url: '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>',
 							dataType: 'json',
@@ -306,8 +309,10 @@ class Custom_Related_Products_Admin {
 
 		global $woocommerce;
 
+		// phpcs:disable WordPress.Security.NonceVerification.Missing -- Nonce verification is already done in the parent function.
+
 		if ( isset( $_POST['crp_related_ids'] ) && current_user_can( 'manage_woocommerce' ) ) {
-			$custom_related_ids = ( isset( $_POST['crp_related_ids'] ) && is_array( $_POST['crp_related_ids'] ) ) ? array_map( 'absint', $_POST['crp_related_ids'] ) : array();
+			$custom_related_ids = ( isset( $_POST['crp_related_ids'] ) && is_array( $_POST['crp_related_ids'] ) ) ? array_map( 'absint', wp_unslash( $_POST['crp_related_ids'] ) ) : array();
 
 			if ( version_compare( $woocommerce->version, '2.3', '>=' ) && version_compare( $woocommerce->version, '3.0', '<' ) ) {
 				$related = $custom_related_ids;
@@ -329,7 +334,7 @@ class Custom_Related_Products_Admin {
 		// save related categories
 		if ( isset( $_POST['crp_related_product_cats'] ) && current_user_can( 'manage_woocommerce' ) ) {
 
-			$custom_related_product_cat_id = ( isset( $_POST['crp_related_product_cats'] ) && is_array( $_POST['crp_related_product_cats'] ) ) ? array_map( 'absint', $_POST['crp_related_product_cats'] ) : array();
+			$custom_related_product_cat_id = ( isset( $_POST['crp_related_product_cats'] ) && is_array( $_POST['crp_related_product_cats'] ) ) ? array_map( 'absint', wp_unslash( $_POST['crp_related_product_cats'] ) ) : array();
 
 			if ( version_compare( $woocommerce->version, '2.3', '>=' ) && version_compare( $woocommerce->version, '3.0', '<' ) ) {
 				$related = $custom_related_product_cat_id;
@@ -351,7 +356,7 @@ class Custom_Related_Products_Admin {
 		// save related tags
 		if ( isset( $_POST['crp_related_product_tags'] ) && current_user_can( 'manage_woocommerce' ) ) {
 
-			$custom_related_product_tag_id = ( isset( $_POST['crp_related_product_tags'] ) && is_array( $_POST['crp_related_product_tags'] ) ) ? array_map( 'absint', $_POST['crp_related_product_tags'] ) : array();
+			$custom_related_product_tag_id = ( isset( $_POST['crp_related_product_tags'] ) && is_array( $_POST['crp_related_product_tags'] ) ) ? array_map( 'absint', wp_unslash( $_POST['crp_related_product_tags'] ) ) : array();
 
 			if ( version_compare( $woocommerce->version, '2.3', '>=' ) && version_compare( $woocommerce->version, '3.0', '<' ) ) {
 				$related = $custom_related_product_tag_id;
@@ -373,7 +378,7 @@ class Custom_Related_Products_Admin {
 		// save related attributes
 		if ( isset( $_POST['crp_related_product_attr'] ) && current_user_can( 'manage_woocommerce' ) ) {
 
-			$crp_related_atts_data = isset( $_POST['crp_related_product_attr'] ) ? Wt_Related_Product_Security_Helper::crp_sanitize_text( $_POST['crp_related_product_attr'] ) : array();
+			$crp_related_atts_data = isset( $_POST['crp_related_product_attr'] ) ? array_map( 'sanitize_text_field', (array) wp_unslash( $_POST['crp_related_product_attr'] ) ) : array();
 
 			$crp_related_atts_data = $this->process_related_attr_data( $crp_related_atts_data );
 
@@ -385,7 +390,7 @@ class Custom_Related_Products_Admin {
 		// save excluded categories
 		if ( isset( $_POST['crp_exclude_cats'] ) && current_user_can( 'manage_woocommerce' ) ) {
 
-			$custom_related_product_cat_id = ( isset( $_POST['crp_exclude_cats'] ) && is_array( $_POST['crp_exclude_cats'] ) ) ? array_map( 'absint', $_POST['crp_exclude_cats'] ) : array();
+			$custom_related_product_cat_id = ( isset( $_POST['crp_exclude_cats'] ) && is_array( $_POST['crp_exclude_cats'] ) ) ? array_map( 'absint', wp_unslash( $_POST['crp_exclude_cats'] ) ) : array();
 
 			if ( version_compare( $woocommerce->version, '2.3', '>=' ) && version_compare( $woocommerce->version, '3.0', '<' ) ) {
 				$related = $custom_related_product_cat_id;
@@ -403,6 +408,8 @@ class Custom_Related_Products_Admin {
 		} else {
 			delete_post_meta( $post_id, '_crp_excluded_cats' );
 		}
+
+		// phpcs:enable WordPress.Security.NonceVerification.Missing -- Nonce verification is already done in the parent function.
 	}
 
 	public function add_options_page() {
@@ -420,6 +427,8 @@ class Custom_Related_Products_Admin {
 
 	public function display_options_page() {
 		$tab = 'related-product';
+
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended -- Nonce verification is not required here.
 		if ( ! empty( $_GET['tab'] ) ) {
 			if ( $_GET['tab'] == 'other-solutions' ) {
 				$tab = 'other-solutions';
@@ -427,6 +436,7 @@ class Custom_Related_Products_Admin {
 				$tab = 'related-product';
 			}
 		}
+		// phpcs:enable WordPress.Security.NonceVerification.Recommended -- Nonce verification is not required here.
 		include_once 'partials/custom-related-products-admin-tab-view.php';
 	}
 
@@ -494,6 +504,7 @@ class Custom_Related_Products_Admin {
 		);
 		add_settings_field(
 			$this->option_name . '_crp_number',
+			// translators: %1$s HTML b tag opening, %2$s HTML b tag closing.
 			__( 'Number of products to display', 'wt-woocommerce-related-products' ) . wc_help_tip( sprintf( __( 'Choose the number of products to display as related products. This number must be greater than the %1$sNumber of products to display on the slider per page%2$s for the slider to function correctly. The default value is 4.', 'wt-woocommerce-related-products' ), '<b>', '</b>' ) ),
 			array( $this, $this->option_name . '_crp_number' ),
 			$this->plugin_name,
@@ -664,7 +675,7 @@ class Custom_Related_Products_Admin {
 		);
 		add_settings_field(
 			$this->option_name . '_overide_theme_rp',
-			__( "Override theme's template", 'wt-woocommerce-related-products' ) . wc_help_tip( __( 'Enable to override the theme’s existing template for related products.', 'wt-woocommerce-related-products' ) ),
+			__( 'Override theme\'s template', 'wt-woocommerce-related-products' ) . wc_help_tip( __( 'Enable to override the theme\'s existing template for related products.', 'wt-woocommerce-related-products' ) ),
 			array( $this, $this->option_name . '_overide_theme_rp_cb' ),
 			$this->plugin_name,
 			$this->option_name . '_advanced_settings',
@@ -688,92 +699,246 @@ class Custom_Related_Products_Admin {
 
 		register_setting(
 			$this->plugin_name,
-			$this->option_name . '_working_mode'
+			$this->option_name . '_working_mode',
+			array(
+				'sanitize_callback' => array( $this, 'sanitize_working_mode' ),
+			)
 		);
 		register_setting(
 			$this->plugin_name,
-			$this->option_name . '_cart_working_mode'
+			$this->option_name . '_cart_working_mode',
+			array(
+				'sanitize_callback' => array( $this, 'sanitize_cart_working_mode' ),
+			)
 		);
 		register_setting(
 			$this->plugin_name,
-			$this->option_name . '_disable'
+			$this->option_name . '_disable',
+			array(
+				'sanitize_callback' => array( $this, 'sanitize_checkbox' ),
+			)
 		);
 		register_setting(
 			$this->plugin_name,
-			$this->option_name . '_disable_custom'
-		);
-
-		register_setting(
-			$this->plugin_name,
-			$this->option_name . '_crp_title'
-		);
-
-		register_setting(
-			$this->plugin_name,
-			$this->option_name . '_crp_related_by'
-		);
-
-		register_setting(
-			$this->plugin_name,
-			$this->option_name . '_crp_exclude_widget_category'
+			$this->option_name . '_disable_custom',
+			array(
+				'sanitize_callback' => array( $this, 'sanitize_checkbox' ),
+			)
 		);
 
 		register_setting(
 			$this->plugin_name,
-			$this->option_name . '_crp_exclude_widget_product'
-		);
-		register_setting(
-			$this->plugin_name,
-			$this->option_name . '_crp_order_by'
-		);
-		register_setting(
-			$this->plugin_name,
-			$this->option_name . '_crp_order'
-		);
-		register_setting(
-			$this->plugin_name,
-			$this->option_name . '_crp_number'
-		);
-		register_setting(
-			$this->plugin_name,
-			$this->option_name . '_crp_banner_width'
-		);
-		register_setting(
-			$this->plugin_name,
-			$this->option_name . '_crp_custom_slider_arrow'
-		);
-		register_setting(
-			$this->plugin_name,
-			$this->option_name . '_crp_banner_product_width'
-		);
-		register_setting(
-			$this->plugin_name,
-			$this->option_name . '_exclude_os'
-		);
-		// Exclude backorder
-		register_setting(
-			$this->plugin_name,
-			$this->option_name . '_rp_exclude_backorder'
+			$this->option_name . '_crp_title',
+			array(
+				'sanitize_callback' => 'sanitize_text_field',
+			)
 		);
 
 		register_setting(
 			$this->plugin_name,
-			$this->option_name . '_slider'
+			$this->option_name . '_crp_related_by',
+			array(
+				'sanitize_callback' => array( $this, 'sanitize_related_by' ),
+			)
 		);
-		// register_setting(
-		// $this->plugin_name, $this->option_name . '_slider_type'
-		// );
+
 		register_setting(
 			$this->plugin_name,
-			$this->option_name . '_use_primary_id_wpml'
+			$this->option_name . '_crp_exclude_widget_category',
+			array(
+				'sanitize_callback' => array( $this, 'sanitize_array_of_integers' ),
+			)
+		);
+
+		register_setting(
+			$this->plugin_name,
+			$this->option_name . '_crp_exclude_widget_product',
+			array(
+				'sanitize_callback' => array( $this, 'sanitize_array_of_integers' ),
+			)
+		);
+		register_setting(
+			$this->plugin_name,
+			$this->option_name . '_crp_order_by',
+			array(
+				'sanitize_callback' => array( $this, 'sanitize_order_by' ),
+			)
+		);
+		register_setting(
+			$this->plugin_name,
+			$this->option_name . '_crp_order',
+			array(
+				'sanitize_callback' => array( $this, 'sanitize_order' ),
+			)
+		);
+		register_setting(
+			$this->plugin_name,
+			$this->option_name . '_crp_number',
+			array(
+				'sanitize_callback' => array( $this, 'sanitize_number' ),
+			)
+		);
+		register_setting(
+			$this->plugin_name,
+			$this->option_name . '_crp_banner_width',
+			array(
+				'sanitize_callback' => array( $this, 'sanitize_banner_width' ),
+			)
+		);
+		register_setting(
+			$this->plugin_name,
+			$this->option_name . '_crp_custom_slider_arrow',
+			array(
+				'sanitize_callback' => array( $this, 'sanitize_checkbox' ),
+			)
+		);
+		register_setting(
+			$this->plugin_name,
+			$this->option_name . '_crp_banner_product_width',
+			array(
+				'sanitize_callback' => array( $this, 'sanitize_array_of_integers' ),
+			)
+		);
+		register_setting(
+			$this->plugin_name,
+			$this->option_name . '_exclude_os',
+			array(
+				'sanitize_callback' => array( $this, 'sanitize_checkbox' ),
+			)
+		);
+		register_setting(
+			$this->plugin_name,
+			$this->option_name . '_rp_exclude_backorder',
+			array(
+				'sanitize_callback' => array( $this, 'sanitize_checkbox' ),
+			)
+		);
+
+		register_setting(
+			$this->plugin_name,
+			$this->option_name . '_slider',
+			array(
+				'sanitize_callback' => array( $this, 'sanitize_checkbox' ),
+			)
+		);
+		register_setting(
+			$this->plugin_name,
+			$this->option_name . '_use_primary_id_wpml',
+			array(
+				'sanitize_callback' => array( $this, 'sanitize_checkbox' ),
+			)
 		);
 		register_setting(
 			$this->plugin_name,
 			$this->option_name . '_overide_theme_rp',
-			array( 'default' => 'enable' )
+			array(
+				'default'           => 'enable',
+				'sanitize_callback' => array( $this, 'sanitize_checkbox' ),
+			)
 		);
 
 		add_action( 'admin_head', array( $this, 'insert_main_settings_scripts' ), 999 );
+	}
+
+	/**
+	 * Sanitize working mode option
+	 *
+	 * @param string $input The input value to sanitize
+	 * @return string Sanitized value
+	 */
+	public function sanitize_working_mode( $input ) {
+		$allowed_values = array( 'custom', 'default', 'disable' );
+		return in_array( $input, $allowed_values ) ? $input : 'default';
+	}
+
+	/**
+	 * Sanitize cart working mode option
+	 *
+	 * @param string $input The input value to sanitize
+	 * @return string Sanitized value
+	 */
+	public function sanitize_cart_working_mode( $input ) {
+		return $input === 'cart_mode' ? 'cart_mode' : '';
+	}
+
+	/**
+	 * Sanitize checkbox option
+	 *
+	 * @param string $input The input value to sanitize
+	 * @return string Sanitized value
+	 */
+	public function sanitize_checkbox( $input ) {
+		return in_array( $input, array( 'enable', 'exclude_os', 'rp_exclude_backorder', 'slider_arrow' ) ) ? $input : '';
+	}
+
+	/**
+	 * Sanitize related by option
+	 *
+	 * @param array $input The input value to sanitize
+	 * @return array Sanitized value
+	 */
+	public function sanitize_related_by( $input ) {
+		if ( ! is_array( $input ) ) {
+			return array( 'category' );
+		}
+		$allowed_values = array( 'category', 'tag' );
+		return array_intersect( $input, $allowed_values );
+	}
+
+	/**
+	 * Sanitize array of integers
+	 *
+	 * @param array $input The input value to sanitize
+	 * @return array Sanitized value
+	 */
+	public function sanitize_array_of_integers( $input ) {
+		if ( ! is_array( $input ) ) {
+			return array();
+		}
+		return array_map( 'absint', $input );
+	}
+
+	/**
+	 * Sanitize order by option
+	 *
+	 * @param string $input The input value to sanitize
+	 * @return string Sanitized value
+	 */
+	public function sanitize_order_by( $input ) {
+		$allowed_values = array( 'title', 'date', 'name', 'rand', 'modified', 'price', 'popularity', 'rating', 'relevance' );
+		return in_array( $input, $allowed_values ) ? $input : 'popularity';
+	}
+
+	/**
+	 * Sanitize order option
+	 *
+	 * @param string $input The input value to sanitize
+	 * @return string Sanitized value
+	 */
+	public function sanitize_order( $input ) {
+		return strtoupper( $input ) === 'DESC' ? 'DESC' : 'ASC';
+	}
+
+	/**
+	 * Sanitize number option
+	 *
+	 * @param mixed $input The input value to sanitize
+	 * @return int Sanitized value
+	 */
+	public function sanitize_number( $input ) {
+		$number = absint( $input );
+		return $number >= 4 ? $number : 4;
+	}
+
+	/**
+	 * Sanitize banner width option
+	 *
+	 * @param mixed $input The input value to sanitize
+	 * @return int Sanitized value
+	 */
+	public function sanitize_banner_width( $input ) {
+		$width = absint( $input );
+		return max( 50, min( 150, $width ) );
 	}
 
 	public function custom_related_products_working_mode_cb() {
@@ -783,23 +948,23 @@ class Custom_Related_Products_Admin {
 		<fieldset class="working-mode-field">
 			<input type="radio" name="<?php echo esc_attr( $this->option_name . '_working_mode' ); ?>" id="<?php echo esc_attr( $this->option_name . '_custom' ); ?>" value="custom" <?php checked( $working_mode, 'custom' ); ?>>
 			<label for="<?php echo esc_attr( $this->option_name . '_custom' ); ?>">
-				<?php _e( 'Custom related products', 'wt-woocommerce-related-products' ); ?>
+				<?php esc_html_e( 'Custom related products', 'wt-woocommerce-related-products' ); ?>
 			</label><br>
-			<p class="description"><?php _e( 'Get full control over which products are displayed as related products and appearance using advanced customization options.(Recommended)', 'wt-woocommerce-related-products' ); ?></p>
+			<p class="description"><?php esc_html_e( 'Get full control over which products are displayed as related products and appearance using advanced customization options.(Recommended)', 'wt-woocommerce-related-products' ); ?></p>
 
 			<input type="radio" name="<?php echo esc_attr( $this->option_name . '_working_mode' ); ?>" id="<?php echo esc_attr( $this->option_name . '_default' ); ?>" value="default" <?php checked( $working_mode, 'default' ); ?>>
 			<label for="<?php echo esc_attr( $this->option_name . '_default' ); ?>">
-				<?php _e( 'Default', 'wt-woocommerce-related-products' ); ?>
+				<?php esc_html_e( 'Default', 'wt-woocommerce-related-products' ); ?>
 			</label><br>
-			<p class="description"><?php _e( "Use WooCommerce's built-in related products settings with limited customization options.", 'wt-woocommerce-related-products' ); ?></p>
+			<p class="description"><?php esc_html_e( "Use WooCommerce's built-in related products settings with limited customization options.", 'wt-woocommerce-related-products' ); ?></p>
 
 			
 
 			<input type="radio" name="<?php echo esc_attr( $this->option_name . '_working_mode' ); ?>" id="<?php echo esc_attr( $this->option_name . '_disable_rp' ); ?>" value="disable" <?php checked( $working_mode, 'disable' ); ?>>
 			<label for="<?php echo esc_attr( $this->option_name . '_disable_rp' ); ?>">
-				<?php _e( 'Disable recommendation', 'wt-woocommerce-related-products' ); ?>
+				<?php esc_html_e( 'Disable recommendation', 'wt-woocommerce-related-products' ); ?>
 			</label><br>
-			<p class="description"><?php _e( 'Completely remove the related products section from your store.', 'wt-woocommerce-related-products' ); ?></p>
+			<p class="description"><?php esc_html_e( 'Completely remove the related products section from your store.', 'wt-woocommerce-related-products' ); ?></p>
 
 		</fieldset>         
 		<?php
@@ -826,7 +991,7 @@ class Custom_Related_Products_Admin {
 			<label>
 				<input type="number" name="<?php echo esc_attr( $this->option_name . '_crp_banner_width' ); ?>" id="<?php echo esc_attr( $this->option_name . '_crp_banner_width' ); ?>" value="<?php echo esc_attr( $crp_title ); ?>" class="wt-crp-input"  min="50" max="150" required='required'>
 			</label>
-			<p class="description"><?php _e( '%', 'wt-woocommerce-related-products' ); ?></p>
+			<p class="description"><?php esc_html_e( '%', 'wt-woocommerce-related-products' ); ?></p>
 		</fieldset>         
 		<?php
 	}
@@ -877,30 +1042,30 @@ class Custom_Related_Products_Admin {
 		</style>
 		<fieldset class="crp-banner-product-width wt-with-slider">
 			<label class="inner-addon left-addon wt_tooltip">
-				<i class="glyphicon wt-preview-desktop wt_tooltip"><span class="wt_tooltiptext"><?php _e( 'Desktop', 'wt-woocommerce-related-products' ); ?></span></i>
+				<i class="glyphicon wt-preview-desktop wt_tooltip"><span class="wt_tooltiptext"><?php esc_html_e( 'Desktop', 'wt-woocommerce-related-products' ); ?></span></i>
 				<input type="number" name="<?php echo esc_attr( $this->option_name . '_crp_banner_product_width[]' ); ?>" id="<?php echo esc_attr( $this->option_name . '_crp_banner_product_width_desk' ); ?>" value="<?php echo esc_attr( $desktop_view ); ?>" class="wt-crp-input" min="3" style="width: 102px">
 				</label>
 			<label class="inner-addon left-addon wt_tooltip">
-				<i class="glyphicon wt-preview-tablet wt_tooltip"><span class="wt_tooltiptext"><?php _e( 'Tablet', 'wt-woocommerce-related-products' ); ?></span></i>
+				<i class="glyphicon wt-preview-tablet wt_tooltip"><span class="wt_tooltiptext"><?php esc_html_e( 'Tablet', 'wt-woocommerce-related-products' ); ?></span></i>
 				<input type="number" name="<?php echo esc_attr( $this->option_name . '_crp_banner_product_width[]' ); ?>" id="<?php echo esc_attr( $this->option_name . '_crp_banner_product_width_tab' ); ?>" value="<?php echo esc_attr( $tab_view ); ?>" class="wt-crp-input" min="1" style="width: 102px">
 				</label>
 			<label class="inner-addon left-addon wt_tooltip">
-				<i class="glyphicon wt-preview-mobile wt_tooltip"><span class="wt_tooltiptext"><?php _e( 'Mobile', 'wt-woocommerce-related-products' ); ?></span></i>
+				<i class="glyphicon wt-preview-mobile wt_tooltip"><span class="wt_tooltiptext"><?php esc_html_e( 'Mobile', 'wt-woocommerce-related-products' ); ?></span></i>
 				<input type="number" name="<?php echo esc_attr( $this->option_name . '_crp_banner_product_width[]' ); ?>" id="<?php echo esc_attr( $this->option_name . '_crp_banner_product_width_mobile' ); ?>" value="<?php echo esc_attr( $mobile_view ); ?>" class="wt-crp-input" min="1" style="width: 102px">
 				</label>
-			<p class="description"><?php _e( 'Enter the number of products to be shown in the slider per view.', 'wt-woocommerce-related-products' ); ?></p>
+			<p class="description"><?php esc_html_e( 'Enter the number of products to be shown in the slider per view.', 'wt-woocommerce-related-products' ); ?></p>
 		</fieldset>  
 		<fieldset class="crp-banner-product-width wt-with-out-slider">          
 			<label class="inner-addon left-addon wt_tooltip">
-				<i class="glyphicon wt-preview-desktop wt_tooltip"><span class="wt_tooltiptext"><?php _e( 'Desktop', 'wt-woocommerce-related-products' ); ?></span></i>
+				<i class="glyphicon wt-preview-desktop wt_tooltip"><span class="wt_tooltiptext"><?php esc_html_e( 'Desktop', 'wt-woocommerce-related-products' ); ?></span></i>
 				<input type="number" name="<?php echo esc_attr( $this->option_name . '_crp_banner_product_width[]' ); ?>" id="<?php echo esc_attr( $this->option_name . '_crp_banner_product_width_desk_default' ); ?>" value="<?php echo esc_attr( $desktop_view_default ); ?>" class="wt-crp-input" min="3" style="width: 102px">
 				</label>
 			<label class="inner-addon left-addon wt_tooltip">
-				<i class="glyphicon wt-preview-tablet wt_tooltip"><span class="wt_tooltiptext"><?php _e( 'Tablet', 'wt-woocommerce-related-products' ); ?></span></i>
+				<i class="glyphicon wt-preview-tablet wt_tooltip"><span class="wt_tooltiptext"><?php esc_html_e( 'Tablet', 'wt-woocommerce-related-products' ); ?></span></i>
 				<input type="number" name="<?php echo esc_attr( $this->option_name . '_crp_banner_product_width[]' ); ?>" id="<?php echo esc_attr( $this->option_name . '_crp_banner_product_width_tab_default' ); ?>" value="<?php echo esc_attr( $tab_view_default ); ?>" class="wt-crp-input" min="1" style="width: 102px">
 				</label>
 			<label class="inner-addon left-addon wt_tooltip">
-				<i class="glyphicon wt-preview-mobile wt_tooltip"><span class="wt_tooltiptext"><?php _e( 'Mobile', 'wt-woocommerce-related-products' ); ?></span></i>
+				<i class="glyphicon wt-preview-mobile wt_tooltip"><span class="wt_tooltiptext"><?php esc_html_e( 'Mobile', 'wt-woocommerce-related-products' ); ?></span></i>
 				<input type="number" name="<?php echo esc_attr( $this->option_name . '_crp_banner_product_width[]' ); ?>" id="<?php echo esc_attr( $this->option_name . '_crp_banner_product_width_mobile_default' ); ?>" value="<?php echo esc_attr( $mobile_view_default ); ?>" class="wt-crp-input" min="1" style="width: 102px">
 				</label>
 		</fieldset>
@@ -910,7 +1075,7 @@ class Custom_Related_Products_Admin {
 	public function custom_related_products_crp_related_by() {
 		wp_enqueue_script( 'wc-enhanced-select' );
 		if ( function_exists( 'WC' ) ) {
-			wp_enqueue_style( 'woocommerce_admin_styles', WC()->plugin_url() . '/assets/css/admin.css' );
+			wp_enqueue_style( 'woocommerce_admin_styles', WC()->plugin_url() . '/assets/css/admin.css', array(), $this->version );
 		}
 
 		$crp_related_by = (array) get_option( $this->option_name . '_crp_related_by', array( 'category' ) );
@@ -918,15 +1083,15 @@ class Custom_Related_Products_Admin {
 		?>
 		<fieldset class="crp-related-by">
 
-			<label for="<?php esc_attr_e( $this->option_name . '_category' ); ?>">
+			<label for="<?php echo esc_attr( $this->option_name . '_category' ); ?>">
 				<input type="checkbox" name="<?php echo esc_attr( $this->option_name . '_crp_related_by[]' ); ?>" id="<?php echo esc_attr( $this->option_name . '_category' ); ?>" value="<?php echo esc_attr( 'category' ); ?>"  <?php ( is_array( $crp_related_by ) && in_array( 'category', $crp_related_by ) ? print esc_attr( 'checked' ) : '' ); ?>>
-				<?php _e( 'Same category', 'wt-woocommerce-related-products' ); ?>
+				<?php esc_html_e( 'Same category', 'wt-woocommerce-related-products' ); ?>
 			</label>
 
-			<label for="<?php esc_attr_e( $this->option_name . '_tag' ); ?>">
+			<label for="<?php echo esc_attr( $this->option_name . '_tag' ); ?>">
 				
 				<input type="checkbox" name="<?php echo esc_attr( $this->option_name . '_crp_related_by[]' ); ?>" id="<?php echo esc_attr( $this->option_name . '_tag' ); ?>" value="<?php echo esc_attr( 'tag' ); ?>" <?php ( is_array( $crp_related_by ) && in_array( 'tag', $crp_related_by ) ? print esc_attr( 'checked' ) : '' ); ?>>
-				<?php _e( 'Same tag', 'wt-woocommerce-related-products' ); ?>
+				<?php esc_html_e( 'Same tag', 'wt-woocommerce-related-products' ); ?>
 			</label>
 			<!-- <p class="description crp-paragraph crp-sub-cat"><?php // printf( __( 'Use this %1$s code snippet %2$s to relate products by sub-category.', 'wt-woocommerce-related-products' ), '<a href="https://www.webtoffee.com/related-products-woocommerce-user-guide/#sub_category" target="_blank">', '</a>' ); ?></p> -->
 
@@ -939,16 +1104,15 @@ class Custom_Related_Products_Admin {
 		<tr class="crp-tr-field">
 			<td colspan="2" style="padding: 0px;">
 				<div class="crp-banner wt-crp-info-box">
-				<?php _e( "To override the 'Display related products from' selection or to set related products individually for each product:", 'wt-woocommerce-related-products' ); ?>
+				<?php esc_html_e( "To override the 'Display related products from' selection or to set related products individually for each product:", 'wt-woocommerce-related-products' ); ?>
 				<ol>
-					<li><?php _e( 'Navigate to Products', 'wt-woocommerce-related-products' ); ?> > <?php _e( 'Edit Product', 'wt-woocommerce-related-products' ); ?> > <?php _e( 'Linked Products', 'wt-woocommerce-related-products' ); ?></li>
-					<li><?php _e( 'Choose to display related products from specific categories, tags, attributes, or products.', 'wt-woocommerce-related-products' ); ?></li>
+					<li><?php esc_html_e( 'Navigate to Products', 'wt-woocommerce-related-products' ); ?> > <?php esc_html_e( 'Edit Product', 'wt-woocommerce-related-products' ); ?> > <?php esc_html_e( 'Linked Products', 'wt-woocommerce-related-products' ); ?></li>
+					<li><?php esc_html_e( 'Choose to display related products from specific categories, tags, attributes, or products.', 'wt-woocommerce-related-products' ); ?></li>
 				</ol>
 				
 				</div>
 			</td>
-		</tr>
-		
+		</tr>		
 		<?php
 	}
 
@@ -959,7 +1123,7 @@ class Custom_Related_Products_Admin {
 			<select name="<?php echo esc_attr( $this->option_name . '_crp_exclude_widget_category[]' ); ?>" id="<?php echo esc_attr( $this->option_name . '_crp_exclude_widget_category' ); ?>" class="wc-category-search" multiple="multiple"  data-return_id="id" data-placeholder="<?php esc_attr_e( 'Search for a category...', 'wt-woocommerce-related-products' ); ?>" style="width: 400px;">     
 				<?php
 
-					$category_ids = array_filter( array_map( 'absint', (array) get_option( 'custom_related_products_crp_exclude_widget_category', true ) ) );
+				$category_ids = array_filter( array_map( 'absint', (array) get_option( 'custom_related_products_crp_exclude_widget_category', true ) ) );
 				if ( is_array( $category_ids ) && ! empty( $category_ids ) ) {
 					foreach ( $category_ids as $category_id ) {
 						$category = get_term( $category_id, 'product_cat' );
@@ -1005,55 +1169,15 @@ class Custom_Related_Products_Admin {
 		?>
 		<fieldset class="crp-order-by">
 		<select name="<?php echo esc_attr( $this->option_name . '_crp_order_by' ); ?>" id="<?php echo esc_attr( $this->option_name . '_crp_order_by' ); ?>" class="wt-crp-select">
-				<option value="title"><?php _e( 'Product title', 'wt-woocommerce-related-products' ); ?></option>
-				<option value="date" 
-				<?php
-				if ( $crp_order_by == 'date' ) {
-					echo 'selected="selected"';}
-				?>
-					><?php _e( 'Date', 'wt-woocommerce-related-products' ); ?></option>
-				<option value="name" 
-				<?php
-				if ( $crp_order_by == 'name' ) {
-					echo 'selected="selected"';}
-				?>
-					><?php _e( 'Slug name', 'wt-woocommerce-related-products' ); ?></option>
-				<option value="rand" 
-				<?php
-				if ( $crp_order_by == 'rand' ) {
-					echo 'selected="selected"';}
-				?>
-					><?php _e( 'Random', 'wt-woocommerce-related-products' ); ?></option>
-				<option value="modified" 
-				<?php
-				if ( $crp_order_by == 'modified' ) {
-					echo 'selected="selected"';}
-				?>
-					><?php _e( 'Last modified', 'wt-woocommerce-related-products' ); ?></option>
-				<option value="price" 
-				<?php
-				if ( $crp_order_by == 'price' ) {
-					echo 'selected="selected"';}
-				?>
-					><?php _e( 'Price', 'wt-woocommerce-related-products' ); ?></option>
-				<option value="popularity" 
-				<?php
-				if ( $crp_order_by == 'popularity' ) {
-					echo 'selected="selected"';}
-				?>
-					><?php _e( 'Popularity', 'wt-woocommerce-related-products' ); ?></option>
-				<option value="rating" 
-				<?php
-				if ( $crp_order_by == 'rating' ) {
-					echo 'selected="selected"';}
-				?>
-					><?php _e( 'Avg rating', 'wt-woocommerce-related-products' ); ?></option>
-				<option value="relevance" 
-				<?php
-				if ( $crp_order_by == 'relevance' ) {
-					echo 'selected="selected"';}
-				?>
-					><?php _e( 'Relevance', 'wt-woocommerce-related-products' ); ?></option>
+				<option value="title"><?php esc_html_e( 'Product title', 'wt-woocommerce-related-products' ); ?></option>
+				<option value="date" <?php selected( $crp_order_by, 'date' ); ?>><?php esc_html_e( 'Date', 'wt-woocommerce-related-products' ); ?></option>
+				<option value="name" <?php selected( $crp_order_by, 'name' ); ?>><?php esc_html_e( 'Slug name', 'wt-woocommerce-related-products' ); ?></option>
+				<option value="rand" <?php selected( $crp_order_by, 'rand' ); ?>><?php esc_html_e( 'Random', 'wt-woocommerce-related-products' ); ?></option>
+				<option value="modified" <?php selected( $crp_order_by, 'modified' ); ?>><?php esc_html_e( 'Last modified', 'wt-woocommerce-related-products' ); ?></option>
+				<option value="price" <?php selected( $crp_order_by, 'price' ); ?>><?php esc_html_e( 'Price', 'wt-woocommerce-related-products' ); ?></option>
+				<option value="popularity" <?php selected( $crp_order_by, 'popularity' ); ?>><?php esc_html_e( 'Popularity', 'wt-woocommerce-related-products' ); ?></option>
+				<option value="rating" <?php selected( $crp_order_by, 'rating' ); ?>><?php esc_html_e( 'Avg rating', 'wt-woocommerce-related-products' ); ?></option>
+				<option value="relevance" <?php selected( $crp_order_by, 'relevance' ); ?>><?php esc_html_e( 'Relevance', 'wt-woocommerce-related-products' ); ?></option>
 			</select>
 		</fieldset>         
 		<?php
@@ -1065,13 +1189,8 @@ class Custom_Related_Products_Admin {
 		?>
 		<fieldset class="crp-order">
 		<select name="<?php echo esc_attr( $this->option_name . '_crp_order' ); ?>" id="<?php echo esc_attr( $this->option_name . '_crp_order' ); ?>" class="wt-crp-select">
-				<option value="ASC"><?php _e( 'Ascending', 'wt-woocommerce-related-products' ); ?></option>
-				<option value="DESC" 
-				<?php
-				if ( $crp_order_by == 'DESC' ) {
-					echo 'selected="selected"';}
-				?>
-					><?php _e( 'Descending', 'wt-woocommerce-related-products' ); ?></option>
+				<option value="ASC"><?php esc_html_e( 'Ascending', 'wt-woocommerce-related-products' ); ?></option>
+				<option value="DESC" <?php selected( $crp_order_by, 'DESC' ); ?>><?php esc_html_e( 'Descending', 'wt-woocommerce-related-products' ); ?></option>
 			</select>
 		</fieldset>         
 		<?php
@@ -1085,7 +1204,7 @@ class Custom_Related_Products_Admin {
 			<label>
 				<input type="number" name="<?php echo esc_attr( $this->option_name . '_crp_number' ); ?>" id="<?php echo esc_attr( $this->option_name . '_crp_number' ); ?>" value="<?php echo esc_attr( absint( $crp_number ) ); ?>" class="wt-crp-input" min="4" required="required">
 			</label>
-			<p class="description"><?php _e( 'products.', 'wt-woocommerce-related-products' ); ?></p>
+			<p class="description"><?php esc_html_e( 'products.', 'wt-woocommerce-related-products' ); ?></p>
 		</fieldset>         
 		<?php
 	}
@@ -1142,22 +1261,32 @@ class Custom_Related_Products_Admin {
 				if ( $slider == 'bx' ) {
 					echo 'selected="selected"';}
 				?>
-					><?php _e( 'bxSlider', 'wt-woocommerce-related-products' ); ?></option>
+					><?php esc_html_e( 'bxSlider', 'wt-woocommerce-related-products' ); ?></option>
 				<option value="swiper" 
 				<?php
 				if ( $slider == 'swiper' ) {
 					echo 'selected="selected"';}
 				?>
-					><?php _e( 'Swiper slider', 'wt-woocommerce-related-products' ); ?></option>
+					><?php esc_html_e( 'Swiper slider', 'wt-woocommerce-related-products' ); ?></option>
 			</select>
-			<p class="description"><?php _e( 'Try switching the slider type if any conflicts with the site theme.', 'wt-woocommerce-related-products' ); ?></p>
+			<p class="description"><?php esc_html_e( 'Try switching the slider type if any conflicts with the site theme.', 'wt-woocommerce-related-products' ); ?></p>
 		</fieldset>  
 		
 			<div class="crp-banner wt-crp-info-box">
 			<?php if ( $slider == 'bx' ) { ?>
-					<p id="crp-slider-type"><?php printf( __( 'bxSlider is a fully-loaded, responsive jQuery content slider.%1$s Know more. %2$s', 'wt-woocommerce-related-products' ), '<a href="https://github.com/stevenwanderski/bxslider-4" target="_blank">', '</a>' ); ?></p>
+					<p id="crp-slider-type">
+					<?php
+						// translators: %1$s HTML a tag opening, %2$s HTML a tag closing.
+						wp_kses_post( sprintf( __( 'bxSlider is a fully-loaded, responsive jQuery content slider.%1$s Know more. %2$s', 'wt-woocommerce-related-products' ), '<a href="https://github.com/stevenwanderski/bxslider-4" target="_blank">', '</a>' ) );
+					?>
+					</p>
 				<?php } elseif ( $slider == 'swiper' ) { ?> 
-					<p id="crp-slider-type"> <?php printf( __( 'Swiper - is the free and most modern mobile touch slider with hardware accelerated transitions and amazing native behavior.%1$s Know more. %2$s', 'wt-woocommerce-related-products' ), '<a href="https://github.com/nolimits4web/swiper" target="_blank">', '</a>' ); ?></p>
+					<p id="crp-slider-type">
+					<?php
+						// translators: %1$s HTML a tag opening, %2$s HTML a tag closing.
+						wp_kses_post( sprintf( __( 'Swiper - is the free and most modern mobile touch slider with hardware accelerated transitions and amazing native behavior.%1$s Know more. %2$s', 'wt-woocommerce-related-products' ), '<a href="https://github.com/nolimits4web/swiper" target="_blank">', '</a>' ) );
+					?>
+					</p>
 				<?php } ?> 
 
 			</div>
@@ -1173,10 +1302,14 @@ class Custom_Related_Products_Admin {
 				<input type="checkbox" name="<?php echo esc_attr( $this->option_name . '_use_primary_id_wpml' ); ?>" id="<?php echo esc_attr( $this->option_name . '_use_primary_id_wpml' ); ?>" value="enable" <?php checked( $primary_id_wpml, 'enable' ); ?>>
 			</label>
 			<p class="description">
-				<?php _e( 'Enable to display related products for translated products based on original product ID.', 'wt-woocommerce-related-products' ); ?>
+				<?php esc_html_e( 'Enable to display related products for translated products based on original product ID.', 'wt-woocommerce-related-products' ); ?>
 			</p>
 			<p class="description wt-crp-note">
-				<?php printf( __( '%1$s Note:%2$s Ensure that each product has a corresponding translated product in your site.', 'wt-woocommerce-related-products' ), '<b>', '</b>' ); ?>
+				<?php
+				// translators: %1$s HTML b tag opening, %2$s HTML b tag closing.
+				wp_kses_post( sprintf( __( '%1$s Note:%2$s Ensure that each product has a corresponding translated product in your site.', 'wt-woocommerce-related-products' ), '<b>', '</b>' ) );
+				?>
+				</p>
 			</p>
 		</fieldset>         
 		<?php
@@ -1192,7 +1325,7 @@ class Custom_Related_Products_Admin {
 			</label>
 			<div class="crp-alert crp-warning-alert">
 			<span>&#9888;</span>
-				<?php _e( 'If disabled, the above settings may not be reflected in the front end.', 'wt-woocommerce-related-products' ); ?>
+				<?php esc_html_e( 'If disabled, the above settings may not be reflected in the front end.', 'wt-woocommerce-related-products' ); ?>
 			</div>
 		</fieldset>         
 		<?php
@@ -1201,10 +1334,10 @@ class Custom_Related_Products_Admin {
 	public function custom_related_products_general_cb() {
 		?>
 		<!-- <p>
-			<b><?php _e( 'Displays custom related products based on category, tag, attribute or product.', 'wt-woocommerce-related-products' ); ?></b>
+			<b><?php esc_html_e( 'Displays custom related products based on category, tag, attribute or product.', 'wt-woocommerce-related-products' ); ?></b>
 		</p>
 		<p>
-			<a target="_blank" href="https://www.webtoffee.com/related-products-woocommerce-user-guide/"><?php _e( 'Read documentation', 'wt-woocommerce-related-products' ); ?></a>
+			<a target="_blank" href="https://www.webtoffee.com/related-products-woocommerce-user-guide/"><?php esc_html_e( 'Read documentation', 'wt-woocommerce-related-products' ); ?></a>
 		</p>
 		<p style="border-top: 1px dashed rgb(204, 204, 204); padding-top: 5px; width: 95%;"></p>-->
 		<?php
@@ -1217,6 +1350,7 @@ class Custom_Related_Products_Admin {
 					<?php
 					echo wp_kses_post(
 						sprintf(
+							// translators: %1$s HTML code tag opening, %2$s HTML code tag closing, %3$s HTML code tag opening, %4$s HTML code tag closing.
 							__( 'Use the shortcode %1$s[wt-related-products product_id=XX]%2$s to show related products on custom posts/pages.<br>Replace the %3$sXX%4$s placeholder with the product ID of the product you are basing the recommendation on.', 'wt-woocommerce-related-products' ),
 							'<code>',
 							'</code>',
@@ -1268,10 +1402,10 @@ class Custom_Related_Products_Admin {
 	public function add_crp_action_links( $links ) {
 
 		$plugin_links = array(
-			'<a href="' . esc_url( admin_url( '/admin.php?page=wt-woocommerce-related-products' ) ) . '">' . __( 'Settings', 'wt-woocommerce-related-products' ) . '</a>',
-			'<a target="_blank" href="https://www.webtoffee.com/related-products-woocommerce-user-guide/">' . __( 'Documentation', 'wt-woocommerce-related-products' ) . '</a>',
-			'<a target="_blank" href="https://wordpress.org/support/plugin/wt-woocommerce-related-products/">' . __( 'Support', 'wt-woocommerce-related-products' ) . '</a>',
-			'<a target="_blank" href="https://wordpress.org/support/plugin/wt-woocommerce-related-products/reviews#new-post">' . __( 'Review', 'wt-woocommerce-related-products' ) . '</a>',
+			'<a href="' . esc_url( admin_url( '/admin.php?page=wt-woocommerce-related-products' ) ) . '">' . esc_html__( 'Settings', 'wt-woocommerce-related-products' ) . '</a>',
+			'<a target="_blank" href="https://www.webtoffee.com/related-products-woocommerce-user-guide/">' . esc_html__( 'Documentation', 'wt-woocommerce-related-products' ) . '</a>',
+			'<a target="_blank" href="https://wordpress.org/support/plugin/wt-woocommerce-related-products/">' . esc_html__( 'Support', 'wt-woocommerce-related-products' ) . '</a>',
+			'<a target="_blank" href="https://wordpress.org/support/plugin/wt-woocommerce-related-products/reviews#new-post">' . esc_html__( 'Review', 'wt-woocommerce-related-products' ) . '</a>',
 		);
 		if ( array_key_exists( 'deactivate', $links ) ) {
 			$links['deactivate'] = str_replace( '<a', '<a class="relatedproducts-deactivate-link"', $links['deactivate'] );
@@ -1515,7 +1649,7 @@ class Custom_Related_Products_Admin {
 		?>
 		<div class="wt_crp_branding">
 			<div class="wt_crp_brand_label">
-				<?php _e( 'Related Products for WooCommerce | Developed by', 'wt-woocommerce-related-products' ); ?>
+				<?php esc_html_e( 'Related Products for WooCommerce | Developed by', 'wt-woocommerce-related-products' ); ?>
 			</div>
 			<div class="wt_crp_brand_logo">
 				<a href="https://www.webtoffee.com/" target="_blank"><img src="<?php echo esc_url( $webtoffee_logo_url ); ?>"></a>
@@ -1531,7 +1665,7 @@ class Custom_Related_Products_Admin {
 		<fieldset class="include-cart">
 			<label>
 				<input type="checkbox" name="<?php echo esc_attr( $this->option_name . '_cart_working_mode' ); ?>" id="<?php echo esc_attr( $this->option_name . '_cart_working_mode' ); ?>" value="cart_mode" <?php checked( $include_cart, 'cart_mode' ); ?>>
-				<?php esc_html_e( 'Display ‘Related products’ widget on the cart page', 'wt-woocommerce-related-products' ); ?>
+				<?php esc_html_e( 'Display Related products widget on the cart page', 'wt-woocommerce-related-products' ); ?>
 			</label>
 		</fieldset>         
 		<?php

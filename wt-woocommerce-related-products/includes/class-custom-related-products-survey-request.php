@@ -77,26 +77,27 @@ class WT_CRP_Survey_Request
      */
     public function show_banner()
     {
+        //phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nonce verification is not required here.
         if(isset($_GET['page']) && 'wt-woocommerce-related-products' === $_GET['page'] && current_user_can('manage_options')) {
             $this->update_banner_state(1); /* update banner active state */
             ?>
                 <div class="<?php echo esc_attr( $this->banner_css_class ); ?> notice-info notice is-dismissible">
                     <?php
-                    if ($this->webtoffee_logo_url != "") {
+                    if ("" !== $this->webtoffee_logo_url) {
                     ?>
-                        <h3 style="margin: 10px 0;"><?php esc_html_e($this->plugin_title, 'wt-woocommerce-related-products'); ?></h3>
+                        <h3 style="margin: 10px 0;"><?php echo esc_html($this->plugin_title); ?></h3>
                     <?php
                     }
                     ?>
                     <p>
-                        <?php echo $this->banner_message; ?>
+                        <?php echo wp_kses_post($this->banner_message); ?>
                     </p>
                     <p>
                         <a class="button button-secondary" style="color:#333; border-color:#ccc; background:#efefef;" data-type="never"><?php echo esc_html( $this->never_btn_text ); ?></a>
                         <a class="button button-primary" data-type="survey"><?php echo esc_html( $this->survey_btn_text ); ?></a>
                     </p>
-                    <div class="wt-cli-survey-footer" style="position: relative;">
-                        <span class="wt-cli-footer-icon" style="position: absolute;right: 0;bottom: 10px;"><img src="<?php echo esc_url( $this->webtoffee_logo_url ); ?>" style="max-width:100px;"></span>
+                    <div class="wt-crp-survey-footer" style="position: relative;">
+                        <span class="wt-crp-footer-icon" style="position: absolute;right: 0;bottom: 10px;"><img src="<?php echo esc_url( $this->webtoffee_logo_url ); ?>" style="max-width:100px;"></span>
                     </div>
                 </div>
             <?php
@@ -110,11 +111,11 @@ class WT_CRP_Survey_Request
     public function process_user_action()
     {
         check_ajax_referer($this->plugin_prefix);
-        $nonce = (isset($_REQUEST['_wpnonce']) ? sanitize_text_field($_REQUEST['_wpnonce']) : '');
+        $nonce = (isset($_REQUEST['_wpnonce']) ? sanitize_text_field(wp_unslash($_REQUEST['_wpnonce'])) : '');
 
         if("" !== $nonce && wp_verify_nonce($nonce, $this->plugin_prefix)) {
             if (isset($_POST['wt_survey_action_type'])) {
-                $action_type = sanitize_text_field($_POST['wt_survey_action_type']);
+                $action_type = sanitize_text_field(wp_unslash($_POST['wt_survey_action_type']));
 
                 /* current action is in allowed action list */
                 if (in_array($action_type, $this->allowed_action_type_arr)) {
@@ -127,8 +128,7 @@ class WT_CRP_Survey_Request
                 }
             }
         } 
-
-        
+      
         exit();
     }
 
@@ -146,34 +146,34 @@ class WT_CRP_Survey_Request
 
                 /* prepare data object */
                 var data_obj = {
-                    _wpnonce: '<?php echo $nonce; ?>',
-                    action: '<?php echo $this->ajax_action_name; ?>',
+                    _wpnonce: '<?php echo esc_js($nonce); ?>',
+                    action: '<?php echo esc_js($this->ajax_action_name); ?>',
                     wt_survey_action_type: ''
                 };
 
-                $(document).on('click', '.<?php echo $this->banner_css_class; ?> a.button', function(e) {
+                $(document).on('click', '.<?php echo esc_js($this->banner_css_class); ?> a.button', function(e) {
                     e.preventDefault();
                     var elm = $(this);
                     var btn_type = elm.attr('data-type');
                     
                     if (btn_type == 'survey') {
-                        window.open('<?php echo $this->survey_url; ?>');
+                        window.open('<?php echo esc_url($this->survey_url); ?>');
                     }
-                    elm.parents('.<?php echo $this->banner_css_class; ?>').hide();
+                    elm.parents('.<?php echo esc_js($this->banner_css_class); ?>').hide();
 
                     data_obj['wt_survey_action_type'] = btn_type;
                     $.ajax({
-                        url: '<?php echo $ajax_url; ?>',
+                        url: '<?php echo esc_url($ajax_url); ?>',
                         data: data_obj,
                         type: 'POST'
                     });
 
-                }).on('click', '.<?php echo $this->banner_css_class; ?> .notice-dismiss', function(e) {
+                }).on('click', '.<?php echo esc_js($this->banner_css_class); ?> .notice-dismiss', function(e) {
                     e.preventDefault();
                     data_obj['wt_survey_action_type'] = 'closed';
                     
                     $.ajax({
-                        url: '<?php echo $ajax_url; ?>',
+                        url: '<?php echo esc_url($ajax_url); ?>',
                         data: data_obj,
                         type: 'POST',
                     });
@@ -194,7 +194,7 @@ class WT_CRP_Survey_Request
                 
             $day_to_stop = strtotime('21 November 2023'); 
             
-            if( strtotime(date("Y/m/d")) >= $day_to_stop ) {  /* current day is after 21th nov ,hide banner */
+            if( strtotime(gmdate("Y/m/d")) >= $day_to_stop ) {  /* current day is after 21th nov ,hide banner */
                 
                 $this->update_banner_state(4);
                 return false;

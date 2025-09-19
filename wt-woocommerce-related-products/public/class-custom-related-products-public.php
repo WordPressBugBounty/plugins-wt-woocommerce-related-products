@@ -205,6 +205,7 @@ class Custom_Related_Products_Public {
                     'numberposts'   => -1,
                     'post_status'   => 'publish',
                     'fields'        => 'ids',
+                    //phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query -- Its necessary for the plugin to work.
                     'tax_query'     => array(
                        array(
                           'taxonomy' => 'product_cat',
@@ -237,6 +238,7 @@ class Custom_Related_Products_Public {
                     'numberposts'   => -1,
                     'post_status'   => 'publish',
                     'fields'        => 'ids',
+                    //phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query -- Its necessary for the plugin to work.
                     'tax_query'     => array(
                        array(
                           'taxonomy' => 'product_tag',
@@ -308,13 +310,13 @@ class Custom_Related_Products_Public {
                                     autoplayHoverPause: true,
                                     responsive: {
                                         0: {
-                                            items: <?php echo $mobile_view; ?>
+                                            items: <?php echo esc_js($mobile_view); ?>
                                         },
                                         600: {
-                                            items: <?php echo $tab_view; ?>
+                                            items: <?php echo esc_js($tab_view); ?>
                                         },
                                         1000: {
-                                            items: <?php echo $desktop_view; ?>
+                                            items: <?php echo esc_js($desktop_view); ?>
                                         }
                                     }
                                 })
@@ -333,13 +335,13 @@ class Custom_Related_Products_Public {
                                     autoplayHoverPause: true,
                                     responsive: {
                                         0: {
-                                            items: <?php echo $mobile_view; ?>
+                                            items: <?php echo esc_js($mobile_view); ?>
                                         },
                                         600: {
-                                            items: <?php echo $tab_view; ?>
+                                            items: <?php echo esc_js($tab_view); ?>
                                         },
                                         1000: {
-                                            items: <?php echo $desktop_view; ?>
+                                            items: <?php echo esc_js($desktop_view); ?>
                                         }
                                     }
                                 });
@@ -413,7 +415,7 @@ class Custom_Related_Products_Public {
                 </script>
                 <style>
                     .wt-related-products{
-                        max-width: <?php echo $slide_width . ' !important'; ?>;
+                        max-width: <?php echo esc_attr($slide_width) . ' !important'; ?>;
                     }
                     .wt-related-products .owl-carousel .owl-nav .owl-next:before ,.wt-related-products .owl-carousel .owl-nav .owl-prev:before {
                         content: unset;
@@ -502,7 +504,7 @@ class Custom_Related_Products_Public {
                                         }
 
                                         .wt-related-products .owl-theme .owl-nav [class*=owl-]:hover {
-                                            background:  <?php echo $hover_colour . ' !important'; ?>;
+                                            background:  <?php echo esc_attr($hover_colour) . ' !important'; ?>;
                                             text-decoration: none;
                                         }
 

@@ -40,6 +40,7 @@ if ( ! function_exists( 'crp_get_all_product_ids_from_cat_ids' ) ) {
 				'numberposts'	 => -1,
 				'post_status'	 => 'publish',
 				'fields'		 => 'ids',
+				//phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query -- Its necessary for the plugin to work.
 				'tax_query'		 => array(
 					array(
 						'taxonomy'	 => 'product_cat',
@@ -91,6 +92,7 @@ if ( ! function_exists( 'crp_get_all_product_ids_from_tag_ids' ) ) {
 				'numberposts'	 => -1,
 				'post_status'	 => 'publish',
 				'fields'		 => 'ids',
+				//phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query -- Its necessary for the plugin to work.
 				'tax_query'		 => array(
 					array(
 						'taxonomy'	 => 'product_tag',
@@ -129,6 +131,7 @@ if ( ! function_exists( 'crp_get_all_product_ids_from_attr_ids' ) ) {
 				'posts_per_page'	 => -1,
 				'post_status'	 => 'publish',
 				'fields'		 => 'ids',
+				//phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query -- Its necessary for the plugin to work.
 				'tax_query' => $tax_query
 			)
 		);
@@ -273,7 +276,9 @@ if ( $related_products || !empty($global_related_by) ) :
 						$args = array(
 							'post_type' => 'product',
 							'posts_per_page' => -1,
+							//phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in -- Its necessary for the plugin to work.
 							'post__not_in' => array($post->ID),
+							//phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query -- Its necessary for the plugin to work.
 							'tax_query' => array(
 								'relation' => 'AND',
 								array(
@@ -297,7 +302,9 @@ if ( $related_products || !empty($global_related_by) ) :
 						$args = array(
 							'post_type' => 'product',
 							'posts_per_page' => -1,
+							//phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in -- Its necessary for the plugin to work.
 							'post__not_in' => array_merge(array($post->ID), $related),
+							//phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query -- Its necessary for the plugin to work.
 							'tax_query' => array(
 								array(
 									'taxonomy' => 'product_cat',
@@ -315,7 +322,9 @@ if ( $related_products || !empty($global_related_by) ) :
 						$args = array(
 							'post_type' => 'product',
 							'posts_per_page' => -1,
+							//phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in -- Its necessary for the plugin to work.
 							'post__not_in' => array_merge(array($post->ID), $related),
+							//phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query -- Its necessary for the plugin to work.
 							'tax_query' => array(
 								array(
 									'taxonomy' => 'product_tag',
@@ -351,7 +360,9 @@ if ( $related_products || !empty($global_related_by) ) :
 						$args = array(
 							'post_type' => 'product',
 							'posts_per_page' => $number_of_products - count($related),
+							//phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in -- Its necessary for the plugin to work.
 							'post__not_in' => array_merge(array($post->ID), $related),
+							//phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query -- Its necessary for the plugin to work.
 							'tax_query' => array(
 								array(
 									'taxonomy' => 'product_cat',
@@ -524,7 +535,7 @@ if ( $related_products || !empty($global_related_by) ) :
 					if(!empty($products_to_exclude_widgets)) {
 						$products_to_exclude_widgets = array_merge($get_product_ids,$products_to_exclude_widgets); 
 					} else {
-						$products_to_exclude_widgets = $categories_to_exclude_widgets;
+						$products_to_exclude_widgets = $get_product_ids;	
 					}
 					
 				}
@@ -608,6 +619,7 @@ if ( $related_products || !empty($global_related_by) ) :
 				$custom_orderby = class_exists('Custom_Related_Products') ? Custom_Related_Products::get_custom_order_by_values() : array();
 				if( array_key_exists( $orderby, $custom_orderby ) ) {
 					$args['orderby'] =  $custom_orderby[$orderby]['orderby'];
+					//phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- Its necessary for the plugin to work.
 					$args['meta_key'] = $custom_orderby[$orderby]['meta_key'];
 				}
 
@@ -662,6 +674,7 @@ if ( $related_products || !empty($global_related_by) ) :
                 	$loop	 = new WP_Query($args);
 
                     if ( ! WP_DEBUG || ( WP_DEBUG && ! WP_DEBUG_DISPLAY ) ) {
+						//phpcs:ignore Squiz.PHP.DiscouragedFunctions.Discouraged
 						@ini_set( 'display_errors', 0 ); 
 					}
                 }
@@ -669,7 +682,7 @@ if ( $related_products || !empty($global_related_by) ) :
 		       	if(!empty($loop) && $loop->have_posts())
 		       	{
 
-					echo $crp_heading;
+					echo wp_kses_post($crp_heading);
 
 	                if($bxslider && apply_filters( 'wt_crp_custom_related_product_template', false ))
 	                {
@@ -704,7 +717,7 @@ if ( $related_products || !empty($global_related_by) ) :
 	                        	
 	                            <?php $wt_rp_ul_tag = apply_filters('wt_rp_alter_slider_carousal_ul_tag','<ul class="owl-carousel owl-theme products">');
 
-								echo $wt_rp_ul_tag;
+								echo wp_kses_post($wt_rp_ul_tag);
 	                            
 	                    } else 
 	                    {
@@ -735,7 +748,7 @@ if ( $related_products || !empty($global_related_by) ) :
 	        $crp_heading 	 = apply_filters('wt_related_products_heading', "<h2 class='wt-crp-heading'>" . esc_html( $crp_title ) . " </h2>", $crp_title);
 	        $bxslider = false;
 			?>
-			<?php echo $crp_heading; ?>
+			<?php echo wp_kses_post($crp_heading); ?>
 			<?php
 			$crelated = get_post_meta($post->ID, '_crp_related_ids', true);
 

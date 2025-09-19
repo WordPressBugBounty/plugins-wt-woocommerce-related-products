@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Plugin Name:       Related Products for WooCommerce
+ * Plugin Name:       Related Products - Create Upsells, Cross-sells, and Product Recommendations for WooCommerce
  * Plugin URI:        https://wordpress.org/plugins/wt-woocommerce-related-products/
  * Description:       Displays custom related products based on category, tag, attribute or product for your WooCommerce store.
- * Version:           1.7.3
+ * Version:           1.7.4
  * Author:            WebToffee
  * Author URI:        https://www.webtoffee.com/
  * License:           GPLv3
@@ -35,12 +35,18 @@ if ( ! defined( 'CRP_PLUGIN_TEMPLATE_PATH' ) ) {
 if ( ! defined( 'WT_CRP_BASE_NAME' ) ) {
 	define( 'WT_CRP_BASE_NAME', plugin_basename( __FILE__ ) );
 }
+
+if ( ! defined( 'WT_CRP_CROSS_PROMO_BANNER_VERSION' ) ) {
+    // This constant must be unique for each plugin. Update this value when updating to a new banner.
+    define ( 'WT_CRP_CROSS_PROMO_BANNER_VERSION', '1.0.0' );
+}
+
 /**
  * Currently plugin version.
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'WT_RELATED_PRODUCTS_VERSION', '1.7.3' );
+define( 'WT_RELATED_PRODUCTS_VERSION', '1.7.4' );
 
 /**
  *  @since 1.6.0
@@ -134,7 +140,8 @@ if ( ! in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins',
 }
 if( !function_exists('wt_rp_disabled_notice') ) {
 	function wt_rp_disabled_notice() {
-		echo '<div class="error"><p>' . sprintf( __( '<strong>Related Products</strong> requires WooCommerce to be active. You can download WooCommerce %s.', 'wt-woocommerce-related-products' ), '<a href="https://wordpress.org/plugins/woocommerce">' . __( 'here', 'wt-woocommerce-related-products' ) . '</a>' ) . '</p></div>';
+		// translators: %s: WooCommerce plugin link
+		echo wp_kses_post('<div class="error"><p>' . sprintf( __( '<strong>Related Products</strong> requires WooCommerce to be active. You can download WooCommerce %s.', 'wt-woocommerce-related-products' ), '<a href="https://wordpress.org/plugins/woocommerce">' . esc_html__( 'here', 'wt-woocommerce-related-products' ) . '</a>' ) . '</p></div>');
 	}
 }
 

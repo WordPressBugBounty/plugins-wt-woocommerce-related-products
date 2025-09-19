@@ -112,21 +112,21 @@ class WT_CRP_Review_Request
 ?>
         <div class="<?php echo esc_attr( $this->banner_css_class ); ?> notice-info notice is-dismissible">
             <?php
-            if ($this->webtoffee_logo_url != "") {
+            if ("" !== $this->webtoffee_logo_url) {
             ?>
-                <h3 style="margin: 10px 0;"><?php esc_html_e($this->plugin_title, 'wt-woocommerce-related-products'); ?></h3>
+                <h3 style="margin: 10px 0;"><?php echo esc_html($this->plugin_title); ?></h3>
             <?php
             }
             ?>
             <p>
-                <?php echo $this->banner_message; ?>
+                <?php echo wp_kses_post($this->banner_message); ?>
             </p>
             <p>
                 <a class="button button-secondary" style="color:#333; border-color:#ccc; background:#efefef;" data-type="later"><?php echo esc_html( $this->later_btn_text ); ?></a>
                 <a class="button button-primary" data-type="review"><?php echo esc_html( $this->review_btn_text ); ?></a>
             </p>
-            <div class="wt-cli-review-footer" style="position: relative;">
-                <span class="wt-cli-footer-icon" style="position: absolute;right: 0;bottom: 10px;"><img src="<?php echo esc_url( $this->webtoffee_logo_url ); ?>" style="max-width:100px;"></span>
+            <div class="wt-crp-review-footer" style="position: relative;">
+                <span class="wt-crp-footer-icon" style="position: absolute;right: 0;bottom: 10px;"><img src="<?php echo esc_url( $this->webtoffee_logo_url ); ?>" style="max-width:100px;"></span>
             </div>
         </div>
     <?php
@@ -139,7 +139,7 @@ class WT_CRP_Review_Request
     {
         check_ajax_referer($this->plugin_prefix);
         if (isset($_POST['wt_review_action_type'])) {
-            $action_type = sanitize_text_field($_POST['wt_review_action_type']);
+            $action_type = sanitize_text_field(wp_unslash($_POST['wt_review_action_type']));
 
             /* current action is in allowed action list */
             if (in_array($action_type, $this->allowed_action_type_arr)) {
@@ -172,32 +172,32 @@ class WT_CRP_Review_Request
 
                 /* prepare data object */
                 var data_obj = {
-                    _wpnonce: '<?php echo $nonce; ?>',
-                    action: '<?php echo $this->ajax_action_name; ?>',
+                    _wpnonce: '<?php echo esc_js($nonce); ?>',
+                    action: '<?php echo esc_js($this->ajax_action_name); ?>',
                     wt_review_action_type: ''
                 };
 
-                $(document).on('click', '.<?php echo $this->banner_css_class; ?> a.button', function(e) {
+                $(document).on('click', '.<?php echo esc_js($this->banner_css_class); ?> a.button', function(e) {
                     e.preventDefault();
                     var elm = $(this);
                     var btn_type = elm.attr('data-type');
                     if (btn_type == 'review') {
-                        window.open('<?php echo $this->review_url; ?>');
+                        window.open('<?php echo esc_url($this->review_url); ?>');
                     }
-                    elm.parents('.<?php echo $this->banner_css_class; ?>').hide();
+                    elm.parents('.<?php echo esc_js($this->banner_css_class); ?>').hide();
 
                     data_obj['wt_review_action_type'] = btn_type;
                     $.ajax({
-                        url: '<?php echo $ajax_url; ?>',
+                        url: '<?php echo esc_url($ajax_url); ?>',
                         data: data_obj,
                         type: 'POST'
                     });
 
-                }).on('click', '.<?php echo $this->banner_css_class; ?> .notice-dismiss', function(e) {
+                }).on('click', '.<?php echo esc_js($this->banner_css_class); ?> .notice-dismiss', function(e) {
                     e.preventDefault();
                     data_obj['wt_review_action_type'] = 'closed';
                     $.ajax({
-                        url: '<?php echo $ajax_url; ?>',
+                        url: '<?php echo esc_url($ajax_url); ?>',
                         data: data_obj,
                         type: 'POST',
                     });
@@ -206,10 +206,10 @@ class WT_CRP_Review_Request
 
             })(jQuery);
             jQuery(window).on("load", function () {
-                jQuery('.wt_crp_review_request > .notice-dismiss').append('<span style="position: absolute; right: 30px; top:11px; color:#000;">'+'<?php esc_html_e('Dismiss'); ?>'+'</span>');
+                jQuery('.wt_crp_review_request > .notice-dismiss').append('<span style="position: absolute; right: 30px; top:11px; color:#000;">'+'<?php esc_html_e('Dismiss', 'wt-woocommerce-related-products'); ?>'+'</span>');
             });
         </script>
-<?php
+    <?php
     }
 
     /**
@@ -248,7 +248,8 @@ class WT_CRP_Review_Request
      * @return void
      */
     public function load_button_text_and_display_banner(){
-        $this->banner_message = sprintf(__("Hi there! We at %sWebToffee%s would like to thank you for using our plugin. We would really appreciate if you could take a moment to drop a quick review that will inspire us to keep going.", 'wt-woocommerce-related-products'), '<b>', '</b>');
+        // translators: %1$s HTML b tag opening, %2$s HTML b tag closing.
+        $this->banner_message = sprintf(__('Hi there! We at %1$sWebToffee%2$s would like to thank you for using our plugin. We would really appreciate if you could take a moment to drop a quick review that will inspire us to keep going.', 'wt-woocommerce-related-products'), '<b>', '</b>');
 
         /* button texts */
         $this->later_btn_text   = __("Remind me later", 'wt-woocommerce-related-products');

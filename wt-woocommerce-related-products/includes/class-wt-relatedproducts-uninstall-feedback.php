@@ -76,7 +76,7 @@ if (!class_exists('RelatedProducts_Uninstall_Feedback')) :
             <div class="relatedproducts-modal" id="relatedproducts-relatedproducts-modal">
                 <div class="relatedproducts-modal-wrap">
                     <div class="relatedproducts-modal-header">
-                        <h3><?php _e('If you have a moment, please let us know why you are deactivating:', 'wt-woocommerce-related-products'); ?></h3>
+                        <h3><?php esc_html_e('If you have a moment, please let us know why you are deactivating:', 'wt-woocommerce-related-products'); ?></h3>
                     </div>
                     <div class="relatedproducts-modal-body">
                         <ul class="reasons">
@@ -85,20 +85,20 @@ if (!class_exists('RelatedProducts_Uninstall_Feedback')) :
                                 $reason_placeholder = isset($reason['placeholder']) ? $reason['placeholder'] : '';
                                 ?>
                                 <li data-type="<?php echo esc_attr($reason_type); ?>" data-placeholder="<?php echo esc_attr($reason_placeholder); ?>">
-                                    <label><input type="radio" name="selected-reason" value="<?php echo $reason['id']; ?>"> <?php echo $reason['text']; ?></label>
+                                    <label><input type="radio" name="selected-reason" value="<?php echo esc_attr($reason['id']); ?>"> <?php echo esc_html($reason['text']); ?></label>
                                 </li>
                             <?php } ?>
                         </ul>
                         <div class="wt-uninstall-feedback-privacy-policy">
-						<?php _e( "We do not collect any personal data when you submit this form. It's your feedback that we value.", 'wt-woocommerce-related-products' ); ?>
-						<a href="https://www.webtoffee.com/privacy-policy/" target="_blank"><?php _e( 'Privacy Policy', 'wt-woocommerce-related-products' ); ?></a>
+						<?php esc_html_e( "We do not collect any personal data when you submit this form. It's your feedback that we value.", 'wt-woocommerce-related-products' ); ?>
+						<a href="https://www.webtoffee.com/privacy-policy/" target="_blank"><?php esc_html_e( 'Privacy Policy', 'wt-woocommerce-related-products' ); ?></a>
 					</div>
                     </div>
                     <div class="relatedproducts-modal-footer">
-                        <a href="#" class="dont-bother-me"><?php _e('I rather wouldn\'t say', 'wt-woocommerce-related-products'); ?></a>
-                        <a href="https://wordpress.org/support/plugin/wt-woocommerce-related-products/" target="_blank" class="button-primary relatedproducts-model-submit"><?php _e('Contact Support', 'wt-woocommerce-related-products'); ?></a>
-                        <button class="button-primary relatedproducts-model-submit"><?php _e('Submit & Deactivate', 'wt-woocommerce-related-products'); ?></button>
-                        <button class="button-secondary relatedproducts-model-cancel"><?php _e('Cancel', 'wt-woocommerce-related-products'); ?></button>
+                        <a href="#" class="dont-bother-me"><?php esc_html_e('I rather wouldn\'t say', 'wt-woocommerce-related-products'); ?></a>
+                        <a href="https://wordpress.org/support/plugin/wt-woocommerce-related-products/" target="_blank" class="button-primary relatedproducts-model-submit"><?php esc_html_e('Contact Support', 'wt-woocommerce-related-products'); ?></a>
+                        <button class="button-primary relatedproducts-model-submit"><?php esc_html_e('Submit & Deactivate', 'wt-woocommerce-related-products'); ?></button>
+                        <button class="button-secondary relatedproducts-model-cancel"><?php esc_html_e('Cancel', 'wt-woocommerce-related-products'); ?></button>
                     </div>
                 </div>
             </div>
@@ -177,12 +177,16 @@ if (!class_exists('RelatedProducts_Uninstall_Feedback')) :
                                     inputPlaceholder = parent.data('placeholder'),
                                     reasonInputHtml = '<div class="reason-input">' + (('text' === inputType) ? '<input type="text" class="input-text" size="40" />' : '<textarea rows="5" cols="45"></textarea>') + '</div>';
                             if( 'custom_msg' === inputType ) {
-                                var customMsg = '<p><?php _e('It might be due to a theme conflict. Could you please share the theme name so that we can make it compatible with the upcoming release.', 'wt-woocommerce-related-products'); ?></p>';
-                                var contactSupportMsg = '<p><?php printf( __('You can also reach us via support forum by using the below %1$s "Contact Support" %2$s button.', 'wt-woocommerce-related-products'), '<b>', '</b>'); ?></p>';
+                                var customMsg = '<p><?php esc_html_e('It might be due to a theme conflict. Could you please share the theme name so that we can make it compatible with the upcoming release.', 'wt-woocommerce-related-products'); ?></p>';
+                                var contactSupportMsg = '<p><?php 
+                                // translators: %1$s HTML b tag opening, %2$s HTML b tag closing.
+                                wp_kses_post( sprintf( __('You can also reach us via support forum by using the below %1$s "Contact Support" %2$s button.', 'wt-woocommerce-related-products'), '<b>', '</b>') ); ?></p>';
                                 reasonInputHtml = '<div class="reason-input">' + customMsg +'<input type="text" class="input-text" size="40" />' + contactSupportMsg + '</div>';
                             }
                             if( 'doc_link' === inputType ) {
-                                var customMsg = '<p><?php printf( __('Please check our documentation %1$s here %2$s.', 'wt-woocommerce-related-products'), '<a href="https://www.webtoffee.com/related-products-woocommerce-user-guide/" target="_blank">', '</a>'); ?></p>';
+                                var customMsg = '<p><?php 
+                                    // translators: %1$s HTML a tag opening, %2$s HTML a tag closing.
+                                    wp_kses_post( sprintf( __('Please check our documentation %1$s here %2$s.', 'wt-woocommerce-related-products'), '<a href="https://www.webtoffee.com/related-products-woocommerce-user-guide/" target="_blank">', '</a>') ); ?></p>';
                                 reasonInputHtml = '<div class="reason-input">' + customMsg  + '<textarea rows="5" cols="45"></textarea>' +  '</div>';
                             }
                             if (inputType !== '') {
@@ -209,7 +213,8 @@ if (!class_exists('RelatedProducts_Uninstall_Feedback')) :
                                 data: {
                                     action: 'relatedproducts_submit_uninstall_reason',
                                     reason_id: $reason_id,
-                                    reason_info: $reason_info
+                                    reason_info: $reason_info,
+                                    _wpnonce: '<?php echo esc_js(wp_create_nonce('relatedproducts_submit_uninstall_reason')); ?>'
                                 },
                                 beforeSend: function () {
                                     button.addClass('disabled');
@@ -230,20 +235,24 @@ if (!class_exists('RelatedProducts_Uninstall_Feedback')) :
 
             global $wpdb;
 
+            if ( ! empty($_POST['_wpnonce']) && ! wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['_wpnonce'])), 'relatedproducts_submit_uninstall_reason')) {
+                wp_send_json_error();
+            }
+
             if (!isset($_POST['reason_id'])) {
                 wp_send_json_error();
             }
 
 
             $data = array(
-                'reason_id' => sanitize_text_field($_POST['reason_id']),
+                'reason_id' => sanitize_text_field(wp_unslash($_POST['reason_id'])),
                 'plugin' => "relatedproducts",
                 'auth' => 'relatedproducts_uninstall_1234#',
                 'date' => gmdate("M d, Y h:i:s A"),
                 'url' => '',
                 'user_email' => '',
-                'reason_info' => isset($_REQUEST['reason_info']) ? trim(stripslashes($_REQUEST['reason_info'])) : '',
-                'software' => $_SERVER['SERVER_SOFTWARE'],
+                'reason_info' => isset($_REQUEST['reason_info']) ? sanitize_textarea_field(wp_unslash($_REQUEST['reason_info'])) : '',
+                'software' => isset($_SERVER['SERVER_SOFTWARE']) ?  sanitize_text_field(wp_unslash($_SERVER['SERVER_SOFTWARE'])) : '',
                 'php_version' => phpversion(),
                 'mysql_version' => $wpdb->db_version(),
                 'wp_version' => get_bloginfo('version'),

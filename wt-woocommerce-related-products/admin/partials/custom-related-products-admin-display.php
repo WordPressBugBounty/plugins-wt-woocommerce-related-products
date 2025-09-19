@@ -40,21 +40,22 @@
 		</div>
 		
 		<?php
-		/* Exclusive Go Pro section - temporarily disabled
+		/*
+		Exclusive Go Pro section - temporarily disabled
 		<div class="wt_rp_exclusive_gopro">
 			<div class="wt_rp_exclusive_gopro_content">
 				<h3><?php _e( 'Exclusive for <span class="exclusive_txt">you!<span>', 'wt-woocommerce-related-products' ); ?></h3>
 				<img class="wt_rp_30_discount_img"src="<?php echo esc_url( $wt_rp_admin_gopro_img_path . '/30-discount.svg' ); ?>" height="78px" width="87px">
 				<p class="wt_rp_exclusive_gopro_txt">
-					<?php 
+					<?php
 					echo wp_kses(
 						__( 'Our free plugins are getting all of the premium promotion plugins at <b>30% off</b>.', 'wt-woocommerce-related-products' ),
 						array( 'b' => array() )
-					); 
+					);
 					?>
 				</p>
 				<div class="wt_rp_copy_content">
-					<a href="#" style="background: #007FFF; border-radius: 5px;"><img src="<?php echo esc_url( $wt_rp_admin_gopro_img_path . '/promo-code.svg' ); ?>" style="height: 35px; margin-top: 8px;"><a>            
+					<a href="#" style="background: #007FFF; border-radius: 5px;"><img src="<?php echo esc_url( $wt_rp_admin_gopro_img_path . '/promo-code.svg' ); ?>" style="height: 35px; margin-top: 8px;"><a>
 					<p><?php esc_html_e( 'Use code at checkout', 'wt-woocommerce-related-products' ); ?></p>
 					<p class="wt_rp_copied"><?php esc_html_e( 'Copied!', 'wt-woocommerce-related-products' ); ?></p>
 				</div>
@@ -95,17 +96,17 @@
 		<div class="wt_rp_marketing_automation">
 			<div class="wt_rp_marketing_automation_content">
 				<span style="background-color:#FFD159 ; color: #515151; padding: 4px 8px; border-radius: 70px; font-size: 12px; font-weight: 700; display: inline-block; margin-bottom: 10px;">Special introductory offer</span>
-				<h3><?php _e( 'WebToffee <span class="exclusive_txt">Woocommerce Marketing Automation</span> App', 'wt-woocommerce-related-products' ); ?></h3>
+				<h3><?php echo wp_kses_post(__( 'WebToffee <span class="exclusive_txt">Woocommerce Marketing Automation</span> App', 'wt-woocommerce-related-products' )); ?></h3>
 				<p class="wt_rp_marketing_automation_txt">
-					<?php 
+					<?php
 					echo wp_kses(
 						__( 'Automate your marketing emails, and create dynamic popups, and powerful promotion campaigns on your WooCommerce store.', 'wt-woocommerce-related-products' ),
 						array( 'b' => array() )
-					); 
+					);
 					?>
 				</p>
 				<div class="wt_rp_marketing_automation_cta">
-					<a href="https://www.webtoffee.com/ecommerce-marketing-automation/?utm_source=free_plugin_sidebar&utm_medium=related_free_plugin&utm_campaign=EMA" target="_blank" class="wt_rp_signup_btn"><?php esc_html_e('Sign up for free', 'wt-woocommerce-related-products'); ?></a>            
+					<a href="https://www.webtoffee.com/ecommerce-marketing-automation/?utm_source=free_plugin_sidebar&utm_medium=related_free_plugin&utm_campaign=EMA" target="_blank" class="wt_rp_signup_btn"><?php esc_html_e( 'Sign up for free', 'wt-woocommerce-related-products' ); ?></a>            
 					<p style="margin: 0px; padding-top: 10px;"><?php esc_html_e( '*Offer valid only for a limited time.', 'wt-woocommerce-related-products' ); ?></p>
 				</div>
 			</div>

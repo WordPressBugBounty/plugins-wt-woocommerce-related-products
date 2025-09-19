@@ -21,17 +21,16 @@ class Custom_Related_Products {
 	protected $VERSION;
 	protected $plugin_base_name;
 
-	const VERSION = '1.7.3';
+	const VERSION = '1.7.4';
 
 	public function __construct() {
 
 		$this->plugin_name		 = 'wt-woocommerce-related-products';
 		$this->plugin_base_name	 = WT_CRP_BASE_NAME;
 
-		$this->VERSION = '1.7.3';
+		$this->VERSION = '1.7.4';
 
 		$this->load_dependencies();
-		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
 		add_shortcode( 'wt-related-products', array( $this, 'render_wt_related_products' ) );
@@ -47,7 +46,6 @@ class Custom_Related_Products {
 	 * Include the following files that make up the plugin:
 	 *
 	 * - Custom_Related_Products_Loader. Orchestrates the hooks of the plugin.
-	 * - Custom_Related_Products_i18n. Defines internationalization functionality.
 	 * - Custom_Related_Products_Admin. Defines all hooks for the admin area.
 	 * - Custom_Related_Products_Public. Defines all hooks for the public side of the site.
 	 *
@@ -66,12 +64,6 @@ class Custom_Related_Products {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-custom-related-products-loader.php';
 
 		/**
-		 * The class responsible for defining internationalization functionality
-		 * of the plugin.
-		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-custom-related-products-i18n.php';
-
-		/**
 		 * The class responsible for the review banner in customer site 
 		 * of the plugin.
 		 */
@@ -84,11 +76,9 @@ class Custom_Related_Products {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-custom-related-products-survey-request.php';
 
 		/**
-		 * Includes the CTA banners for smart coupon, Pdf invoice and product import export for woocommerce
+		 * Includes cross promotion banner main class file.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/modules/banner/class-wt-p-iew-cta-banner.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/modules/banner/class-wt-pklist-cta-banner.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/modules/banner/class-wt-smart-coupon-cta-banner.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/cross-promotion-banners/class-wbte-cross-promotion-banners.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
@@ -102,22 +92,6 @@ class Custom_Related_Products {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-custom-related-products-public.php';
 		
 		$this->loader = new Custom_Related_Products_Loader();
-	}
-
-	/**
-	 * Define the locale for this plugin for internationalization.
-	 *
-	 * Uses the Custom_Related_Products_i18n class in order to set the domain and to register the hook
-	 * with WordPress.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 */
-	private function set_locale() {
-
-		$plugin_i18n = new Custom_Related_Products_i18n();
-
-		$this->loader->add_action( 'init', $plugin_i18n, 'load_plugin_textdomain' );
 	}
 
 	/**
@@ -289,14 +263,17 @@ class Custom_Related_Products {
 		return array(
 			'price' => array(
 				'orderby' => 'meta_value_num',
+				//phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- Its necessary for the plugin to work.
 				'meta_key' => '_price'
 			),
 			'popularity' => array(
 				'orderby' => 'meta_value_num',
+				//phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- Its necessary for the plugin to work.
 				'meta_key' => 'total_sales'
 			),
 			'rating' => array(
 				'orderby' => 'meta_value_num',
+				//phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- Its necessary for the plugin to work.
 				'meta_key' => '_wc_average_rating'
 			),
 		);
@@ -317,8 +294,8 @@ class Custom_Related_Products {
                 $tab_view_default = isset($crp_view_port[4]) && !empty($crp_view_port[4]) ?  $crp_view_port[4] : 2;
                 $mobile_view_default = isset($crp_view_port[5]) && !empty($crp_view_port[5]) ?  $crp_view_port[5] : 1;
 
-				$user_agent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
-				$http_accept = isset($_SERVER['HTTP_ACCEPT']) ? $_SERVER['HTTP_ACCEPT'] : '';
+				$user_agent = isset($_SERVER['HTTP_USER_AGENT']) ? sanitize_text_field(wp_unslash($_SERVER['HTTP_USER_AGENT'])) : '';
+				$http_accept = isset($_SERVER['HTTP_ACCEPT']) ? sanitize_text_field(wp_unslash($_SERVER['HTTP_ACCEPT'])) : '';
 
                 $slider_count = 3;
 		
@@ -356,7 +333,7 @@ class Custom_Related_Products {
                 if (strpos(strtolower($user_agent),'opera mini') > 0) {
                     $mobile_browser++;
                     //Check for tablets on opera mini alternative headers
-                    $stock_ua = strtolower(isset($_SERVER['HTTP_X_OPERAMINI_PHONE_UA'])?$_SERVER['HTTP_X_OPERAMINI_PHONE_UA']:(isset($_SERVER['HTTP_DEVICE_STOCK_UA'])?$_SERVER['HTTP_DEVICE_STOCK_UA']:''));
+                    $stock_ua = strtolower(isset($_SERVER['HTTP_X_OPERAMINI_PHONE_UA'])?sanitize_text_field(wp_unslash($_SERVER['HTTP_X_OPERAMINI_PHONE_UA'])):(isset($_SERVER['HTTP_DEVICE_STOCK_UA'])?sanitize_text_field(wp_unslash($_SERVER['HTTP_DEVICE_STOCK_UA'])):''));
                     if (preg_match('/(tablet|ipad|playbook)|(android(?!.*mobile))/i', $stock_ua)) {
                       $tablet_browser++;
                     }

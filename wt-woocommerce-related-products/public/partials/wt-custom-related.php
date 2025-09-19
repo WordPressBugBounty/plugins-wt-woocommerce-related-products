@@ -43,9 +43,9 @@ if (isset($args['attributes']['aria-label'])) {
     $get_price_html = '<span class="amount wt-amount" style="text-decoration: none !important;">' . $price . '</span>';
     ?>
     <div <?php wc_product_class( '', $product ); ?> class="wt-crp-wrapper">
-        <a href="<?php echo get_permalink($id); ?>" style="color: unset">
+        <a href="<?php echo esc_url(get_permalink($id)); ?>" style="color: unset">
             <div class="wt-crp-container">
-                <!--<span class="wt-crp-position"><?php echo $loop ?></span>-->
+                <!--<span class="wt-crp-position"><?php echo esc_html($loop); ?></span>-->
                 <?php
                 $thumb_id = get_post_thumbnail_id($id);
                 $thumb_id = !empty($thumb_id) ? $thumb_id : get_option('woocommerce_placeholder_image');
@@ -54,7 +54,7 @@ if (isset($args['attributes']['aria-label'])) {
 
                     <div class="wt-crp-thumb-wrapper">
                         <?php
-                        $image_title = esc_attr(get_the_title($thumb_id));
+                        $image_title = get_the_title($thumb_id);
                         $image_caption = get_post($thumb_id)->post_excerpt;
                         $image_link = wp_get_attachment_url($thumb_id);
                         $image = get_the_post_thumbnail($id, 'shop_catalog');
@@ -62,17 +62,17 @@ if (isset($args['attributes']['aria-label'])) {
 
                         $image_link = !empty($resized_link) ? $resized_link[0] : $image_link;
 
-                        echo "<img src='{$image_link}' title='{$image_title}' alt='{$image_title}' />";
+                        echo '<img src="'.esc_url($image_link).'" title="'.esc_attr($image_title).'" alt="'.esc_attr($image_title).'" />';
                         ?>
                     </div>
                 <?php endif; ?>
                 <div class="wt-crp-content-wrapper">
-                    <p class=" woocommerce-loop-product__title wt-crp-product-title"><?php echo $bestseller_product->get_title(); ?></p>
-                    <span class="wt_price"> <?php echo $get_price_html; ?></span>
+                    <p class=" woocommerce-loop-product__title wt-crp-product-title"><?php echo esc_html($bestseller_product->get_title()); ?></p>
+                    <span class="wt_price"> <?php echo wp_kses_post($get_price_html); ?></span>
                     <div class="wt_cart_button">
 
                         <?php
-                        echo apply_filters(
+                        echo wp_kses_post(apply_filters(
                                 'woocommerce_loop_add_to_cart_link', // WPCS: XSS ok.
                                 sprintf(
                                         '<a href="%s" data-quantity="%s" class="%s" %s>%s</a>',
@@ -83,7 +83,7 @@ if (isset($args['attributes']['aria-label'])) {
                                         esc_html($product->add_to_cart_text())
                                 ),
                                 $product,
-                        );
+                        ));
                         ?>
                     </div>
 
