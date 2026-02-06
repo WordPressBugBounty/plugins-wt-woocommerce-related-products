@@ -185,34 +185,33 @@ $wt_rp_admin_img_path = CRP_PLUGIN_URL . 'admin/img/other_solutions';
 	</div>
 
 
-	<div class="wt_rp_also_need_plugin_row" > 
+	<div class="wt_rp_also_need_plugin_row"> 
 		<div class="wt_rp_also_need_plugin_content" >
 			<div class="wt_rp_also_need_plugin_title_wrapper">
-				<img src="<?php echo esc_url( $wt_rp_admin_img_path . '/product-recommendation-plugin.svg' ); ?>">
-				<h3><?php esc_html_e( 'WooCommerce Product Recommendations', 'wt-woocommerce-related-products' ); ?></h3>
+				<img src="<?php echo esc_url( $wt_rp_admin_img_path . '/gift-card-plugin.svg' ); ?>">
+				<h3><?php esc_html_e( 'Gift Card Plugin', 'wt-woocommerce-related-products' ); ?></h3>
 			</div>
-			<p style="font-size: 14px;"><?php esc_html_e( 'Automate tailored product suggestions for better conversions.', 'wt-woocommerce-related-products' ); ?></p>
+			<p style="font-size: 14px;"><?php esc_html_e( 'Create and sell customizable gift cards for any occasion.', 'wt-woocommerce-related-products' ); ?></p>
 			<div class="wt_rp_also_need_plugin_content_wrapper">
 				<div class="wt_rp_also_need_plugin_content_left">
 					<ul>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Automatic product recommendations', 'wt-woocommerce-related-products' ); ?></span></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Generate suggestions using filters', 'wt-woocommerce-related-products' ); ?></span></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Place recommendations on relevant pages', 'wt-woocommerce-related-products' ); ?></span></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Sort products by price, popularity, rating, etc.', 'wt-woocommerce-related-products' ); ?></span></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Display recommendations in a grid or a slider', 'wt-woocommerce-related-products' ); ?></span></li>
+						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Create and sell unlimited gift cards', 'wt-woocommerce-related-products' ); ?></span></li>
+						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Allow customers to buy, redeem, and share', 'wt-woocommerce-related-products' ); ?></span></li>
+						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Schedule gift card delivery', 'wt-woocommerce-related-products' ); ?></span></li>
+						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Sell physical gift cards ', 'wt-woocommerce-related-products' ); ?></span></li>
+						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Provide instant refunds to store credits', 'wt-woocommerce-related-products' ); ?></span></li>
 					</ul>
 				</div>
 				<div class="wt_rp_also_need_plugin_content_right">
 					<ul>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Hide out-of-stock products from suggestions', 'wt-woocommerce-related-products' ); ?></span></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Multiple product type support', 'wt-woocommerce-related-products' ); ?></span></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Built-in recommendations template', 'wt-woocommerce-related-products' ); ?></span></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Create custom recommendations', 'wt-woocommerce-related-products' ); ?></span></li>
+						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Set predefined or custom gift card amounts', 'wt-woocommerce-related-products' ); ?></span></li>
+						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Manage user credit balances from a single dashboard', 'wt-woocommerce-related-products' ); ?></span></li>
+						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Set usage restrictions for gift card coupons', 'wt-woocommerce-related-products' ); ?></span></li>
 					</ul>
 				</div>
 			</div>
 			
-			<a href="https://www.webtoffee.com/product/woocommerce-product-recommendations/?utm_source=free_plugin_addon&utm_medium=related_products&utm_campaign=Product_Recommendations" target="_blank" class="wt_rp_visit_plugin_btn" style="margin-left: 0px;"><?php esc_html_e( 'Visit plugin page', 'wt-woocommerce-related-products' ); ?> <span class="dashicons dashicons-arrow-right-alt"></span></a>
+			<a href="https://www.webtoffee.com/product/woocommerce-gift-cards/?utm_source=free_plugin_addon&utm_medium=related_products&utm_campaign=WooCommerce_Gift_Cards" target="_blank" class="wt_rp_visit_plugin_btn" style="margin-left: 0px;"><?php esc_html_e( 'Visit plugin page', 'wt-woocommerce-related-products' ); ?> <span class="dashicons dashicons-arrow-right-alt"></span></a>
 		</div>
 		<div class="wt_rp_also_need_plugin_img" style="border-radius: 50px 10px 10px 0; position: relative;">
 			<img src="<?php echo esc_url( $wt_rp_admin_img_path . '/product-recommendations.png' ); ?>" width="501px"; height="429px"; style="position: absolute; left: 20px">
@@ -284,30 +283,31 @@ $wt_rp_admin_img_path = CRP_PLUGIN_URL . 'admin/img/other_solutions';
 	<div class="wt_rp_also_need_plugin_row" style="margin-top: 30px;"> 
 		<div class="wt_rp_also_need_plugin_content" >
 			<div class="wt_rp_also_need_plugin_title_wrapper">
-				<img src="<?php echo esc_url( $wt_rp_admin_img_path . '/gift-card-plugin.svg' ); ?>">
-				<h3><?php esc_html_e( 'Gift Card Plugin', 'wt-woocommerce-related-products' ); ?></h3>
+				<img src="<?php echo esc_url( $wt_rp_admin_img_path . '/product-recommendation-plugin.svg' ); ?>">
+				<h3><?php esc_html_e( 'WooCommerce Product Recommendations', 'wt-woocommerce-related-products' ); ?></h3>
 			</div>
-			<p style="font-size: 14px;"><?php esc_html_e( 'Create and sell customizable gift cards for any occasion.', 'wt-woocommerce-related-products' ); ?></p>
+			<p style="font-size: 14px;"><?php esc_html_e( 'Automate tailored product suggestions for better conversions.', 'wt-woocommerce-related-products' ); ?></p>
 			<div class="wt_rp_also_need_plugin_content_wrapper">
 				<div class="wt_rp_also_need_plugin_content_left">
 					<ul>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Create and sell unlimited gift cards', 'wt-woocommerce-related-products' ); ?></span></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Allow customers to buy, redeem, and share', 'wt-woocommerce-related-products' ); ?></span></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Schedule gift card delivery', 'wt-woocommerce-related-products' ); ?></span></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Sell physical gift cards ', 'wt-woocommerce-related-products' ); ?></span></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Provide instant refunds to store credits', 'wt-woocommerce-related-products' ); ?></span></li>
+						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Automatic product recommendations', 'wt-woocommerce-related-products' ); ?></span></li>
+						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Generate suggestions using filters', 'wt-woocommerce-related-products' ); ?></span></li>
+						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Place recommendations on relevant pages', 'wt-woocommerce-related-products' ); ?></span></li>
+						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Sort products by price, popularity, rating, etc.', 'wt-woocommerce-related-products' ); ?></span></li>
+						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Display recommendations in a grid or a slider', 'wt-woocommerce-related-products' ); ?></span></li>
 					</ul>
 				</div>
 				<div class="wt_rp_also_need_plugin_content_right">
 					<ul>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Set predefined or custom gift card amounts', 'wt-woocommerce-related-products' ); ?></span></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Manage user credit balances from a single dashboard', 'wt-woocommerce-related-products' ); ?></span></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Set usage restrictions for gift card coupons', 'wt-woocommerce-related-products' ); ?></span></li>
+						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Hide out-of-stock products from suggestions', 'wt-woocommerce-related-products' ); ?></span></li>
+						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Multiple product type support', 'wt-woocommerce-related-products' ); ?></span></li>
+						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Built-in recommendations template', 'wt-woocommerce-related-products' ); ?></span></li>
+						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Create custom recommendations', 'wt-woocommerce-related-products' ); ?></span></li>
 					</ul>
 				</div>
 			</div>
 			
-			<a href="https://www.webtoffee.com/product/woocommerce-gift-cards/?utm_source=free_plugin_addon&utm_medium=related_products&utm_campaign=WooCommerce_Gift_Cards" target="_blank" class="wt_rp_visit_plugin_btn" style="margin-left: 0px;"><?php esc_html_e( 'Visit plugin page', 'wt-woocommerce-related-products' ); ?> <span class="dashicons dashicons-arrow-right-alt"></span></a>
+			<a href="https://www.webtoffee.com/product/woocommerce-product-recommendations/?utm_source=free_plugin_addon&utm_medium=related_products&utm_campaign=Product_Recommendations" target="_blank" class="wt_rp_visit_plugin_btn" style="margin-left: 0px;"><?php esc_html_e( 'Visit plugin page', 'wt-woocommerce-related-products' ); ?> <span class="dashicons dashicons-arrow-right-alt"></span></a>
 		</div>
 		<div class="wt_rp_also_need_plugin_img" style="border-radius: 50px 10px 10px 0; position: relative;">
 			<img src="<?php echo esc_url( $wt_rp_admin_img_path . '/product-recommendations.png' ); ?>" width="501px"; height="429px"; style="position: absolute; left: 20px">

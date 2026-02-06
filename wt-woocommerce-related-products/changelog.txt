@@ -1,6 +1,10 @@
-= 1.7.4 2025-09-19 =
-* [Compatibility] – Tested OK with WooCommerce 10.1.2
-* [Update] – Plugin Check Plugin fixes.
+= 1.7.6 04-12-2025 =
+* [Compatibility] - Tested OK with WordPress 6.9
+
+= 1.7.5 05-11-2025 =
+* [Compatibility] – Tested OK with WooCommerce 10.3
+* [Compatibility] - Tested OK with WordPress 6.8.3
+* [Fix] – Improved compatibility by updating internal data handling in import module.
 
 = 1.7.3 17-7-2025 =
 * [Enhancement]   - Tags recommended products selection

@@ -21,14 +21,14 @@ class Custom_Related_Products {
 	protected $VERSION;
 	protected $plugin_base_name;
 
-	const VERSION = '1.7.4';
+	const VERSION = '1.7.6';
 
 	public function __construct() {
 
 		$this->plugin_name		 = 'wt-woocommerce-related-products';
 		$this->plugin_base_name	 = WT_CRP_BASE_NAME;
 
-		$this->VERSION = '1.7.4';
+		$this->VERSION = '1.7.6';
 
 		$this->load_dependencies();
 		$this->define_admin_hooks();
@@ -76,21 +76,41 @@ class Custom_Related_Products {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-custom-related-products-survey-request.php';
 
 		/**
-		 * Includes cross promotion banner main class file.
-		 */
-		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/cross-promotion-banners/class-wbte-cross-promotion-banners.php';
-
-		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-custom-related-products-admin.php';
+
+		/**
+		 * Includes cross promotion banner main class file.
+		 */
+		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/cross-promotion-banners/class-wbte-cross-promotion-banners.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-custom-related-products-public.php';
+
+		/**
+		 * 
+		 *  @since 1.7.5
+		 *  Add upsell banner in settings page
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/modules/banners/class-wt-crp-upsell-banner.php';
 		
+		/**
+		 * @since 1.7.5
+		 * Includes the Black Friday and Cyber Monday CTA banners for 2025
+		 */
+		require_once plugin_dir_path( __DIR__ ) . 'admin/modules/banners/class-wt-bfcm-twenty-twenty-five.php';
+
+		/**
+		 * EMA promotion banner added in Analytics page
+		 * 
+		 * @since 1.7.6
+		 */
+		require_once plugin_dir_path( __DIR__ ) . 'admin/modules/banners/class-wbte-ema-banner.php';
+
 		$this->loader = new Custom_Related_Products_Loader();
 	}
 
@@ -119,6 +139,12 @@ class Custom_Related_Products {
 		$this->loader->add_filter( 'plugin_action_links_' . $this->get_plugin_base_name(), $plugin_admin, 'add_crp_action_links' );
 		$this->loader->add_filter( 'plugin_row_meta', $plugin_admin, 'add_crp_plugin_row_meta', 10, 2);
 		$this->loader->add_filter( 'woocommerce_screen_ids', $plugin_admin, 'set_wc_screen_ids', 10, 1);
+		/**
+		 *  Set screens to show promotional banner
+		 *
+		 *  @since 1.7.5
+		 */
+		$this->loader->add_filter( 'wt_bfcm_banner_screens', $plugin_admin, 'wt_bfcm_banner_screens' );
 		$plugin_admin->admin_modules();
 	}
 

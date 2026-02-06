@@ -536,6 +536,19 @@ class Custom_Related_Products_Admin {
 				'class'     => 'crp-tr-field mode-default-disallow wt-slider-mode',
 			),
 		);
+		/*
+		*  @since 1.7.5
+		*/
+		$crp_upsell_banner = ( class_exists('Wbte_Crp_Upsell_Banner') ) ? Wbte_Crp_Upsell_Banner::get_instance() : ''; 
+		if( ! empty($crp_upsell_banner) && ! $crp_upsell_banner->is_banner_dismissed() ){
+			add_settings_field(
+				$this->option_name . '_crp_upsell_banner',
+				'',
+				array( $this, $this->option_name . '_crp_upsell_banner' ),
+				$this->plugin_name,
+				$this->option_name . '_general',
+			);
+		}
 		add_settings_section(
 			$this->option_name . '_widget_settings',
 			'',
@@ -1714,4 +1727,51 @@ class Custom_Related_Products_Admin {
 		$screen[] = 'woocommerce_page_wt-woocommerce-related-products';
 		return $screen;
 	}
+
+	/**
+	 * Add upsell banner
+	 *
+	 * @since 1.7.5
+	 */
+	public function custom_related_products_crp_upsell_banner() {
+
+		/**
+		 * @var mixed
+		 * 
+		 * Display upsell banner
+		 */
+		$crp_upsell_banner = Wbte_Crp_Upsell_Banner::get_instance(); 
+		$crp_upsell_banner->pro_banner_content(); 
+	}
+
+	/**
+	 *  Screens to show Black Friday and Cyber Monday Banner.
+	 *
+	 *  @since 1.7.5
+	 *  @param array $screen_ids Array of screen ids.
+	 *  @return array            Array of screen ids.
+	 */
+	public function wt_bfcm_banner_screens( $screen_ids ) {
+		$screen_ids[] = 'woocommerce_page_wt-woocommerce-related-products';
+		return $screen_ids;
+	}
+
+	/**
+	 * To Check if the current date is on or between the start and end date of black friday and cyber monday banner for 2024.
+	 *
+	 * @since 1.7.5
+	 */
+	public static function is_bfcm_season() {
+
+		$start_date   = new DateTime( '17-NOV-2025, 12:00 AM', new DateTimeZone( 'Asia/Kolkata' ) ); // Start date.
+		$current_date = new DateTime( 'now', new DateTimeZone( 'Asia/Kolkata' ) ); // Current date.
+		$end_date     = new DateTime( '04-DEC-2025, 11:59 PM', new DateTimeZone( 'Asia/Kolkata' ) ); // End date.
+
+		// Check if the date is on or between the start and end date of black friday and cyber monday banner for 2025.
+		if ( $current_date < $start_date || $current_date > $end_date ) {
+			return false;
+		}
+		return true;
+	}
+
 }

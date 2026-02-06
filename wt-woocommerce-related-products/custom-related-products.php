@@ -4,7 +4,7 @@
  * Plugin Name:       Related Products - Create Upsells, Cross-sells, and Product Recommendations for WooCommerce
  * Plugin URI:        https://wordpress.org/plugins/wt-woocommerce-related-products/
  * Description:       Displays custom related products based on category, tag, attribute or product for your WooCommerce store.
- * Version:           1.7.4
+ * Version:           1.7.6
  * Author:            WebToffee
  * Author URI:        https://www.webtoffee.com/
  * License:           GPLv3
@@ -38,7 +38,7 @@ if ( ! defined( 'WT_CRP_BASE_NAME' ) ) {
 
 if ( ! defined( 'WT_CRP_CROSS_PROMO_BANNER_VERSION' ) ) {
     // This constant must be unique for each plugin. Update this value when updating to a new banner.
-    define ( 'WT_CRP_CROSS_PROMO_BANNER_VERSION', '1.0.0' );
+    define ( 'WT_CRP_CROSS_PROMO_BANNER_VERSION', '1.0.1' );
 }
 
 /**
@@ -46,7 +46,7 @@ if ( ! defined( 'WT_CRP_CROSS_PROMO_BANNER_VERSION' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'WT_RELATED_PRODUCTS_VERSION', '1.7.4' );
+define( 'WT_RELATED_PRODUCTS_VERSION', '1.7.6' );
 
 /**
  *  @since 1.6.0

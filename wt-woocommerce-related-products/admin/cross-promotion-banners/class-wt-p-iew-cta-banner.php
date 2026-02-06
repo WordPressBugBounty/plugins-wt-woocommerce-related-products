@@ -3,6 +3,8 @@
  * Class Wt_P_IEW_Cta_Banner
  *
  * This class is responsible for displaying the CTA banner on the product edit page.
+ * 
+ * @package    Custom_Related_Products
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -13,11 +15,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'Wt_P_IEW_Cta_Banner' ) ) {
 	class Wt_P_IEW_Cta_Banner {
 		/**
+		 * Is BFCM season.
+		 * @var bool
+		 */
+		private static $is_bfcm_season = false;
+
+		/**
 		 * Constructor.
 		 */
 		public function __construct() {
 			// Check if premium plugin is active
 			if ( ! in_array( 'wt-import-export-for-woo-product/wt-import-export-for-woo-product.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+				self::$is_bfcm_season = method_exists( 'Custom_Related_Products_Admin', 'is_bfcm_season' ) && Custom_Related_Products_Admin::is_bfcm_season();
 				add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 				add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
 				add_action( 'wp_ajax_wt_dismiss_product_ie_cta_banner', array( $this, 'dismiss_banner' ) );
@@ -78,7 +87,7 @@ if ( ! class_exists( 'Wt_P_IEW_Cta_Banner' ) ) {
 			if ( ! defined( 'WT_PRODUCT_IMPORT_EXPORT_DISPLAY_BANNER' ) && $total_products >= 50 ) {
 				add_meta_box(
 					'wt_product_import_export_pro',
-					'Product Import Export Pro',
+					self::$is_bfcm_season ? ' ' : __( 'Product Import Export for WooCommerce', 'wt-woocommerce-related-products' ),
 					array( $this, 'render_banner' ),
 					'product',
 					'side',
@@ -103,12 +112,34 @@ if ( ! class_exists( 'Wt_P_IEW_Cta_Banner' ) ) {
 				return;
 			}
 			?>
+			<style type="text/css">
+				<?php
+				if ( self::$is_bfcm_season ) {
+					?>
+					#wt_product_import_export_pro .postbox-header{  height: 66px; background: url( <?php echo esc_url( CRP_PLUGIN_URL . 'admin/img/wtcrp-bfcm-doc-settings-coupon.svg' ); ?> ) no-repeat 18px 0 #FFFBD5; }
+					.wbte-cta-banner-features_head_div{ height: 80px; border-bottom: 1px solid #c3c4c7; display: flex; align-items: center; padding-left: 15px; justify-content: center; }
+					.wbte-cta-banner-features_head_div img{ width: 50px; }
+					.wbte-cta-banner-features_head_div h2{ font-weight: 600 !important; font-size: 13px !important; }
+					<?php
+				} else {
+					echo '#wt_product_import_export_pro .postbox-header{  height:80px; background:url(' . esc_url( $wt_admin_img_path . '/product-ie.svg' ) . ') no-repeat 18px 18px #fff; padding-left:65px; margin-bottom:18px; background-size: 45px 45px; }';
+				}
+				?>
+			</style>
+
 			<div class="wt-cta-banner">
 				<div class="wt-cta-content">
-					<div class="wt-cta-header">
-						<img src="<?php echo esc_url( $wt_admin_img_path . '/product-ie.svg' ); ?>" alt="<?php esc_html_e( 'Product Import Export', 'wt-woocommerce-related-products' ); ?>" class="wt-cta-icon">
-						<h3><?php esc_html_e( 'Product Import Export for WooCommerce', 'wt-woocommerce-related-products' ); ?></h3>
-					</div>
+
+					<?php
+					if ( self::$is_bfcm_season ) {
+						?>
+						<div class="wbte-cta-banner-features_head_div">
+							<img src=" <?php echo esc_url( $wt_admin_img_path . '/product-ie.svg' ); ?>" alt="<?php esc_attr_e( 'upgrade box icon', 'wt-woocommerce-related-products' ); ?>">
+							<h2><?php esc_html_e( 'Product Import Export for WooCommerce', 'wt-woocommerce-related-products' ); ?></h2>
+						</div>
+						<?php
+					}
+					?>
 
 					<ul class="wt-cta-features">
 						<li><?php esc_html_e( 'Import, export, or update WooCommerce products', 'wt-woocommerce-related-products' ); ?></li>

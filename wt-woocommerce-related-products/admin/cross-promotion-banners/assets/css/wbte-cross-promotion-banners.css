@@ -35,7 +35,7 @@
 
 .wt-cta-features {
 	margin: 0;
-	padding: 0 12px;
+	padding: 12px 12px 0 12px;
 	list-style: none;
 }
 
@@ -134,24 +134,6 @@
 	display: none;
 }
 
-#wt_product_import_export_pro h2.hndle,
-#wt_coupon_import_export_pro h2.hndle,
-#wt_pdf_invoice_pro h2.hndle {
-	display: none !important;
-}
-
-#wt_product_import_export_pro .handlediv,
-#wt_coupon_import_export_pro .handlediv,
-#wt_pdf_invoice_pro .handlediv {
-	display: none !important;
-}
-
-/* Only hide postbox header for specific banner meta boxes, not all */
-#wt_product_import_export_pro .postbox-header,
-#wt_coupon_import_export_pro .postbox-header,
-#wt_pdf_invoice_pro .postbox-header {
-	display: none !important;
-}
 
 .wt-cta-footer-links {
 	display: flex;
@@ -196,3 +178,6 @@
 	box-shadow: none ;
 	background: transparent ;
 }
+
+#wt_coupon_import_export_pro .postbox-header h2, #wt_pdf_invoice_pro .postbox-header h2, #wt_product_import_export_pro .postbox-header h2{ color: #000; font-size: 13px; font-weight: 600; }
+#wt_coupon_import_export_pro .postbox-header .handle-actions, #wt_pdf_invoice_pro .postbox-header .handle-actions, #wt_product_import_export_pro .postbox-header .handle-actions{ display: none; }

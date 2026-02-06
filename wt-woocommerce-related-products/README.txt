@@ -1,12 +1,12 @@
 === Related Products - Create Upsells, Cross-sells, and Product Recommendations for WooCommerce ===
 Contributors: webtoffee
-Version: 1.7.4
+Version: 1.7.6
 Donate link: https://www.webtoffee.com/product/woocommerce-product-recommendations/
 Tags: related products, product recommendations, woocommerce related products, woocommerce product recommendations, woocommerce recommendations
 Requires at least: 3.0.1
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 5.6
-Stable tag: 1.7.4
+Stable tag: 1.7.6
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -38,7 +38,7 @@ You can also make use of the related product's functionality in your WooCommerce
 * Import related products using the default WooCommerce importer<a rel="nofollow" href="https://www.webtoffee.com/how-to-import-related-products-using-woocommerce-importer/"> Learn more </a>
 
 
-&#9989; Tested OK with WooCommerce 10.0.2
+&#9989; Tested OK with WooCommerce 10.3
 
 == Related Products for WooCommerce Product Recommendations- Installation and Setup ==
 
@@ -181,15 +181,14 @@ You can display cross-sell product recommendations by adding cross-sells to indi
 
 == Changelog ==
 
-= 1.7.4 2025-09-19 =
-* [Compatibility] – Tested OK with WooCommerce 10.1.2
-* [Update] – Plugin Check Plugin fixes.
+= 1.7.6 04-12-2025 =
+* [Compatibility] - Tested OK with WordPress 6.9
+
 
 [See changelog for all versions](https://plugins.svn.wordpress.org/wt-woocommerce-related-products/trunk/changelog.txt)
 
 
 == Upgrade Notice ==
 
-= 1.7.4 2025-09-19 =
-* [Compatibility] – Tested OK with WooCommerce 10.1.2
-* [Update] – Plugin Check Plugin fixes.
+= 1.7.6 04-12-2025 =
+* [Compatibility] - Tested OK with WordPress 6.9

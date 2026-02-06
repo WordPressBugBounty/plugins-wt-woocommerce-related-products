@@ -179,7 +179,7 @@ class Custom_Related_Product_Import_Export {
 					}
 
 					$en_value                            = wp_json_encode( $custom_meta, JSON_NUMERIC_CHECK );
-					$custom_meta_data                    = wp_json_decode( $en_value, true );
+					$custom_meta_data                    = json_decode( $en_value, true );
 					$data['meta_data'][ $mkey ]['value'] = $custom_meta_data;
 				}
 			}
