@@ -13,10 +13,17 @@
  * @see         https://docs.woocommerce.com/document/template-structure/
  * @author      WooThemes
  * @package     WooCommerce/Templates
- * @version     4.9.0
+ * @version     10.3.0
  */
 if (!defined('ABSPATH')) {
 	exit;
+}
+
+// Mirror WC core's lazy-load hint: bump WP's media counter so the related
+// product thumbnails (below the fold) get loading="lazy". function_exists()
+// guards WP < 5.9, where the helper does not exist.
+if ( function_exists( 'wp_increase_content_media_count' ) ) {
+	wp_increase_content_media_count();
 }
 
 

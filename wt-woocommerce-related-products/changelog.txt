@@ -1,3 +1,8 @@
+= 1.7.7 26-05-2026 =
+* [Compatibility] – Tested OK with WooCommerce 10.7
+* [Compatibility] - Tested OK with WordPress 7.0
+* [Improvement]   - Product attribute selection in Linked Products section.
+
 = 1.7.6 04-12-2025 =
 * [Compatibility] - Tested OK with WordPress 6.9
 

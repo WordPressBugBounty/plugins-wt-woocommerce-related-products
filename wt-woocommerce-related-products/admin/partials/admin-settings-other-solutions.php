@@ -1,320 +1,593 @@
 <?php
 /**
- * Other solutions tab in the admin settings.
+ * "You May Also Need" (Other Solutions) admin tab.
  *
  * @package WooCommerce Related Products
- * @since 1.0.0
+ * @since   1.0.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) || exit;
 
+$img_base = esc_url( CRP_PLUGIN_URL . 'admin/img/other_solutions' );
 
-$wt_rp_admin_img_path = CRP_PLUGIN_URL . 'admin/img/other_solutions';
+$categories = array(
+	'ecommerce-promotions' => array(
+		'label'    => __( 'E-commerce Promotions', 'wt-woocommerce-related-products' ),
+		'subtitle' => __( 'Create and run successful promotional campaigns with the best marketing tools for WooCommerce', 'wt-woocommerce-related-products' ),
+		'icon'  => 'sidebar-ecommerce-promotions.svg',
+		'hero'  => null,
+		'plugins' => array(
+			array(
+				'type'     => 'standard',
+				'name'     => __( 'Smart Coupons for WooCommerce', 'wt-woocommerce-related-products' ),
+				'icon'     => 'smart-coupons-plugin.png',
+				'rating'   => '4.9',
+				'features' => array(
+					__( 'Advanced BOGO Coupons', 'wt-woocommerce-related-products' ),
+					__( 'Offer store credits', 'wt-woocommerce-related-products' ),
+					__( 'Create attractive gift cards', 'wt-woocommerce-related-products' ),
+				),
+				'url'      => 'https://www.webtoffee.com/product/smart-coupons-for-woocommerce/?utm_source=other_solution_page&utm_medium=free_plugin&utm_campaign=smart_coupons',
+			),
+			array(
+				'type'     => 'standard',
+				'name'     => __( 'URL Coupons for WooCommerce', 'wt-woocommerce-related-products' ),
+				'icon'     => 'url-coupons-plugin.png',
+				'rating'   => '5.0',
+				'features' => array(
+					__( 'Generate custom coupon URLs', 'wt-woocommerce-related-products' ),
+					__( 'Set up a redirect page', 'wt-woocommerce-related-products' ),
+					__( 'Automatically add products', 'wt-woocommerce-related-products' ),
+				),
+				'url'      => 'https://www.webtoffee.com/product/url-coupons-for-woocommerce/?utm_source=other_solution_page&utm_medium=free_plugin&utm_campaign=URL_Coupons',
+			),
+			array(
+				'type'     => 'standard',
+				'name'     => __( 'WooCommerce Product Recommendations', 'wt-woocommerce-related-products' ),
+				'icon'     => 'product-recommendation-plugin.png',
+				'rating'   => '5.0',
+				'features' => array(
+					__( 'Automatically generate suggestions based on order history', 'wt-woocommerce-related-products' ),
+					__( 'Display recommended products on the product pages', 'wt-woocommerce-related-products' ),
+					__( 'Multiple product recommendation templates', 'wt-woocommerce-related-products' ),
+				),
+				'url'      => 'https://www.webtoffee.com/product/woocommerce-product-recommendations/?utm_source=other_solution_page&utm_medium=free_plugin&utm_campaign=Product_Recommendations',
+			),
+			array(
+				'type'     => 'standard',
+				'name'     => __( 'WooCommerce Coupon Generator', 'wt-woocommerce-related-products' ),
+				'icon'     => 'coupon-generator-plugin.png',
+				'rating'   => '5.0',
+				'features' => array(
+					__( 'Bulk generate WooCommerce coupons', 'wt-woocommerce-related-products' ),
+					__( 'Bulk export WooCommerce coupons to CSV', 'wt-woocommerce-related-products' ),
+					__( 'Add usage restrictions to coupons', 'wt-woocommerce-related-products' ),
+				),
+				'url'      => 'https://www.webtoffee.com/product/woocommerce-coupon-generator/?utm_source=other_solution_page&utm_medium=free_plugin_related_products&utm_campaign=Coupon_Generator',
+			),
+			array(
+				'type'      => 'standard-with-image',
+				'name'      => __( 'WooCommerce Gift Cards', 'wt-woocommerce-related-products' ),
+				'icon'      => 'gift-card-plugin.png',
+				'rating'    => 'stars',
+				'features'  => array(
+					__( 'Create unlimited gift cards', 'wt-woocommerce-related-products' ),
+					__( 'Email gift cards to customers', 'wt-woocommerce-related-products' ),
+					__( 'Provide refunds to store credit', 'wt-woocommerce-related-products' ),
+					__( '20+ predefined gift card templates', 'wt-woocommerce-related-products' ),
+				),
+				'url'       => 'https://www.webtoffee.com/product/woocommerce-gift-cards/?utm_source=other_solution_page&utm_medium=free_plugin&utm_campaign=WooCommerce_Gift_Cards',
+				'image_src' => 'gift-cards-illustration.png',
+			),
+		),
+		'standalone' => array(
+			'name'       => __( 'ECommerce Marketing Automation App', 'wt-woocommerce-related-products' ),
+			'icon'       => 'ema-app-plugin.png',
+			'desc'       => __( 'Create signup forms, popups, and automated email campaigns with pre-built workflow templates to capture leads, recover abandoned carts, and grow sales.', 'wt-woocommerce-related-products' ),
+			'screenshot' => 'ema-screenshot.svg',
+			'url'        => 'https://www.webtoffee.com/product/ecommerce-marketing-automation/?utm_source=other_solution_page&utm_medium=free_plugin_related_products&utm_campaign=EMA',
+		),
+		'bundle' => array(
+			'tag_emoji'    => '📣',
+			'tag_color'    => 'yellow',
+			'tag'          => __( 'Promotion Bundle', 'wt-woocommerce-related-products' ),
+			'title'        => __( 'WooCommerce Promotion Bundle', 'wt-woocommerce-related-products' ),
+			'url'          => 'https://www.webtoffee.com/woocommerce-promotions/?utm_source=other_solution_page&utm_medium=free_plugin_related_products&utm_campaign=Promotion_Bundle',
+			'desc'         => __( 'Make powerful promotional campaigns with our WooCommerce promotion bundle. Create coupon promotions, set up gift cards, and implement popular product recommendation strategies.', 'wt-woocommerce-related-products' ),
+			'pills'        => array(
+				__( 'Smart Coupons', 'wt-woocommerce-related-products' ),
+				__( 'Product recommendation', 'wt-woocommerce-related-products' ),
+				__( 'Gift cards', 'wt-woocommerce-related-products' ),
+			),
+			'price_orig'   => '$277',
+			'price_sale'   => '$194',
+			'savings'      => __( 'Save up to 30% off', 'wt-woocommerce-related-products' ),
+			'illustration' => 'promotion-bundle.png',
+		),
+	),
+	'privacy-compliance' => array(
+		'label'    => __( 'Privacy Compliance', 'wt-woocommerce-related-products' ),
+		'subtitle' => __( 'Ensure compliance with major cookie laws, including, GDPR, CCPA, LGPD, CNIL, and more', 'wt-woocommerce-related-products' ),
+		'icon'  => 'sidebar-privacy-compliance.svg',
+		'hero'  => array(
+			'name'     => __( 'GDPR Cookie Consent Plugin (CCPA Ready)', 'wt-woocommerce-related-products' ),
+			'icon'     => 'gdpr-plugin.png',
+			'rating'   => 'stars',
+			'image'    => 'cookie-consent.svg',
+			'desc'     => __( 'This Google-certified CMP lets you create a customizable cookie banner, manage user consent, and ensure global privacy compliance with automatic script blocking.', 'wt-woocommerce-related-products' ),
+			'features' => array(),
+			'url'      => 'https://www.webtoffee.com/product/gdpr-cookie-consent/?utm_source=other_solution_page&utm_medium=_free_plugin_&utm_campaign=GDPR',
+		),
+		'plugins'    => array(),
+		'standalone' => null,
+		'bundle'     => null,
+	),
+	'data-import-export' => array(
+		'label'    => __( 'Data Import & Export', 'wt-woocommerce-related-products' ),
+		'subtitle' => __( 'The best-in-class import, export, and migration solutions for your WooCommerce data', 'wt-woocommerce-related-products' ),
+		'icon'  => 'sidebar-data-import-export.svg',
+		'hero'  => null,
+		'plugins' => array(
+			array(
+				'type'     => 'standard',
+				'name'     => __( 'Product Import Export Plugin', 'wt-woocommerce-related-products' ),
+				'icon'     => 'product-ie-plugin.png',
+				'rating'   => '4.9',
+				'features' => array(
+					__( 'Supports Excel, XML, CSV and TSV file formats', 'wt-woocommerce-related-products' ),
+					__( 'Schedule automated import and export', 'wt-woocommerce-related-products' ),
+					__( 'Support for multiple product types', 'wt-woocommerce-related-products' ),
+				),
+				'url'      => 'https://www.webtoffee.com/product/product-import-export-woocommerce/?utm_source=other_solution_page&utm_medium=free_plugin&utm_campaign=Product_Import_Export',
+			),
+			array(
+				'type'     => 'standard',
+				'name'     => __( 'Order, Coupon, Subscription Export Import', 'wt-woocommerce-related-products' ),
+				'icon'     => 'order-ie-plugin.png',
+				'rating'   => '4.6',
+				'features' => array(
+					__( 'Supports Excel, XML, CSV and TSV file formats', 'wt-woocommerce-related-products' ),
+					__( 'Schedule automated import and export', 'wt-woocommerce-related-products' ),
+					__( 'Email customers on order status change', 'wt-woocommerce-related-products' ),
+				),
+				'url'      => 'https://www.webtoffee.com/product/order-import-export-plugin-for-woocommerce/?utm_source=other_solution_page&utm_medium=free_plugin&utm_campaign=Order_Import_Export',
+			),
+			array(
+				'type'     => 'standard',
+				'name'     => __( 'User Import Export Plugin', 'wt-woocommerce-related-products' ),
+				'icon'     => 'user-ie-plugin.png',
+				'rating'   => '5.0',
+				'features' => array(
+					__( 'Supports Excel, XML, CSV and TSV file formats', 'wt-woocommerce-related-products' ),
+					__( 'Schedule automated import and export', 'wt-woocommerce-related-products' ),
+					__( 'Customize and send emails to new users on import', 'wt-woocommerce-related-products' ),
+				),
+				'url'      => 'https://www.webtoffee.com/product/wordpress-users-woocommerce-customers-import-export/?utm_source=other_solution_page&utm_medium=free_plugin&utm_campaign=User_Import_Export',
+			),
+			array(
+				'type'     => 'standard',
+				'name'     => __( 'Product Feed & Sync Manager', 'wt-woocommerce-related-products' ),
+				'icon'     => 'product-feed-plugin.png',
+				'rating'   => '5.0',
+				'features' => array(
+					__( 'Generate WooCommerce product feeds for Google Shopping, Facebook Shop, and Instagram Shop', 'wt-woocommerce-related-products' ),
+					__( 'Supports 25+ sales channels and marketplaces', 'wt-woocommerce-related-products' ),
+				),
+				'url'      => 'https://www.webtoffee.com/product/woocommerce-product-feed/?utm_source=other_solution_page&utm_medium=free_plugin_related_products&utm_campaign=WooCommerce_Product_Feed',
+			),
+			array(
+				'type'      => 'standard-with-image',
+				'name'      => __( 'Import Export Suite for WooCommerce', 'wt-woocommerce-related-products' ),
+				'icon'      => 'ie-suite-plugin.png',
+				'rating'    => 'stars',
+				'features'  => array(
+					__( 'Import/export Products, Orders, Subscriptions, Coupons, Customers, WordPress Users, Categories & Tags, Reviews', 'wt-woocommerce-related-products' ),
+					__( 'Supports Excel, XML, CSV and TSV file formats', 'wt-woocommerce-related-products' ),
+				),
+				'url'       => 'https://www.webtoffee.com/product/woocommerce-import-export-suite/?utm_source=other_solution_page&utm_medium=free_plugin&utm_campaign=Import_Export_Suite',
+				'image_src' => 'data-io-illustration.png',
+			),
+		),
+		'standalone' => null,
+		'bundle'     => null,
+	),
+	'accounting-invoicing' => array(
+		'label'    => __( 'Accounting & Invoicing', 'wt-woocommerce-related-products' ),
+		'subtitle' => __( 'Automatically generate professional WooCommerce invoices and documents for all your orders', 'wt-woocommerce-related-products' ),
+		'icon'  => 'sidebar-accounting-invoicing.svg',
+		'hero'  => array(
+			'name'     => __( 'PDF Invoices, Packing Slips, & Credit Notes', 'wt-woocommerce-related-products' ),
+			'icon'     => 'pdf-invoices-plugin.png',
+			'rating'   => 'stars',
+			'image'    => 'pdf-invoices-screenshot.png',
+			'desc'     => __( 'Automatically generate, customize, and manage professional WooCommerce invoices, packing slips, and credit notes with advanced automation and tax compliance features.', 'wt-woocommerce-related-products' ),
+			'features' => array(),
+			'url'      => 'https://www.webtoffee.com/product/woocommerce-pdf-invoices-packing-slips/?utm_source=other_solution_page&utm_medium=free_plugin&utm_campaign=PDF_invoice',
+		),
+		'plugins' => array(
+			array(
+				'type'     => 'standard',
+				'name'     => __( 'Shipping Labels, Dispatch Labels, & Delivery Notes', 'wt-woocommerce-related-products' ),
+				'icon'     => 'shipping-labels-plugin.png',
+				'rating'   => '5.0',
+				'features' => array(
+					__( 'Create delivery notes, shipping & dispatch labels', 'wt-woocommerce-related-products' ),
+					__( 'Enable customers to print the documents from order emails', 'wt-woocommerce-related-products' ),
+					__( 'Customize shipping label size', 'wt-woocommerce-related-products' ),
+				),
+				'url'      => 'https://www.webtoffee.com/product/woocommerce-shipping-labels-delivery-notes/?utm_source=other_solution_page&utm_medium=free_plugin&utm_campaign=Shipping_Label',
+			),
+			array(
+				'type'     => 'standard',
+				'name'     => __( 'WooCommerce Picklists plugin', 'wt-woocommerce-related-products' ),
+				'icon'     => 'picklists-plugin.png',
+				'rating'   => '4.0',
+				'features' => array(
+					__( 'Bulk print picklists from the admin order page', 'wt-woocommerce-related-products' ),
+					__( 'Automatically email picklists based on order status', 'wt-woocommerce-related-products' ),
+					__( 'Create or customize picklist templates', 'wt-woocommerce-related-products' ),
+				),
+				'url'      => 'https://www.webtoffee.com/product/woocommerce-picklist/?utm_source=other_solution_page&utm_medium=free_plugin&utm_campaign=Picklist',
+			),
+			array(
+				'type'     => 'standard',
+				'name'     => __( 'Customizer for WooCommerce PDF Invoices', 'wt-woocommerce-related-products' ),
+				'icon'     => 'pdf-customizer-plugin.png',
+				'rating'   => '5.0',
+				'features' => array(
+					__( 'Drag-and-drop easy customization', 'wt-woocommerce-related-products' ),
+					__( 'Customize individual elements using block editors', 'wt-woocommerce-related-products' ),
+					__( 'Advanced visual and code editor', 'wt-woocommerce-related-products' ),
+				),
+				'url'      => 'https://www.webtoffee.com/product/customizer-for-woocommerce-pdf-invoice/?utm_source=other_solution_page&utm_medium=free_plugin_related_products&utm_campaign=PDF_Customizer',
+			),
+			array(
+				'type'     => 'standard',
+				'name'     => __( 'WooCommerce Address Labels plugin', 'wt-woocommerce-related-products' ),
+				'icon'     => 'address-labels-plugin.png',
+				'rating'   => '5.0',
+				'features' => array(
+					__( 'Generate \'Shipping Address\', \'Billing Address\', \'From Address\', and \'Return Address\' labels', 'wt-woocommerce-related-products' ),
+					__( 'Customize label sizes', 'wt-woocommerce-related-products' ),
+					__( 'Bulk print address labels', 'wt-woocommerce-related-products' ),
+				),
+				'url'      => 'https://www.webtoffee.com/product/woocommerce-address-label/?utm_source=other_solution_page&utm_medium=free_plugin&utm_campaign=Address_Label',
+			),
+			array(
+				'type'     => 'standard',
+				'name'     => __( 'Proforma Invoice', 'wt-woocommerce-related-products' ),
+				'icon'     => 'proforma-invoice-plugin.png',
+				'rating'   => '5.0',
+				'features' => array(
+					__( 'Create proforma invoices automatically', 'wt-woocommerce-related-products' ),
+					__( 'Pre-built proforma invoice layouts', 'wt-woocommerce-related-products' ),
+					__( 'Attach proforma invoice PDF to order emails', 'wt-woocommerce-related-products' ),
+				),
+				'url'      => 'https://www.webtoffee.com/product/woocommerce-proforma-invoice/?utm_source=other_solution_page&utm_medium=free_plugin&utm_campaign=Proforma_Invoice',
+			),
+			array(
+				'type'     => 'standard',
+				'name'     => __( 'QR Code Add-on for WooCommerce PDF Invoices', 'wt-woocommerce-related-products' ),
+				'icon'     => 'qr-code-plugin.png',
+				'rating'   => '5.0',
+				'features' => array(
+					__( 'Assign QR codes to all generated invoices', 'wt-woocommerce-related-products' ),
+					__( 'Create QR code that reads order or invoice number', 'wt-woocommerce-related-products' ),
+					__( 'Add custom data to invoices', 'wt-woocommerce-related-products' ),
+				),
+				'url'      => 'https://www.webtoffee.com/product/qr-code-addon-for-woocommerce-pdf-invoices/?utm_source=other_solution_page&utm_medium=free_plugin_related_products&utm_campaign=QR_Code',
+			),
+			array(
+				'type'     => 'standard',
+				'name'     => __( 'WooCommerce Request a Quote', 'wt-woocommerce-related-products' ),
+				'icon'     => 'request-quote-plugin.png',
+				'rating'   => '5.0',
+				'features' => array(
+					__( 'Add quote button to the product & shop pages', 'wt-woocommerce-related-products' ),
+					__( 'Enable quotation request for selected products', 'wt-woocommerce-related-products' ),
+					__( 'Automatically send quotes to users', 'wt-woocommerce-related-products' ),
+				),
+				'url'      => 'https://www.webtoffee.com/product/woocommerce-request-a-quote/?utm_source=other_solution_page&utm_medium=free_plugin_related_products&utm_campaign=Request_Quote',
+			),
+			array(
+				'type'     => 'standard',
+				'name'     => __( 'Sequential Order Numbers', 'wt-woocommerce-related-products' ),
+				'icon'     => 'sequential-orders-plugin.png',
+				'rating'   => '5.0',
+				'features' => array(
+					__( 'Auto reset sequence per month/year etc', 'wt-woocommerce-related-products' ),
+					__( 'Add a custom suffix for order numbers', 'wt-woocommerce-related-products' ),
+					__( 'Date suffix in order numbers', 'wt-woocommerce-related-products' ),
+				),
+				'url'      => 'https://www.webtoffee.com/product/woocommerce-sequential-order-numbers/?utm_source=other_solution_page&utm_medium=free_plugin&utm_campaign=Sequential_Order_Numbers',
+			),
+			array(
+				'type' => 'image',
+				'src'  => 'seq-orders-illustration.png',
+			),
+		),
+		'standalone' => null,
+		'bundle' => array(
+			'tag_emoji'    => '📄',
+			'tag_color'    => 'green',
+			'tag'          => __( 'Invoice Bundle', 'wt-woocommerce-related-products' ),
+			'title'        => __( 'All in one Invoice bundle', 'wt-woocommerce-related-products' ),
+			'url'          => 'https://www.webtoffee.com/pdf-invoices-packing-slips-suite-woocommerce/?utm_source=other_solution_page&utm_medium=free_plugin_related_products&utm_campaign=Invoice_bundle',
+			'desc'         => __( 'A complete suite of invoices and shipping documents bundle to create and print PDF invoices, packing slips, shipping and delivery documents in WooCommerce.', 'wt-woocommerce-related-products' ),
+			'pills'        => array(
+				__( 'Invoice', 'wt-woocommerce-related-products' ),
+				__( 'Packing Slip', 'wt-woocommerce-related-products' ),
+				__( 'Address Labels', 'wt-woocommerce-related-products' ),
+				__( 'Dispatch Labels', 'wt-woocommerce-related-products' ),
+				__( 'Shipping Labels', 'wt-woocommerce-related-products' ),
+				__( 'Delivery Notes', 'wt-woocommerce-related-products' ),
+				__( 'Picklists', 'wt-woocommerce-related-products' ),
+				__( 'Proforma Invoice', 'wt-woocommerce-related-products' ),
+			),
+			'price_orig'   => '$279',
+			'price_sale'   => '$179',
+			'savings'      => __( 'Save up to 30% off', 'wt-woocommerce-related-products' ),
+			'illustration' => 'invoice-bundle.png',
+		),
+	),
+);
+
+$first_category = array_key_first( $categories );
 ?>
-<style>
 
-.wt_crp_branding {
-	text-align: end;
-	width: 100%;
-	margin-bottom: 10px;
-}
-.wt_crp_brand_label {
-	width: 100%;
-	padding-bottom: 10px;
-	font-size: 11px;
-	font-weight: 600;
-}
-.wt_crp_brand_label {
-	width: 100%;
-	padding-bottom: 10px;
-	font-size: 11px;
-	font-weight: 600;
-}
-.wt_crp_brand_logo img {
-	max-width: 100px;
-}
+<div class="wt-crp-os-page">
 
-.wt-crp-main-container {
-	padding: 0 10px 10px 20px;
-	display: inline-block;
-}
-
-/* Style for You may also need tab starts here */
-
-.wt_exclusive{ position: relative; color: #433434;}
-
-.wt_rp_row_1{ display: flex; position: relative; padding-top: 40px;}
-.wt_rp_row_2 { padding: 1% 3%;font-weight: 400;}
-.wt_rp_row_2 h2{ font-weight: 700; font-size: 24px;}
-.wt_rp_discount_logo{ position: absolute; top: 21px; left: 10px;}
-
-.wt_rp_promo_code { margin-top: 30px; display: flex; border-left: 2px solid #007FFF; padding-left: 30px; padding-right: 90px}
-.wt_rp_copied {position: absolute; top: 109px; left: 866px; display: none; font-size: 10px;}
-.wt_rp_promo_code p{ font-size: 15px; padding-right: 20px;}
-.wt_rp_promo_code_text{ height: 110px; display: flex; border: 2px solid #007FFF; padding-left: 60px; margin-left: 130px; border-radius: 6px;}
-
-.wt_rp_exclusive_for_you { padding-right: 100px}
-.wt_rp_exclusive_for_you h1{ font-weight:700; font-size:24px; }
-.wt_rp_exclusive_for_you p{ font-weight: 400; font-size: 14px; }
-
-/*.wt_rp_also_need_plugin_row{width: 100%; background: #12265F; color: #FFFFFF; display: flex;}*/
-.wt_rp_also_need_plugin_row{width: 102%; background: #FFFFFF; color: #434343; display: flex; margin-left: -19px; border: 1px solid #007FFF; border-radius: 10px;}
-
-
-.wt_rp_also_need_plugin_title_wrapper img { width: 45px; height: 45px; align-self: center;}
-.wt_rp_also_need_plugin_title_wrapper h3{ margin-left: 12px; font-size: 18px; font-weight: 700; color: #212121;}
-.wt_rp_also_need_plugin_title_wrapper{ display: flex; }
-.wt_rp_also_need_plugin_content_wrapper{ display: flex; }
-.wt_rp_also_need_pf_plugin_content_wrapper{ display: block; }
-
-.wt_rp_also_need_plugin_content_left, 
-.wt_rp_also_need_plugin_content_right{ flex: 1; }
-/*.wt_rp_also_need_plugin_img img{ padding: 65px 100px 60px 100px; }*/
-.wt_rp_also_need_plugin_img img{ height: 100%; }
-.wt_rp_pf_plugin_img img{ padding: 5% 74px; }
-.wt_rp_pf_plugin_img { background-color: #F0F6FF; border-radius: 50px 10px 10px 0;}
-.wt_rp_also_need_plugin_img { width: 46%; overflow: hidden; background-color: #F0F6FF; }
-.wt_rp_also_need_plugin_content{ width:100%; box-sizing:border-box;  height: auto; padding: 2% 2% 2% 3%;}
-.wt_rp_also_need_plugin_content ul{ list-style:none; margin-left:20px; margin-top: 10px; }
-.wt_rp_also_need_plugin_content li{ float:left; width:calc(100% - 23px); box-sizing:border-box; padding-left:23px; padding:4px 0px; font-size: 15px; font-weight: 400;}
-.wt_rp_also_need_plugin_content li .dashicons{ margin-left:-20px; float:left; color:#6abe45; }
-.wt_rp_also_need_plugin_content li .dashicons-yes-alt{ color:#18c01d; margin-right: 0px; font-size: 17px;}
-
-.wt_rp_fbt_content{ box-sizing: border-box; padding: 2% 2% 2% 5%; height: auto; width: 100%;}
-.wt_rp_fbt_content ul{ list-style:none; margin-left:20px;color: #434343; }
-.wt_rp_fbt_content li{ float:left; width:calc(100% - 23px); box-sizing:border-box; padding-left:23px; padding:4px 0px; font-size: 15px; font-weight: 400; }
-.wt_rp_fbt_content li .dashicons{ margin-left:-20px; float:left; color:#434343; }
-.wt_rp_fbt_content li .dashicons-yes-alt{ color:#18c01d; margin-right: 0px; font-size: 17px;}
-
-.wt_rp_visit_plugin_btn{ width: 140px; display:inline-block; padding:16px 35px; color:#fff; background:#007FFF; border-radius:5px; text-decoration:none; font-size:14px; margin-top:14px; font-weight: 600; }
-.wt_rp_visit_plugin_btn:hover{ color:#fff; text-decoration:none; background:#1da5f8; color:#fff; }
-
-.wt_rp_also_need_list_item{
-	float: left;
-	margin-left: 20px;
-}
-.dashicons-info-outline{ color: #007FFF; font-size: 14px; }
-.tooltip{position: absolute; left: 529px; bottom: -1px; margin: 10px;}
-/* Tooltip text */
-.tooltip .tooltiptext {
-	visibility: hidden;
-	width: 120px;
-	background-color: #D1E5FE;
-	color: #434343;
-	text-align: center;
-	padding: 5px 0;
-
-	/* Position the tooltip text */
-	position: absolute;
-	z-index: 1;
-	top: 100%;
-	width: 300px;
-	margin-left: -47px;
-
-	/* Fade in tooltip */
-	opacity: 0;
-	transition: opacity 0.3s;
-	font-size: 13px;
-	font-weight: 400;
-	font-style: italic;
-}
-
-/* Tooltip arrow */
-.tooltip .tooltiptext::after {
-	content: "";
-	position: absolute;
-	bottom: 100%;
-	left: 50%;
-	margin-left: -117px;
-	border-width: 5px;
-	border-style: solid;
-	border-color: transparent transparent #D1E5FE transparent;
-}
-
-.tooltip:hover .tooltiptext {
-	visibility: visible;
-	opacity: 1;
-}
-@media (min-width: 520px) and (max-width: 1200px) {
-	.wt_rp_pf_plugin_img{
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-	.wt_rp_pf_plugin_img img{
-		width: 100%;
-		object-fit: contain;
-	}
-}
-@media (min-width: 768px) and (max-width: 1200px) {
-	.wt_rp_also_need_pf_plugin_content_wrapper{ display: flex; }
-	.wt_rp_also_need_pf_plugin_content_left,
-	.wt_rp_also_need_pf_plugin_content_right{ flex: 1; }
-}
-
-@media (max-width: 520px) {
-	.wt-crp-main-container{
-		width: 90vw;
-		padding: 0 10px;
-	}
-	.wt_rp_also_need_plugin_row{
-		margin-left: 0px;
-	}
-	.wt_rp_also_need_plugin_img,
-	.wt_rp_pf_plugin_img{
-		display: none;
-	}
-	.wt_rp_also_need_plugin_content_wrapper{
-		flex-direction: column;
-	}
-}
-
-/* Style for You may also need tab ends here */
-
-</style>
-
-<div class="wt-crp-main-container">
-<!-- You may also like starts here -->
-	<div class="wt_exclusive">
-		<div class="wt_rp_row_2">
-			<h2><?php esc_html_e( 'Premium extensions', 'wt-woocommerce-related-products' ); ?></h2>
-			<p style="font-size: 15px;"><?php esc_html_e( 'Level up your product suggestions and improve conversion rates!', 'wt-woocommerce-related-products' ); ?></p>
-		</div>
+	<?php
+	$first_cat        = $categories[ $first_category ];
+	?>
+	<div class="wt-crp-os-header">
+		<h1 class="wt-crp-os-page-title" id="wt-crp-os-cat-title"><?php echo esc_html( $first_cat['label'] ); ?></h1>
+		<p class="wt-crp-os-page-subtitle" id="wt-crp-os-cat-subtitle"><?php echo esc_html( $first_cat['subtitle'] ); ?></p>
 	</div>
 
+	<div class="wt-crp-os-layout">
 
-	<div class="wt_rp_also_need_plugin_row"> 
-		<div class="wt_rp_also_need_plugin_content" >
-			<div class="wt_rp_also_need_plugin_title_wrapper">
-				<img src="<?php echo esc_url( $wt_rp_admin_img_path . '/gift-card-plugin.svg' ); ?>">
-				<h3><?php esc_html_e( 'Gift Card Plugin', 'wt-woocommerce-related-products' ); ?></h3>
-			</div>
-			<p style="font-size: 14px;"><?php esc_html_e( 'Create and sell customizable gift cards for any occasion.', 'wt-woocommerce-related-products' ); ?></p>
-			<div class="wt_rp_also_need_plugin_content_wrapper">
-				<div class="wt_rp_also_need_plugin_content_left">
-					<ul>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Create and sell unlimited gift cards', 'wt-woocommerce-related-products' ); ?></span></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Allow customers to buy, redeem, and share', 'wt-woocommerce-related-products' ); ?></span></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Schedule gift card delivery', 'wt-woocommerce-related-products' ); ?></span></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Sell physical gift cards ', 'wt-woocommerce-related-products' ); ?></span></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Provide instant refunds to store credits', 'wt-woocommerce-related-products' ); ?></span></li>
-					</ul>
+		<?php /* ---- Sidebar ---- */ ?>
+		<div class="wt-crp-os-sidebar">
+			<ul class="wt-crp-os-sidebar-nav">
+				<?php foreach ( $categories as $cat_id => $cat ) : ?>
+					<li>
+						<a href="#"
+							class="wt-crp-os-cat-link<?php echo ( $cat_id === $first_category ) ? ' active' : ''; ?>"
+							data-category="<?php echo esc_attr( $cat_id ); ?>">
+							<img class="wt-crp-os-cat-icon"
+								src="<?php echo esc_url( $img_base . '/' . $cat['icon'] ); ?>"
+								alt="">
+							<?php echo esc_html( $cat['label'] ); ?>
+						</a>
+					</li>
+				<?php endforeach; ?>
+			</ul>
+
+			<div class="wt-crp-os-trust-badges">
+				<div class="wt-crp-os-trust-badge">
+					<img src="<?php echo esc_url( $img_base . '/thirty-day-guarantee.png' ); ?>"
+						alt="<?php esc_attr_e( '30 Day Money Back Guarantee', 'wt-woocommerce-related-products' ); ?>">
+					<span><?php esc_html_e( '30 Day No Risk Money Back Guarantee', 'wt-woocommerce-related-products' ); ?></span>
 				</div>
-				<div class="wt_rp_also_need_plugin_content_right">
-					<ul>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Set predefined or custom gift card amounts', 'wt-woocommerce-related-products' ); ?></span></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Manage user credit balances from a single dashboard', 'wt-woocommerce-related-products' ); ?></span></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Set usage restrictions for gift card coupons', 'wt-woocommerce-related-products' ); ?></span></li>
-					</ul>
+				<div class="wt-crp-os-trust-badge">
+					<img src="<?php echo esc_url( $img_base . '/satisfaction-badge.png' ); ?>"
+						alt="<?php esc_attr_e( '99% Satisfaction Rating', 'wt-woocommerce-related-products' ); ?>">
+					<span><?php esc_html_e( 'Fast Support with 99% Satisfaction Rating', 'wt-woocommerce-related-products' ); ?></span>
 				</div>
 			</div>
-			
-			<a href="https://www.webtoffee.com/product/woocommerce-gift-cards/?utm_source=free_plugin_addon&utm_medium=related_products&utm_campaign=WooCommerce_Gift_Cards" target="_blank" class="wt_rp_visit_plugin_btn" style="margin-left: 0px;"><?php esc_html_e( 'Visit plugin page', 'wt-woocommerce-related-products' ); ?> <span class="dashicons dashicons-arrow-right-alt"></span></a>
 		</div>
-		<div class="wt_rp_also_need_plugin_img" style="border-radius: 50px 10px 10px 0; position: relative;">
-			<img src="<?php echo esc_url( $wt_rp_admin_img_path . '/product-recommendations.png' ); ?>" width="501px"; height="429px"; style="position: absolute; left: 20px">
+
+		<?php /* ---- Main content ---- */ ?>
+		<div class="wt-crp-os-main">
+
+			<?php foreach ( $categories as $cat_id => $cat ) : ?>
+				<div id="wt-crp-os-panel-<?php echo esc_attr( $cat_id ); ?>"
+					class="wt-crp-os-category-panel<?php echo ( $cat_id === $first_category ) ? ' active' : ''; ?>"
+					data-title="<?php echo esc_attr( $cat['label'] ); ?>"
+					data-subtitle="<?php echo esc_attr( $cat['subtitle'] ); ?>">
+
+					<?php /* -- Hero card -- */ ?>
+					<?php if ( ! empty( $cat['hero'] ) ) : $hero = $cat['hero']; ?>
+						<div class="wt-crp-os-hero-card">
+							<div class="wt-crp-os-hero-left">
+								<div class="wt-crp-os-hero-title-row">
+									<img class="wt-crp-os-hero-icon"
+										src="<?php echo esc_url( $img_base . '/' . $hero['icon'] ); ?>"
+										alt="<?php echo esc_attr( $hero['name'] ); ?>">
+									<h3 class="wt-crp-os-hero-name"><?php echo esc_html( $hero['name'] ); ?></h3>
+								</div>
+								<div class="wt-crp-os-hero-stars" aria-label="<?php echo esc_attr( sprintf( /* translators: %s rating */ __( '%s out of 5 stars', 'wt-woocommerce-related-products' ), $hero['rating'] ) ); ?>">
+									<?php for ( $i = 0; $i < 5; $i++ ) : ?>
+										<span class="wt-crp-os-star">&#9733;</span>
+									<?php endfor; ?>
+								</div>
+								<p class="wt-crp-os-hero-desc"><?php echo esc_html( $hero['desc'] ); ?></p>
+								<a href="<?php echo esc_url( $hero['url'] ); ?>"
+									target="_blank"
+									rel="noopener noreferrer"
+									class="wt-crp-os-btn-premium wt-crp-os-btn-premium--block">
+									<span class="dashicons dashicons-star-filled"></span>
+									<?php esc_html_e( 'Get premium', 'wt-woocommerce-related-products' ); ?>
+								</a>
+							</div>
+							<?php if ( ! empty( $hero['image'] ) ) : ?>
+								<div class="wt-crp-os-hero-right">
+									<img src="<?php echo esc_url( $img_base . '/' . $hero['image'] ); ?>"
+										alt="<?php echo esc_attr( $hero['name'] ); ?>">
+								</div>
+							<?php endif; ?>
+						</div>
+					<?php endif; ?>
+
+					<?php /* -- Plugin card grid -- */ ?>
+					<?php if ( ! empty( $cat['plugins'] ) ) : ?>
+						<?php
+						$chunks = array_chunk( $cat['plugins'], 3 );
+						foreach ( $chunks as $row ) :
+						?>
+							<div class="wt-crp-os-card-grid">
+								<?php foreach ( $row as $plugin ) : ?>
+
+									<?php if ( 'image' === $plugin['type'] ) : ?>
+
+										<div class="wt-crp-os-card-image">
+											<img src="<?php echo esc_url( $img_base . '/' . $plugin['src'] ); ?>"
+												alt="">
+										</div>
+
+									<?php else :
+										$with_image = ( 'standard-with-image' === $plugin['type'] && ! empty( $plugin['image_src'] ) );
+									?>
+
+										<div class="wt-crp-os-card<?php echo $with_image ? ' wt-crp-os-card--with-image' : ''; ?>">
+											<div class="wt-crp-os-card-body">
+												<div class="wt-crp-os-card-header">
+													<div class="wt-crp-os-card-icon-name">
+														<img class="wt-crp-os-card-icon"
+															src="<?php echo esc_url( $img_base . '/' . $plugin['icon'] ); ?>"
+															alt="<?php echo esc_attr( $plugin['name'] ); ?>">
+														<span class="wt-crp-os-card-name"><?php echo esc_html( $plugin['name'] ); ?></span>
+													</div>
+													<?php if ( 'stars' === $plugin['rating'] ) : ?>
+														<span class="wt-crp-os-card-rating wt-crp-os-card-rating--stars">
+															<span class="wt-crp-os-star">&#9733;</span>
+															<span class="wt-crp-os-star">&#9733;</span>
+															<span class="wt-crp-os-star">&#9733;</span>
+															<span class="wt-crp-os-star">&#9733;</span>
+															<span class="wt-crp-os-star">&#9733;</span>
+														</span>
+													<?php else : ?>
+														<span class="wt-crp-os-card-rating">
+															<?php echo esc_html( $plugin['rating'] ); ?>
+															<span class="wt-crp-os-star">&#9733;</span>
+														</span>
+													<?php endif; ?>
+												</div>
+												<ul class="wt-crp-os-card-features">
+													<?php foreach ( $plugin['features'] as $feature ) : ?>
+														<li>
+															<span class="dashicons dashicons-yes-alt"></span>
+															<?php echo esc_html( $feature ); ?>
+														</li>
+													<?php endforeach; ?>
+												</ul>
+												<a href="<?php echo esc_url( $plugin['url'] ); ?>"
+													target="_blank"
+													rel="noopener noreferrer"
+													class="wt-crp-os-btn-premium">
+													<span class="dashicons dashicons-star-filled"></span>
+													<?php esc_html_e( 'Get premium', 'wt-woocommerce-related-products' ); ?>
+												</a>
+											</div>
+											<?php if ( $with_image ) : ?>
+												<div class="wt-crp-os-card-image-side">
+													<img src="<?php echo esc_url( $img_base . '/' . $plugin['image_src'] ); ?>"
+														alt="">
+												</div>
+											<?php endif; ?>
+										</div>
+
+									<?php endif; ?>
+
+								<?php endforeach; ?>
+							</div>
+						<?php endforeach; ?>
+					<?php endif; ?>
+
+					<?php /* -- Bundle section (renders BEFORE the standalone, per Figma order) -- */ ?>
+					<?php if ( ! empty( $cat['bundle'] ) ) : $bundle = $cat['bundle']; ?>
+						<div class="wt-crp-os-bundle">
+							<div class="wt-crp-os-bundle-content">
+								<?php $tag_color = ! empty( $bundle['tag_color'] ) ? $bundle['tag_color'] : 'green'; ?>
+								<span class="wt-crp-os-bundle-tag wt-crp-os-bundle-tag--<?php echo esc_attr( $tag_color ); ?>">
+									<?php if ( ! empty( $bundle['tag_emoji'] ) ) : ?>
+										<span class="wt-crp-os-bundle-tag-emoji"><?php echo esc_html( $bundle['tag_emoji'] ); ?></span>
+									<?php endif; ?>
+									<?php echo esc_html( $bundle['tag'] ); ?>
+								</span>
+								<div class="wt-crp-os-bundle-title">
+									<a href="<?php echo esc_url( $bundle['url'] ); ?>"
+										target="_blank"
+										rel="noopener noreferrer">
+										<?php echo esc_html( $bundle['title'] ); ?>
+									</a>
+									<span class="dashicons dashicons-external"></span>
+								</div>
+								<p class="wt-crp-os-bundle-desc"><?php echo esc_html( $bundle['desc'] ); ?></p>
+								<div class="wt-crp-os-bundle-pills">
+									<?php foreach ( $bundle['pills'] as $pill ) : ?>
+										<span class="wt-crp-os-bundle-pill">
+											<span class="dashicons dashicons-yes-alt"></span>
+											<?php echo esc_html( $pill ); ?>
+										</span>
+									<?php endforeach; ?>
+								</div>
+								<p class="wt-crp-os-bundle-pricing">
+									<?php
+									printf(
+										wp_kses(
+											/* translators: 1: strikethrough original price, 2: bold sale price, 3: green savings text */
+											__( 'Total: <s>%1$s</s> <strong>%2$s</strong> <span class="wt-crp-os-savings">(%3$s)</span>', 'wt-woocommerce-related-products' ),
+											array(
+												's'      => array(),
+												'strong' => array(),
+												'span'   => array( 'class' => array() ),
+											)
+										),
+										esc_html( $bundle['price_orig'] ),
+										esc_html( $bundle['price_sale'] ),
+										esc_html( $bundle['savings'] )
+									);
+									?>
+								</p>
+								<a href="<?php echo esc_url( $bundle['url'] ); ?>"
+									target="_blank"
+									rel="noopener noreferrer"
+									class="wt-crp-os-btn-bundle">
+									<?php esc_html_e( 'View Bundle', 'wt-woocommerce-related-products' ); ?>
+									<span class="dashicons dashicons-external"></span>
+								</a>
+							</div>
+							<?php if ( ! empty( $bundle['illustration'] ) ) : ?>
+								<div class="wt-crp-os-bundle-illustration">
+									<img src="<?php echo esc_url( $img_base . '/' . $bundle['illustration'] ); ?>"
+										alt="<?php echo esc_attr( $bundle['title'] ); ?>">
+								</div>
+							<?php endif; ?>
+						</div>
+					<?php endif; ?>
+
+					<?php /* -- Standalone card (e.g. EMA App) — renders AFTER the bundle, per Figma order -- */ ?>
+					<?php if ( ! empty( $cat['standalone'] ) ) : $solo = $cat['standalone']; ?>
+						<div class="wt-crp-os-standalone">
+							<div class="wt-crp-os-standalone-content">
+								<div class="wt-crp-os-standalone-header">
+									<img class="wt-crp-os-standalone-icon"
+										src="<?php echo esc_url( $img_base . '/' . $solo['icon'] ); ?>"
+										alt="<?php echo esc_attr( $solo['name'] ); ?>">
+									<h3 class="wt-crp-os-standalone-name"><?php echo esc_html( $solo['name'] ); ?></h3>
+								</div>
+								<p class="wt-crp-os-standalone-desc"><?php echo esc_html( $solo['desc'] ); ?></p>
+								<a href="<?php echo esc_url( $solo['url'] ); ?>"
+									target="_blank"
+									rel="noopener noreferrer"
+									class="wt-crp-os-btn-premium wt-crp-os-btn-premium--block">
+									<?php esc_html_e( 'Try Now', 'wt-woocommerce-related-products' ); ?>
+								</a>
+							</div>
+							<?php if ( ! empty( $solo['screenshot'] ) ) : ?>
+								<div class="wt-crp-os-standalone-screenshot">
+									<img src="<?php echo esc_url( $img_base . '/' . $solo['screenshot'] ); ?>"
+										alt="<?php echo esc_attr( $solo['name'] ); ?>">
+								</div>
+							<?php endif; ?>
+						</div>
+					<?php endif; ?>
+
+				</div>
+			<?php endforeach; ?>
+
 		</div>
 	</div>
-
-	<div class="wt_rp_also_need_plugin_row" style="margin-top: 30px;"> 
-		<div class="wt_rp_also_need_plugin_img" style="border-radius: 10px 50px 0 10px; position: relative">
-			<img src="<?php echo esc_url( $wt_rp_admin_img_path . '/frequently-bought-together.png' ); ?>" width="501px"; height="429px"; style="position: absolute; right: 20px">
-		</div>
-		<div class="wt_rp_fbt_content">
-			<div class="wt_rp_also_need_plugin_title_wrapper">
-				<img src="<?php echo esc_url( $wt_rp_admin_img_path . '/frequently-bought-together-plugin.svg' ); ?>">
-				<h3><?php esc_html_e( 'Frequently Bought Together For WooCommerce', 'wt-woocommerce-related-products' ); ?></h3>
-			</div>
-			<p style="font-size: 14px;"><?php esc_html_e( 'Increase average order value with customized product bundles.', 'wt-woocommerce-related-products' ); ?></p>           
-			<div class="wt_rp_also_need_plugin_content_wrapper">
-				<div class="wt_rp_also_need_plugin_content_left">
-					<ul>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Suggest products based on store order history', 'wt-woocommerce-related-products' ); ?></span></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Display suggestions on product pages', 'wt-woocommerce-related-products' ); ?></span></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Multiple FBT recommendation layouts', 'wt-woocommerce-related-products' ); ?></span></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Offers discounts on product bundles', 'wt-woocommerce-related-products' ); ?></span></li>
-					</ul>
-				</div>
-				<div class="wt_rp_also_need_plugin_content_right">
-					<ul>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Use upsells, cross-sells, & related products as frequently bought products', 'wt-woocommerce-related-products' ); ?></span></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Customize the widget title, button, and label texts', 'wt-woocommerce-related-products' ); ?></span></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'A quick edit page to enable, edit or remove suggestions', 'wt-woocommerce-related-products' ); ?></span></li> 
-					</ul>
-				</div>
-			</div>
-			<a href="https://www.webtoffee.com/product/woocommerce-frequently-bought-together/?utm_source=free_plugin_addon&utm_medium=related_products&utm_campaign=Frequently_Bought_Together" target="_blank" class="wt_rp_visit_plugin_btn"><?php esc_html_e( 'Visit plugin page', 'wt-woocommerce-related-products' ); ?> <span class="dashicons dashicons-arrow-right-alt"></span></a>
-		</div>
-	</div>
-
-	<div class="wt_rp_also_need_plugin_row" style="margin-top: 30px;"> 
-		<div class="wt_rp_also_need_plugin_content" style="padding: 2% 3%;">
-			<div class="wt_rp_also_need_plugin_title_wrapper">
-				<img src="<?php echo esc_url( $wt_rp_admin_img_path . '/product-feed-plugin.svg' ); ?>">
-				<h3><?php esc_html_e( 'Product Feed for WooCommerce Plugin', 'wt-woocommerce-related-products' ); ?></h3>
-			</div>
-			<p style="font-size: 14px;"><?php esc_html_e( 'Generate product feeds to expand sales channels.', 'wt-woocommerce-related-products' ); ?></p>            
-			<div class="wt_rp_also_need_pf_plugin_content_wrapper">
-				<div class="wt_rp_also_need_pf_plugin_content_left">
-					<ul>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Generate optimized product feeds for 20+ sales channels', 'wt-woocommerce-related-products' ); ?></span></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Map WooCommerce product details and categories', 'wt-woocommerce-related-products' ); ?></span></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Create feeds for all Google shopping platforms', 'wt-woocommerce-related-products' ); ?></span></li>
-					</ul>
-				</div>
-				<div class="wt_rp_also_need_pf_plugin_content_right">
-					<ul>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Sync WooCommerce products with Facebook Catalog', 'wt-woocommerce-related-products' ); ?></span></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Tailor your product feed with filters', 'wt-woocommerce-related-products' ); ?></span></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Track and manage feed updates ', 'wt-woocommerce-related-products' ); ?></span></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Keep your product feeds up-to-date', 'wt-woocommerce-related-products' ); ?></span></li>
-					</ul>  
-				</div>
-			</div>
-			<a href="https://www.webtoffee.com/product/woocommerce-product-feed/?utm_source=free_plugin_addon&utm_medium=related_products&utm_campaign=WooCommerce_Product_Feed" target="_blank" class="wt_rp_visit_plugin_btn"><?php esc_html_e( 'Visit plugin page', 'wt-woocommerce-related-products' ); ?> <span class="dashicons dashicons-arrow-right-alt"></span></a>
-		</div>
-		<div class="wt_rp_pf_plugin_img">
-			<img src="<?php echo esc_url( $wt_rp_admin_img_path . '/product-feed.png' ); ?>" width="430px"; height="380px";>
-		</div>
-	</div>
-
-	<div class="wt_rp_also_need_plugin_row" style="margin-top: 30px;"> 
-		<div class="wt_rp_also_need_plugin_content" >
-			<div class="wt_rp_also_need_plugin_title_wrapper">
-				<img src="<?php echo esc_url( $wt_rp_admin_img_path . '/product-recommendation-plugin.svg' ); ?>">
-				<h3><?php esc_html_e( 'WooCommerce Product Recommendations', 'wt-woocommerce-related-products' ); ?></h3>
-			</div>
-			<p style="font-size: 14px;"><?php esc_html_e( 'Automate tailored product suggestions for better conversions.', 'wt-woocommerce-related-products' ); ?></p>
-			<div class="wt_rp_also_need_plugin_content_wrapper">
-				<div class="wt_rp_also_need_plugin_content_left">
-					<ul>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Automatic product recommendations', 'wt-woocommerce-related-products' ); ?></span></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Generate suggestions using filters', 'wt-woocommerce-related-products' ); ?></span></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Place recommendations on relevant pages', 'wt-woocommerce-related-products' ); ?></span></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Sort products by price, popularity, rating, etc.', 'wt-woocommerce-related-products' ); ?></span></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Display recommendations in a grid or a slider', 'wt-woocommerce-related-products' ); ?></span></li>
-					</ul>
-				</div>
-				<div class="wt_rp_also_need_plugin_content_right">
-					<ul>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Hide out-of-stock products from suggestions', 'wt-woocommerce-related-products' ); ?></span></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Multiple product type support', 'wt-woocommerce-related-products' ); ?></span></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Built-in recommendations template', 'wt-woocommerce-related-products' ); ?></span></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><span class="wt_rp_also_need_list_item"><?php esc_html_e( 'Create custom recommendations', 'wt-woocommerce-related-products' ); ?></span></li>
-					</ul>
-				</div>
-			</div>
-			
-			<a href="https://www.webtoffee.com/product/woocommerce-product-recommendations/?utm_source=free_plugin_addon&utm_medium=related_products&utm_campaign=Product_Recommendations" target="_blank" class="wt_rp_visit_plugin_btn" style="margin-left: 0px;"><?php esc_html_e( 'Visit plugin page', 'wt-woocommerce-related-products' ); ?> <span class="dashicons dashicons-arrow-right-alt"></span></a>
-		</div>
-		<div class="wt_rp_also_need_plugin_img" style="border-radius: 50px 10px 10px 0; position: relative;">
-			<img src="<?php echo esc_url( $wt_rp_admin_img_path . '/product-recommendations.png' ); ?>" width="501px"; height="429px"; style="position: absolute; left: 20px">
-		</div>
-	</div>
-
-<!-- You may also like ends here -->
 </div>
-
-

@@ -134,7 +134,7 @@ class Custom_Related_Product_Import_Export {
 		foreach ( $wt_crp_meta_keys as $crp_key => $crp_value ) {
 			foreach ( $rows as $r_key => $row ) {
 				if ( array_key_exists( $crp_value, $row ) && ! empty( $row[ $crp_value ] ) ) {
-					$value = wt_unserialize_safe( $row[ $crp_value ] );
+					$value = self::wt_unserialize_safe( $row[ $crp_value ] );
 					if ( '_crp_related_product_attr' === $crp_value ) {
 						$value = $this->process_related_attr_for_export( $value );
 					}

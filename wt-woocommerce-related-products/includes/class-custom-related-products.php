@@ -21,14 +21,14 @@ class Custom_Related_Products {
 	protected $VERSION;
 	protected $plugin_base_name;
 
-	const VERSION = '1.7.6';
+	const VERSION = '1.7.7';
 
 	public function __construct() {
 
 		$this->plugin_name		 = 'wt-woocommerce-related-products';
 		$this->plugin_base_name	 = WT_CRP_BASE_NAME;
 
-		$this->VERSION = '1.7.6';
+		$this->VERSION = '1.7.7';
 
 		$this->load_dependencies();
 		$this->define_admin_hooks();

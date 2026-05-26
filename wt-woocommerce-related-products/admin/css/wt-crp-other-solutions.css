@@ -1,0 +1,819 @@
+/**
+ * Styles for the "You May Also Need" (Other Solutions) admin tab.
+ *
+ * @package WooCommerce Related Products
+ * @since   1.7.7
+ */
+
+/* -----------------------------------------------------------------------
+   Branding block (rendered above the tab nav via wt_crp_before_settings_block)
+   Styles for the Settings tab live inline in custom-related-products-admin-display.php;
+   this tab needs them too so the "Developed by" label/logo sits on the right.
+----------------------------------------------------------------------- */
+.wt_crp_branding {
+	text-align: end;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.wt_crp_brand_label {
+	width: 100%;
+	padding-bottom: 10px;
+	font-size: 11px;
+	font-weight: 600;
+}
+
+.wt_crp_brand_logo img {
+	max-width: 100px;
+}
+
+/* -----------------------------------------------------------------------
+   Page wrapper — white canvas matching Figma (#FFFFFF)
+----------------------------------------------------------------------- */
+.wt-crp-os-page {
+	padding: 20px 20px 30px;
+	background: #FFFFFF;
+	margin: 10px -20px 0;
+	min-height: calc( 100vh - 100px );
+}
+
+/* -----------------------------------------------------------------------
+   Page header (above the two-panel layout)
+----------------------------------------------------------------------- */
+.wt-crp-os-header {
+	margin: 0 0 18px;
+	padding: 0 4px;
+}
+
+.wt-crp-os-page-title {
+	font-size: 22px;
+	font-weight: 700;
+	color: #212121;
+	margin: 0 0 4px;
+	line-height: 1.3;
+}
+
+.wt-crp-os-page-subtitle {
+	font-size: 14px;
+	color: #6B7280;
+	margin: 0;
+	line-height: 1.5;
+}
+
+/* -----------------------------------------------------------------------
+   Two-panel layout
+----------------------------------------------------------------------- */
+.wt-crp-os-layout {
+	display: flex;
+	gap: 20px;
+	align-items: flex-start;
+}
+
+/* -----------------------------------------------------------------------
+   Sidebar
+----------------------------------------------------------------------- */
+.wt-crp-os-sidebar {
+	width: 240px;
+	flex-shrink: 0;
+	background: #fff;
+	border: 1px solid #ECECEC;
+	border-radius: 10px;
+	overflow: hidden;
+	box-shadow: 0 1px 3px rgba( 0, 0, 0, 0.04 );
+}
+
+.wt-crp-os-sidebar-nav {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.wt-crp-os-sidebar-nav li {
+	margin: 0;
+	padding: 0;
+	border-bottom: 1px solid #ECECEC;
+}
+
+.wt-crp-os-sidebar-nav li:last-child {
+	border-bottom: none;
+}
+
+.wt-crp-os-cat-link {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 20px 20px;
+	color: #212121;
+	text-decoration: none;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 1.3;
+	cursor: pointer;
+	transition: color 0.15s ease, background 0.15s ease;
+}
+
+.wt-crp-os-cat-link:hover {
+	color: #2369FF;
+	background: #F8F8FE;
+	text-decoration: none;
+}
+
+.wt-crp-os-cat-link.active {
+	color: #2369FF;
+	font-weight: 600;
+}
+
+.wt-crp-os-cat-icon {
+	width: 18px;
+	height: 18px;
+	flex-shrink: 0;
+	display: block;
+}
+
+.wt-crp-os-cat-link.active .wt-crp-os-cat-icon,
+.wt-crp-os-cat-link:hover .wt-crp-os-cat-icon {
+	filter: invert(32%) sepia(82%) saturate(2956%) hue-rotate(213deg) brightness(101%) contrast(101%);
+}
+
+/* Trust badges (inside the same sidebar card) */
+.wt-crp-os-trust-badges {
+	border-top: 1px solid #ECECEC;
+}
+
+.wt-crp-os-trust-badge {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	padding: 16px 20px;
+	font-size: 12px;
+	color: #212121;
+	line-height: 1.3;
+	border-bottom: 1px solid #ECECEC;
+	box-sizing: border-box;
+}
+
+.wt-crp-os-trust-badge:last-child {
+	border-bottom: none;
+}
+
+.wt-crp-os-trust-badge img {
+	width: 44px;
+	height: 44px;
+	flex-shrink: 0;
+}
+
+/* -----------------------------------------------------------------------
+   Main content area
+----------------------------------------------------------------------- */
+.wt-crp-os-main {
+	flex: 1;
+	min-width: 0;
+}
+
+.wt-crp-os-category-panel {
+	display: none;
+}
+
+.wt-crp-os-category-panel.active {
+	display: block;
+}
+
+.wt-crp-os-panel-title {
+	font-size: 20px;
+	font-weight: 700;
+	color: #212121;
+	margin: 0 0 16px;
+}
+
+/* -----------------------------------------------------------------------
+   Card grid (3-column)
+----------------------------------------------------------------------- */
+.wt-crp-os-card-grid {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 16px;
+	margin-bottom: 16px;
+}
+
+/* -----------------------------------------------------------------------
+   Standard plugin card
+----------------------------------------------------------------------- */
+.wt-crp-os-card {
+	background: #fff;
+	border: 1px solid #ECECEC;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	box-shadow: 0 1px 3px rgba( 0, 0, 0, 0.04 );
+	overflow: hidden;
+}
+
+.wt-crp-os-card-body {
+	padding: 16px;
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+}
+
+.wt-crp-os-card--with-image {
+	grid-column: span 2;
+	flex-direction: row;
+	align-items: stretch;
+}
+
+.wt-crp-os-card--with-image .wt-crp-os-card-body {
+	flex: 1 1 50%;
+	min-width: 0;
+	background: #F0F6FF;
+}
+
+.wt-crp-os-card-image-side {
+	flex: 1 1 50%;
+	background: #F0F6FF;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 0;
+}
+
+.wt-crp-os-card-image-side img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	padding: 0px 0px 0px 17px;
+	box-sizing: border-box;
+}
+
+.wt-crp-os-card-header {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 6px;
+	background: #F8F8FF;
+	margin: -16px -16px 12px;
+	padding: 16px;
+	border-bottom: 1px solid #ECECEC;
+}
+
+.wt-crp-os-card-icon-name {
+	display: flex;
+	align-items: flex-start;
+	gap: 8px;
+	flex: 1;
+	min-width: 0;
+}
+
+.wt-crp-os-card-icon {
+	width: 36px;
+	height: 36px;
+	flex-shrink: 0;
+}
+
+.wt-crp-os-card-name {
+	font-size: 14px;
+	font-weight: 600;
+	color: #212121;
+	line-height: 1.4;
+	margin-top: 2px;
+	min-height: 2.8em;
+	display: flex;
+	align-items: center;
+}
+
+.wt-crp-os-card-rating {
+	display: inline-flex;
+	align-items: center;
+	gap: 3px;
+	font-size: 13px;
+	font-weight: 600;
+	color: #212121;
+	white-space: nowrap;
+	flex-shrink: 0;
+	background: #fff;
+	border: 1px solid #ECECEC;
+	border-radius: 6px;
+	padding: 4px 8px;
+	box-shadow: 0 1px 2px rgba( 0, 0, 0, 0.04 );
+}
+
+.wt-crp-os-star {
+	color: #FFB900;
+	font-size: 13px;
+	line-height: 1;
+}
+
+.wt-crp-os-card-rating--stars {
+	background: transparent;
+	border: 0;
+	box-shadow: none;
+	padding: 0;
+	gap: 2px;
+}
+
+.wt-crp-os-card-rating--stars .wt-crp-os-star {
+	font-size: 16px;
+}
+
+.wt-crp-os-card-features {
+	list-style: none;
+	margin: 0 0 8px;
+	padding: 0;
+	flex: 1;
+}
+
+.wt-crp-os-card-features li {
+	font-size: 14px;
+	color: #434343;
+	padding: 4px 0;
+	display: flex;
+	align-items: flex-start;
+	gap: 6px;
+	line-height: 1.45;
+}
+
+.wt-crp-os-card-features li .dashicons {
+	color: #18c01d;
+	font-size: 16px;
+	width: 16px;
+	height: 16px;
+	flex-shrink: 0;
+	margin-top: 1px;
+}
+
+.wt-crp-os-btn-premium {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	width: 100%;
+	padding: 11px 12px;
+	background: #2369FF;
+	color: #fff;
+	border-radius: 6px;
+	text-decoration: none;
+	font-size: 15px;
+	font-weight: 600;
+	margin-top: auto;
+	box-sizing: border-box;
+	transition: background 0.15s ease;
+}
+
+.wt-crp-os-btn-premium:hover,
+.wt-crp-os-btn-premium:focus {
+	background: #1A55D6;
+	color: #fff;
+	text-decoration: none;
+}
+
+.wt-crp-os-btn-premium .dashicons {
+	font-size: 14px;
+	width: 14px;
+	height: 14px;
+}
+
+/* -----------------------------------------------------------------------
+   Image column card (screenshot placeholder in mixed rows)
+----------------------------------------------------------------------- */
+.wt-crp-os-card-image {
+	background: #F0F6FF;
+	border: 1px solid #e0e0e0;
+	border-radius: 10px;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	aspect-ratio: 312.96 / 252.74;
+	min-height: 0;
+}
+
+.wt-crp-os-card-image img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	padding: 12px;
+	box-sizing: border-box;
+}
+
+/* -----------------------------------------------------------------------
+   Hero / featured card (full-width with screenshot)
+----------------------------------------------------------------------- */
+.wt-crp-os-hero-card {
+	background: #fff;
+	border: 1px solid #ECECEC;
+	border-radius: 10px;
+	display: flex;
+	overflow: hidden;
+	margin-bottom: 16px;
+	box-shadow: 0 1px 3px rgba( 0, 0, 0, 0.04 );
+}
+
+.wt-crp-os-hero-left {
+	flex: 1;
+	padding: 24px;
+	min-width: 0;
+}
+
+.wt-crp-os-hero-right {
+	width: 40%;
+	background: #F5EFFB;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	overflow: hidden;
+}
+
+.wt-crp-os-hero-right img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+.wt-crp-os-hero-title-row {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin-bottom: 8px;
+}
+
+.wt-crp-os-hero-icon {
+	width: 44px;
+	height: 44px;
+	flex-shrink: 0;
+	border-radius: 8px;
+}
+
+.wt-crp-os-hero-name {
+	font-size: 18px;
+	font-weight: 700;
+	color: #212121;
+	line-height: 1.3;
+	margin: 0;
+}
+
+.wt-crp-os-hero-stars {
+	display: flex;
+	gap: 2px;
+	margin-bottom: 14px;
+}
+
+.wt-crp-os-hero-stars .wt-crp-os-star {
+	color: #FFB900;
+	font-size: 18px;
+	line-height: 1;
+}
+
+.wt-crp-os-hero-desc {
+	font-size: 14px;
+	color: #434343;
+	margin: 0 0 18px;
+	line-height: 1.55;
+}
+
+.wt-crp-os-btn-premium--block {
+	width: 280px;
+	align-self: flex-start;
+}
+
+/* -----------------------------------------------------------------------
+   Bundle offer section
+----------------------------------------------------------------------- */
+.wt-crp-os-bundle {
+	background: linear-gradient(90deg, #FFFFFF 0%, #FDFBEB 55%, #F2F6D3 100%);
+	border: 1px solid #ECECEC;
+	border-radius: 10px;
+	padding: 24px 24px;
+	margin-bottom: 16px;
+	display: flex;
+	align-items: center;
+	gap: 28px;
+}
+
+.wt-crp-os-bundle-content {
+	flex: 1;
+	min-width: 0;
+}
+
+.wt-crp-os-bundle-illustration {
+	flex-shrink: 0;
+	width: 240px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.wt-crp-os-bundle-illustration img {
+	max-width: 100%;
+	max-height: 220px;
+	object-fit: contain;
+}
+
+@media ( max-width: 780px ) {
+	.wt-crp-os-bundle {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.wt-crp-os-bundle-illustration {
+		width: 100%;
+		max-height: 200px;
+	}
+}
+
+.wt-crp-os-bundle-tag {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	color: #212121;
+	border-radius: 10px;
+	padding: 6px 14px;
+	font-size: 13px;
+	font-weight: 600;
+	margin-bottom: 14px;
+	border-width: 1.5px;
+	border-style: solid;
+}
+
+.wt-crp-os-bundle-tag--green {
+	background: #DFFAD9;
+	border: none;
+}
+
+.wt-crp-os-bundle-tag--yellow {
+	background: #FFF4C2;
+	border: none;
+}
+
+.wt-crp-os-bundle-tag-emoji {
+	font-size: 14px;
+	line-height: 1;
+}
+
+.wt-crp-os-bundle-title {
+	font-size: 20px;
+	font-weight: 700;
+	color: #212121;
+	margin-bottom: 8px;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.wt-crp-os-bundle-title a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.wt-crp-os-bundle-title a:hover {
+	color: #007FFF;
+}
+
+.wt-crp-os-bundle-title .dashicons {
+	font-size: 14px;
+	width: 14px;
+	height: 14px;
+	color: #007FFF;
+}
+
+.wt-crp-os-bundle-desc {
+	font-size: 13px;
+	color: #434343;
+	margin-bottom: 12px;
+	line-height: 1.5;
+}
+
+.wt-crp-os-bundle-pills {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	margin-bottom: 12px;
+}
+
+.wt-crp-os-bundle-pill {
+	background: #F1F5FB;
+	border: 1px solid #E2E8F0;
+	border-radius: 20px;
+	padding: 6px 14px;
+	font-size: 13px;
+	color: #212121;
+	font-weight: 500;
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.wt-crp-os-bundle-pill .dashicons {
+	color: #18c01d;
+	font-size: 14px;
+	width: 14px;
+	height: 14px;
+}
+
+.wt-crp-os-bundle-pricing {
+	font-size: 16px;
+	color: #212121;
+	margin-bottom: 16px;
+	font-weight: 500;
+}
+
+.wt-crp-os-bundle-pricing s {
+	color: #9CA3AF;
+	margin-right: 6px;
+	font-weight: 400;
+}
+
+.wt-crp-os-bundle-pricing strong {
+	color: #2369FF;
+	font-weight: 700;
+	font-size: 22px;
+	margin-right: 8px;
+}
+
+.wt-crp-os-savings {
+	color: #F5811F;
+	font-weight: 600;
+}
+
+.wt-crp-os-btn-bundle {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	min-width: 280px;
+	padding: 11px 12px;
+	background: #2369FF;
+	color: #fff;
+	border-radius: 6px;
+	text-decoration: none;
+	font-size: 15px;
+	font-weight: 600;
+	box-sizing: border-box;
+	transition: background 0.15s ease;
+	align-self: flex-start;
+}
+
+.wt-crp-os-btn-bundle:hover,
+.wt-crp-os-btn-bundle:focus {
+	background: #1A55D6;
+	color: #fff;
+	text-decoration: none;
+}
+
+/* -----------------------------------------------------------------------
+   Standalone app card (e.g. EMA app)
+----------------------------------------------------------------------- */
+.wt-crp-os-standalone {
+	background: #fff;
+	border: 1px solid #ECECEC;
+	border-radius: 10px;
+	margin-bottom: 16px;
+	display: flex;
+	overflow: hidden;
+	box-shadow: 0 1px 3px rgba( 0, 0, 0, 0.04 );
+}
+
+.wt-crp-os-standalone-content {
+	flex: 1;
+	padding: 18px 22px;
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+}
+
+.wt-crp-os-standalone-header {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	padding-bottom: 12px;
+	margin-bottom: 12px;
+	border-bottom: 1px solid #ECECEC;
+}
+
+.wt-crp-os-standalone-icon {
+	width: 44px;
+	height: 44px;
+	flex-shrink: 0;
+	border-radius: 8px;
+}
+
+.wt-crp-os-standalone-name {
+	font-size: 18px;
+	font-weight: 700;
+	color: #212121;
+	line-height: 1.3;
+	margin: 0;
+}
+
+.wt-crp-os-standalone-desc {
+	font-size: 16px;
+	color: #434343;
+	line-height: 1.55;
+	margin: 0 0 14px;
+}
+
+.wt-crp-os-standalone-screenshot {
+	width: 40%;
+	background: #F5EFFB;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+}
+
+.wt-crp-os-standalone-screenshot img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	display: block;
+}
+
+@media ( max-width: 780px ) {
+	.wt-crp-os-standalone {
+		flex-direction: column;
+	}
+
+	.wt-crp-os-standalone-screenshot {
+		width: 100%;
+		max-height: 220px;
+	}
+}
+
+/* -----------------------------------------------------------------------
+   Responsive
+----------------------------------------------------------------------- */
+@media ( max-width: 900px ) {
+	.wt-crp-os-card-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.wt-crp-os-hero-right {
+		display: none;
+	}
+
+	.wt-crp-os-card--with-image {
+		flex-direction: column;
+	}
+
+	.wt-crp-os-card--with-image .wt-crp-os-card-image-side {
+		min-height: 180px;
+	}
+}
+
+@media ( max-width: 960px ) {
+	.wt-crp-os-sidebar {
+		width: 180px;
+	}
+}
+
+@media ( max-width: 782px ) {
+	.wt-crp-os-layout {
+		flex-direction: column;
+	}
+
+	.wt-crp-os-sidebar {
+		width: 100%;
+	}
+
+	.wt-crp-os-sidebar-nav {
+		display: flex;
+		flex-wrap: wrap;
+		padding: 8px;
+		gap: 4px;
+	}
+
+	.wt-crp-os-cat-link {
+		border-left: none;
+		border-bottom: 3px solid transparent;
+		border-radius: 4px;
+		padding: 8px 12px;
+	}
+
+	.wt-crp-os-cat-link.active {
+		border-left: none;
+		border-bottom-color: #007FFF;
+	}
+
+	.wt-crp-os-trust-badges {
+		display: none;
+	}
+}
+
+@media ( max-width: 600px ) {
+	.wt-crp-os-card-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.wt-crp-os-card-image {
+		display: none;
+	}
+
+	.wt-crp-os-card--with-image {
+		grid-column: span 1;
+	}
+
+	.wt-crp-os-standalone {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+}

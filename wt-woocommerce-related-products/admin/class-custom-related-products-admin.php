@@ -40,6 +40,10 @@ class Custom_Related_Products_Admin {
 	 */
 	public function enqueue_styles() {
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/custom-related-products-admin.css', array( 'wc-admin-layout' ), $this->version, 'all' );
+
+		if ( $this->is_other_solutions_tab() ) {
+			wp_enqueue_style( 'wt-crp-other-solutions', plugin_dir_url( __FILE__ ) . 'css/wt-crp-other-solutions.css',array( 'dashicons' ), $this->version,'all' );
+		}
 	}
 
 	/**
@@ -52,6 +56,35 @@ class Custom_Related_Products_Admin {
 		if ( isset( $_GET['page'] ) && 'wt-woocommerce-related-products' === $_GET['page'] && current_user_can( 'manage_options' ) ) {
 			wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/custom-related-products-admin.js', array( 'jquery' ), $this->version, false );
 		}
+
+		if ( $this->is_other_solutions_tab() ) {
+			wp_enqueue_script( 'wt-crp-other-solutions', plugin_dir_url( __FILE__ ) . 'js/wt-crp-other-solutions.js', array( 'jquery' ), $this->version, true );
+		}
+
+		$screen = get_current_screen();
+		if ( $screen && 'product' === $screen->id ) {
+			wp_enqueue_script( 'wc-enhanced-select' );
+		}
+	}
+
+	/**
+	 * Check whether the current admin screen is the "You May Also Need" tab.
+	 *
+	 * @since 1.7.7
+	 * @return bool
+	 */
+	private function is_other_solutions_tab() {
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended -- Read-only tab routing, no state change.
+		if ( ! isset( $_GET['page'] ) || 'wt-woocommerce-related-products' !== $_GET['page'] ) {
+			return false;
+		}
+
+		if ( ! current_user_can( apply_filters( 'woocommerce_custom_related_products_role', 'manage_woocommerce' ) ) ) {
+			return false;
+		}
+
+		return isset( $_GET['tab'] ) && 'other-solutions' === $_GET['tab'];
+		// phpcs:enable WordPress.Security.NonceVerification.Recommended
 	}
 
 	/**
@@ -251,17 +284,21 @@ class Custom_Related_Products_Admin {
 			jQuery(document).ready(function() {
 				jQuery('.crp_related_product_attr_search').select2({
 						placeholder: "<?php esc_html_e( 'Search for an attribute...', 'wt-woocommerce-related-products' ); ?>",
-						minimumInputLength: 2,
+						minimumInputLength: 3,
 						multiple: true,
-						noResults: "<?php esc_html_e( 'No results found', 'wt-woocommerce-related-products' ); ?>",
+						language: {
+							noResults: function () {
+								return "<?php esc_html_e( 'No results found', 'wt-woocommerce-related-products' ); ?>";
+							}
+						},
 						ajax: {
 							url: '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>',
 							dataType: 'json',
 							type: "POST",
-							quietMillis: 50,
-							data: function (terms) {
+							delay: 250,
+							data: function ( params ) {
 								return {
-									term: terms.term,
+									term: params.term,
 									_wpnonce: '<?php echo esc_html( wp_create_nonce( 'ajax_search_nonce' ) ); ?>',
 									action: 'wt_crp_ajax_attribute_search',
 								};
@@ -276,7 +313,7 @@ class Custom_Related_Products_Admin {
 									})
 								};
 							}
-						}                
+						}
 				});
 			});
 		</script>
@@ -539,8 +576,8 @@ class Custom_Related_Products_Admin {
 		/*
 		*  @since 1.7.5
 		*/
-		$crp_upsell_banner = ( class_exists('Wbte_Crp_Upsell_Banner') ) ? Wbte_Crp_Upsell_Banner::get_instance() : ''; 
-		if( ! empty($crp_upsell_banner) && ! $crp_upsell_banner->is_banner_dismissed() ){
+		$crp_upsell_banner = ( class_exists( 'Wbte_Crp_Upsell_Banner' ) ) ? Wbte_Crp_Upsell_Banner::get_instance() : '';
+		if ( ! empty( $crp_upsell_banner ) && ! $crp_upsell_banner->is_banner_dismissed() ) {
 			add_settings_field(
 				$this->option_name . '_crp_upsell_banner',
 				'',
@@ -1600,16 +1637,19 @@ class Custom_Related_Products_Admin {
 	/**
 	 * Search for attributes and return json.
 	 */
-	public static function wt_crp_ajax_attribute_search() {
+	public function wt_crp_ajax_attribute_search() {
 
 		check_ajax_referer( 'ajax_search_nonce' );
+
+		if ( ! current_user_can( 'manage_woocommerce' ) ) {
+			wp_die( -1 );
+		}
 
 		$search_term = isset( $_POST['term'] ) ? (string) sanitize_text_field( wp_unslash( $_POST['term'] ) ) : '';
 
 		if ( empty( $search_term ) ) {
-				wp_die();
+			wp_die();
 		}
-		// TODO: Implement filtered list - as of now all attributes are taken on search
 
 		$attr_taxonomies = function_exists( 'wc_get_attribute_taxonomies' ) ? wc_get_attribute_taxonomies() : array();
 		$attributes_list = array();
@@ -1622,10 +1662,13 @@ class Custom_Related_Products_Admin {
 					)
 				);
 				foreach ( $terms as $term ) {
-					$attributes_list[] = array(
-						'id'   => $attr->attribute_name . ':' . $term->term_id,
-						'text' => $attr->attribute_label . ':' . $term->name,
-					);
+					$entry_text = $attr->attribute_label . ':' . $term->name;
+					if ( false !== stripos( $entry_text, $search_term ) ) {
+						$attributes_list[] = array(
+							'id'   => $attr->attribute_name . ':' . $term->term_id,
+							'text' => $entry_text,
+						);
+					}
 				}
 			}
 		}
@@ -1737,11 +1780,11 @@ class Custom_Related_Products_Admin {
 
 		/**
 		 * @var mixed
-		 * 
+		 *
 		 * Display upsell banner
 		 */
-		$crp_upsell_banner = Wbte_Crp_Upsell_Banner::get_instance(); 
-		$crp_upsell_banner->pro_banner_content(); 
+		$crp_upsell_banner = Wbte_Crp_Upsell_Banner::get_instance();
+		$crp_upsell_banner->pro_banner_content();
 	}
 
 	/**
@@ -1773,5 +1816,4 @@ class Custom_Related_Products_Admin {
 		}
 		return true;
 	}
-
 }
