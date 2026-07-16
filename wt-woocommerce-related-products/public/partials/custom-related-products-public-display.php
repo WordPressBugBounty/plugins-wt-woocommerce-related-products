@@ -10,4 +10,8 @@
  * @package    Custom_Related_Products
  * @subpackage Custom_Related_Products/public/partials
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 ?>

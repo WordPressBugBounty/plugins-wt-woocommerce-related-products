@@ -7,6 +7,10 @@
  * @author WebToffee <info@webtoffee.com>
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 if(!class_exists('Wt_Related_Product_Security_Helper'))
 {
 

@@ -7,9 +7,13 @@
  * @package    Custom_Related_Products
  */
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals -- Legacy global/hook/function names kept for backward compatibility.
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals -- Shared cross-plugin hook and constant names kept for backward compatibility.
 
 
 if ( ! class_exists( 'Wt_P_IEW_Cta_Banner' ) ) {

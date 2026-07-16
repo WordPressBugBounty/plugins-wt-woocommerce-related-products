@@ -10,6 +10,11 @@
  * @subpackage Custom_Related_Products/includes
  * @author     markhf
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 class Custom_Related_Products_Activator {
 
 	/**

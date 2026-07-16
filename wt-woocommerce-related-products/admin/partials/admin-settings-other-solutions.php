@@ -6,7 +6,11 @@
  * @since   1.0.0
  */
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals -- Legacy global/hook/function names kept for backward compatibility.
+
 defined( 'ABSPATH' ) || exit;
+
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals -- Template file; variables are template-scoped, not plugin globals.
 
 $img_base = esc_url( CRP_PLUGIN_URL . 'admin/img/other_solutions' );
 

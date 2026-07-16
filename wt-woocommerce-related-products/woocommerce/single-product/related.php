@@ -19,6 +19,8 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals -- Template file; variables are template-scoped and hook names are WooCommerce/WordPress core or legacy plugin hooks kept for backward compatibility.
+
 // Mirror WC core's lazy-load hint: bump WP's media counter so the related
 // product thumbnails (below the fold) get loading="lazy". function_exists()
 // guards WP < 5.9, where the helper does not exist.
@@ -152,12 +154,12 @@ if ( ! function_exists( 'crp_get_all_product_ids_from_attr_ids' ) ) {
 }
 
 $global_related_by = (array) apply_filters( 'wt_crp_global_related_by', get_option('custom_related_products_crp_related_by', array('category')) );
-$number_of_products = get_option('custom_related_products_crp_number', 3);
+$number_of_products = (int) get_option('custom_related_products_crp_number', 3);
 $slider_state = get_option('custom_related_products_slider','enable');
 if ('enable' !== $slider_state) {
 	$number_of_products = class_exists('Custom_Related_Products') ? Custom_Related_Products::wt_get_device_type() : '3';
 }
-$number_of_products = apply_filters('wt_related_products_number', $number_of_products);
+$number_of_products = (int) apply_filters('wt_related_products_number', $number_of_products);
 
 if ( $related_products || !empty($global_related_by) ) :
 

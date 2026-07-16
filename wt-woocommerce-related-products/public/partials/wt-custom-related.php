@@ -4,6 +4,13 @@
  *
  * @version 1.0.0
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals -- Template file; variables are template-scoped and hook names are WooCommerce core hooks, not plugin globals.
+
 $bestseller_product = wc_get_product($id);
 $product = $bestseller_product;
 

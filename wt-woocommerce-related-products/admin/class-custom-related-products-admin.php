@@ -10,6 +10,10 @@
  * @subpackage Custom_Related_Products/admin
  * @author     markhf
  */
+
+if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly.
+
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals -- Legacy global/hook/function names kept for backward compatibility.
 class Custom_Related_Products_Admin {
 
 	private $plugin_name;
@@ -31,6 +35,7 @@ class Custom_Related_Products_Admin {
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
 		add_action( 'wp_ajax_wt_crp_ajax_attribute_search', array( $this, 'wt_crp_ajax_attribute_search' ) );
+		add_action( 'wp_ajax_wt_crp_hide_newsletter_banner', array( $this, 'hide_newsletter_banner' ) );
 	}
 
 	/**
@@ -55,6 +60,14 @@ class Custom_Related_Products_Admin {
 		//phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nonce verification is not required here.
 		if ( isset( $_GET['page'] ) && 'wt-woocommerce-related-products' === $_GET['page'] && current_user_can( 'manage_options' ) ) {
 			wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/custom-related-products-admin.js', array( 'jquery' ), $this->version, false );
+			wp_localize_script(
+				$this->plugin_name,
+				'wt_crp_params',
+				array(
+					'ajax_url' => admin_url( 'admin-ajax.php' ),
+					'nonce'    => wp_create_nonce( 'wt_crp_admin_nonce' ),
+				)
+			);
 		}
 
 		if ( $this->is_other_solutions_tab() ) {
@@ -1815,5 +1828,22 @@ class Custom_Related_Products_Admin {
 			return false;
 		}
 		return true;
+	}
+
+	/**
+	 * AJAX handler to hide the newsletter banner permanently.
+	 *
+	 * @since 1.7.8
+	 */
+	public function hide_newsletter_banner() {
+		check_ajax_referer( 'wt_crp_admin_nonce', '_wpnonce' );
+
+		if ( ! current_user_can( 'manage_woocommerce' ) ) {
+			wp_send_json_error( esc_html__( 'Access denied', 'wt-woocommerce-related-products' ) );
+		}
+
+		update_option( 'wt_crp_newsletter_banner_hidden', true );
+
+		wp_send_json_success( esc_html__( 'Newsletter subscription successful', 'wt-woocommerce-related-products' ) );
 	}
 }

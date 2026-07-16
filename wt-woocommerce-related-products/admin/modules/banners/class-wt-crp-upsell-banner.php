@@ -93,7 +93,7 @@ class Wbte_Crp_Upsell_Banner {
 					</div>
 					<div class="wbte_crp_upsell_banner_actions">
 						<a href="<?php echo esc_url( 'https://www.webtoffee.com/product/woocommerce-product-recommendations/?utm_source=free_plugin_settings_page&utm_medium=related_products&utm_campaign=Product_Recommendations' ); ?>" class="btn-primary" target="_blank"><?php esc_html_e( 'Get plugin now →', 'wt-woocommerce-related-products' ); ?></a>
-						<a href="<?php echo esc_url( '#' ); ?>" class="btn-secondary wbte_crp_upsell_banner_dismiss" ><?php esc_html_e( 'Dismiss', 'wt-woocommerce-related-products' ); ?></a>
+						<a href="<?php echo esc_url( '#' ); ?>" class="btn-secondary wbte_crp_upsell_banner_dismiss" ><?php esc_html_e( 'Maybe Later', 'wt-woocommerce-related-products' ); ?></a>
 						<button type="button" class="popup-close wbte_crp_upsell_banner_closed">
 							<svg class="wt_pklist_banner_dismiss" width="11" height="11" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path d="M9.5 1L1 9.5" stroke="#505050" stroke-width="1.5"></path>

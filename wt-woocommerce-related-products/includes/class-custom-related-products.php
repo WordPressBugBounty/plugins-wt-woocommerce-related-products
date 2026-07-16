@@ -14,6 +14,11 @@
  * @subpackage Custom_Related_Products/includes
  * @author     markhf
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 class Custom_Related_Products {
 
 	protected $loader;
@@ -21,14 +26,14 @@ class Custom_Related_Products {
 	protected $VERSION;
 	protected $plugin_base_name;
 
-	const VERSION = '1.7.7';
+	const VERSION = '1.7.8';
 
 	public function __construct() {
 
 		$this->plugin_name		 = 'wt-woocommerce-related-products';
 		$this->plugin_base_name	 = WT_CRP_BASE_NAME;
 
-		$this->VERSION = '1.7.7';
+		$this->VERSION = '1.7.8';
 
 		$this->load_dependencies();
 		$this->define_admin_hooks();

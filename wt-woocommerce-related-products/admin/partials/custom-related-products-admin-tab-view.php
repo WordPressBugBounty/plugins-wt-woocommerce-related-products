@@ -6,9 +6,13 @@
  * @since 1.0.0
  */
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals -- Legacy global/hook/function names kept for backward compatibility.
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals -- Template file; hook names are legacy plugin hooks kept for backward compatibility.
 ?>
 <div class="woocommerce">
 	<div class="wrap wt-crp-container">

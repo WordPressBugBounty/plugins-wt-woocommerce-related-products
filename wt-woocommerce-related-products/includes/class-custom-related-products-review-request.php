@@ -108,6 +108,12 @@ class WT_CRP_Review_Request
      */
     public function show_banner()
     {
+        /* Only display the review banner on the plugin's own settings page. */
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only admin page check, no state change.
+        if ( ! isset( $_GET['page'] ) || 'wt-woocommerce-related-products' !== sanitize_text_field( wp_unslash( $_GET['page'] ) ) ) {
+            return;
+        }
+
         $this->update_banner_state(1); /* update banner active state */
 ?>
         <div class="<?php echo esc_attr( $this->banner_css_class ); ?> notice-info notice is-dismissible">

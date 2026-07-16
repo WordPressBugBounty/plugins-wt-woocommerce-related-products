@@ -10,6 +10,13 @@
  * @subpackage Custom_Related_Products/public
  * @author     markhf
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals -- Legacy and WooCommerce/WordPress core hook names kept for backward compatibility.
+
 class Custom_Related_Products_Public {
 
     /**

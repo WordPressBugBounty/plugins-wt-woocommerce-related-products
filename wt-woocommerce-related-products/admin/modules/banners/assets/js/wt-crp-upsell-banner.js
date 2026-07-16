@@ -36,7 +36,7 @@
                 $(document).on('click', '.wbte_crp_upsell_banner_dismiss', function(e) {
                     e.preventDefault();
                     self.hideBanner(this);
-                    self.sendAjax(true); // permanent dismiss
+                    self.sendAjax(false); // "Maybe Later" — snooze for 7 days
                 });
             },
 
@@ -45,7 +45,7 @@
                 $(document).on('click', '.wbte_crp_upsell_banner_closed', function(e) {
                     e.preventDefault();
                     self.hideBanner(this);
-                    self.sendAjax(false); // hide for 7 days
+                    self.sendAjax(true); // close (×) — permanent dismiss
                 });
             }
         };

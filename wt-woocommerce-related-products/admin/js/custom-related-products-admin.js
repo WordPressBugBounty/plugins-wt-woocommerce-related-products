@@ -66,4 +66,77 @@
 
 		}
 	);
+
+	/** Newsletter: show spinner on Subscribe click, hide when Mailchimp responds; on success call our AJAX to hide banner. */
+	jQuery( document ).ready(
+		function () {
+			var newsletterBoxSelector = '.wt_crp_newsletter_subscription_box';
+			var newsletterHideRequestInProgress = false;
+
+			function showNewsletterLoader( $box ) {
+				if ( $box.hasClass( 'wt_newsletter_loading' ) ) {
+					return;
+				}
+				$box.addClass( 'wt_newsletter_loading' ).append(
+					'<div class="wt_newsletter_loader"><span class="spinner"></span></div>'
+				);
+				$box.find( '.wt_newsletter_loader .spinner' ).css( 'visibility', 'visible' );
+			}
+
+			function removeNewsletterLoader( $box ) {
+				$box.removeClass( 'wt_newsletter_loading' ).find( '.wt_newsletter_loader' ).remove();
+			}
+
+			function checkForNewsletterSuccess() {
+				var $box = $( newsletterBoxSelector );
+				var successResponse = $box.find( '#mce-success-response' );
+				var errorResponse   = $box.find( '#mce-error-response' );
+				var successHasContent = successResponse.length && successResponse.text().trim().length > 0;
+				var errorHasContent   = errorResponse.length && errorResponse.text().trim().length > 0;
+				var isSuccessVisible = successHasContent && successResponse.is( ':visible' );
+
+				if ( newsletterHideRequestInProgress || ! isSuccessVisible || errorHasContent ) {
+					return;
+				}
+				newsletterHideRequestInProgress = true;
+				$.ajax({
+					url: wt_crp_params.ajax_url,
+					type: 'POST',
+					dataType: 'json',
+					data: {
+						action: 'wt_crp_hide_newsletter_banner',
+						_wpnonce: wt_crp_params.nonce
+					},
+					success: function( response ) {
+						if ( response && response.success ) {
+							removeNewsletterLoader( $box );
+							setTimeout(function () {
+								$box.fadeOut( 500, function () {
+									$( this ).remove();
+								} );
+							}, 3000);
+						}
+					},
+					error: function () {
+						removeNewsletterLoader( $box );
+					}
+				});
+			}
+
+			if ( 'undefined' !== typeof wt_crp_params && -1 !== window.location.href.indexOf( 'wt-woocommerce-related-products' ) && $( newsletterBoxSelector ).length ) {
+				var $box = $( newsletterBoxSelector );
+				$box.on( 'click', '.wbte-newsletter-subscribe-button', function () {
+					showNewsletterLoader( $box );
+				} );
+				checkForNewsletterSuccess();
+				var newsletterCheckInterval = setInterval( function () {
+					if ( ! $( newsletterBoxSelector ).length ) {
+						clearInterval( newsletterCheckInterval );
+						return;
+					}
+					checkForNewsletterSuccess();
+				}, 1000 );
+			}
+		}
+	);
 })( jQuery );
