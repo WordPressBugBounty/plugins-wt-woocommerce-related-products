@@ -1813,6 +1813,35 @@ class Custom_Related_Products_Admin {
 	}
 
 	/**
+	 * Whether every plugin in the given list is present on the site.
+	 *
+	 * @since 1.7.9
+	 *
+	 * @param array $plugin_files Plugin basenames, e.g. 'wt-woocommerce-gift-cards/wt-woocommerce-gift-cards.php'.
+	 * @return bool True when the list is non-empty and every entry is installed.
+	 */
+	public static function wt_crp_owns_all_plugins( $plugin_files ) {
+
+		if ( empty( $plugin_files ) || ! is_array( $plugin_files ) ) {
+			return false;
+		}
+
+		if ( ! function_exists( 'get_plugins' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
+
+		$installed = array_keys( get_plugins() );
+
+		foreach ( $plugin_files as $plugin_file ) {
+			if ( ! in_array( $plugin_file, $installed, true ) ) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	/**
 	 * To Check if the current date is on or between the start and end date of black friday and cyber monday banner for 2024.
 	 *
 	 * @since 1.7.5

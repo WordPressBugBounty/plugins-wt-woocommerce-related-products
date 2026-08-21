@@ -1,27 +1,62 @@
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: Related Products for WooCommerce\n"
-"POT-Creation-Date: 2021-10-28 14:17+0530\n"
+"Project-Id-Version: Related Products for WooCommerce 1.7.9\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wt-woocommerce-related-products\n"
+"POT-Creation-Date: 2026-08-03T08:53:14+00:00\n"
 "PO-Revision-Date: 2021-10-28 14:18+0530\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: es\n"
+"Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Domain: wt-woocommerce-related-products\n"
 "X-Generator: Poedit 3.0\n"
 "X-Poedit-Basepath: ..\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
-"X-Poedit-WPHeader: custom-related-products.php\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
-"_nx_noop:3c,1,2;__ngettext_noop:1,2;esc_html__\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2;esc_html__\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.min.js\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-WPHeader: custom-related-products.php\n"
 
-#: admin/class-custom-related-products-admin.php:57
+#. Plugin Name of the plugin
+#: custom-related-products.php
+msgid ""
+"Related Products - Create Upsells, Cross-sells, and Product Recommendations "
+"for WooCommerce"
+msgstr ""
+"Related Products - Create Upsells, Cross-sells, and Product Recommendations "
+"for WooCommerce"
+
+#. Plugin URI of the plugin
+#: custom-related-products.php
+msgid "https://wordpress.org/plugins/wt-woocommerce-related-products/"
+msgstr "https://wordpress.org/plugins/wt-woocommerce-related-products/"
+
+#. Description of the plugin
+#: custom-related-products.php
+msgid ""
+"Displays custom related products based on category, tag, attribute or "
+"product for your WooCommerce store."
+msgstr ""
+"Muestra productos relacionados personalizados según categoría, etiqueta, "
+"atributo o producto en tu tienda WooCommerce."
+
+#. Author of the plugin
+#: custom-related-products.php
+msgid "WebToffee"
+msgstr "WebToffee"
+
+#. Author URI of the plugin
+#: custom-related-products.php
+msgid "https://www.webtoffee.com/"
+msgstr "https://www.webtoffee.com/"
+
+#. translators: %1$s HTML a tag opening, %2$s HTML a tag closing.
+#: admin/class-custom-related-products-admin.php:117
 #, php-format
 msgid ""
 "Please select %1$s Working mode %2$s as \"Custom related products\" to "
@@ -31,34 +66,45 @@ msgstr ""
 "WooCommerce %2$s para reflejar los productos relacionados seleccionados en "
 "la página del producto."
 
-#: admin/class-custom-related-products-admin.php:61
+#: admin/class-custom-related-products-admin.php:124
 msgid "Custom related product settings:"
 msgstr "Configuración personalizada de productos relacionados:"
 
-#: admin/class-custom-related-products-admin.php:61
+#: admin/class-custom-related-products-admin.php:124
 msgid ""
-"Displays related products for this product based on the following selection."
+"Related products for this item will be shown based on the selection made "
+"below."
 msgstr ""
-"Muestra productos relacionados para este producto según la siguiente "
-"selección."
+"Los productos relacionados con este artículo se mostrarán según la selección"
+" realizada a continuación."
 
-#: admin/class-custom-related-products-admin.php:62
-msgid "Related categories"
-msgstr "Categorias relacionadas"
+#: admin/class-custom-related-products-admin.php:127
+msgid "Categories"
+msgstr "Categorías"
 
-#: admin/class-custom-related-products-admin.php:80
+#: admin/class-custom-related-products-admin.php:128
+#: admin/class-custom-related-products-admin.php:263
+#: admin/class-custom-related-products-admin.php:1186
+msgid "Search for a category..."
+msgstr "Buscar una categoría..."
+
+#: admin/class-custom-related-products-admin.php:145
 msgid ""
-"Products from chosen categories will be displayed as related products on the "
-"product page."
+"Products from chosen categories will be displayed as related products on the"
+" product page."
 msgstr ""
 "Los productos de las categorías elegidas se mostrarán como productos "
 "relacionados en la página del producto."
 
-#: admin/class-custom-related-products-admin.php:84
-msgid "Related tags"
-msgstr "Etiquetas relacionadas"
+#: admin/class-custom-related-products-admin.php:152
+msgid "Tags"
+msgstr "Etiquetas"
 
-#: admin/class-custom-related-products-admin.php:113
+#: admin/class-custom-related-products-admin.php:153
+msgid "Select for a tag..."
+msgstr "Selecciona una etiqueta..."
+
+#: admin/class-custom-related-products-admin.php:169
 msgid ""
 "Products from chosen tags will be displayed as related products on the "
 "product page."
@@ -66,41 +112,41 @@ msgstr ""
 "Los productos de las etiquetas elegidas se mostrarán como productos "
 "relacionados en la página del producto."
 
-#: admin/class-custom-related-products-admin.php:122
-msgid "Related attributes"
-msgstr "Categorias relacionadas"
+#: admin/class-custom-related-products-admin.php:180
+msgid "Attributes"
+msgstr "Atributos"
 
-#: admin/class-custom-related-products-admin.php:154
+#: admin/class-custom-related-products-admin.php:202
 msgid ""
-"Products from chosen attributes will be displayed as related products on the "
-"product page."
+"Products from chosen attributes will be displayed as related products on the"
+" product page."
 msgstr ""
 "Los productos de las categorías elegidas se mostrarán como productos "
 "relacionados en la página del producto."
 
-#: admin/class-custom-related-products-admin.php:164
-#: admin/class-custom-related-products-admin.php:178
-msgid "Related products"
-msgstr "Productos relacionados"
+#: admin/class-custom-related-products-admin.php:212
+#: admin/class-custom-related-products-admin.php:236
+msgid "Products"
+msgstr "Productos"
 
-#: admin/class-custom-related-products-admin.php:165
-#: admin/class-custom-related-products-admin.php:184
+#: admin/class-custom-related-products-admin.php:218
+#: admin/class-custom-related-products-admin.php:242
 msgid "Search for a product&hellip;"
 msgstr "Buscar un producto&hellip;"
 
-#: admin/class-custom-related-products-admin.php:175
-#: admin/class-custom-related-products-admin.php:195
+#: admin/class-custom-related-products-admin.php:233
+#: admin/class-custom-related-products-admin.php:255
 msgid ""
 "Choose products to be displayed as related products on the product page."
 msgstr ""
 "Elija productos que se mostrarán como productos relacionados en la página "
 "del producto."
 
-#: admin/class-custom-related-products-admin.php:201
+#: admin/class-custom-related-products-admin.php:262
 msgid "Exclude categories"
 msgstr "Excluir categorías"
 
-#: admin/class-custom-related-products-admin.php:216
+#: admin/class-custom-related-products-admin.php:281
 msgid ""
 "Products from chosen categories will be excluded from related products on "
 "the product page."
@@ -108,235 +154,396 @@ msgstr ""
 "Los productos de las categorías elegidas se mostrarán como productos "
 "relacionados en la página del producto."
 
-#: admin/class-custom-related-products-admin.php:233
-msgid "Select related categories"
-msgstr "Seleccionar categorías relacionadas"
+#: admin/class-custom-related-products-admin.php:299
+msgid "Search for an attribute..."
+msgstr "Buscar un atributo..."
 
-#: admin/class-custom-related-products-admin.php:236
-msgid "Select related tags"
-msgstr "Seleccionar etiquetas relacionadas"
+#: admin/class-custom-related-products-admin.php:304
+msgid "No results found"
+msgstr "No se encontraron resultados"
 
-#: admin/class-custom-related-products-admin.php:239
-msgid "Select attributes"
-msgstr "Seleccionar atributos"
+#: admin/class-custom-related-products-admin.php:469
+msgid "Related Products for WooCommerce"
+msgstr "Related Products for WooCommerce"
 
-#: admin/class-custom-related-products-admin.php:242
-msgid "Select categories"
-msgstr "Seleccionar categorías"
-
-#: admin/class-custom-related-products-admin.php:374
-msgid "Custom Related Products Settings"
-msgstr "Configuración personalizada de productos relacionados"
-
-#: admin/class-custom-related-products-admin.php:374
-#: admin/class-custom-related-products-admin.php:511
-#: woocommerce/single-product/related.php:126
+#: admin/class-custom-related-products-admin.php:470
+#: admin/class-custom-related-products-admin.php:1038
+#: woocommerce/cart/wt-cart.php:624 woocommerce/cart/wt-cart.php:721
+#: woocommerce/single-product/related.php:647
+#: woocommerce/single-product/related.php:756
 msgid "Related Products"
 msgstr "Productos relacionados"
 
-#: admin/class-custom-related-products-admin.php:389
-msgid "Choose working mode"
-msgstr "Elige el modo de trabajo"
+#: admin/class-custom-related-products-admin.php:516
+msgid "Working mode"
+msgstr "Modo de funcionamiento"
 
-#: admin/class-custom-related-products-admin.php:393
-msgid "Show heading as"
-msgstr "Mostrar encabezado como"
+#: admin/class-custom-related-products-admin.php:524
+msgid "Show related products in cart"
+msgstr "Mostrar productos relacionados en el carrito"
 
-#: admin/class-custom-related-products-admin.php:398
-msgid "Globally relate products by"
-msgstr "Productos relacionados personalizados"
+#: admin/class-custom-related-products-admin.php:524
+msgid ""
+"Enable to display the related products recommendation on the cart page."
+msgstr ""
+"Actívalo para mostrar la recomendación de productos relacionados en la "
+"página del carrito."
 
-#: admin/class-custom-related-products-admin.php:403
-msgid "Order by"
-msgstr "Ordenar por"
+#: admin/class-custom-related-products-admin.php:535
+msgid "Slider"
+msgstr "Slider"
 
-#: admin/class-custom-related-products-admin.php:408
-msgid "Order"
-msgstr "Orden"
+#: admin/class-custom-related-products-admin.php:535
+msgid ""
+"Turn on the product slider to allow customers to browse related products by "
+"swiping left or right."
+msgstr ""
+"Activa el slider de productos para que los clientes puedan explorar los "
+"productos relacionados deslizando a izquierda o derecha."
 
-#: admin/class-custom-related-products-admin.php:413
+#: admin/class-custom-related-products-admin.php:546
+msgid "Number of products to display on slider per page"
+msgstr "Número de productos que se muestran en el slider por página"
+
+#. translators: %1$s HTML b tag opening, %2$s HTML b tag closing.
+#: admin/class-custom-related-products-admin.php:558
 msgid "Number of products to display"
 msgstr "Numero de productos a mostrar"
 
-#: admin/class-custom-related-products-admin.php:417
+#. translators: %1$s HTML b tag opening, %2$s HTML b tag closing.
+#: admin/class-custom-related-products-admin.php:558
+#, php-format
+msgid ""
+"Choose the number of products to display as related products. This number "
+"must be greater than the %1$sNumber of products to display on the slider per"
+" page%2$s for the slider to function correctly. The default value is 4."
+msgstr ""
+"Elige el número de productos que se mostrarán como productos relacionados. "
+"Este número debe ser mayor que %1$sNúmero de productos que se muestran en el"
+" slider por página%2$s para que el slider funcione correctamente. El valor "
+"predeterminado es 4."
+
+#: admin/class-custom-related-products-admin.php:569
+msgid "Slider width"
+msgstr "Ancho del slider"
+
+#: admin/class-custom-related-products-admin.php:569
+msgid "Alter the width of the related product section."
+msgstr "Modifica el ancho de la sección de productos relacionados."
+
+#: admin/class-custom-related-products-admin.php:580
+msgid "Use custom slider arrow"
+msgstr "Usar flecha de slider personalizada"
+
+#: admin/class-custom-related-products-admin.php:611
+msgid "Related products title"
+msgstr "Título de productos relacionados"
+
+#: admin/class-custom-related-products-admin.php:611
+msgid ""
+"The entered text will be displayed as the title of related products "
+"recommendation on the store."
+msgstr ""
+"El texto introducido se mostrará como título de la recomendación de "
+"productos relacionados en la tienda."
+
+#: admin/class-custom-related-products-admin.php:623
+msgid "Display related products from"
+msgstr "Mostrar productos relacionados de"
+
+#: admin/class-custom-related-products-admin.php:623
+msgid ""
+"Based on the selection made, products from the same category and tag will be"
+" shown as recommendations."
+msgstr ""
+"Según la selección realizada, se mostrarán como recomendaciones productos de"
+" la misma categoría y etiqueta."
+
+#: admin/class-custom-related-products-admin.php:635
+msgid "Hide related products for categories"
+msgstr "Ocultar productos relacionados para categorías"
+
+#: admin/class-custom-related-products-admin.php:635
+msgid ""
+"Select which categories should be excluded from displaying related products."
+msgstr ""
+"Selecciona qué categorías deben excluirse de mostrar productos relacionados."
+
+#: admin/class-custom-related-products-admin.php:647
+msgid "Hide related products for products"
+msgstr "Ocultar productos relacionados para productos"
+
+#: admin/class-custom-related-products-admin.php:647
+msgid "Select individual products that should not display related products."
+msgstr ""
+"Selecciona los productos concretos que no deben mostrar productos "
+"relacionados."
+
+#: admin/class-custom-related-products-admin.php:671
+msgid "Sort by"
+msgstr "Ordenar por"
+
+#: admin/class-custom-related-products-admin.php:671
+msgid "Select the criteria for sorting related products."
+msgstr "Selecciona el criterio para ordenar los productos relacionados."
+
+#: admin/class-custom-related-products-admin.php:683
+msgid "Sort order"
+msgstr "Orden de clasificación"
+
+#: admin/class-custom-related-products-admin.php:683
+msgid ""
+"Choose whether to sort related products in ascending (A-Z, low to high) or "
+"descending (Z-A, high to low) order based on the selected criteria."
+msgstr ""
+"Elige si los productos relacionados se ordenan de forma ascendente (A-Z, de "
+"menor a mayor) o descendente (Z-A, de mayor a menor) según el criterio "
+"seleccionado."
+
+#: admin/class-custom-related-products-admin.php:700
 msgid "Exclude out of stock products"
 msgstr "Excluir productos agotados"
 
-#: admin/class-custom-related-products-admin.php:421
-msgid "Use slider"
-msgstr "Utilice el slider"
+#: admin/class-custom-related-products-admin.php:700
+msgid ""
+"Enable to exclude out of stock products from being displayed as related "
+"product recommendations."
+msgstr ""
+"Actívalo para excluir los productos agotados de las recomendaciones de "
+"productos relacionados."
 
-#: admin/class-custom-related-products-admin.php:425
-msgid "WPML: Use original product ID"
-msgstr "WPML: use ID de producto original"
+#: admin/class-custom-related-products-admin.php:713
+msgid "Exclude Backorder products"
+msgstr "Excluir productos en pedido pendiente"
 
-#: admin/class-custom-related-products-admin.php:429
+#: admin/class-custom-related-products-admin.php:713
+msgid ""
+"Enable to exclude backorder products from being displayed as related product"
+" recommendations."
+msgstr ""
+"Actívalo para excluir los productos en pedido pendiente de las "
+"recomendaciones de productos relacionados."
+
+#: admin/class-custom-related-products-admin.php:730
+msgid "Use original product ID(WPML)"
+msgstr "Usar el ID de producto original (WPML)"
+
+#: admin/class-custom-related-products-admin.php:741
 msgid "Override theme's template"
 msgstr "Anular la plantilla del tema"
 
-#: admin/class-custom-related-products-admin.php:487
+#: admin/class-custom-related-products-admin.php:741
+msgid "Enable to override the theme's existing template for related products."
+msgstr ""
+"Actívalo para sobrescribir la plantilla existente del tema para los "
+"productos relacionados."
+
+#: admin/class-custom-related-products-admin.php:1014
 msgid "Custom related products"
 msgstr "Productos relacionados personalizados"
 
-#: admin/class-custom-related-products-admin.php:489
+#: admin/class-custom-related-products-admin.php:1016
 msgid ""
-"Displays related products as per the settings done in this plugin. You will "
-"get full customization options. (Recommended)."
+"Get full control over which products are displayed as related products and "
+"appearance using advanced customization options.(Recommended)"
 msgstr ""
-"Muestra productos relacionados según la configuración realizada en este "
-"complemento. Obtendrá opciones de personalización completas. (Recomendado)."
+"Obtén control total sobre qué productos se muestran como relacionados y "
+"sobre su apariencia mediante opciones de personalización avanzadas. "
+"(Recomendado)"
 
-#: admin/class-custom-related-products-admin.php:493
-msgid "Default related products"
-msgstr "Productos relacionados personalizados"
+#: admin/class-custom-related-products-admin.php:1020
+msgid "Default"
+msgstr "Predeterminado"
 
-#: admin/class-custom-related-products-admin.php:495
+#: admin/class-custom-related-products-admin.php:1022
 msgid ""
-"Works on WooCommerce's default related products settings with limited "
-"customizations."
+"Use WooCommerce's built-in related products settings with limited "
+"customization options."
 msgstr ""
-"Funciona en la configuración predeterminada de productos relacionados de "
-"WooCommerce con personalizaciones limitadas."
+"Usa la configuración de productos relacionados integrada de WooCommerce, con"
+" opciones de personalización limitadas."
 
-#: admin/class-custom-related-products-admin.php:501
-msgid "Remove related products"
-msgstr "Productos relacionados"
+#: admin/class-custom-related-products-admin.php:1028
+msgid "Disable recommendation"
+msgstr "Desactivar recomendación"
 
-#: admin/class-custom-related-products-admin.php:503
-msgid "Removes the related products section from your site entirely."
-msgstr "Elimina la sección de productos relacionados de su sitio por completo."
-
-#: admin/class-custom-related-products-admin.php:517
-msgid "Enter text to display as heading for the related products."
+#: admin/class-custom-related-products-admin.php:1030
+msgid "Completely remove the related products section from your store."
 msgstr ""
-"Introduzca texto para mostrar como encabezado de los productos relacionados."
+"Elimina por completo la sección de productos relacionados de tu tienda."
 
-#: admin/class-custom-related-products-admin.php:531
-msgid "Category"
-msgstr "Categoría"
+#: admin/class-custom-related-products-admin.php:1051
+msgid "100"
+msgstr "100"
 
-#: admin/class-custom-related-products-admin.php:532
-msgid "Tag"
-msgstr "Etiqueta"
+#: admin/class-custom-related-products-admin.php:1057
+msgid "%"
+msgstr "%"
 
-#: admin/class-custom-related-products-admin.php:536
-msgid "Select options"
-msgstr "Seleccionar opciones"
+#: admin/class-custom-related-products-admin.php:1108
+#: admin/class-custom-related-products-admin.php:1123
+msgid "Desktop"
+msgstr "Escritorio"
 
-#: admin/class-custom-related-products-admin.php:543
+#: admin/class-custom-related-products-admin.php:1112
+#: admin/class-custom-related-products-admin.php:1127
+msgid "Tablet"
+msgstr "Tableta"
+
+#: admin/class-custom-related-products-admin.php:1116
+#: admin/class-custom-related-products-admin.php:1131
+msgid "Mobile"
+msgstr "Móvil"
+
+#: admin/class-custom-related-products-admin.php:1119
+msgid "Enter the number of products to be shown in the slider per view."
+msgstr ""
+"Introduce el número de productos que se mostrarán en el slider por vista."
+
+#: admin/class-custom-related-products-admin.php:1151
+msgid "Same category"
+msgstr "Misma categoría"
+
+#: admin/class-custom-related-products-admin.php:1157
+msgid "Same tag"
+msgstr "Misma etiqueta"
+
+#: admin/class-custom-related-products-admin.php:1170
 msgid ""
-"Select to display related products for all products based on category,tag or "
-"both."
+"To override the 'Display related products from' selection or to set related "
+"products individually for each product:"
 msgstr ""
-"Permitir mostrar productos relacionados personalizados según la categoría / "
-"etiquetas / productos."
+"Para sobrescribir la selección de 'Mostrar productos relacionados de' o "
+"establecer productos relacionados individualmente para cada producto:"
 
-#: admin/class-custom-related-products-admin.php:544
-#, php-format
-msgid "Use this %1$s code snippet %2$s to relate products by sub-category."
-msgstr ""
-"Utilice este %1$s fragmento de código %2$s para relacionar productos por "
-"subcategoría."
+#: admin/class-custom-related-products-admin.php:1172
+msgid "Navigate to Products"
+msgstr "Ir a Productos"
 
-#: admin/class-custom-related-products-admin.php:548
-msgid ""
-"To override the above 'Globally relate products by' selection or to set "
-"related products individually for each product:"
-msgstr ""
-"Para anular la selección anterior 'Relacionar productos globalmente por' o "
-"para establecer productos relacionados individualmente para cada producto:"
-
-#: admin/class-custom-related-products-admin.php:550
-msgid "Go to Products"
-msgstr "Ir a productos"
-
-#: admin/class-custom-related-products-admin.php:550
+#: admin/class-custom-related-products-admin.php:1172
 msgid "Edit Product"
 msgstr "Editar Producto"
 
-#: admin/class-custom-related-products-admin.php:550
+#: admin/class-custom-related-products-admin.php:1172
 msgid "Linked Products"
 msgstr "Productos vinculados"
 
-#: admin/class-custom-related-products-admin.php:551
+#: admin/class-custom-related-products-admin.php:1173
 msgid ""
-"Select the category, tag, attribute or product to display related products "
-"individually for each product."
+"Choose to display related products from specific categories, tags, "
+"attributes, or products."
 msgstr ""
-"Seleccione la categoría, etiqueta, atributo o producto para mostrar "
-"productos relacionados individualmente para cada producto."
+"Elige mostrar productos relacionados de categorías, etiquetas, atributos o "
+"productos concretos."
 
-#: admin/class-custom-related-products-admin.php:565
+#: admin/class-custom-related-products-admin.php:1211
+msgid "Search for a product..."
+msgstr "Buscar un producto..."
+
+#: admin/class-custom-related-products-admin.php:1235
 msgid "Product title"
 msgstr "Título del producto"
 
-#: admin/class-custom-related-products-admin.php:566
+#: admin/class-custom-related-products-admin.php:1236
 msgid "Date"
 msgstr "Fecha"
 
-#: admin/class-custom-related-products-admin.php:567
+#: admin/class-custom-related-products-admin.php:1237
 msgid "Slug name"
 msgstr "Nombre de la babosa"
 
-#: admin/class-custom-related-products-admin.php:568
+#: admin/class-custom-related-products-admin.php:1238
 msgid "Random"
 msgstr "Aleatorio"
 
-#: admin/class-custom-related-products-admin.php:569
+#: admin/class-custom-related-products-admin.php:1239
 msgid "Last modified"
 msgstr "Última modificación"
 
-#: admin/class-custom-related-products-admin.php:571
-msgid "Sort related products based on the selection."
-msgstr "Ordene los productos relacionados según la selección."
+#: admin/class-custom-related-products-admin.php:1240
+msgid "Price"
+msgstr "Precio"
 
-#: admin/class-custom-related-products-admin.php:582
+#: admin/class-custom-related-products-admin.php:1241
+msgid "Popularity"
+msgstr "Popularidad"
+
+#: admin/class-custom-related-products-admin.php:1242
+msgid "Avg rating"
+msgstr "Valoración media"
+
+#: admin/class-custom-related-products-admin.php:1243
+msgid "Relevance"
+msgstr "Relevancia"
+
+#: admin/class-custom-related-products-admin.php:1255
 msgid "Ascending"
 msgstr "Ascendente"
 
-#: admin/class-custom-related-products-admin.php:583
+#: admin/class-custom-related-products-admin.php:1256
 msgid "Descending"
 msgstr "Descendente"
 
-#: admin/class-custom-related-products-admin.php:585
-msgid "Arrange the 'Order by' selection in ascending or descending order."
-msgstr "Organice la selección 'Ordenar por' en orden ascendente o descendente."
+#: admin/class-custom-related-products-admin.php:1270
+msgid "products."
+msgstr "productos."
 
-#: admin/class-custom-related-products-admin.php:598
-msgid ""
-"Enter the maximum number of products to display as related products. Default "
-"value is '3'."
+#: admin/class-custom-related-products-admin.php:1282
+msgid "Prevent out of stock products from being displayed in the widget"
+msgstr "Evita que los productos agotados se muestren en el widget"
+
+#: admin/class-custom-related-products-admin.php:1297
+msgid "Prevent backorder products from being displayed in the widget"
+msgstr "Evita que los productos en pedido pendiente se muestren en el widget"
+
+#: admin/class-custom-related-products-admin.php:1310
+msgid "Showcase products in a slidable widget"
+msgstr "Muestra productos en un widget deslizable"
+
+#: admin/class-custom-related-products-admin.php:1327
+msgid "bxSlider"
+msgstr "bxSlider"
+
+#: admin/class-custom-related-products-admin.php:1333
+msgid "Swiper slider"
+msgstr "Slider Swiper"
+
+#: admin/class-custom-related-products-admin.php:1335
+msgid "Try switching the slider type if any conflicts with the site theme."
 msgstr ""
-"Elija productos que se mostrarán como productos relacionados en la página "
-"del producto."
+"Prueba a cambiar el tipo de slider si hay conflictos con el tema del sitio."
 
-#: admin/class-custom-related-products-admin.php:610
-#: admin/class-custom-related-products-admin.php:624
-#: admin/class-custom-related-products-admin.php:638
-#: admin/class-custom-related-products-admin.php:657
-msgid "Enable"
-msgstr "Habilitar"
-
-#: admin/class-custom-related-products-admin.php:612
+#. translators: %1$s HTML a tag opening, %2$s HTML a tag closing.
+#: admin/class-custom-related-products-admin.php:1343
+#, php-format
 msgid ""
-"Enable to exclude out of stock products from displaying in related products."
+"bxSlider is a fully-loaded, responsive jQuery content slider.%1$s Know more."
+" %2$s"
 msgstr ""
-"Habilite esta opción para excluir productos agotados para que no se muestren "
-"en productos relacionados."
+"bxSlider es un slider de contenido jQuery completo y adaptable.%1$s Más "
+"información. %2$s"
 
-#: admin/class-custom-related-products-admin.php:626
-msgid "Enable slider to swipe related products left or right."
-msgstr "Pasos para vincular productos relacionados para cada producto:"
-
-#: admin/class-custom-related-products-admin.php:641
+#. translators: %1$s HTML a tag opening, %2$s HTML a tag closing.
+#: admin/class-custom-related-products-admin.php:1350
+#, php-format
 msgid ""
-"Enable to display related products for translated products based on original "
-"product ID."
+"Swiper - is the free and most modern mobile touch slider with hardware "
+"accelerated transitions and amazing native behavior.%1$s Know more. %2$s"
+msgstr ""
+"Swiper es el slider táctil móvil gratuito y más moderno, con transiciones "
+"aceleradas por hardware y un excelente comportamiento nativo.%1$s Más "
+"información. %2$s"
+
+#: admin/class-custom-related-products-admin.php:1368
+msgid ""
+"Enable to display related products for translated products based on original"
+" product ID."
 msgstr ""
 "Permitir mostrar productos relacionados personalizados según la categoría / "
 "etiquetas / productos."
 
-#: admin/class-custom-related-products-admin.php:644
+#. translators: %1$s HTML b tag opening, %2$s HTML b tag closing.
+#: admin/class-custom-related-products-admin.php:1373
 #, php-format
 msgid ""
 "%1$s Note:%2$s Ensure that each product has a corresponding translated "
@@ -345,19 +552,13 @@ msgstr ""
 "%1$s Nota: %2$s asegúrese de que cada producto tenga un producto traducido "
 "correspondiente en su sitio."
 
-#: admin/class-custom-related-products-admin.php:659
-msgid "Enable to override the theme’s existing template for related products."
-msgstr ""
-"Habilite esta opción para anular la plantilla existente del tema para "
-"productos relacionados."
-
-#: admin/class-custom-related-products-admin.php:662
+#: admin/class-custom-related-products-admin.php:1391
 msgid "If disabled, the above settings may not be reflected in the front end."
 msgstr ""
 "Si está deshabilitado, es posible que la configuración anterior no se "
 "refleje en la interfaz."
 
-#: admin/class-custom-related-products-admin.php:671
+#: admin/class-custom-related-products-admin.php:1400
 msgid ""
 "Displays custom related products based on category, tag, attribute or "
 "product."
@@ -365,141 +566,1079 @@ msgstr ""
 "Permitir mostrar productos relacionados personalizados según la categoría / "
 "etiquetas / productos."
 
-#: admin/class-custom-related-products-admin.php:674
+#: admin/class-custom-related-products-admin.php:1403
 msgid "Read documentation"
 msgstr "Leer documentación"
 
-#: admin/class-custom-related-products-admin.php:682
+#. translators: %1$s HTML code tag opening, %2$s HTML code tag closing, %3$s
+#. HTML code tag opening, %4$s HTML code tag closing.
+#: admin/class-custom-related-products-admin.php:1417
+#, php-format
 msgid ""
-"Note: Use shortcode [wt-related-products product_id=\"xx\"] to display "
-"related products to posts/pages of your site."
+"Use the shortcode %1$s[wt-related-products product_id=XX]%2$s to show "
+"related products on custom posts/pages.<br>Replace the %3$sXX%4$s "
+"placeholder with the product ID of the product you are basing the "
+"recommendation on."
 msgstr ""
-"Nota: Utilice el código corto [wt-related-products product_id = \"xx\"] para "
-"mostrar productos relacionados en publicaciones / páginas de su sitio."
+"Usa el shortcode %1$s[wt-related-products product_id=XX]%2$s para mostrar "
+"productos relacionados en entradas o páginas personalizadas.<br>Sustituye el"
+" marcador %3$sXX%4$s por el ID del producto en el que se basa la "
+"recomendación."
 
-#: admin/class-custom-related-products-admin.php:697
+#: admin/class-custom-related-products-admin.php:1437
+msgid "Advanced"
+msgstr "Avanzado"
+
+#: admin/class-custom-related-products-admin.php:1450
+msgid "Widget Settings"
+msgstr "Ajustes del widget"
+
+#: admin/class-custom-related-products-admin.php:1468
+#: admin/partials/custom-related-products-admin-display.php:26
+#: admin/partials/custom-related-products-admin-tab-view.php:23
 msgid "Settings"
 msgstr "Ajustes"
 
-#: admin/class-custom-related-products-admin.php:698
+#: admin/class-custom-related-products-admin.php:1469
 msgid "Documentation"
 msgstr "Documentación"
 
-#: admin/class-custom-related-products-admin.php:699
-#: admin/class-custom-related-products-admin.php:722
+#: admin/class-custom-related-products-admin.php:1470
+#: admin/class-custom-related-products-admin.php:1493
 msgid "Support"
 msgstr "Apoyo"
 
-#: admin/class-custom-related-products-admin.php:700
+#: admin/class-custom-related-products-admin.php:1471
 msgid "Review"
 msgstr "Revisión"
 
-#: admin/class-custom-related-products-admin.php:722
+#: admin/class-custom-related-products-admin.php:1493
 msgid "Visit support forums"
 msgstr "Visite los foros de soporte"
 
-#: admin/class-custom-related-products-admin.php:723
+#: admin/class-custom-related-products-admin.php:1494
 msgid "Export Related Products"
 msgstr "Exportar productos relacionados"
 
-#: admin/class-custom-related-products-admin.php:723
+#: admin/class-custom-related-products-admin.php:1494
 msgid "Export"
 msgstr "Exportar"
 
-#: admin/class-custom-related-products-admin.php:724
+#: admin/class-custom-related-products-admin.php:1495
 msgid "Import Related Products"
 msgstr "Importar productos relacionados"
 
-#: admin/class-custom-related-products-admin.php:724
+#: admin/class-custom-related-products-admin.php:1495
 msgid "Import"
 msgstr "Importar"
 
-#: includes/class-custom-related-products-review-request.php:53
+#: admin/class-custom-related-products-admin.php:1721
+msgid "Related Products for WooCommerce | Developed by"
+msgstr "Related Products for WooCommerce | Developed by"
+
+#: admin/class-custom-related-products-admin.php:1737
+msgid "Display Related products widget on the cart page"
+msgstr "Muestra el widget de productos relacionados en la página del carrito"
+
+#: admin/class-custom-related-products-admin.php:1770
+msgid ""
+"Use this option if you encounter issues in displaying the default arrow "
+"icons on the slider"
+msgstr ""
+"Usa esta opción si tienes problemas para mostrar los iconos de flecha "
+"predeterminados en el slider"
+
+#: admin/class-custom-related-products-admin.php:1842
+msgid "Access denied"
+msgstr "Acceso denegado"
+
+#: admin/class-custom-related-products-admin.php:1847
+msgid "Newsletter subscription successful"
+msgstr "Suscripción al boletín completada"
+
+#: admin/cross-promotion-banners/class-wt-p-iew-cta-banner.php:94
+#: admin/cross-promotion-banners/class-wt-p-iew-cta-banner.php:142
+msgid "Product Import Export for WooCommerce"
+msgstr "Product Import Export for WooCommerce"
+
+#: admin/cross-promotion-banners/class-wt-p-iew-cta-banner.php:141
+#: admin/cross-promotion-banners/class-wt-pklist-cta-banner.php:124
+#: admin/cross-promotion-banners/class-wt-smart-coupon-cta-banner.php:126
+msgid "upgrade box icon"
+msgstr "Icono del cuadro de mejora"
+
+#: admin/cross-promotion-banners/class-wt-p-iew-cta-banner.php:149
+msgid "Import, export, or update WooCommerce products"
+msgstr "Importa, exporta o actualiza productos de WooCommerce"
+
+#: admin/cross-promotion-banners/class-wt-p-iew-cta-banner.php:150
+msgid ""
+"Supports all types of products (Simple, variable, subscription grouped, and "
+"external)"
+msgstr ""
+"Compatible con todos los tipos de producto (simple, variable, suscripción, "
+"agrupado y externo)"
+
+#: admin/cross-promotion-banners/class-wt-p-iew-cta-banner.php:151
+msgid "Multiple file formats - CSV, XML, Excel, and TSV"
+msgstr "Varios formatos de archivo: CSV, XML, Excel y TSV"
+
+#: admin/cross-promotion-banners/class-wt-p-iew-cta-banner.php:152
+msgid "Advanced filters and customizations for better control"
+msgstr "Filtros y personalizaciones avanzados para un mayor control"
+
+#: admin/cross-promotion-banners/class-wt-p-iew-cta-banner.php:153
+msgid "Bulk update WooCommerce product data"
+msgstr "Actualiza los datos de productos de WooCommerce de forma masiva"
+
+#: admin/cross-promotion-banners/class-wt-p-iew-cta-banner.php:154
+msgid "Import via FTP/SFTP and URL"
+msgstr "Importa mediante FTP/SFTP y URL"
+
+#: admin/cross-promotion-banners/class-wt-p-iew-cta-banner.php:155
+msgid "Schedule automated import & export"
+msgstr "Programa importaciones y exportaciones automáticas"
+
+#: admin/cross-promotion-banners/class-wt-p-iew-cta-banner.php:156
+msgid "Export and Import custom fields and third-party plugin fields"
+msgstr ""
+"Exporta e importa campos personalizados y campos de plugins de terceros"
+
+#: admin/cross-promotion-banners/class-wt-p-iew-cta-banner.php:161
+#: admin/cross-promotion-banners/class-wt-pklist-cta-banner.php:144
+#: admin/cross-promotion-banners/class-wt-smart-coupon-cta-banner.php:155
+msgid "View all premium features"
+msgstr "Ver todas las funciones premium"
+
+#: admin/cross-promotion-banners/class-wt-p-iew-cta-banner.php:161
+#: admin/cross-promotion-banners/class-wt-pklist-cta-banner.php:144
+#: admin/cross-promotion-banners/class-wt-smart-coupon-cta-banner.php:155
+msgid "Show less"
+msgstr "Mostrar menos"
+
+#: admin/cross-promotion-banners/class-wt-p-iew-cta-banner.php:162
+#: admin/cross-promotion-banners/class-wt-pklist-cta-banner.php:145
+#: admin/cross-promotion-banners/class-wt-smart-coupon-cta-banner.php:156
+msgid "Get the plugin"
+msgstr "Obtener el plugin"
+
+#: admin/cross-promotion-banners/class-wt-p-iew-cta-banner.php:164
+#: admin/cross-promotion-banners/class-wt-pklist-cta-banner.php:147
+#: admin/cross-promotion-banners/class-wt-smart-coupon-cta-banner.php:158
+#: includes/class-custom-related-products-review-request.php:215
+msgid "Dismiss"
+msgstr "Descartar"
+
+#: admin/cross-promotion-banners/class-wt-pklist-cta-banner.php:84
+#: admin/cross-promotion-banners/class-wt-pklist-cta-banner.php:125
+msgid "WooCommerce PDF Invoices, Packing Slips and Credit Notes"
+msgstr "WooCommerce PDF Invoices, Packing Slips and Credit Notes"
+
+#: admin/cross-promotion-banners/class-wt-pklist-cta-banner.php:132
+msgid "Automatically generate PDF invoices, packing slips, and credit notes"
+msgstr "Genera automáticamente facturas PDF, albaranes y notas de crédito"
+
+#: admin/cross-promotion-banners/class-wt-pklist-cta-banner.php:133
+msgid "Use ready-made, customizable templates to match your brand"
+msgstr "Usa plantillas listas y personalizables acordes con tu marca"
+
+#: admin/cross-promotion-banners/class-wt-pklist-cta-banner.php:134
+msgid "Print or download invoices individually or in bulk"
+msgstr "Imprime o descarga facturas de forma individual o masiva"
+
+#: admin/cross-promotion-banners/class-wt-pklist-cta-banner.php:135
+msgid "Set custom invoice numbering for better organization"
+msgstr ""
+"Establece una numeración de facturas personalizada para una mejor "
+"organización"
+
+#: admin/cross-promotion-banners/class-wt-pklist-cta-banner.php:136
+msgid "Customize documents fully with visual or code editors"
+msgstr ""
+"Personaliza los documentos por completo con editores visuales o de código"
+
+#: admin/cross-promotion-banners/class-wt-pklist-cta-banner.php:137
+msgid "Include VAT, GST, ABN, and other tax details"
+msgstr "Incluye IVA, GST, ABN y otros datos fiscales"
+
+#: admin/cross-promotion-banners/class-wt-pklist-cta-banner.php:138
+msgid "Add \"Pay Now\" link on invoices"
+msgstr "Añade un enlace \"Pagar ahora\" en las facturas"
+
+#: admin/cross-promotion-banners/class-wt-pklist-cta-banner.php:139
+msgid "Add custom fields to any order document with ease"
+msgstr ""
+"Añade campos personalizados a cualquier documento de pedido con facilidad"
+
+#: admin/cross-promotion-banners/class-wt-smart-coupon-cta-banner.php:82
+#: admin/cross-promotion-banners/class-wt-smart-coupon-cta-banner.php:127
+msgid ""
+"Create better coupon campaigns with advanced WooCommerce coupon features"
+msgstr ""
+"Crea mejores campañas de cupones con funciones avanzadas de cupones para "
+"WooCommerce"
+
+#: admin/cross-promotion-banners/class-wt-smart-coupon-cta-banner.php:134
+msgid "Smart Coupons for WooCommerce Pro"
+msgstr "Smart Coupons for WooCommerce Pro"
+
+#: admin/cross-promotion-banners/class-wt-smart-coupon-cta-banner.php:138
+msgid "Auto-apply coupons"
+msgstr "Aplica cupones automáticamente"
+
+#: admin/cross-promotion-banners/class-wt-smart-coupon-cta-banner.php:139
+msgid "Create attractive Buy X Get Y (BOGO) offers"
+msgstr "Crea atractivas ofertas Compra X Llévate Y (BOGO)"
+
+#: admin/cross-promotion-banners/class-wt-smart-coupon-cta-banner.php:140
+msgid "Create product quantity/subtotal based discounts"
+msgstr "Crea descuentos según la cantidad de productos o el subtotal"
+
+#: admin/cross-promotion-banners/class-wt-smart-coupon-cta-banner.php:141
+msgid "Offer store credits and gift cards"
+msgstr "Ofrece crédito de tienda y tarjetas regalo"
+
+#: admin/cross-promotion-banners/class-wt-smart-coupon-cta-banner.php:142
+msgid "Set up smart giveaway campaigns"
+msgstr "Configura campañas de regalos inteligentes"
+
+#: admin/cross-promotion-banners/class-wt-smart-coupon-cta-banner.php:143
+msgid "Set advanced coupon rules and conditions"
+msgstr "Establece reglas y condiciones avanzadas para los cupones"
+
+#: admin/cross-promotion-banners/class-wt-smart-coupon-cta-banner.php:144
+msgid "Bulk generate coupons"
+msgstr "Genera cupones de forma masiva"
+
+#: admin/cross-promotion-banners/class-wt-smart-coupon-cta-banner.php:145
+msgid "Shipping, purchase history, and payment method-based coupons"
+msgstr ""
+"Cupones basados en el envío, el historial de compras y el método de pago"
+
+#: admin/cross-promotion-banners/class-wt-smart-coupon-cta-banner.php:146
+msgid "Sign up coupons"
+msgstr "Cupones de registro"
+
+#: admin/cross-promotion-banners/class-wt-smart-coupon-cta-banner.php:147
+msgid "Cart abandonment coupons"
+msgstr "Cupones por carrito abandonado"
+
+#: admin/cross-promotion-banners/class-wt-smart-coupon-cta-banner.php:148
+msgid "Create day-specific deals"
+msgstr "Crea ofertas para días concretos"
+
+#: admin/cross-promotion-banners/class-wt-smart-coupon-cta-banner.php:149
+msgid "Display coupon banners and widgets"
+msgstr "Muestra banners y widgets de cupones"
+
+#: admin/cross-promotion-banners/class-wt-smart-coupon-cta-banner.php:150
+msgid "Import coupons"
+msgstr "Importar cupones"
+
+#: admin/modules/banners/class-wbte-ema-banner.php:128
+#: admin/modules/banners/class-wt-crp-upsell-banner.php:91
+msgid "Did you know?"
+msgstr "¿Sabías que?"
+
+#: admin/modules/banners/class-wbte-ema-banner.php:129
+msgid ""
+"You can boost your store revenue and recover lost sales with automated email"
+" campaigns, cart recovery, and upsell popups using the WebToffee Marketing "
+"Automation App."
+msgstr ""
+"Puedes aumentar los ingresos de tu tienda y recuperar ventas perdidas con "
+"campañas de correo automatizadas, recuperación de carritos y popups de venta"
+" adicional usando la WebToffee Marketing Automation App."
+
+#: admin/modules/banners/class-wbte-ema-banner.php:132
+msgid "Sign Up for Free"
+msgstr "Regístrate gratis"
+
+#: admin/modules/banners/class-wbte-ema-banner.php:134
+msgid "Dismiss this notice."
+msgstr "Descartar este aviso."
+
+#: admin/modules/banners/class-wt-bfcm-twenty-twenty-five.php:117
+msgid "Black Friday Cyber Monday 2025"
+msgstr "Black Friday Cyber Monday 2025"
+
+#: admin/modules/banners/class-wt-bfcm-twenty-twenty-five.php:121
+msgid "Never Miss This Deal"
+msgstr "No te pierdas esta oferta"
+
+#. translators: 1: Discount text with span wrapper, e.g. <span>30% OFF</span>.
+#: admin/modules/banners/class-wt-bfcm-twenty-twenty-five.php:128
 #, php-format
 msgid ""
-"Hi there! We at %sWebToffee%s would like to thank you for using our plugin. "
-"We would really appreciate if you could take a moment to drop a quick review "
-"that will inspire us to keep going."
+"Your Last Chance to Avail %1$s on WebToffee Plugins. Grab the deal before "
+"it`s gone!"
 msgstr ""
-"Hai, en %sWebToffee%s nos gustaría agradecerle por usar nuestro complemento. "
-"Realmente apreciaríamos si pudiera tomarse un momento para dejar una reseña "
-"rápida que nos inspire a seguir adelante."
+"Tu última oportunidad de conseguir %1$s en los plugins de WebToffee. "
+"¡Aprovecha la oferta antes de que se acabe!"
 
-#: includes/class-custom-related-products-review-request.php:56
+#: admin/modules/banners/class-wt-bfcm-twenty-twenty-five.php:129
+msgid "OFF"
+msgstr "DE DESCUENTO"
+
+#: admin/modules/banners/class-wt-bfcm-twenty-twenty-five.php:135
+msgid "View plugins"
+msgstr "Ver los plugins"
+
+#: admin/modules/banners/class-wt-crp-upsell-banner.php:92
+msgid ""
+"You can create advanced product recommendation campaigns like Best Sellers, "
+"New Arrivals, Frequently Bought Together, and more using the WooCommerce "
+"Product Recommendations plugin."
+msgstr ""
+"Puedes crear campañas avanzadas de recomendación de productos como Más "
+"vendidos, Novedades, Comprados juntos habitualmente y más con el plugin "
+"WooCommerce Product Recommendations."
+
+#: admin/modules/banners/class-wt-crp-upsell-banner.php:95
+msgid "Get plugin now →"
+msgstr "Obtener el plugin ahora →"
+
+#: admin/modules/banners/class-wt-crp-upsell-banner.php:96
+msgid "Maybe Later"
+msgstr "Quizás más tarde"
+
+#: admin/modules/banners/class-wt-crp-upsell-banner.php:140
+msgid "Permission denied"
+msgstr "Permiso denegado"
+
+#: admin/partials/admin-settings-other-solutions.php:19
+msgid "E-commerce Promotions"
+msgstr "Promociones de comercio electrónico"
+
+#: admin/partials/admin-settings-other-solutions.php:20
+msgid ""
+"Create and run successful promotional campaigns with the best marketing "
+"tools for WooCommerce"
+msgstr ""
+"Crea y ejecuta campañas promocionales de éxito con las mejores herramientas "
+"de marketing para WooCommerce"
+
+#: admin/partials/admin-settings-other-solutions.php:26
+msgid "Smart Coupons for WooCommerce"
+msgstr "Smart Coupons for WooCommerce"
+
+#: admin/partials/admin-settings-other-solutions.php:30
+msgid "Advanced BOGO Coupons"
+msgstr "Cupones BOGO avanzados"
+
+#: admin/partials/admin-settings-other-solutions.php:31
+msgid "Offer store credits"
+msgstr "Ofrece crédito de tienda"
+
+#: admin/partials/admin-settings-other-solutions.php:32
+msgid "Create attractive gift cards"
+msgstr "Crea tarjetas regalo atractivas"
+
+#: admin/partials/admin-settings-other-solutions.php:38
+msgid "URL Coupons for WooCommerce"
+msgstr "URL Coupons for WooCommerce"
+
+#: admin/partials/admin-settings-other-solutions.php:42
+msgid "Generate custom coupon URLs"
+msgstr "Genera URL de cupón personalizadas"
+
+#: admin/partials/admin-settings-other-solutions.php:43
+msgid "Set up a redirect page"
+msgstr "Configura una página de redirección"
+
+#: admin/partials/admin-settings-other-solutions.php:44
+msgid "Automatically add products"
+msgstr "Añade productos automáticamente"
+
+#: admin/partials/admin-settings-other-solutions.php:50
+#: admin/partials/custom-related-products-admin-display.php:75
+msgid "WooCommerce Product Recommendations"
+msgstr "WooCommerce Product Recommendations"
+
+#: admin/partials/admin-settings-other-solutions.php:54
+msgid "Automatically generate suggestions based on order history"
+msgstr "Genera sugerencias automáticamente según el historial de pedidos"
+
+#: admin/partials/admin-settings-other-solutions.php:55
+msgid "Display recommended products on the product pages"
+msgstr "Muestra productos recomendados en las páginas de producto"
+
+#: admin/partials/admin-settings-other-solutions.php:56
+msgid "Multiple product recommendation templates"
+msgstr "Múltiples plantillas de recomendación de productos"
+
+#: admin/partials/admin-settings-other-solutions.php:62
+msgid "WooCommerce Coupon Generator"
+msgstr "WooCommerce Coupon Generator"
+
+#: admin/partials/admin-settings-other-solutions.php:66
+msgid "Bulk generate WooCommerce coupons"
+msgstr "Genera cupones de WooCommerce de forma masiva"
+
+#: admin/partials/admin-settings-other-solutions.php:67
+msgid "Bulk export WooCommerce coupons to CSV"
+msgstr "Exporta cupones de WooCommerce a CSV de forma masiva"
+
+#: admin/partials/admin-settings-other-solutions.php:68
+msgid "Add usage restrictions to coupons"
+msgstr "Añade restricciones de uso a los cupones"
+
+#: admin/partials/admin-settings-other-solutions.php:74
+msgid "WooCommerce Gift Cards"
+msgstr "WooCommerce Gift Cards"
+
+#: admin/partials/admin-settings-other-solutions.php:78
+msgid "Create unlimited gift cards"
+msgstr "Crea tarjetas regalo ilimitadas"
+
+#: admin/partials/admin-settings-other-solutions.php:79
+msgid "Email gift cards to customers"
+msgstr "Envía tarjetas regalo por correo a los clientes"
+
+#: admin/partials/admin-settings-other-solutions.php:80
+msgid "Provide refunds to store credit"
+msgstr "Reembolsa en forma de crédito de tienda"
+
+#: admin/partials/admin-settings-other-solutions.php:81
+msgid "20+ predefined gift card templates"
+msgstr "Más de 20 plantillas de tarjetas regalo predefinidas"
+
+#: admin/partials/admin-settings-other-solutions.php:88
+msgid "ECommerce Marketing Automation App"
+msgstr "ECommerce Marketing Automation App"
+
+#: admin/partials/admin-settings-other-solutions.php:90
+msgid ""
+"Create signup forms, popups, and automated email campaigns with pre-built "
+"workflow templates to capture leads, recover abandoned carts, and grow "
+"sales."
+msgstr ""
+"Crea formularios de suscripción, popups y campañas de correo automatizadas "
+"con plantillas de flujo de trabajo predefinidas para captar leads, recuperar"
+" carritos abandonados y aumentar las ventas."
+
+#: admin/partials/admin-settings-other-solutions.php:97
+msgid "Promotion Bundle"
+msgstr "Paquete de promociones"
+
+#: admin/partials/admin-settings-other-solutions.php:98
+msgid "WooCommerce Promotion Bundle"
+msgstr "WooCommerce Promotion Bundle"
+
+#: admin/partials/admin-settings-other-solutions.php:100
+msgid ""
+"Make powerful promotional campaigns with our WooCommerce promotion bundle. "
+"Create coupon promotions, set up gift cards, and implement popular product "
+"recommendation strategies."
+msgstr ""
+"Crea potentes campañas promocionales con nuestro paquete de promociones para"
+" WooCommerce. Crea promociones con cupones, configura tarjetas regalo e "
+"implementa estrategias populares de recomendación de productos."
+
+#: admin/partials/admin-settings-other-solutions.php:102
+msgid "Smart Coupons"
+msgstr "Smart Coupons"
+
+#: admin/partials/admin-settings-other-solutions.php:103
+msgid "Product recommendation"
+msgstr "Recomendación de productos"
+
+#: admin/partials/admin-settings-other-solutions.php:104
+msgid "Gift cards"
+msgstr "Tarjetas regalo"
+
+#: admin/partials/admin-settings-other-solutions.php:108
+#: admin/partials/admin-settings-other-solutions.php:333
+msgid "Save up to 30% off"
+msgstr "Ahorra hasta un 30 %"
+
+#: admin/partials/admin-settings-other-solutions.php:113
+msgid "Privacy Compliance"
+msgstr "Cumplimiento de privacidad"
+
+#: admin/partials/admin-settings-other-solutions.php:114
+msgid ""
+"Ensure compliance with major cookie laws, including, GDPR, CCPA, LGPD, CNIL,"
+" and more"
+msgstr ""
+"Garantiza el cumplimiento de las principales leyes de cookies, incluidas "
+"RGPD, CCPA, LGPD, CNIL y más"
+
+#: admin/partials/admin-settings-other-solutions.php:117
+msgid "GDPR Cookie Consent Plugin (CCPA Ready)"
+msgstr "GDPR Cookie Consent Plugin (CCPA Ready)"
+
+#: admin/partials/admin-settings-other-solutions.php:121
+msgid ""
+"This Google-certified CMP lets you create a customizable cookie banner, "
+"manage user consent, and ensure global privacy compliance with automatic "
+"script blocking."
+msgstr ""
+"Esta CMP certificada por Google te permite crear un banner de cookies "
+"personalizable, gestionar el consentimiento de los usuarios y garantizar el "
+"cumplimiento global de la privacidad con bloqueo automático de scripts."
+
+#: admin/partials/admin-settings-other-solutions.php:130
+msgid "Data Import & Export"
+msgstr "Importación y exportación de datos"
+
+#: admin/partials/admin-settings-other-solutions.php:131
+msgid ""
+"The best-in-class import, export, and migration solutions for your "
+"WooCommerce data"
+msgstr ""
+"Las mejores soluciones de importación, exportación y migración para tus "
+"datos de WooCommerce"
+
+#: admin/partials/admin-settings-other-solutions.php:137
+msgid "Product Import Export Plugin"
+msgstr "Product Import Export Plugin"
+
+#: admin/partials/admin-settings-other-solutions.php:141
+#: admin/partials/admin-settings-other-solutions.php:153
+#: admin/partials/admin-settings-other-solutions.php:165
+#: admin/partials/admin-settings-other-solutions.php:189
+msgid "Supports Excel, XML, CSV and TSV file formats"
+msgstr "Compatible con los formatos Excel, XML, CSV y TSV"
+
+#: admin/partials/admin-settings-other-solutions.php:142
+#: admin/partials/admin-settings-other-solutions.php:154
+#: admin/partials/admin-settings-other-solutions.php:166
+msgid "Schedule automated import and export"
+msgstr "Programa importaciones y exportaciones automáticas"
+
+#: admin/partials/admin-settings-other-solutions.php:143
+msgid "Support for multiple product types"
+msgstr "Compatibilidad con varios tipos de producto"
+
+#: admin/partials/admin-settings-other-solutions.php:149
+msgid "Order, Coupon, Subscription Export Import"
+msgstr "Order, Coupon, Subscription Export Import"
+
+#: admin/partials/admin-settings-other-solutions.php:155
+msgid "Email customers on order status change"
+msgstr "Envía un correo a los clientes cuando cambie el estado del pedido"
+
+#: admin/partials/admin-settings-other-solutions.php:161
+msgid "User Import Export Plugin"
+msgstr "User Import Export Plugin"
+
+#: admin/partials/admin-settings-other-solutions.php:167
+msgid "Customize and send emails to new users on import"
+msgstr ""
+"Personaliza y envía correos a los nuevos usuarios durante la importación"
+
+#: admin/partials/admin-settings-other-solutions.php:173
+msgid "Product Feed & Sync Manager"
+msgstr "Product Feed & Sync Manager"
+
+#: admin/partials/admin-settings-other-solutions.php:177
+msgid ""
+"Generate WooCommerce product feeds for Google Shopping, Facebook Shop, and "
+"Instagram Shop"
+msgstr ""
+"Genera feeds de productos de WooCommerce para Google Shopping, Facebook Shop"
+" e Instagram Shop"
+
+#: admin/partials/admin-settings-other-solutions.php:178
+msgid "Supports 25+ sales channels and marketplaces"
+msgstr "Compatible con más de 25 canales de venta y marketplaces"
+
+#: admin/partials/admin-settings-other-solutions.php:184
+msgid "Import Export Suite for WooCommerce"
+msgstr "Import Export Suite for WooCommerce"
+
+#: admin/partials/admin-settings-other-solutions.php:188
+msgid ""
+"Import/export Products, Orders, Subscriptions, Coupons, Customers, WordPress"
+" Users, Categories & Tags, Reviews"
+msgstr ""
+"Importa y exporta productos, pedidos, suscripciones, cupones, clientes, "
+"usuarios de WordPress, categorías y etiquetas, y reseñas"
+
+#: admin/partials/admin-settings-other-solutions.php:199
+msgid "Accounting & Invoicing"
+msgstr "Contabilidad y facturación"
+
+#: admin/partials/admin-settings-other-solutions.php:200
+msgid ""
+"Automatically generate professional WooCommerce invoices and documents for "
+"all your orders"
+msgstr ""
+"Genera automáticamente facturas y documentos profesionales de WooCommerce "
+"para todos tus pedidos"
+
+#: admin/partials/admin-settings-other-solutions.php:203
+msgid "PDF Invoices, Packing Slips, & Credit Notes"
+msgstr "PDF Invoices, Packing Slips, & Credit Notes"
+
+#: admin/partials/admin-settings-other-solutions.php:207
+msgid ""
+"Automatically generate, customize, and manage professional WooCommerce "
+"invoices, packing slips, and credit notes with advanced automation and tax "
+"compliance features."
+msgstr ""
+"Genera, personaliza y gestiona automáticamente facturas, albaranes y notas "
+"de crédito profesionales de WooCommerce con funciones avanzadas de "
+"automatización y cumplimiento fiscal."
+
+#: admin/partials/admin-settings-other-solutions.php:214
+msgid "Shipping Labels, Dispatch Labels, & Delivery Notes"
+msgstr "Shipping Labels, Dispatch Labels, & Delivery Notes"
+
+#: admin/partials/admin-settings-other-solutions.php:218
+msgid "Create delivery notes, shipping & dispatch labels"
+msgstr "Crea notas de entrega y etiquetas de envío y expedición"
+
+#: admin/partials/admin-settings-other-solutions.php:219
+msgid "Enable customers to print the documents from order emails"
+msgstr ""
+"Permite a los clientes imprimir los documentos desde los correos de pedido"
+
+#: admin/partials/admin-settings-other-solutions.php:220
+msgid "Customize shipping label size"
+msgstr "Personaliza el tamaño de la etiqueta de envío"
+
+#: admin/partials/admin-settings-other-solutions.php:226
+msgid "WooCommerce Picklists plugin"
+msgstr "WooCommerce Picklists plugin"
+
+#: admin/partials/admin-settings-other-solutions.php:230
+msgid "Bulk print picklists from the admin order page"
+msgstr ""
+"Imprime listas de preparación de forma masiva desde la página de pedidos del"
+" administrador"
+
+#: admin/partials/admin-settings-other-solutions.php:231
+msgid "Automatically email picklists based on order status"
+msgstr ""
+"Envía listas de preparación por correo automáticamente según el estado del "
+"pedido"
+
+#: admin/partials/admin-settings-other-solutions.php:232
+msgid "Create or customize picklist templates"
+msgstr "Crea o personaliza plantillas de listas de preparación"
+
+#: admin/partials/admin-settings-other-solutions.php:238
+msgid "Customizer for WooCommerce PDF Invoices"
+msgstr "Customizer for WooCommerce PDF Invoices"
+
+#: admin/partials/admin-settings-other-solutions.php:242
+msgid "Drag-and-drop easy customization"
+msgstr "Personalización sencilla mediante arrastrar y soltar"
+
+#: admin/partials/admin-settings-other-solutions.php:243
+msgid "Customize individual elements using block editors"
+msgstr "Personaliza elementos concretos con editores de bloques"
+
+#: admin/partials/admin-settings-other-solutions.php:244
+msgid "Advanced visual and code editor"
+msgstr "Editor visual y de código avanzado"
+
+#: admin/partials/admin-settings-other-solutions.php:250
+msgid "WooCommerce Address Labels plugin"
+msgstr "WooCommerce Address Labels plugin"
+
+#: admin/partials/admin-settings-other-solutions.php:254
+msgid ""
+"Generate 'Shipping Address', 'Billing Address', 'From Address', and 'Return "
+"Address' labels"
+msgstr ""
+"Genera etiquetas de 'dirección de envío', 'dirección de facturación', "
+"'dirección del remitente' y 'dirección de devolución'"
+
+#: admin/partials/admin-settings-other-solutions.php:255
+msgid "Customize label sizes"
+msgstr "Personaliza el tamaño de las etiquetas"
+
+#: admin/partials/admin-settings-other-solutions.php:256
+msgid "Bulk print address labels"
+msgstr "Imprime etiquetas de dirección de forma masiva"
+
+#: admin/partials/admin-settings-other-solutions.php:262
+#: admin/partials/admin-settings-other-solutions.php:329
+msgid "Proforma Invoice"
+msgstr "Factura proforma"
+
+#: admin/partials/admin-settings-other-solutions.php:266
+msgid "Create proforma invoices automatically"
+msgstr "Crea facturas proforma automáticamente"
+
+#: admin/partials/admin-settings-other-solutions.php:267
+msgid "Pre-built proforma invoice layouts"
+msgstr "Diseños de factura proforma predefinidos"
+
+#: admin/partials/admin-settings-other-solutions.php:268
+msgid "Attach proforma invoice PDF to order emails"
+msgstr "Adjunta el PDF de la factura proforma a los correos de pedido"
+
+#: admin/partials/admin-settings-other-solutions.php:274
+msgid "QR Code Add-on for WooCommerce PDF Invoices"
+msgstr "QR Code Add-on for WooCommerce PDF Invoices"
+
+#: admin/partials/admin-settings-other-solutions.php:278
+msgid "Assign QR codes to all generated invoices"
+msgstr "Asigna códigos QR a todas las facturas generadas"
+
+#: admin/partials/admin-settings-other-solutions.php:279
+msgid "Create QR code that reads order or invoice number"
+msgstr "Crea un código QR que muestre el número de pedido o de factura"
+
+#: admin/partials/admin-settings-other-solutions.php:280
+msgid "Add custom data to invoices"
+msgstr "Añade datos personalizados a las facturas"
+
+#: admin/partials/admin-settings-other-solutions.php:286
+msgid "WooCommerce Request a Quote"
+msgstr "WooCommerce Request a Quote"
+
+#: admin/partials/admin-settings-other-solutions.php:290
+msgid "Add quote button to the product & shop pages"
+msgstr "Añade un botón de presupuesto en las páginas de producto y de tienda"
+
+#: admin/partials/admin-settings-other-solutions.php:291
+msgid "Enable quotation request for selected products"
+msgstr "Activa la solicitud de presupuesto para productos seleccionados"
+
+#: admin/partials/admin-settings-other-solutions.php:292
+msgid "Automatically send quotes to users"
+msgstr "Envía presupuestos automáticamente a los usuarios"
+
+#: admin/partials/admin-settings-other-solutions.php:298
+msgid "Sequential Order Numbers"
+msgstr "Sequential Order Numbers"
+
+#: admin/partials/admin-settings-other-solutions.php:302
+msgid "Auto reset sequence per month/year etc"
+msgstr "Reinicia la secuencia automáticamente por mes/año, etc."
+
+#: admin/partials/admin-settings-other-solutions.php:303
+msgid "Add a custom suffix for order numbers"
+msgstr "Añade un sufijo personalizado a los números de pedido"
+
+#: admin/partials/admin-settings-other-solutions.php:304
+msgid "Date suffix in order numbers"
+msgstr "Sufijo de fecha en los números de pedido"
+
+#: admin/partials/admin-settings-other-solutions.php:317
+msgid "Invoice Bundle"
+msgstr "Paquete de facturas"
+
+#: admin/partials/admin-settings-other-solutions.php:318
+msgid "All in one Invoice bundle"
+msgstr "Paquete de facturación todo en uno"
+
+#: admin/partials/admin-settings-other-solutions.php:320
+msgid ""
+"A complete suite of invoices and shipping documents bundle to create and "
+"print PDF invoices, packing slips, shipping and delivery documents in "
+"WooCommerce."
+msgstr ""
+"Un paquete completo de facturas y documentos de envío para crear e imprimir "
+"facturas PDF, albaranes y documentos de envío y entrega en WooCommerce."
+
+#: admin/partials/admin-settings-other-solutions.php:322
+msgid "Invoice"
+msgstr "Factura"
+
+#: admin/partials/admin-settings-other-solutions.php:323
+msgid "Packing Slip"
+msgstr "Albarán"
+
+#: admin/partials/admin-settings-other-solutions.php:324
+msgid "Address Labels"
+msgstr "Etiquetas de dirección"
+
+#: admin/partials/admin-settings-other-solutions.php:325
+msgid "Dispatch Labels"
+msgstr "Etiquetas de expedición"
+
+#: admin/partials/admin-settings-other-solutions.php:326
+msgid "Shipping Labels"
+msgstr "Etiquetas de envío"
+
+#: admin/partials/admin-settings-other-solutions.php:327
+msgid "Delivery Notes"
+msgstr "Notas de entrega"
+
+#: admin/partials/admin-settings-other-solutions.php:328
+msgid "Picklists"
+msgstr "Listas de preparación"
+
+#: admin/partials/admin-settings-other-solutions.php:374
+msgid "30 Day Money Back Guarantee"
+msgstr "Garantía de devolución del dinero de 30 días"
+
+#: admin/partials/admin-settings-other-solutions.php:375
+msgid "30 Day No Risk Money Back Guarantee"
+msgstr "Garantía de devolución del dinero sin riesgo de 30 días"
+
+#: admin/partials/admin-settings-other-solutions.php:379
+msgid "99% Satisfaction Rating"
+msgstr "99 % de satisfacción"
+
+#: admin/partials/admin-settings-other-solutions.php:380
+msgid "Fast Support with 99% Satisfaction Rating"
+msgstr "Soporte rápido con un 99 % de satisfacción"
+
+#. translators: %s rating
+#: admin/partials/admin-settings-other-solutions.php:404
+#, php-format
+msgid "%s out of 5 stars"
+msgstr "%s de 5 estrellas"
+
+#: admin/partials/admin-settings-other-solutions.php:415
+#: admin/partials/admin-settings-other-solutions.php:484
+msgid "Get premium"
+msgstr "Obtener premium"
+
+#. translators: 1: strikethrough original price, 2: bold sale price, 3: green
+#. savings text
+#: admin/partials/admin-settings-other-solutions.php:535
+#, php-format
+msgid ""
+"Total: <s>%1$s</s> <strong>%2$s</strong> <span class=\"wt-crp-os-"
+"savings\">(%3$s)</span>"
+msgstr ""
+"Total: <s>%1$s</s> <strong>%2$s</strong> <span class=\"wt-crp-os-"
+"savings\">(%3$s)</span>"
+
+#: admin/partials/admin-settings-other-solutions.php:552
+msgid "View Bundle"
+msgstr "Ver paquete"
+
+#: admin/partials/admin-settings-other-solutions.php:580
+msgid "Try Now"
+msgstr "Pruébalo ahora"
+
+#: admin/partials/custom-related-products-admin-display.php:42
+msgid "Watch setup video"
+msgstr "Ver el vídeo de configuración"
+
+#: admin/partials/custom-related-products-admin-display.php:77
+msgid "Get the most from premium version Get the most from premium version"
+msgstr "Saca el máximo partido a la versión premium"
+
+#: admin/partials/custom-related-products-admin-display.php:81
+msgid "Premium features"
+msgstr "Funciones premium"
+
+#: admin/partials/custom-related-products-admin-display.php:82
+msgid "Hide features"
+msgstr "Ocultar funciones"
+
+#: admin/partials/custom-related-products-admin-display.php:83
+msgid "View plugin"
+msgstr "Ver el plugin"
+
+#: admin/partials/custom-related-products-admin-display.php:88
+msgid "Automatic product recommendations"
+msgstr "Recomendaciones automáticas de productos"
+
+#: admin/partials/custom-related-products-admin-display.php:89
+msgid "Generate suggestions using filters"
+msgstr "Genera sugerencias mediante filtros"
+
+#: admin/partials/custom-related-products-admin-display.php:90
+msgid "Place recommendations on relevant pages"
+msgstr "Coloca recomendaciones en las páginas relevantes"
+
+#: admin/partials/custom-related-products-admin-display.php:91
+msgid "Sort products by price, popularity, rating, etc. "
+msgstr "Ordena los productos por precio, popularidad, valoración, etc. "
+
+#: admin/partials/custom-related-products-admin-display.php:92
+msgid "Display recommendations in a grid or a slider"
+msgstr "Muestra las recomendaciones en cuadrícula o slider"
+
+#: admin/partials/custom-related-products-admin-display.php:93
+msgid "Hide out-of-stock products from suggestions "
+msgstr "Oculta los productos agotados de las sugerencias "
+
+#: admin/partials/custom-related-products-admin-display.php:94
+msgid "Multiple product type support "
+msgstr "Compatibilidad con varios tipos de producto "
+
+#: admin/partials/custom-related-products-admin-display.php:103
+msgid ""
+"WebToffee <span class=\"exclusive_txt\">Woocommerce Marketing "
+"Automation</span> App"
+msgstr ""
+"WebToffee <span class=\"exclusive_txt\">Woocommerce Marketing "
+"Automation</span> App"
+
+#: admin/partials/custom-related-products-admin-display.php:107
+msgid ""
+"Automate your marketing emails, and create dynamic popups, and powerful "
+"promotion campaigns on your WooCommerce store."
+msgstr ""
+"Automatiza tus correos de marketing y crea popups dinámicos y potentes "
+"campañas promocionales en tu tienda WooCommerce."
+
+#: admin/partials/custom-related-products-admin-display.php:113
+msgid "Sign up for free"
+msgstr "Regístrate gratis"
+
+#: admin/partials/custom-related-products-admin-display.php:114
+msgid "*Offer valid only for a limited time."
+msgstr "*Oferta válida solo por tiempo limitado."
+
+#: admin/partials/custom-related-products-admin-display.php:124
+msgid "100% No Risk Money Back Guarantee"
+msgstr "Garantía de devolución del dinero sin riesgo del 100 %"
+
+#: admin/partials/custom-related-products-admin-display.php:128
+msgid "Supported by a team with 99% customer satisfaction score"
+msgstr "Respaldado por un equipo con un 99 % de satisfacción del cliente"
+
+#: admin/partials/custom-related-products-admin-display.php:157
+msgid "Subscribe to our newsletter for exclusive offers & updates"
+msgstr ""
+"Suscríbete a nuestro boletín para recibir ofertas exclusivas y novedades"
+
+#: admin/partials/custom-related-products-admin-display.php:165
+msgid "Enter your email address"
+msgstr "Introduce tu dirección de correo electrónico"
+
+#. translators: %1$s: Privacy Policy link opening tag, %2$s: link closing tag.
+#: admin/partials/custom-related-products-admin-display.php:173
+#, php-format
+msgid ""
+"I consent to receive newsletters and exclusive offers from WebToffee and "
+"agree to the %1$s Privacy Policy %2$s."
+msgstr ""
+"Acepto recibir boletines y ofertas exclusivas de WebToffee y estoy de "
+"acuerdo con la %1$s Política de privacidad %2$s."
+
+#: admin/partials/custom-related-products-admin-display.php:192
+msgid "Subscribe"
+msgstr "Suscribirse"
+
+#: admin/partials/custom-related-products-admin-tab-view.php:25
+msgid "You May Also Need"
+msgstr "También podrías necesitar"
+
+#. translators: %s: WooCommerce plugin link
+#: custom-related-products.php:145
+#, php-format
+msgid ""
+"<strong>Related Products</strong> requires WooCommerce to be active. You can"
+" download WooCommerce %s."
+msgstr ""
+"<strong>Related Products</strong> requiere que WooCommerce esté activo. "
+"Puedes descargar WooCommerce %s."
+
+#. translators: %s: WooCommerce plugin link
+#: custom-related-products.php:145
+msgid "here"
+msgstr "aquí"
+
+#. translators: %1$s HTML b tag opening, %2$s HTML b tag closing.
+#: includes/class-custom-related-products-review-request.php:258
+#, php-format
+msgid ""
+"Hi there! We at %1$sWebToffee%2$s would like to thank you for using our "
+"plugin. We would really appreciate if you could take a moment to drop a "
+"quick review that will inspire us to keep going."
+msgstr ""
+"¡Hola! En %1$sWebToffee%2$s queremos darte las gracias por usar nuestro "
+"plugin. Te agradeceríamos mucho que dedicaras un momento a dejar una breve "
+"reseña; nos anima a seguir mejorando."
+
+#: includes/class-custom-related-products-review-request.php:261
 msgid "Remind me later"
 msgstr "Recuérdame más tarde"
 
-#: includes/class-custom-related-products-review-request.php:57
+#: includes/class-custom-related-products-review-request.php:262
+#: includes/class-custom-related-products-survey-request.php:45
 msgid "Not interested"
 msgstr "No interesada"
 
-#: includes/class-custom-related-products-review-request.php:58
+#: includes/class-custom-related-products-review-request.php:263
 msgid "Review now"
 msgstr "Revisar ahora"
 
-#: includes/class-wt-relatedproducts-uninstall-feedback.php:19
+#: includes/class-custom-related-products-survey-request.php:42
+msgid ""
+"💡Your feedback matters! Help Shape the Future of 'Related Products for "
+"WooCommerce' Plugin by taking Our quick Survey. Thank you for being an "
+"essential part of our community!"
+msgstr ""
+"💡¡Tu opinión importa! Ayuda a definir el futuro del plugin 'Related Products"
+" for WooCommerce' respondiendo a nuestra breve encuesta. ¡Gracias por ser "
+"una parte esencial de nuestra comunidad!"
+
+#: includes/class-custom-related-products-survey-request.php:46
+msgid "Lets take the survey"
+msgstr "Realizar la encuesta"
+
+#: includes/class-wt-relatedproducts-uninstall-feedback.php:24
 msgid "Does not display the related products in product page."
 msgstr ""
 "Elija productos que se mostrarán como productos relacionados en la página "
 "del producto."
 
-#: includes/class-wt-relatedproducts-uninstall-feedback.php:21
+#: includes/class-wt-relatedproducts-uninstall-feedback.php:26
 msgid "Please mention the name of the theme"
 msgstr "Por favor mencione el nombre del tema."
 
-#: includes/class-wt-relatedproducts-uninstall-feedback.php:25
+#: includes/class-wt-relatedproducts-uninstall-feedback.php:30
 msgid "Couldn't understand how to configure"
 msgstr "No pude entender cómo hacerlo funcionar"
 
-#: includes/class-wt-relatedproducts-uninstall-feedback.php:30
+#: includes/class-wt-relatedproducts-uninstall-feedback.php:32
+msgid "Would you like us to assist you?"
+msgstr "¿Quieres que te ayudemos?"
+
+#: includes/class-wt-relatedproducts-uninstall-feedback.php:36
 msgid "Lack of customization options"
 msgstr "Falta de opciones de personalización"
 
-#: includes/class-wt-relatedproducts-uninstall-feedback.php:32
+#: includes/class-wt-relatedproducts-uninstall-feedback.php:38
 msgid "Tell us about what you are looking for"
 msgstr "No es lo que estaba buscando"
 
-#: includes/class-wt-relatedproducts-uninstall-feedback.php:36
+#: includes/class-wt-relatedproducts-uninstall-feedback.php:42
 msgid "The plugin didn't work as expected"
 msgstr "El plugin no funcionó como se esperaba"
 
-#: includes/class-wt-relatedproducts-uninstall-feedback.php:38
+#: includes/class-wt-relatedproducts-uninstall-feedback.php:44
 msgid "Please share your expected workflow"
 msgstr "Comparta su flujo de trabajo esperado"
 
-#: includes/class-wt-relatedproducts-uninstall-feedback.php:42
+#: includes/class-wt-relatedproducts-uninstall-feedback.php:48
 msgid "Temporary deactivation for debugging"
 msgstr "Desactivación temporal para depuración"
 
-#: includes/class-wt-relatedproducts-uninstall-feedback.php:46
+#: includes/class-wt-relatedproducts-uninstall-feedback.php:52
 msgid "Found a better plugin"
 msgstr "Encontrado un mejor complemento"
 
-#: includes/class-wt-relatedproducts-uninstall-feedback.php:48
+#: includes/class-wt-relatedproducts-uninstall-feedback.php:54
 msgid "Please mention the name of the plugin"
 msgstr "Por favor, mencione el nombre del complemento."
 
-#: includes/class-wt-relatedproducts-uninstall-feedback.php:52
+#: includes/class-wt-relatedproducts-uninstall-feedback.php:58
 msgid "Suggest a missing feature"
 msgstr "Sugerir una característica que falta"
 
-#: includes/class-wt-relatedproducts-uninstall-feedback.php:54
+#: includes/class-wt-relatedproducts-uninstall-feedback.php:60
 msgid "We are listening. Please share your suggestion."
 msgstr "Estamos escuchando. Comparte tu sugerencia."
 
-#: includes/class-wt-relatedproducts-uninstall-feedback.php:58
+#: includes/class-wt-relatedproducts-uninstall-feedback.php:64
 msgid "Other"
 msgstr "Otro"
 
-#: includes/class-wt-relatedproducts-uninstall-feedback.php:60
+#: includes/class-wt-relatedproducts-uninstall-feedback.php:66
 msgid "Could you tell us a bit more?"
 msgstr "¿Podrías contarnos un poco más?"
 
-#: includes/class-wt-relatedproducts-uninstall-feedback.php:78
+#: includes/class-wt-relatedproducts-uninstall-feedback.php:84
 msgid "If you have a moment, please let us know why you are deactivating:"
 msgstr "Si tiene un momento, háganos saber por qué está desactivando:"
 
-#: includes/class-wt-relatedproducts-uninstall-feedback.php:92
+#: includes/class-wt-relatedproducts-uninstall-feedback.php:98
 msgid ""
 "We do not collect any personal data when you submit this form. It's your "
 "feedback that we value."
@@ -507,27 +1646,27 @@ msgstr ""
 "No recogemos ningún dato personal cuando usted envía este formulario. Es su "
 "opinión la que valoramos."
 
-#: includes/class-wt-relatedproducts-uninstall-feedback.php:93
+#: includes/class-wt-relatedproducts-uninstall-feedback.php:99
 msgid "Privacy Policy"
 msgstr "Política de privacidad"
 
-#: includes/class-wt-relatedproducts-uninstall-feedback.php:97
+#: includes/class-wt-relatedproducts-uninstall-feedback.php:103
 msgid "I rather wouldn't say"
 msgstr "Prefiero no decir"
 
-#: includes/class-wt-relatedproducts-uninstall-feedback.php:98
+#: includes/class-wt-relatedproducts-uninstall-feedback.php:104
 msgid "Contact Support"
 msgstr "Contactar Soporte"
 
-#: includes/class-wt-relatedproducts-uninstall-feedback.php:99
+#: includes/class-wt-relatedproducts-uninstall-feedback.php:105
 msgid "Submit & Deactivate"
 msgstr "Enviar y desactivar"
 
-#: includes/class-wt-relatedproducts-uninstall-feedback.php:100
+#: includes/class-wt-relatedproducts-uninstall-feedback.php:106
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: includes/class-wt-relatedproducts-uninstall-feedback.php:179
+#: includes/class-wt-relatedproducts-uninstall-feedback.php:185
 msgid ""
 "It might be due to a theme conflict. Could you please share the theme name "
 "so that we can make it compatible with the upcoming release."
@@ -535,7 +1674,8 @@ msgstr ""
 "Puede deberse a un conflicto temático. ¿Podría compartir el nombre del tema "
 "para que podamos hacerlo compatible con la próxima versión?"
 
-#: includes/class-wt-relatedproducts-uninstall-feedback.php:180
+#. translators: %1$s HTML b tag opening, %2$s HTML b tag closing.
+#: includes/class-wt-relatedproducts-uninstall-feedback.php:188
 #, php-format
 msgid ""
 "You can also reach us via support forum by using the below %1$s \"Contact "
@@ -545,46 +1685,97 @@ msgstr ""
 "mediante el botón %1$s \"Contactar con el servicio de asistencia\" %2$s a "
 "continuación."
 
-#: includes/class-wt-relatedproducts-uninstall-feedback.php:184
+#. translators: %1$s HTML a tag opening, %2$s HTML a tag closing.
+#: includes/class-wt-relatedproducts-uninstall-feedback.php:194
 #, php-format
 msgid "Please check our documentation %1$s here %2$s."
 msgstr "Consulte nuestra documentación %1$s aquí %2$s."
 
-#: includes/class-wt-relatedproducts-uninstall-feedback.php:185
+#~ msgid "Related categories"
+#~ msgstr "Categorias relacionadas"
+
+#~ msgid "Related attributes"
+#~ msgstr "Categorias relacionadas"
+
+#~ msgid "Custom Related Products Settings"
+#~ msgstr "Configuración personalizada de productos relacionados"
+
+#~ msgid "Show heading as"
+#~ msgstr "Mostrar encabezado como"
+
+#~ msgid "Globally relate products by"
+#~ msgstr "Productos relacionados personalizados"
+
+#~ msgid "Order by"
+#~ msgstr "Ordenar por"
+
+#~ msgid "Order"
+#~ msgstr "Orden"
+
+#~ msgid ""
+#~ "Displays related products as per the settings done in this plugin. You will "
+#~ "get full customization options. (Recommended)."
+#~ msgstr ""
+#~ "Muestra productos relacionados según la configuración realizada en este "
+#~ "complemento. Obtendrá opciones de personalización completas. (Recomendado)."
+
+#~ msgid "Remove related products"
+#~ msgstr "Productos relacionados"
+
+#~ msgid "Tag"
+#~ msgstr "Etiqueta"
+
+#~ msgid "Select options"
+#~ msgstr "Seleccionar opciones"
+
+#~ msgid ""
+#~ "Select to display related products for all products based on category,tag or"
+#~ " both."
+#~ msgstr ""
+#~ "Permitir mostrar productos relacionados personalizados según la categoría / "
+#~ "etiquetas / productos."
+
 #, php-format
-msgid ""
-"If you have any further queries, reach us via the below %1$s \"Contact "
-"Support\" %2$s button."
-msgstr ""
-"Si tiene más preguntas, comuníquese con nosotros a través del botón %1$s "
-"\"Comuníquese con el servicio de asistencia\" %2$s a continuación."
+#~ msgid "Use this %1$s code snippet %2$s to relate products by sub-category."
+#~ msgstr ""
+#~ "Utilice este %1$s fragmento de código %2$s para relacionar productos por "
+#~ "subcategoría."
 
-#. Plugin Name of the plugin/theme
-msgid "Related Products for WooCommerce"
-msgstr "Productos relacionados para WooCommerce"
+#~ msgid ""
+#~ "Select the category, tag, attribute or product to display related products "
+#~ "individually for each product."
+#~ msgstr ""
+#~ "Seleccione la categoría, etiqueta, atributo o producto para mostrar "
+#~ "productos relacionados individualmente para cada producto."
 
-#. Plugin URI of the plugin/theme
-msgid "https://wordpress.org/plugins/wt-woocommerce-related-products/"
-msgstr "https://wordpress.org/plugins/wt-woocommerce-related-products/"
+#~ msgid "Sort related products based on the selection."
+#~ msgstr "Ordene los productos relacionados según la selección."
 
-#. Description of the plugin/theme
-msgid ""
-"Displays custom related products based on category, tag, attribute or "
-"product for your WooCommerce store."
-msgstr ""
-"Permita mostrar productos relacionados personalizados según la categoría / "
-"etiquetas / productos para su tienda WooCommerce."
+#~ msgid "Arrange the 'Order by' selection in ascending or descending order."
+#~ msgstr ""
+#~ "Organice la selección 'Ordenar por' en orden ascendente o descendente."
 
-#. Author of the plugin/theme
-msgid "WebToffee"
-msgstr "WebToffee"
+#~ msgid ""
+#~ "Enter the maximum number of products to display as related products. Default"
+#~ " value is '3'."
+#~ msgstr ""
+#~ "Elija productos que se mostrarán como productos relacionados en la página "
+#~ "del producto."
 
-#. Author URI of the plugin/theme
-msgid "https://www.webtoffee.com/"
-msgstr "https://www.webtoffee.com/"
+#~ msgid ""
+#~ "Note: Use shortcode [wt-related-products product_id=\"xx\"] to display "
+#~ "related products to posts/pages of your site."
+#~ msgstr ""
+#~ "Nota: Utilice el código corto [wt-related-products product_id = \"xx\"] para"
+#~ " mostrar productos relacionados en publicaciones / páginas de su sitio."
 
-#~ msgid "Woocommerce default related products"
-#~ msgstr "Productos relacionados por defecto de Woocommerce"
+#, php-format
+#~ msgid ""
+#~ "If you have any further queries, reach us via the below %1$s \"Contact "
+#~ "Support\" %2$s button."
+#~ msgstr ""
+#~ "Si tiene más preguntas, comuníquese con nosotros a través del botón %1$s "
+#~ "\"Comuníquese con el servicio de asistencia\" %2$s a continuación."
 
 #~ msgid "Disable"
 #~ msgstr "Inhabilitar"
@@ -608,12 +1799,6 @@ msgstr "https://www.webtoffee.com/"
 #~ msgstr ""
 #~ "Elija los productos relacionados que deben aparecer en la página del "
 #~ "producto según la categoría / etiquetas / producto."
-
-#~ msgid "Would you like us to assist you?"
-#~ msgstr "¿Quieres que te ayudemos?"
-
-#~ msgid "Which plugin?"
-#~ msgstr "¿Qué plugin?"
 
 #~ msgid ""
 #~ "The plugin is great, but I need specific feature that you don't support"

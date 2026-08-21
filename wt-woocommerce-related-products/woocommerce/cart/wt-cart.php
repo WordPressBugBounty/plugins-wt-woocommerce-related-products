@@ -658,8 +658,8 @@ if ($related_products || !empty($global_related_by) ) :
 				$loop = new WP_Query($args);
 
 				if (! WP_DEBUG || ( WP_DEBUG && ! WP_DEBUG_DISPLAY ) ) {
-					//phpcs:ignore Squiz.PHP.DiscouragedFunctions.Discouraged
-					@ini_set('display_errors', 0); 
+					//phpcs:ignore Squiz.PHP.DiscouragedFunctions.Discouraged, PluginCheck.CodeAnalysis.PHPErrorReporting.IniDirectiveDisplay_errors
+					@ini_set('display_errors', 0);
 				}
 			}
 	

@@ -37,7 +37,7 @@ if ( ! class_exists( 'Wbte_Ema_Banner' ) ) {
          */
         public function __construct() {
 
-            if ( ! in_array( 'decorator-woocommerce-email-customizer/decorator.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+            if ( ! in_array( 'wt-smart-coupon-pro/wt-smart-coupon-pro.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ), true ) ) {
                 add_action('admin_enqueue_scripts', array($this, 'enqueue_styles'));
                 add_action('admin_footer', array($this, 'ema_inject_analytics_script'));
                 add_action('wp_ajax_wbte_ema_banner_analytics_page_dismiss', array($this, 'wbte_ema_banner_analytics_page_dismiss'));
@@ -117,7 +117,7 @@ if ( ! class_exists( 'Wbte_Ema_Banner' ) ) {
                 return;
             }
             
-            $sale_link = 'https://www.webtoffee.com/product/ecommerce-marketing-automation/?utm_source=free_plugin_analytics_overview_tab&utm_medium=related_products&utm_campaign=EMA' ;
+            $sale_link = 'https://www.webtoffee.com/product/smart-coupons-for-woocommerce/?utm_source=free_plugin_analytics_revenue_tab&utm_medium=smart_coupons_free&utm_campaign=smart_coupons' ;
 
             ?>
 
@@ -126,10 +126,10 @@ if ( ! class_exists( 'Wbte_Ema_Banner' ) ) {
                         <div class="wbte_ema_text">
                             <img src="<?php echo esc_url( CRP_PLUGIN_URL . 'admin/modules/banners/assets/images/idea_bulb_purple.svg' ); ?>" style="">
                             <span class="wbte_ema_title"><?php esc_html_e( 'Did you know?', 'wt-woocommerce-related-products' ); ?></span>
-                            <?php esc_html_e( 'You can boost your store revenue and recover lost sales with automated email campaigns, cart recovery, and upsell popups using the WebToffee Marketing Automation App.','wt-woocommerce-related-products' ); ?>
+                            <?php esc_html_e( 'WebToffee Smart Coupons lets you create BOGO offers, giveaways, and store credits to help grow your store\'s revenue.','wt-woocommerce-related-products' ); ?>
                         </div>
                         <div class="wbte_ema_actions">
-                            <a href="<?php echo esc_url( $sale_link ); ?>" class="btn-primary" target="_blank"><?php esc_html_e( 'Sign Up for Free', 'wt-woocommerce-related-products' ); ?></a>
+                            <a href="<?php echo esc_url( $sale_link ); ?>" class="btn-primary" target="_blank"><?php esc_html_e( 'Get Plugin Now', 'wt-woocommerce-related-products' ); ?></a>
                             <button type="button" class="notice-dismiss wbte_ema_banner_analytics_page_dismiss">
                                 <span class="screen-reader-text"><?php esc_html_e( 'Dismiss this notice.', 'wt-woocommerce-related-products' ); ?></span>
                             </button>

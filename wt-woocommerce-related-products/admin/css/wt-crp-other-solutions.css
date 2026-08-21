@@ -390,7 +390,8 @@
 	width: 100%;
 	height: 100%;
 	object-fit: contain;
-	padding: 12px;
+	transform: scale( 1.1 );
+	padding: 0px 5px;
 	box-sizing: border-box;
 }
 
@@ -415,7 +416,7 @@
 
 .wt-crp-os-hero-right {
 	width: 40%;
-	background: #F5EFFB;
+	background: #FFFFFF;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -428,6 +429,11 @@
 	height: 100%;
 	object-fit: cover;
 	display: block;
+}
+
+/* Artwork shown whole rather than cropped to fill the panel. */
+.wt-crp-os-hero-right--contain img {
+	object-fit: contain;
 }
 
 .wt-crp-os-hero-title-row {
@@ -469,6 +475,32 @@
 	color: #434343;
 	margin: 0 0 18px;
 	line-height: 1.55;
+}
+
+.wt-crp-os-hero-features {
+	list-style: none;
+	margin: 0 0 18px;
+	padding: 0;
+}
+
+.wt-crp-os-hero-features li {
+	font-size: 14px;
+	color: #434343;
+	padding: 5px 0;
+	margin: 0;
+	display: flex;
+	align-items: flex-start;
+	gap: 8px;
+	line-height: 1.45;
+}
+
+.wt-crp-os-hero-features li .dashicons {
+	color: #18C01D;
+	font-size: 16px;
+	width: 16px;
+	height: 16px;
+	flex-shrink: 0;
+	margin-top: 1px;
 }
 
 .wt-crp-os-btn-premium--block {

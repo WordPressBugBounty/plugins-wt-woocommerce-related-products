@@ -9,6 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals -- Shared cross-plugin class name; the guard above relies on every WebToffee plugin declaring it identically.
 if ( version_compare( WT_CRP_CROSS_PROMO_BANNER_VERSION, get_option( 'wbfte_promotion_banner_version', WT_CRP_CROSS_PROMO_BANNER_VERSION ), '==' ) && ! class_exists( 'Wbte_Cross_Promotion_Banners' ) ) { // Current version is not equal to the latest version.
 
 	class Wbte_Cross_Promotion_Banners {

@@ -1,12 +1,12 @@
 === Related Products - Create Upsells, Cross-sells, and Product Recommendations for WooCommerce ===
 Contributors: webtoffee
-Version: 1.7.8
+Version: 1.7.9
 Donate link: https://www.webtoffee.com/product/woocommerce-product-recommendations/
 Tags: related products, product recommendations, woocommerce related products, woocommerce product recommendations, woocommerce recommendations
-Requires at least: 3.0.1
-Tested up to: 7.0
-Requires PHP: 5.6
-Stable tag: 1.7.8
+Requires at least: 6.0
+Tested up to: 7.1
+Requires PHP: 7.0
+Stable tag: 1.7.9
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -38,7 +38,7 @@ You can also make use of the related product's functionality in your WooCommerce
 * Import related products using the default WooCommerce importer<a rel="nofollow" href="https://www.webtoffee.com/how-to-import-related-products-using-woocommerce-importer/"> Learn more </a>
 
 
-&#9989; Tested OK with WooCommerce 10.9
+&#9989; Tested OK with WooCommerce 11.1
 
 == Related Products for WooCommerce Product Recommendations- Installation and Setup ==
 
@@ -118,8 +118,8 @@ Get [GDPR Cookie Consent Plugin](https://www.webtoffee.com/product/gdpr-cookie-c
 
 ### Minimum Requirements ###
 
-* PHP 5.6 or higher is recommended
-* WordPress 3.0.1 or higher is recommended
+* PHP 7.0 or higher is recommended
+* WordPress 6.0 or higher is recommended
 
 
 ### Steps to install the plugin ###
@@ -181,13 +181,17 @@ You can display cross-sell product recommendations by adding cross-sells to indi
 
 == Changelog ==
 
-= 1.7.8 16-07-2026 =
-* [Compatibility] – Tested OK with WooCommerce 10.9
+= 1.7.9 21-08-2026 =
+* [Compatibility] – Tested OK with Wordpress 7.1
+* [Compatibility] – Tested OK with WooCommerce 11.1
+* [Tweak] – Translation updated
 
 [See changelog for all versions](https://plugins.svn.wordpress.org/wt-woocommerce-related-products/trunk/changelog.txt)
 
 
 == Upgrade Notice ==
 
-= 1.7.8 16-07-2026 =
-* [Compatibility] – Tested OK with WooCommerce 10.9
+= 1.7.9 21-08-2026 =
+* [Compatibility] – Tested OK with Wordpress 7.1
+* [Compatibility] – Tested OK with WooCommerce 11.1
+* [Tweak] – Translation updated

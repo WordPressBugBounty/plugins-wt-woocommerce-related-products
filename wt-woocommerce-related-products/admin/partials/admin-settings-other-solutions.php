@@ -19,7 +19,7 @@ $categories = array(
 		'label'    => __( 'E-commerce Promotions', 'wt-woocommerce-related-products' ),
 		'subtitle' => __( 'Create and run successful promotional campaigns with the best marketing tools for WooCommerce', 'wt-woocommerce-related-products' ),
 		'icon'  => 'sidebar-ecommerce-promotions.svg',
-		'hero'  => null,
+		'heroes' => array(),
 		'plugins' => array(
 			array(
 				'type'     => 'standard',
@@ -107,20 +107,46 @@ $categories = array(
 			'price_sale'   => '$194',
 			'savings'      => __( 'Save up to 30% off', 'wt-woocommerce-related-products' ),
 			'illustration' => 'promotion-bundle.png',
+			'products'     => array(
+				'wt-smart-coupon-pro/wt-smart-coupon-pro.php',
+				'wt-woocommerce-product-recommendations/wt-woocommerce-product-recommendations.php',
+				'wt-woocommerce-gift-cards/wt-woocommerce-gift-cards.php',
+			),
 		),
 	),
 	'privacy-compliance' => array(
 		'label'    => __( 'Privacy Compliance', 'wt-woocommerce-related-products' ),
 		'subtitle' => __( 'Ensure compliance with major cookie laws, including, GDPR, CCPA, LGPD, CNIL, and more', 'wt-woocommerce-related-products' ),
 		'icon'  => 'sidebar-privacy-compliance.svg',
-		'hero'  => array(
-			'name'     => __( 'GDPR Cookie Consent Plugin (CCPA Ready)', 'wt-woocommerce-related-products' ),
-			'icon'     => 'gdpr-plugin.png',
-			'rating'   => 'stars',
-			'image'    => 'cookie-consent.svg',
-			'desc'     => __( 'This Google-certified CMP lets you create a customizable cookie banner, manage user consent, and ensure global privacy compliance with automatic script blocking.', 'wt-woocommerce-related-products' ),
-			'features' => array(),
-			'url'      => 'https://www.webtoffee.com/product/gdpr-cookie-consent/?utm_source=other_solution_page&utm_medium=_free_plugin_&utm_campaign=GDPR',
+		'heroes' => array(
+			array(
+				'name'      => __( 'GDPR Cookie Consent Plugin (CCPA Ready)', 'wt-woocommerce-related-products' ),
+				'icon'      => 'gdpr-plugin.png',
+				'rating'    => 'stars',
+				'image'     => 'cookie-consent.svg',
+				'image_fit' => 'contain',
+				'desc'      => __( 'This Google-certified CMP lets you create a customizable cookie banner, manage user consent, and ensure global privacy compliance with automatic script blocking.', 'wt-woocommerce-related-products' ),
+				'features'  => array(),
+				'url'       => 'https://www.webtoffee.com/product/gdpr-cookie-consent/?utm_source=other_solution_page&utm_medium=_free_plugin_&utm_campaign=GDPR',
+			),
+			array(
+				'name'      => __( 'EU Order Withdrawal Button Plugin for WooCommerce', 'wt-woocommerce-related-products' ),
+				'icon'      => 'eu-withdrawal-plugin.svg',
+				'rating'    => 'stars',
+				'image'     => 'eu-withdrawal-illustration.png',
+				'image_fit' => 'contain',
+				'panel_bg'  => '#D6EFFE',
+				'desc'      => '',
+				'features'  => array(
+					__( 'Add "Request Withdrawal" button to WooCommerce', 'wt-woocommerce-related-products' ),
+					__( 'Supports guest withdrawal option', 'wt-woocommerce-related-products' ),
+					__( 'Two-step confirmation to prevent errors', 'wt-woocommerce-related-products' ),
+					__( 'Full or partial order withdrawal support', 'wt-woocommerce-related-products' ),
+					__( 'Dedicated admin dashboard for all requests', 'wt-woocommerce-related-products' ),
+					__( 'Send email confirmation to customers', 'wt-woocommerce-related-products' ),
+				),
+				'url'       => 'https://www.webtoffee.com/product/eu-withdrawal-button/?utm_source=other_solution_page&utm_medium=free_plugin&utm_campaign=EU_Withdrawal_Button',
+			),
 		),
 		'plugins'    => array(),
 		'standalone' => null,
@@ -130,7 +156,7 @@ $categories = array(
 		'label'    => __( 'Data Import & Export', 'wt-woocommerce-related-products' ),
 		'subtitle' => __( 'The best-in-class import, export, and migration solutions for your WooCommerce data', 'wt-woocommerce-related-products' ),
 		'icon'  => 'sidebar-data-import-export.svg',
-		'hero'  => null,
+		'heroes' => array(),
 		'plugins' => array(
 			array(
 				'type'     => 'standard',
@@ -199,14 +225,18 @@ $categories = array(
 		'label'    => __( 'Accounting & Invoicing', 'wt-woocommerce-related-products' ),
 		'subtitle' => __( 'Automatically generate professional WooCommerce invoices and documents for all your orders', 'wt-woocommerce-related-products' ),
 		'icon'  => 'sidebar-accounting-invoicing.svg',
-		'hero'  => array(
-			'name'     => __( 'PDF Invoices, Packing Slips, & Credit Notes', 'wt-woocommerce-related-products' ),
-			'icon'     => 'pdf-invoices-plugin.png',
-			'rating'   => 'stars',
-			'image'    => 'pdf-invoices-screenshot.png',
-			'desc'     => __( 'Automatically generate, customize, and manage professional WooCommerce invoices, packing slips, and credit notes with advanced automation and tax compliance features.', 'wt-woocommerce-related-products' ),
-			'features' => array(),
-			'url'      => 'https://www.webtoffee.com/product/woocommerce-pdf-invoices-packing-slips/?utm_source=other_solution_page&utm_medium=free_plugin&utm_campaign=PDF_invoice',
+		'heroes' => array(
+			array(
+				'name'     => __( 'PDF Invoices, Packing Slips, & Credit Notes', 'wt-woocommerce-related-products' ),
+				'icon'     => 'pdf-invoices-plugin.png',
+				'rating'   => 'stars',
+				'image'    => 'pdf-invoices-screenshot.png',
+				// The screenshot is transparent around the edges and reads on a tint.
+				'panel_bg' => '#F5EFFB',
+				'desc'     => __( 'Automatically generate, customize, and manage professional WooCommerce invoices, packing slips, and credit notes with advanced automation and tax compliance features.', 'wt-woocommerce-related-products' ),
+				'features' => array(),
+				'url'      => 'https://www.webtoffee.com/product/woocommerce-pdf-invoices-packing-slips/?utm_source=other_solution_page&utm_medium=free_plugin&utm_campaign=PDF_invoice',
+			),
 		),
 		'plugins' => array(
 			array(
@@ -332,11 +362,20 @@ $categories = array(
 			'price_sale'   => '$179',
 			'savings'      => __( 'Save up to 30% off', 'wt-woocommerce-related-products' ),
 			'illustration' => 'invoice-bundle.png',
+			'products'     => array(
+				'wt-woocommerce-invoice-addon/wt-woocommerce-invoice-addon.php',
+				'wt-woocommerce-shippinglabel-addon/wt-woocommerce-shippinglabel-addon.php',
+				'wt-woocommerce-picklist-addon/wt-woocommerce-picklist-addon.php',
+				'wt-woocommerce-addresslabel-addon/wt-woocommerce-addresslabel-addon.php',
+				'wt-woocommerce-proforma-addon/wt-woocommerce-proforma-addon.php',
+			),
 		),
 	),
 );
 
-$first_category = array_key_first( $categories );
+// array_key_first() would need PHP 7.3.
+$category_keys  = array_keys( $categories );
+$first_category = $category_keys[0];
 ?>
 
 <div class="wt-crp-os-page">
@@ -391,8 +430,8 @@ $first_category = array_key_first( $categories );
 					data-title="<?php echo esc_attr( $cat['label'] ); ?>"
 					data-subtitle="<?php echo esc_attr( $cat['subtitle'] ); ?>">
 
-					<?php /* -- Hero card -- */ ?>
-					<?php if ( ! empty( $cat['hero'] ) ) : $hero = $cat['hero']; ?>
+					<?php /* -- Hero cards -- */ ?>
+					<?php foreach ( $cat['heroes'] as $hero ) : ?>
 						<div class="wt-crp-os-hero-card">
 							<div class="wt-crp-os-hero-left">
 								<div class="wt-crp-os-hero-title-row">
@@ -406,7 +445,19 @@ $first_category = array_key_first( $categories );
 										<span class="wt-crp-os-star">&#9733;</span>
 									<?php endfor; ?>
 								</div>
-								<p class="wt-crp-os-hero-desc"><?php echo esc_html( $hero['desc'] ); ?></p>
+								<?php if ( ! empty( $hero['desc'] ) ) : ?>
+									<p class="wt-crp-os-hero-desc"><?php echo esc_html( $hero['desc'] ); ?></p>
+								<?php endif; ?>
+								<?php if ( ! empty( $hero['features'] ) ) : ?>
+									<ul class="wt-crp-os-hero-features">
+										<?php foreach ( $hero['features'] as $feature ) : ?>
+											<li>
+												<span class="dashicons dashicons-yes-alt"></span>
+												<?php echo esc_html( $feature ); ?>
+											</li>
+										<?php endforeach; ?>
+									</ul>
+								<?php endif; ?>
 								<a href="<?php echo esc_url( $hero['url'] ); ?>"
 									target="_blank"
 									rel="noopener noreferrer"
@@ -416,13 +467,21 @@ $first_category = array_key_first( $categories );
 								</a>
 							</div>
 							<?php if ( ! empty( $hero['image'] ) ) : ?>
-								<div class="wt-crp-os-hero-right">
+								<?php
+								$hero_panel_class = ( isset( $hero['image_fit'] ) && 'contain' === $hero['image_fit'] )
+									? ' wt-crp-os-hero-right--contain'
+									: '';
+								?>
+								<div class="wt-crp-os-hero-right<?php echo esc_attr( $hero_panel_class ); ?>"
+									<?php if ( ! empty( $hero['panel_bg'] ) ) : ?>
+										style="background-color:<?php echo esc_attr( $hero['panel_bg'] ); ?>"
+									<?php endif; ?>>
 									<img src="<?php echo esc_url( $img_base . '/' . $hero['image'] ); ?>"
 										alt="<?php echo esc_attr( $hero['name'] ); ?>">
 								</div>
 							<?php endif; ?>
 						</div>
-					<?php endif; ?>
+					<?php endforeach; ?>
 
 					<?php /* -- Plugin card grid -- */ ?>
 					<?php if ( ! empty( $cat['plugins'] ) ) : ?>
@@ -500,7 +559,14 @@ $first_category = array_key_first( $categories );
 					<?php endif; ?>
 
 					<?php /* -- Bundle section (renders BEFORE the standalone, per Figma order) -- */ ?>
-					<?php if ( ! empty( $cat['bundle'] ) ) : $bundle = $cat['bundle']; ?>
+					<?php
+					// A bundle is hidden once the store already owns every product in it.
+					$bundle = ! empty( $cat['bundle'] ) ? $cat['bundle'] : array();
+					if ( ! empty( $bundle ) && Custom_Related_Products_Admin::wt_crp_owns_all_plugins( isset( $bundle['products'] ) ? $bundle['products'] : array() ) ) {
+						$bundle = array();
+					}
+					?>
+					<?php if ( ! empty( $bundle ) ) : ?>
 						<div class="wt-crp-os-bundle">
 							<div class="wt-crp-os-bundle-content">
 								<?php $tag_color = ! empty( $bundle['tag_color'] ) ? $bundle['tag_color'] : 'green'; ?>

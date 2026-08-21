@@ -26,16 +26,17 @@ class Custom_Related_Products {
 	protected $VERSION;
 	protected $plugin_base_name;
 
-	const VERSION = '1.7.8';
+	const VERSION = '1.7.9';
 
 	public function __construct() {
 
 		$this->plugin_name		 = 'wt-woocommerce-related-products';
 		$this->plugin_base_name	 = WT_CRP_BASE_NAME;
 
-		$this->VERSION = '1.7.8';
+		$this->VERSION = '1.7.9';
 
 		$this->load_dependencies();
+		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
 		add_shortcode( 'wt-related-products', array( $this, 'render_wt_related_products' ) );
@@ -44,6 +45,32 @@ class Custom_Related_Products {
         add_filter( 'render_block', array( $this, 'render_related_products_in_block_cart' ), 10, 2 );
 		
     }
+
+	/**
+	 * Define the locale for this plugin for internationalization.
+	 *
+	 * @since    1.7.9
+	 * @access   private
+	 */
+	private function set_locale() {
+
+		add_action( 'plugins_loaded', array( $this, 'load_plugin_textdomain' ) );
+	}
+
+	/**
+	 * Load the plugin text domain for translation.
+	 *
+	 * @since    1.7.9
+	 */
+	public function load_plugin_textdomain() {
+
+		//phpcs:ignore PluginCheck.CodeAnalysis.DiscouragedFunctions.load_plugin_textdomainFound
+		load_plugin_textdomain(
+			'wt-woocommerce-related-products',
+			false,
+			dirname( WT_CRP_BASE_NAME ) . '/languages/'
+		);
+	}
 
 	/**
 	 * Load the required dependencies for this plugin.
