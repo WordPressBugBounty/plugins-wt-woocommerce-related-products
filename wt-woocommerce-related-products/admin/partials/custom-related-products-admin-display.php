@@ -68,64 +68,67 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly.
 		*/
 		?>
 
+		<?php $wt_rp_product_recomm_url = 'https://www.webtoffee.com/product/woocommerce-product-recommendations/?utm_source=free_plugin_sidebar&utm_medium=related_free_plugin&utm_campaign=Product_Recommendations'; ?>
 		<div class="wt_rp_plugin_promo">
-			<div class="wt_rp_plugin_promo_content">
-				<div class="wt_rp_plugin_promo_title_wrapper">
-					<img src="<?php echo esc_url( $wt_rp_admin_gopro_img_path . '/product-recommendation-plugin.svg' ); ?>">
-					<h3><?php esc_html_e( 'WooCommerce Product Recommendations', 'wt-woocommerce-related-products' ); ?></h3>
+			<?php if ( Custom_Related_Products_Admin::is_bfcm_season() ) : ?>
+				<div class="wt_rp_bfcm_strip">
+					<span class="wt_rp_bfcm_ribbon">
+						<?php
+						echo wp_kses(
+							// translators: %s: Discount percentage, e.g. 30%.
+							sprintf( __( '%s<br>OFF', 'wt-woocommerce-related-products' ), '30%' ),
+							array( 'br' => array() )
+						);
+						?>
+					</span>
+					<div class="wt_rp_bfcm_strip_txt">
+						<strong><?php esc_html_e( 'BFCM Deal of the Year is Here!', 'wt-woocommerce-related-products' ); ?></strong>
+						<span><?php esc_html_e( 'Grab huge offers on our premium plugins.', 'wt-woocommerce-related-products' ); ?></span>
+					</div>
 				</div>
-				<p><?php esc_html_e( 'Get the most from premium version Get the most from premium version', 'wt-woocommerce-related-products' ); ?></p>
-				
+			<?php endif; ?>
+
+			<div class="wt_rp_plugin_promo_title_wrapper">
+				<img src="<?php echo esc_url( $wt_rp_admin_gopro_img_path . '/product-recommendation-plugin.svg' ); ?>" alt="">
+				<h3><?php esc_html_e( 'WooCommerce Product Recommendations', 'wt-woocommerce-related-products' ); ?></h3>
 			</div>
-			<div class="wt_rp_gopro_buttons">
-				<a href="#" class="wt_rp_pro_features_btn wt_rp_product_recomm_show_btn "><?php esc_html_e( 'Premium features', 'wt-woocommerce-related-products' ); ?> <span class="dashicons dashicons-arrow-right-alt"></span></a>
-				<a href="#" class="wt_rp_pro_hide_features_btn wt_rp_product_recomm_hide_btn"><?php esc_html_e( 'Hide features', 'wt-woocommerce-related-products' ); ?> <span class="dashicons dashicons-arrow-right-alt"></span></a>
-				<a href="https://www.webtoffee.com/product/woocommerce-product-recommendations/?utm_source=free_plugin_sidebar&utm_medium=related_free_plugin&utm_campaign=Product_Recommendations" target="_blank" class="wt_rp_view_plugin_btn"><?php esc_html_e( 'View plugin', 'wt-woocommerce-related-products' ); ?> <span class="dashicons dashicons-arrow-right-alt"></span></a>
-			</div>
-			<div class="wt_rp_pro_feature_content">
-				<div class="wt_rp_pro_feature_content_div wt_rp_product_recomm_points">
-					<ul class="ticked-list">
-						<li><span class="dashicons dashicons-yes-alt"></span><?php esc_html_e( 'Automatic product recommendations', 'wt-woocommerce-related-products' ); ?></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><?php esc_html_e( 'Generate suggestions using filters', 'wt-woocommerce-related-products' ); ?></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><?php esc_html_e( 'Place recommendations on relevant pages', 'wt-woocommerce-related-products' ); ?></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><?php esc_html_e( 'Sort products by price, popularity, rating, etc. ', 'wt-woocommerce-related-products' ); ?></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><?php esc_html_e( 'Display recommendations in a grid or a slider', 'wt-woocommerce-related-products' ); ?></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><?php esc_html_e( 'Hide out-of-stock products from suggestions ', 'wt-woocommerce-related-products' ); ?></li>
-						<li><span class="dashicons dashicons-yes-alt"></span><?php esc_html_e( 'Multiple product type support ', 'wt-woocommerce-related-products' ); ?></li>
-						</ul>
+
+			<div class="wt_rp_plugin_promo_body">
+				<h4 class="wt_rp_plugin_promo_headline"><?php esc_html_e( 'Increase Average Order Value With Smart Product Recommendations', 'wt-woocommerce-related-products' ); ?></h4>
+
+				<ul class="wt_rp_plugin_promo_features">
+					<li><?php esc_html_e( 'Show upsells, cross-sells, and frequently bought together items', 'wt-woocommerce-related-products' ); ?></li>
+					<li><?php esc_html_e( 'Recommend products on product, shop, category, cart, checkout, and order received pages', 'wt-woocommerce-related-products' ); ?></li>
+					<li><?php esc_html_e( 'Ready-made templates for bestsellers, top-rated, trending, new arrivals, and recently viewed', 'wt-woocommerce-related-products' ); ?></li>
+					<li><?php esc_html_e( 'Show "Hot sellers" from your on-sale products', 'wt-woocommerce-related-products' ); ?></li>
+					<li><?php esc_html_e( 'Bring back abandoned products with "Did you forget these?"', 'wt-woocommerce-related-products' ); ?></li>
+					<li><?php esc_html_e( 'Suggest alternatives for out-of-stock items and no results page', 'wt-woocommerce-related-products' ); ?></li>
+					<li class="wt_rp_plugin_promo_feature_more"><?php esc_html_e( 'Target by cart value, price, category, and user role', 'wt-woocommerce-related-products' ); ?></li>
+					<li class="wt_rp_plugin_promo_feature_more"><?php esc_html_e( 'Build custom recommendation campaigns', 'wt-woocommerce-related-products' ); ?></li>
+					<li class="wt_rp_plugin_promo_feature_more"><?php esc_html_e( 'Sort by popularity, rating, price, or newest', 'wt-woocommerce-related-products' ); ?></li>
+					<li class="wt_rp_plugin_promo_feature_more"><?php esc_html_e( 'Support all product types, including variable and subscription', 'wt-woocommerce-related-products' ); ?></li>
+					<li class="wt_rp_plugin_promo_feature_more"><?php esc_html_e( 'Display in a customizable grid or slider', 'wt-woocommerce-related-products' ); ?></li>
+					<li class="wt_rp_plugin_promo_feature_more"><?php esc_html_e( 'Auto-hide out-of-stock products', 'wt-woocommerce-related-products' ); ?></li>
+				</ul>
+
+				<a href="#" class="wt_rp_plugin_promo_view_more" role="button" aria-expanded="false" data-more="<?php esc_attr_e( 'View more..', 'wt-woocommerce-related-products' ); ?>" data-less="<?php esc_attr_e( 'View less..', 'wt-woocommerce-related-products' ); ?>"><?php esc_html_e( 'View more..', 'wt-woocommerce-related-products' ); ?></a>
+
+				<a href="<?php echo esc_url( $wt_rp_product_recomm_url ); ?>" target="_blank" class="wt_rp_plugin_promo_cta">
+					<?php esc_html_e( 'Check Out Premium', 'wt-woocommerce-related-products' ); ?>
+					<span class="dashicons dashicons-arrow-right-alt"></span>
+				</a>
+
+				<p class="wt_rp_plugin_promo_trust_title"><?php esc_html_e( 'Try with confidence', 'wt-woocommerce-related-products' ); ?></p>
+				<div class="wt_rp_plugin_promo_trust">
+					<div class="wt_rp_plugin_promo_trust_item">
+						<img src="<?php echo esc_url( $wt_rp_admin_gopro_img_path . '/30day-money-back.svg' ); ?>" alt="">
+						<span><?php esc_html_e( '100% No Risk Money Back Guarantee', 'wt-woocommerce-related-products' ); ?></span>
+					</div>
+					<div class="wt_rp_plugin_promo_trust_item">
+						<img src="<?php echo esc_url( $wt_rp_admin_gopro_img_path . '/satisfaction-rating.svg' ); ?>" alt="">
+						<span><?php esc_html_e( 'Excellent Support with 99% Satisfaction Rating', 'wt-woocommerce-related-products' ); ?></span>
+					</div>
 				</div>
-			</div>
-		</div>
-
-		<div class="wt_rp_marketing_automation">
-			<div class="wt_rp_marketing_automation_content">
-				<span style="background-color:#FFD159 ; color: #515151; padding: 4px 8px; border-radius: 70px; font-size: 12px; font-weight: 700; display: inline-block; margin-bottom: 10px;">Special introductory offer</span>
-				<h3><?php echo wp_kses_post(__( 'WebToffee <span class="exclusive_txt">Woocommerce Marketing Automation</span> App', 'wt-woocommerce-related-products' )); ?></h3>
-				<p class="wt_rp_marketing_automation_txt">
-					<?php
-					echo wp_kses(
-						__( 'Automate your marketing emails, and create dynamic popups, and powerful promotion campaigns on your WooCommerce store.', 'wt-woocommerce-related-products' ),
-						array( 'b' => array() )
-					);
-					?>
-				</p>
-				<div class="wt_rp_marketing_automation_cta">
-					<a href="https://www.webtoffee.com/product/ecommerce-marketing-automation/?utm_source=free_plugin_sidebar&utm_medium=related_free_plugin&utm_campaign=EMA" target="_blank" class="wt_rp_signup_btn"><?php esc_html_e( 'Sign up for free', 'wt-woocommerce-related-products' ); ?></a>            
-					<p style="margin: 0px; padding-top: 10px;"><?php esc_html_e( '*Offer valid only for a limited time.', 'wt-woocommerce-related-products' ); ?></p>
-				</div>
-			</div>
-		</div>
-
-		<div class="wt_rp_plugin_promo wt_rp_margin_click_style_bs">
-
-		<div class="wt_rp_extras">
-			<div class="wt_rp_extras_content">
-				<img src="<?php echo esc_url( $wt_rp_admin_gopro_img_path . '/30day-money-back.svg' ); ?>">
-				<h3  style="color: #606060;"><?php esc_html_e( '100% No Risk Money Back Guarantee', 'wt-woocommerce-related-products' ); ?></h3>
-			</div>
-			<div class="wt_rp_extras_content" style="margin-top: 1px;">
-				<img src="<?php echo esc_url( $wt_rp_admin_gopro_img_path . '/satisfaction-rating.svg' ); ?>">
-				<h3  style="color: #606060;"><?php esc_html_e( 'Supported by a team with 99% customer satisfaction score', 'wt-woocommerce-related-products' ); ?></h3>
 			</div>
 		</div>
 
@@ -139,7 +142,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly.
 
 		if ( ! $wt_crp_newsletter_banner_hidden ) :
 			?>
-			<div class="wt_crp_newsletter_subscription_widget" style="position:relative;width: 109%;margin: 19px -16px;">
+			<div class="wt_crp_newsletter_subscription_widget" style="position:relative;width: 100%;margin: 19px 0px;">
 				<div class="wt_crp_newsletter_subscription_box">
 					<div class="wt_newsletter_header">
 						<div class="wt_newsletter_icon">
@@ -253,8 +256,8 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly.
 	}
 
 	.crp-right-container {
-		width: 27%;
-		margin-right: 10px;
+		width: 29%;
+		margin-right: -20px;
 	}
 
 	.crp-paragraph {
@@ -438,20 +441,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly.
 		display: flex;
 	}
 
-	.wt_rp_marketing_automation {
-		position: relative;
-		width: 92%;
-		background: #fff;
-		color: #595959;
-		height: 100%;
-		min-height: 330px;
-		padding: 5% 4%;
-		margin: 9% 0;
-		display: flex;
-	}
-
-	.wt_rp_exclusive_gopro_txt,
-	.wt_rp_marketing_automation_txt {
+	.wt_rp_exclusive_gopro_txt {
 		font-size: 15px;
 		color: #000;
 	}
@@ -463,35 +453,18 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly.
 		line-height: 25px;
 	}
 
-	.wt_rp_marketing_automation h3 {
-		font-size: 18px;
-		line-height: 25px;
-		text-align: left;
-		margin: 0;
-		padding: 10px 15px 20px 0;
-	}
-
 	.wt_rp_exclusive_gopro .wt_rp_30_discount_img {
 		position: absolute;
 		left: 239px;
 		bottom: 170px;
 	}
 
-	.wt_rp_exclusive_gopro_content h3,
-	.wt_rp_marketing_automation_content h3 {
+	.wt_rp_exclusive_gopro_content h3 {
 		border-bottom: 1px dashed #595959;
-	}
-
-	.wt_rp_marketing_automation_content {
-		padding: 10px;
 	}
 
 	.exclusive_txt {
 		color: #007FFF;
-	}
-
-	.wt_rp_marketing_automation .exclusive_txt {
-		font-weight: 600;
 	}
 
 	.wt_rp_copy_content {
@@ -525,211 +498,213 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly.
 	}
 
 	.wt_rp_plugin_promo {
-		height: auto;
-		width: 92%;
 		background: #fff;
-		color: #000000;
-		padding: 4%;
+		color: #2a2a2a;
 		margin-top: 20px;
+		padding: 16px;
+		border-radius: 4px;
+		box-shadow: 0 0 2px #ccc;
 	}
 
-	.wt_rp_plugin_promo_content {
-		padding-left: 15px;
-		padding-right: 20px;
+	.wt_rp_bfcm_strip {
+		display: flex;
+		align-items: flex-start;
+		gap: 12px;
+		background: #FFFAD6;
+		border-radius: 6px 6px 0 0;
+		padding: 0 8px 0 12px;
+		margin-bottom: 18px;
+		min-height: 76px;
+		container-type: inline-size;
 	}
 
-	.wt_rp_plugin_promo_title_wrapper img {
-		width: 45px;
-		height: 45px;
-	}
-
-	.wt_rp_plugin_promo_title_wrapper h3 {
-		font-size: 15px;
+	.wt_rp_bfcm_ribbon {
+		flex-shrink: 0;
+		background: #E8566A;
+		color: #fff;
+		font-family: "Oswald", "Bebas Neue", "Roboto Condensed", "Arial Narrow", sans-serif;
+		font-stretch: condensed;
+		font-size: 16px;
 		font-weight: 700;
-		margin-top: -1px;
-		line-height: 25px;
-		padding-left: 10px;
+		line-height: 1.1;
+		text-align: center;
+		padding: 9px 8px 20px;
+		clip-path: polygon( 0 0, 100% 0, 100% 100%, 50% 84%, 0 100% );
+	}
+
+	/* Each line stays on one row; font scales with the sidebar width. */
+	.wt_rp_bfcm_strip_txt {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+		align-self: center;
+		min-width: 0;
+		padding: 10px 0;
+		white-space: nowrap;
+		font-size: clamp( 8.5px, calc( ( 100cqi - 60px ) / 21 ), 14px );
+		line-height: 1.4;
+		color: #000;
+	}
+
+	.wt_rp_bfcm_strip_txt strong {
+		font-size: clamp( 9px, calc( ( 100cqi - 60px ) / 19.5 ), 15px );
+		font-weight: 700;
 	}
 
 	.wt_rp_plugin_promo_title_wrapper {
-		padding-top: 18px;
 		display: flex;
-		color: #000000;
+		align-items: center;
+		gap: 14px;
+		background: #F5F8FF;
+		padding: 14px 18px;
 	}
 
-	.wt_rp_plugin_promo_content p {
-		font-weight: 500;
-		font-size: 14px;
-		color: #959595;
+	.wt_rp_plugin_promo_title_wrapper img {
+		width: 44px;
+		height: 44px;
+		flex-shrink: 0;
 	}
 
-	.wt_rp_gopro_buttons {
-		height: auto;
-		margin: 17px -15px;
-	}
-
-	.wt_rp_pro_features_btn {
-		text-decoration: none;
-		font-size: 14px;
-		color: #36AF00;
-		padding-right: 40px;
-		padding-left: 29px;
-	}
-
-	.wt_rp_pro_hide_features_btn {
-		text-decoration: none;
-		font-size: 14px;
-		color: #3176FD;
-		padding-right: 70px;
-		display: none;
-		margin-left: 34px;
-	}
-
-	.wt_rp_view_plugin_btn {
-		text-decoration: none;
-		font-size: 14px;
-		color: #3176FD;
-	}
-
-	.wt_rp_gopro_buttons .dashicons-arrow-right-alt {
-		font-size: 14px;
-		display: inline;
-		vertical-align: middle;
-	}
-
-	.wt_rp_plugin_promo_content_points {
-		background: #fff;
-		width: 92%;
-		margin-top: 1px;
-		margin-left: -15px;
-		margin-right: -15px;
-		padding: 2px 7px 2px 10px;
-		line-height: 25px;
-	}
-
-	.wt_rp_plugin_promo_content_points ul {
-		margin-left: 20px;
-	}
-
-	.wt_rp_plugin_promo_content_points .text_content {
-		color: green;
-	}
-
-	.wt_rp_plugin_promo_content_points li {
-		line-height: 16px;
-		font-weight: 400;
+	.wt_rp_plugin_promo_title_wrapper h3 {
+		margin: 0;
 		font-size: 15px;
-		margin-right: 21px;
-		padding: 9px 0;
+		font-weight: 600;
+		line-height: 1.5;
+		color: #2a2a2a;
 	}
 
-	.wt_rp_plugin_promo_content_points li .dashicons {
-		margin-right: 7px;
-		font-size: 16px;
+	.wt_rp_plugin_promo_body {
+		padding: 6px 16px 2px;
 	}
 
-	.wt_rp_plugin_promo_content_points li .dashicons-yes-alt {
-		color: #18c01d;
-		font-size: 20px;
-		line-height: 18px;
-		padding-bottom: 10px;
+	.wt_rp_plugin_promo_headline {
+		margin: 12px 13px 18px;
+		font-size: 15px;
+		font-weight: 600;
+		line-height: 1.5;
+		color: #7B2FD0;
 	}
 
-	.wt_rp_plugin_promo_content_points .ticked-list li .dashicons {
-		background: #fff;
-		color: #6ABE45;
-		border-radius: 20px;
-		margin-right: 5px;
-		margin-left: -25px;
+	.wt_rp_plugin_promo_features {
+		margin: 0;
+		padding: 0;
+		list-style: none;
 	}
 
-	.wt_rp_plugin_promo_content_points .ticked-list li {
-		margin-bottom: 15px;
-		padding-left: 25px;
-		color: #000;
-	}
-
-	.ticked-list {
+	.wt_rp_plugin_promo_features li {
+		position: relative;
+		margin-bottom: 10px;
+		padding-left: 28px;
 		font-size: 13px;
-		line-height: 1.4em;
-		padding-left: 0;
-		padding-top: 10px;
+		font-weight: 500;
+		line-height: 1.6;
+		color: #4a4a4a;
 	}
 
-	.wt_rp_extras_content {
-		background: #fff;
-		color: #606060;
-		float: left;
-		padding: 6%;
-		display: flex;
-		width: 97%;
-		margin-left: -4%;
+	.wt_rp_plugin_promo_features li::before {
+		content: "";
+		position: absolute;
+		left: 2px;
+		top: 5px;
+		width: 9px;
+		height: 4px;
+		border-left: 2px solid #6ABE45;
+		border-bottom: 2px solid #6ABE45;
+		transform: rotate( -45deg );
 	}
 
-	.wt_rp_extras_content h3 {
-		line-height: 22px;
-		margin-left: 10px;
-		font-size: 14px;
-	}
-
-	.wt_rp_pro_feature_content_div {
-		padding: 4%;
-		padding-top: 10px;
-		background: white;
-		font-weight: 400;
+	.wt_rp_plugin_promo_features .wt_rp_plugin_promo_feature_more {
 		display: none;
 	}
 
-	.wt_rp_pro_feature_content ul {
-		padding-left: 11px;
-		padding-right: 40px;
-		font-size: 14px;
+	.wt_rp_plugin_promo_features.wt_rp_expanded .wt_rp_plugin_promo_feature_more {
+		display: list-item;
 	}
 
-	.wt_rp_pro_feature_content .ticked-list li {
-		margin-bottom: 15px;
-		padding-left: 35px;
+	.wt_rp_plugin_promo_view_more {
+		display: block;
+		margin: 18px 0 14px;
+		text-align: center;
+		font-size: 14px;
+		color: #0000EE;
+		text-decoration: underline;
+	}
+
+	/* Drop WP admin's blue focus box on mouse click; keep a ring for keyboard users. */
+	.wt_rp_plugin_promo_view_more:focus {
+		outline: none;
+		box-shadow: none;
+	}
+
+	.wt_rp_plugin_promo_view_more:focus-visible {
+		outline: 2px solid #2271b1;
+		outline-offset: 2px;
+		border-radius: 2px;
+	}
+
+	.wt_rp_plugin_promo_cta {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 24px;
+		padding: 14px 16px;
+		background: #2766D4;
+		border-radius: 4px;
+		color: #fff !important;
+		font-size: 15px;
+		font-weight: 500;
+		text-decoration: none;
+	}
+
+	.wt_rp_plugin_promo_cta:hover,
+	.wt_rp_plugin_promo_cta:focus {
+		background: #1F55B3;
+	}
+
+	.wt_rp_plugin_promo_cta .dashicons {
+		width: 20px;
+		height: 20px;
+		font-size: 20px;
+	}
+
+	.wt_rp_plugin_promo_trust_title {
+		margin: 18px 0 12px 16px;
+		font-size: 14px;
+		font-weight: 500;
 		color: #000;
 	}
 
-	.wt_rp_pro_feature_content .ticked-list li div {
-		margin-top: -22px;
-		margin-left: 7px;
-		line-height: 24px;
+	.wt_rp_plugin_promo_trust {
+		background: #F8F8FE;
+		border: 1px solid #DCDCDE;
+		border-radius: 4px;
 	}
 
-	.wt_rp_pro_feature_content .ticked-list li .dashicons {
-		background: #fff;
-		color: #6ABE45;
-		border-radius: 20px;
-		margin-right: 5px;
-		margin-left: -25px;
+	.wt_rp_plugin_promo_trust_item {
+		display: flex;
+		align-items: center;
+		gap: 16px;
+		padding: 14px 22px;
+		font-size: 13px;
+		font-weight: 600;
+		line-height: 1.5;
+		color: #2a2a2a;
+	}
+
+	.wt_rp_plugin_promo_trust_item + .wt_rp_plugin_promo_trust_item {
+		border-top: 1px solid #DCDCDE;
+	}
+
+	.wt_rp_plugin_promo_trust_item img {
+		width: 50px;
+		height: 50px;
+		flex-shrink: 0;
 	}
 
 	.crp-number .description,
 	.crp-banner-width .description {
 		margin-left: 110px;
 		margin-top: -31px;
-	}
-
-	.wt_rp_signup_btn {
-		display: inline-block;
-		background: #007FFF;
-		border-radius: 5px;
-		color: #fff !important;
-		text-decoration: none;
-		font-size: 15px;
-		font-weight: 700;
-		padding: 12px 5px;
-		line-height: 1.4;
-		text-align: center;
-		min-width: 130px;
-		margin: 10px 0;
-	}
-
-	.wt_rp_signup_btn:hover {
-		background: #0066cc;
-		color: #fff !important;
 	}
 
 	@media (min-width: 1200px) and (max-width: 1440px) {
@@ -745,20 +720,14 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly.
 			width: 330px;
 		}
 		
-		.wt_rp_exclusive_gopro,
-		.wt_rp_marketing_automation {
+		.wt_rp_exclusive_gopro {
 			height: fit-content;
 		}
 		
-		.wt_rp_exclusive_gopro .wt_rp_copy_content,
-		.wt_rp_marketing_automation .wt_rp_marketing_automation_cta {
+		.wt_rp_exclusive_gopro .wt_rp_copy_content {
 			align-items: center;
 		}
 		
-		.wt_rp_pro_features_btn {
-			padding-left: 15px;
-			padding-right: 12px;
-		}
 	}
 
 	@media (max-width: 1200px) {
@@ -782,46 +751,15 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly.
 		}
 	}
 </style>
-
 <script>
-	jQuery(document).ready(function(){
-
-		jQuery('.wt_rp_product_recomm_show_btn').click(function(e){
+	jQuery( function( $ ) {
+		$( '.wt_rp_plugin_promo_view_more' ).on( 'click', function( e ) {
 			e.preventDefault();
+			var $link     = $( this );
+			var expanded  = 'true' !== $link.attr( 'aria-expanded' );
 
-			jQuery('.wt_rp_product_recomm_points').toggle();
-			jQuery('.wt_rp_product_recomm_hide_btn').toggle();
-			jQuery('.wt_rp_product_recomm_show_btn').css("display","none");
-		});
-
-		jQuery('.wt_rp_product_recomm_hide_btn').click(function(e){
-			e.preventDefault();
-
-			jQuery('.wt_rp_product_recomm_show_btn').toggle();
-			jQuery('.wt_rp_product_recomm_hide_btn').css("display","none");
-			jQuery('.wt_rp_product_recomm_points').toggle();
-		});
-
-		jQuery('.wt_rp_best_sellers_show_btn').click(function(e){
-			e.preventDefault();
-
-			jQuery('.wt_rp_best_sellers_points').toggle();
-			jQuery('.wt_rp_best_sellers_hide_btn').toggle();
-			jQuery('.wt_rp_best_sellers_show_btn').css("display","none");
-			jQuery('.wt_rp_extras').css("margin-top","30px");
-		});
-
-		jQuery('.wt_rp_best_sellers_hide_btn').click(function(e){
-			e.preventDefault();
-
-			jQuery('.wt_rp_best_sellers_show_btn').toggle();
-			jQuery('.wt_rp_best_sellers_hide_btn').css("display","none");
-			jQuery('.wt_rp_best_sellers_points').toggle();
-			jQuery('.wt_rp_extras').css("margin-top","10px");
-
-		});
-
-	});
-
+			$link.siblings( '.wt_rp_plugin_promo_features' ).toggleClass( 'wt_rp_expanded', expanded );
+			$link.attr( 'aria-expanded', expanded ? 'true' : 'false' ).text( $link.data( expanded ? 'less' : 'more' ) );
+		} );
+	} );
 </script>
-

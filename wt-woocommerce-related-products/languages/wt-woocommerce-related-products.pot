@@ -710,7 +710,7 @@ msgstr ""
 #. translators: 1: Discount text with span wrapper, e.g. <span>30% OFF</span>.
 #: admin/modules/banners/class-wt-bfcm-twenty-twenty-five.php:128
 #, php-format
-msgid "Your Last Chance to Avail %1$s on WebToffee Plugins. Grab the deal before it`s gone!"
+msgid "Your Last Chance to Avail %1$s on WebToffee Plugins. Grab the deal before it's gone!"
 msgstr ""
 
 #: admin/modules/banners/class-wt-bfcm-twenty-twenty-five.php:129

@@ -1801,18 +1801,6 @@ class Custom_Related_Products_Admin {
 	}
 
 	/**
-	 *  Screens to show Black Friday and Cyber Monday Banner.
-	 *
-	 *  @since 1.7.5
-	 *  @param array $screen_ids Array of screen ids.
-	 *  @return array            Array of screen ids.
-	 */
-	public function wt_bfcm_banner_screens( $screen_ids ) {
-		$screen_ids[] = 'woocommerce_page_wt-woocommerce-related-products';
-		return $screen_ids;
-	}
-
-	/**
 	 * Whether every plugin in the given list is present on the site.
 	 *
 	 * @since 1.7.9
@@ -1842,17 +1830,18 @@ class Custom_Related_Products_Admin {
 	}
 
 	/**
-	 * To Check if the current date is on or between the start and end date of black friday and cyber monday banner for 2024.
+	 * To Check if the current date is on or between the start and end date of black friday and cyber monday banner for 2026.
 	 *
 	 * @since 1.7.5
+	 * @since 1.8.0 Updated the display period to BFCM 2026 (11 Nov 2026 - 04 Dec 2026).
 	 */
 	public static function is_bfcm_season() {
 
-		$start_date   = new DateTime( '17-NOV-2025, 12:00 AM', new DateTimeZone( 'Asia/Kolkata' ) ); // Start date.
+		$start_date   = new DateTime( '11-NOV-2026, 12:00 AM', new DateTimeZone( 'Asia/Kolkata' ) ); // Start date.
 		$current_date = new DateTime( 'now', new DateTimeZone( 'Asia/Kolkata' ) ); // Current date.
-		$end_date     = new DateTime( '04-DEC-2025, 11:59 PM', new DateTimeZone( 'Asia/Kolkata' ) ); // End date.
+		$end_date     = new DateTime( '04-DEC-2026, 11:59 PM', new DateTimeZone( 'Asia/Kolkata' ) ); // End date.
 
-		// Check if the date is on or between the start and end date of black friday and cyber monday banner for 2025.
+		// Check if the date is on or between the start and end date of black friday and cyber monday banner for 2026.
 		if ( $current_date < $start_date || $current_date > $end_date ) {
 			return false;
 		}

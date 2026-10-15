@@ -858,7 +858,7 @@ msgstr "Não perca esta oferta"
 #, php-format
 msgid ""
 "Your Last Chance to Avail %1$s on WebToffee Plugins. Grab the deal before "
-"it`s gone!"
+"it's gone!"
 msgstr ""
 "Sua última chance de aproveitar %1$s nos plugins da WebToffee. Garanta a "
 "oferta antes que acabe!"

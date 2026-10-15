@@ -26,14 +26,14 @@ class Custom_Related_Products {
 	protected $VERSION;
 	protected $plugin_base_name;
 
-	const VERSION = '1.7.9';
+	const VERSION = '1.8.0';
 
 	public function __construct() {
 
 		$this->plugin_name		 = 'wt-woocommerce-related-products';
 		$this->plugin_base_name	 = WT_CRP_BASE_NAME;
 
-		$this->VERSION = '1.7.9';
+		$this->VERSION = '1.8.0';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -132,9 +132,9 @@ class Custom_Related_Products {
 		
 		/**
 		 * @since 1.7.5
-		 * Includes the Black Friday and Cyber Monday CTA banners for 2025
+		 * Includes the Black Friday and Cyber Monday CTA banners for 2026
 		 */
-		require_once plugin_dir_path( __DIR__ ) . 'admin/modules/banners/class-wt-bfcm-twenty-twenty-five.php';
+		require_once plugin_dir_path( __DIR__ ) . 'admin/modules/banners/class-wt-bfcm-twenty-twenty-six.php';
 
 		/**
 		 * EMA promotion banner added in Analytics page
@@ -171,12 +171,6 @@ class Custom_Related_Products {
 		$this->loader->add_filter( 'plugin_action_links_' . $this->get_plugin_base_name(), $plugin_admin, 'add_crp_action_links' );
 		$this->loader->add_filter( 'plugin_row_meta', $plugin_admin, 'add_crp_plugin_row_meta', 10, 2);
 		$this->loader->add_filter( 'woocommerce_screen_ids', $plugin_admin, 'set_wc_screen_ids', 10, 1);
-		/**
-		 *  Set screens to show promotional banner
-		 *
-		 *  @since 1.7.5
-		 */
-		$this->loader->add_filter( 'wt_bfcm_banner_screens', $plugin_admin, 'wt_bfcm_banner_screens' );
 		$plugin_admin->admin_modules();
 	}
 

@@ -1,3 +1,6 @@
+= 1.8.0 15-10-2026 =
+* [Compatibility] – Tested OK with WooCommerce 11.2.1
+
 = 1.7.9 21-08-2026 =
 * [Compatibility] – Tested OK with Wordpress 7.1
 * [Compatibility] – Tested OK with WooCommerce 11.1
